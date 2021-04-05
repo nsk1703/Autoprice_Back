@@ -24,14 +24,14 @@ export class Category extends Component {
         const { open } = this.state;
         return (
             <Fragment>
-                <Breadcrumb title="Category" parent="Physical" />
+                <Breadcrumb title="Categories" parent="Produits" />
                 {/* <!-- Container-fluid starts--> */}
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-sm-12">
                             <div className="card">
                                 <div className="card-header">
-                                    <h5>Products Category</h5>
+                                    <h5>Categorie - Produits</h5>
                                 </div>
                                 <div className="card-body">
                                     <div className="btn-popup pull-right">

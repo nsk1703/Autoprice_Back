@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import man from '../../../assets/images/dashboard/man.png'
+import man from '../../../assets/images/dashboard/user_man.png'
 
 export class User_panel extends Component {
     render() {

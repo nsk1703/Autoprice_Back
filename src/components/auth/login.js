@@ -3,7 +3,7 @@ import LoginTabset from './loginTabset';
 import { ArrowLeft, Sliders } from 'react-feather';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
-import stats from '../../assets/images/dashboard/stats.png';
+import stats from '../../assets/images/dashboard/autoprice-logo.png';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -26,7 +26,7 @@ export class Login extends Component {
                                         <div className="svg-icon">
                                             <img src={stats} className="Img-fluid" />
                                         </div>
-                                        <Slider className="single-item" {...settings}>
+                                        {/* <Slider className="single-item" {...settings}>
                                             <div>
                                                 <div>
                                                     <h3>Welcome to Multikart</h3>
@@ -45,7 +45,7 @@ export class Login extends Component {
                                                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.</p>
                                                 </div>
                                             </div>
-                                        </Slider >
+                                        </Slider> */}
                                     </div>
                                 </div>
                                 <div className="col-md-7 p-0 card-right">
@@ -56,7 +56,7 @@ export class Login extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <a href="https://react.pixelstrap.com/multikart" target="_blank" className="btn btn-primary back-btn"><ArrowLeft />back</a>
+                            {/* <a href="https://react.pixelstrap.com/multikart" target="_blank" className="btn btn-primary back-btn"><ArrowLeft />back</a> */}
                         </div>
                     </div>
                 </div>

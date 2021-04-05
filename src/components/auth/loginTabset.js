@@ -31,20 +31,20 @@ export class LoginTabset extends Component {
             <div>
                 <Fragment>
                     <Tabs>
-                        <TabList className="nav nav-tabs tab-coupon" >
-                            <Tab className="nav-link" onClick={(e) => this.clickActive(e)}><User />Login</Tab>
-                            <Tab className="nav-link" onClick={(e) => this.clickActive(e)}><Unlock />Register</Tab>
+                        <TabList className="nav nav-tabs tab-coupon justify-content-center" >
+                            <Tab className="nav-link" onClick={(e) => this.clickActive(e)}><User />Connexion</Tab>
+                            {/* <Tab className="nav-link" onClick={(e) => this.clickActive(e)}><Unlock />Register</Tab> */}
                         </TabList>
 
                         <TabPanel>
                             <form className="form-horizontal auth-form">
                                 <div className="form-group">
-                                    <input required="" name="login[username]" type="email" className="form-control" placeholder="Username" id="exampleInputEmail1" />
+                                    <input required="" name="login[username]" type="email" className="form-control" placeholder="Nom d'utilisateur" id="exampleInputEmail1" />
                                 </div>
                                 <div className="form-group">
-                                    <input required="" name="login[password]" type="password" className="form-control" placeholder="Password" />
+                                    <input required="" name="login[password]" type="password" className="form-control" placeholder="Mot de Passe" />
                                 </div>
-                                <div className="form-terms">
+                                {/* <div className="form-terms">
                                     <div className="custom-control custom-checkbox mr-sm-2">
                                         <input type="checkbox" className="custom-control-input" id="customControlAutosizing" />
                                         <label className="d-block">
@@ -52,11 +52,11 @@ export class LoginTabset extends Component {
                                                         Reminder Me <span className="pull-right"> <a href="#" className="btn btn-default forgot-pass p-0">lost your password</a></span>
                                                 </label>
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="form-button">
-                                    <button className="btn btn-primary" type="submit"  onClick={() => this.routeChange()}>Login</button>
+                                    <button className="btn btn-primary" type="submit"  onClick={() => this.routeChange()}>Connexion</button>
                                 </div>
-                                <div className="form-footer">
+                                {/* <div className="form-footer">
                                     <span>Or Login up with social platforms</span>
                                     <ul className="social">
                                         <li><a className="fa fa-facebook" href=""></a></li>
@@ -64,7 +64,7 @@ export class LoginTabset extends Component {
                                         <li><a className="fa fa-instagram" href=""></a></li>
                                         <li><a className="fa fa-pinterest" href=""></a></li>
                                     </ul>
-                                </div>
+                                </div> */}
                             </form>
                         </TabPanel>
                         <TabPanel>

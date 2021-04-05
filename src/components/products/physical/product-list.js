@@ -14,7 +14,7 @@ export class Product_list extends Component {
     render() {
         return (
             <Fragment>
-                <Breadcrumb title="Product List" parent="Physical" />
+                <Breadcrumb title="Produits" parent="Produits" />
                 <div className="container-fluid">
                     <div className="row products-admin ratio_asos">
                         {
