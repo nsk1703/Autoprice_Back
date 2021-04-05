@@ -6,12 +6,46 @@ import 'react-toastify/dist/ReactToastify.css';
 import data from '../../../assets/data/category';
 import Datatable from '../../common/datatable';
 import Data_categories from '../../common/dataTables/data_categories';
+import * as userActions from "../../../redux/actions/userActions";
+import * as categoryActions from "../../../redux/actions/categoryActions";
+import {connect} from "react-redux";
+import {withRouter} from "react-router-dom";
+import {LoginTabset} from "../../auth/loginTabset";
+import pro16 from "../../../assets/images/dashboard/product/1.jpg";
 
 export class Category extends Component {
     constructor(props) {
         super(props);
+        let listCategories = [];
+
         this.state = {
             open: false,
+            data: []
+        };
+
+        this.props.listCategories();
+
+
+        setTimeout(() => {
+            console.log(this.props.category.categories)
+
+            this.props.category.categories.map(category => {
+                let item = {
+                    image: <img src={category.image_urls} style={{width:50,height:50}}/>,
+                    Nom: category.name,
+                    Description: category.description
+                }
+                listCategories.push(item);
+            })
+            this.setState({
+                    data: listCategories
+                })
+        }, 1000)
+
+
+        this.state = {
+            open: false,
+            data: listCategories
         };
     }
     onOpenModal = () => {
@@ -78,7 +112,7 @@ export class Category extends Component {
                                     <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
                                         <Data_categories
                                             multiSelectOption={true}
-                                            myData={data}  
+                                            myData={this.state.data}
                                             pageSize={10} 
                                             pagination={true}
                                             class="-striped -highlight" 
@@ -95,5 +129,15 @@ export class Category extends Component {
     }
 }
 
-export default Category
+const mapStateToProps = (state) => {
+    return {
+        category: state.category
+    }
+}
+const mapDispatchToProps = (dispatch) =>{
+    return {
+        listCategories: () => {dispatch( categoryActions.listCategories())}
+    }
+}
 
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Category))
