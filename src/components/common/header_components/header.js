@@ -6,7 +6,7 @@ import Language from './language';
 import { AlignLeft, Maximize2, Bell, MessageSquare, MoreHorizontal } from 'react-feather';
 
 //images
-import logo from '../../../assets/images/dashboard/multikart-logo.png'
+import logo from '../../../assets/images/dashboard/mini-autoprice.png'
 
 export class Header extends Component {
     constructor(props) {
@@ -94,8 +94,8 @@ export class Header extends Component {
                                 {/* <li className="onhover-dropdown"><Bell /><span className="badge badge-pill badge-primary pull-right notification-badge">3</span><span className="dot"></span>
                                     <Notification />
                                 </li> */}
-                                {/* <li><a onClick={this.showRightSidebar}><MessageSquare /><span className="dot"></span></a></li> */}
-                                <User_menu />
+                                 <li><User_menu />  </li> 
+
                             </ul>
                             {/* <div className="d-lg-none mobile-toggle pull-right" onClick={() => this.toggle()}><MoreHorizontal /></div> */}
                         </div>

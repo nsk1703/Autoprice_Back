@@ -1,12 +1,11 @@
 import React, { Component,Fragment } from 'react';
 import Breadcrumb from '../../common/breadcrumb';
 import CKEditors from "react-ckeditor-component";
-import { Link } from "react-router-dom";
 import { AvField, AvForm } from 'availity-reactstrap-validation';
 import one from '../../../assets/images/pro3/1.jpg'
 import user from '../../../assets/images/user.png';
 
-export class Add_product extends Component {
+export class Create_product extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -80,7 +79,7 @@ export class Add_product extends Component {
                         <div className="col-sm-12">
                             <div className="card">
                                 <div className="card-header">
-                                    <Link type="button" to="/products/physical/product-list" className="btn btn-primary">Retour</Link>
+                                    <h5>Ajout d'un produit</h5>
                                 </div>
                                 <div className="card-body">
                                     <div className="row product-adding">
@@ -203,4 +202,4 @@ export class Add_product extends Component {
     }
 }
 
-export default Add_product
+export default Create_product

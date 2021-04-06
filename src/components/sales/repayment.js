@@ -3,7 +3,7 @@ import Breadcrumb from '../common/breadcrumb';
 import data from '../../assets/data/sales-transactions';
 import Datatable from '../common/datatable';
 
-export class Transactions_sales extends Component {
+export class Repayment_sales extends Component {
     render() {
         return (
             <Fragment>
@@ -36,4 +36,4 @@ export class Transactions_sales extends Component {
     }
 }
 
-export default Transactions_sales
+export default Repayment_sales

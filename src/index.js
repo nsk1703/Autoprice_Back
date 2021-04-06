@@ -24,6 +24,9 @@ import Digital_add_pro from './components/products/digital/digital-add-pro';
 //Sales
 import Orders from './components/sales/orders';
 import Transactions_sales from './components/sales/transactions-sales';
+import Mobile_pay from './components/sales/mobile-pay';
+import Repayment_sales from './components/sales/repayment';
+
 //Coupons
 import ListCoupons from './components/coupons/list-coupons';
 import Create_coupons from './components/coupons/create-coupons';
@@ -46,6 +49,18 @@ import Reports from './components/reports/report';
 import Invoice from './components/invoice';
 import Datatable from './components/common/datatable'
 import Login from './components/auth/login';
+import Create_currency from './components/supply/currency/create_currency';
+import List_currency from './components/supply/currency/list-currency';
+import Create_product from './components/supply/products/create-product';
+import List_product from './components/supply/products/list-product';
+import Create_machine from './components/machines/create-machine';
+import List_machine from './components/machines/list-machine';
+import Create_maintain from './components/maintains/create-maintain';
+import List_maintain from './components/maintains/list-maintain';
+import Create_slide from './components/slides/create-slide';
+import List_slide from './components/slides/list-slide';
+import Create_log from './components/logs/create-log';
+import List_log from './components/logs/list-log';
 
 
 
@@ -74,6 +89,8 @@ class Root extends Component {
 
                             <Route path={`${process.env.PUBLIC_URL}/sales/orders`} component={Orders} />
                             <Route path={`${process.env.PUBLIC_URL}/sales/transactions`} component={Transactions_sales} />
+                            <Route path={`${process.env.PUBLIC_URL}/sales/repayment`} component={Repayment_sales} />
+                            <Route path={`${process.env.PUBLIC_URL}/sales/mobile-pay`} component={Mobile_pay} />
 
                             <Route path={`${process.env.PUBLIC_URL}/coupons/list-coupons`} component={ListCoupons} />
                             <Route path={`${process.env.PUBLIC_URL}/coupons/create-coupons`} component={Create_coupons} />
@@ -103,6 +120,24 @@ class Root extends Component {
                             <Route path={`${process.env.PUBLIC_URL}/invoice`} component={Invoice} />
 
                             <Route path={`${process.env.PUBLIC_URL}/data-table`} component={Datatable} />
+
+                            <Route path={`${process.env.PUBLIC_URL}/supply/currency/create-currency`} component={Create_currency}/>
+                            <Route path={`${process.env.PUBLIC_URL}/supply/currency/list-currency`} component={List_currency}/>
+
+                            <Route path={`${process.env.PUBLIC_URL}/supply/products/create-product`} component={Create_product}/>
+                            <Route path={`${process.env.PUBLIC_URL}/supply/products/list-product`} component={List_product}/>
+
+                            <Route path={`${process.env.PUBLIC_URL}/machines/create-machine`} component={Create_machine}/>
+                            <Route path={`${process.env.PUBLIC_URL}/machines/list-machine`} component={List_machine}/>
+
+                            <Route path={`${process.env.PUBLIC_URL}/maintains/create-maintain`} component={Create_maintain}/>
+                            <Route path={`${process.env.PUBLIC_URL}/maintains/list-maintain`} component={List_maintain}/>
+                            
+                            <Route path={`${process.env.PUBLIC_URL}/slides/create-slide`} component={Create_slide}/>
+                            <Route path={`${process.env.PUBLIC_URL}/slides/list-slide`} component={List_slide}/>
+                            
+                            <Route path={`${process.env.PUBLIC_URL}/logs/create-log`} component={Create_log}/>
+                            <Route path={`${process.env.PUBLIC_URL}/logs/list-log`} component={List_log}/>
 
                         </App>
                     </Switch>

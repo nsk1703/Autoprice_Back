@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { MENUITEMS } from '../../../constants/menu';
 
 // image import
-import logo from '../../../assets/images/dashboard/multikart-logo.png'
+import logo from '../../../assets/images/dashboard/mini-autoprice.png'
 
 export class sidebar extends Component {
 

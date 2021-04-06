@@ -3,7 +3,7 @@ import LoginTabset from './loginTabset';
 import { ArrowLeft, Sliders } from 'react-feather';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
-import stats from '../../assets/images/dashboard/autoprice-logo.png';
+import stats from '../../assets/images/dashboard/mini-autoprice.png';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -23,9 +23,9 @@ export class Login extends Component {
                             <div className="row">
                                 <div className="col-md-5 p-0 card-left">
                                     <div className="card bg-primary">
-                                        <div className="svg-icon">
+                                        {/* <div className=""> */}
                                             <img src={stats} className="Img-fluid" />
-                                        </div>
+                                        {/* </div> */}
                                         {/* <Slider className="single-item" {...settings}>
                                             <div>
                                                 <div>

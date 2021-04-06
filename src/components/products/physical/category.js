@@ -4,6 +4,7 @@ import Modal from 'react-responsive-modal';
 import 'react-toastify/dist/ReactToastify.css';
 import data from '../../../assets/data/category';
 import Datatable from '../../common/datatable';
+import Data_categories from '../../common/dataTables/data_categories';
 
 export class Category extends Component {
     constructor(props) {
@@ -31,39 +32,39 @@ export class Category extends Component {
                         <div className="col-sm-12">
                             <div className="card">
                                 <div className="card-header">
-                                    <h5>Categorie - Produits</h5>
+                                    <h5>Liste des Catégories</h5>
                                 </div>
                                 <div className="card-body">
                                     <div className="btn-popup pull-right">
-
-                                        <button type="button" className="btn btn-primary" onClick={this.onOpenModal} data-toggle="modal" data-original-title="test" data-target="#exampleModal">Add Category</button>
+                                        <button type="button" className="btn btn-primary" onClick={this.onOpenModal} data-toggle="modal" data-original-title="test" data-target="#exampleModal">Ajouter une catégorie</button>
                                         <Modal open={open} onClose={this.onCloseModal} >
                                             <div className="modal-header">
-                                                <h5 className="modal-title f-w-600" id="exampleModalLabel2">Add Physical Product</h5>
+                                                <h5 className="modal-title f-w-600" id="exampleModalLabel2">Ajout d'une catégorie</h5>
                                             </div>
                                             <div className="modal-body">
                                                 <form>
                                                     <div className="form-group">
-                                                        <label htmlFor="recipient-name" className="col-form-label" >Category Name :</label>
+                                                        <label htmlFor="recipient-name" className="col-form-label" >Nom de catégorie :</label>
                                                         <input type="text" className="form-control" />
                                                     </div>
                                                     <div className="form-group">
-                                                        <label htmlFor="message-text" className="col-form-label">Category Image :</label>
+                                                        <label htmlFor="message-text" className="col-form-label">Image de Catégorie :</label>
                                                         <input className="form-control" id="validationCustom02" type="file" />
                                                     </div>
                                                 </form>
                                             </div>
                                             <div className="modal-footer">
-                                                <button type="button" className="btn btn-primary" onClick={() => this.onCloseModal('VaryingMdo')}>Save</button>
-                                                <button type="button" className="btn btn-secondary" onClick={() => this.onCloseModal('VaryingMdo')}>Close</button>
+                                                <button type="button" className="btn btn-primary" onClick={() => this.onCloseModal('VaryingMdo')}>Enregistrer</button>
+                                                <button type="button" className="btn btn-secondary" onClick={() => this.onCloseModal('VaryingMdo')}>Fermer</button>
                                             </div>
                                         </Modal>
                                     </div>
                                     <div className="clearfix"></div>
-                                    <div id="basicScenario" className="product-physical">
+                                    <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
                                         <Datatable
-                                            multiSelectOption={false}
-                                            myData={data} 
+                                            multiSelectOption={true}
+                                            myData={data}
+                                            check={true}                       
                                             pageSize={10} 
                                             pagination={true}
                                             class="-striped -highlight" 

@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-export class Datatable extends Component {
+export class Data_categories extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -91,74 +91,72 @@ export class Datatable extends Component {
                     Cell: editable,
                     style: {
                         textAlign: 'center'
-                    }
-                });
+                }
+            });
         }
 
-        if (check == true) {
-            if (multiSelectOption == true) {
-            columns.push(
-                {
-                    Header: <button className="btn btn-danger btn-sm btn-delete mb-0 b-r-4"
-                        onClick={
-                            (e) => {
-                                if (window.confirm('Are you sure you wish to delete this item?'))
-                                    this.handleRemoveRow()
-                            }}>Delete</button>,
-                    id: 'delete',
-                    accessor: str => "delete",
-                    sortable: false,
-                    style: {
-                        textAlign: 'center'
-                    },
-                    Cell: (row) => (
-                        <div>
-                            <span >
-                                <input type="checkbox" name={row.original.id} defaultChecked={this.state.checkedValues.includes(row.original.id)}
-                                    onChange={e => this.selectRow(e, row.original.id)} />
-                            </span>
+            if (check == true) {
+                if (multiSelectOption == true) {
+                    columns.push(
+                        {
+                            Header: <button className="btn btn-danger btn-sm btn-delete mb-0 b-r-4"
+                                onClick={
+                                    (e) => {
+                                        if (window.confirm('Are you sure you wish to delete this item?'))
+                                            this.handleRemoveRow()
+                                    }}>Delete</button>,
+                            id: 'delete',
+                            accessor: str => "delete",
+                            sortable: false,
+                            style: {
+                                textAlign: 'center'
+                            },
+                            Cell: (row) => (
+                                <div>
+                                    <span >
+                                        <input type="checkbox" name={row.original.id} defaultChecked={this.state.checkedValues.includes(row.original.id)}
+                                            onChange={e => this.selectRow(e, row.original.id)} />
+                                    </span>
+                                </div>
+                            ),
+                            accessor: key,
+                            style: {
+                                textAlign: 'center'
+                            }
+                        }
+                    )
+            } else {
+                columns.push(
+                    {
+                        Header: <b>Action</b>,
+                        id: 'delete',
+                        accessor: str => "delete",
+                        Cell: (row) => (
+                            <div>
+                                <span onClick={() => {
+                                    if (window.confirm('Are you sure you wish to delete this item?')) {
+                                        let data = myData;
+                                        data.splice(row.index, 1);
+                                        this.setState({ myData: data });
+                                    }
+                                    toast.success("Successfully Deleted !")
+
+                                }}>
+                                    <i className="fa fa-trash" style={{ width: 35, fontSize: 20, padding: 11, color: '#e4566e' }}
+                                    ></i>
+                                </span>
+
                             <span><i className="fa fa-pencil" style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }}></i></span>
                         </div>
-                        
-                    ),
-                    accessor: key,
-                    style: {
-                        textAlign: 'center'
+                        ),
+                        style: {
+                            textAlign: 'center'
+                        },
+                        sortable: false
                     }
-                }
-            )
-        } else {
-            columns.push(
-                {
-                    Header: <b>Action</b>,
-                    id: 'delete',
-                    accessor: str => "delete",
-                    Cell: (row) => (
-                        <div>
-                            <span onClick={() => {
-                                if (window.confirm('Are you sure you wish to delete this item?')) {
-                                    let data = myData;
-                                    data.splice(row.index, 1);
-                                    this.setState({ myData: data });
-                                }
-                                toast.success("Successfully Deleted !")
-
-                            }}>
-                                <i className="fa fa-trash" style={{ width: 35, fontSize: 20, padding: 11, color: '#e4566e' }}
-                                ></i>
-                            </span>
-
-                        <span><i className="fa fa-pencil" style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }}></i></span>
-                    </div>
-                    ),
-                    style: {
-                        textAlign: 'center'
-                    },
-                    sortable: false
-                }
-            )
+                )
+            }
         }
-    }
 
         return (
             <Fragment>
@@ -175,4 +173,4 @@ export class Datatable extends Component {
     }
 }
 
-export default Datatable
+export default Data_categories

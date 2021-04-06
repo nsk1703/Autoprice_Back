@@ -8,23 +8,24 @@ export class Orders extends Component {
     render() {
         return (
             <Fragment>
-                <Breadcrumb title="Orders" parent="Sales" />
+                <Breadcrumb title="Commandes" parent="Ventes" />
 
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-sm-12">
                             <div className="card">
                                 <div className="card-header">
-                                    <h5>Manage Order</h5>
+                                    <h5>Gestionnaire de Commandes</h5>
                                 </div>
                                 <div className="card-body order-datatable">
                                 <Datatable
-                                            multiSelectOption={false}
-                                            myData={data}
-                                            pageSize={10}
-                                            pagination={true}
-                                            class="-striped -highlight"
-                                        />
+                                    multiSelectOption={false}
+                                    myData={data}
+                                    check={false}
+                                    pageSize={10}
+                                    pagination={true}
+                                    class="-striped -highlight"
+                                />
                                 </div>
                             </div>
                         </div>
