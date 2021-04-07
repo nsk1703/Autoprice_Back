@@ -6,13 +6,13 @@ export class Create_currency extends Component {
     render() {
         return (
             <Fragment>
-                <Breadcrumb title="Ajout de monnaie" parent="Monnaie" />
+                <Breadcrumb title="Approvisionnement de Monnaie" parent="Monnaie" />
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-sm-12">
                             <div className="card">
                                 <div className="card-header">
-                                    <h5> Ajout de Monnaie</h5>
+                                    <h5> Approvisionnement de Monnaie</h5>
                                 </div>
                                 <div className="card-body">
                                     <Tabset_currency />

@@ -61,6 +61,7 @@ import Create_slide from './components/slides/create-slide';
 import List_slide from './components/slides/list-slide';
 import Create_log from './components/logs/create-log';
 import List_log from './components/logs/list-log';
+import { Change_profile } from './components/settings/change-profile';
 
 
 
@@ -116,6 +117,7 @@ class Root extends Component {
                             <Route path={`${process.env.PUBLIC_URL}/reports/report`} component={Reports} />
 
                             <Route path={`${process.env.PUBLIC_URL}/settings/profile`} component={Profile} />
+                            <Route path={`${process.env.PUBLIC_URL}/settings/change-profile`} component={Change_profile} />
 
                             <Route path={`${process.env.PUBLIC_URL}/invoice`} component={Invoice} />
 

@@ -8,34 +8,12 @@ export class Tabset_slide extends Component {
                 <Tabs>
                     <TabList className="nav nav-tabs tab-coupon" >
                         <Tab className="nav-link">Account</Tab>
-                        <Tab className="nav-link">Permission</Tab>
+                        {/* <Tab className="nav-link">Permission</Tab> */}
                     </TabList>
                     <TabPanel>
-                        <form className="needs-validation user-add" noValidate="">
-                            <h4>Account Details</h4>
-                            <div className="form-group row">
-                                <label className="col-xl-3 col-md-4"><span>*</span> First Name</label>
-                                <input className="form-control col-xl-8 col-md-7" id="validationCustom0" type="text" required="" />
-                            </div>
-                            <div className="form-group row">
-                                <label className="col-xl-3 col-md-4"><span>*</span> Last Name</label>
-                                <input className="form-control col-xl-8 col-md-7" id="validationCustom1" type="text" required="" />
-                            </div>
-                            <div className="form-group row">
-                                <label className="col-xl-3 col-md-4"><span>*</span> Email</label>
-                                <input className="form-control col-xl-8 col-md-7" id="validationCustom2" type="text" required="" />
-                            </div>
-                            <div className="form-group row">
-                                <label className="col-xl-3 col-md-4"><span>*</span> Password</label>
-                                <input className="form-control col-xl-8 col-md-7" id="validationCustom3" type="password" required="" />
-                            </div>
-                            <div className="form-group row">
-                                <label className="col-xl-3 col-md-4"><span>*</span> Confirm Password</label>
-                                <input className="form-control col-xl-8 col-md-7" id="validationCustom4" type="password" required="" />
-                            </div>
-                        </form>
+                        
                     </TabPanel>
-                    <TabPanel>
+                    {/* <TabPanel>
                         <form className="needs-validation user-add" noValidate="">
                             <div className="permission-block">
                                 <div className="attribute-blocks">
@@ -182,10 +160,10 @@ export class Tabset_slide extends Component {
                                 </div>
                             </div>
                         </form>
-                    </TabPanel>
+                    </TabPanel> */}
                 </Tabs>
                 <div className="pull-right">
-                    <button type="button" className="btn btn-primary">Save</button>
+                    <button type="button" className="btn btn-primary">Enregister</button>
                 </div>
             </Fragment>
         )

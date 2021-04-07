@@ -1,14 +1,15 @@
 import React, { Component ,Fragment} from 'react'
-
+import { Link } from 'react-router-dom';
 import designer from '../../assets/images/dashboard/designer.jpg';
 import Tabset_profile from './tabset-profile';
 import Breadcrumb from '../common/breadcrumb';
+
 
 export class Profile extends Component {
     render() {
         return (
             <Fragment>
-                <Breadcrumb title="Profile" parent="Settings" />
+                <Breadcrumb title="Profil" parent="Paramètres" />
                  <div className="container-fluid">
                 <div className="row">
                     <div className="col-xl-4">
@@ -18,17 +19,20 @@ export class Profile extends Component {
                                     <img src={designer} alt="" className="img-fluid img-90 rounded-circle blur-up lazyloaded" />
                                     <h5 className="f-w-600 f-16 mb-0">John deo</h5>
                                     <span>johndeo@gmail.com</span>
-                                    <div className="social">
+                                    {/* <div className="social">
                                         <div className="form-group btn-showcase">
                                             <button className="btn social-btn btn-fb d-inline-block"> <i className="fa fa-facebook"></i></button>
                                             <button className="btn social-btn btn-twitter d-inline-block"><i className="fa fa-google"></i></button>
                                             <button className="btn social-btn btn-google d-inline-block mr-0"><i className="fa fa-twitter"></i></button>
                                         </div>
-                                    </div>
+                                    </div> */}
+                                    <hr />
+                                    <Link type="button" to="/settings/change-profile" className="btn btn-primary">Modifier le Profil</Link>
                                 </div>
-                                <hr />
-                                <div className="project-status">
-                                    <h5 className="f-w-600 f-16">Employee Status</h5>
+                                
+                                {/* <div className="project-status"> */}
+                                
+                                    {/* <h5 className="f-w-600 f-16">Employee Status</h5>
                                     <div className="media">
                                         <div className="media-body">
                                             <h6>Performance <span className="pull-right">80%</span></h6>
@@ -52,8 +56,9 @@ export class Profile extends Component {
                                                 <div className="progress-bar bg-danger" role="progressbar" style={{width: '50%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
+                                    </div> */}
+                                    
+                                {/* </div> */}
                             </div>
                         </div>
                     </div>

@@ -22,7 +22,7 @@ export class Login extends Component {
                         <div className="container">
                             <div className="row">
                                 <div className="col-md-5 p-0 card-left">
-                                    <div className="card bg-primary">
+                                    <div className="card ">
                                         {/* <div className=""> */}
                                             <img src={stats} className="Img-fluid" />
                                         {/* </div> */}

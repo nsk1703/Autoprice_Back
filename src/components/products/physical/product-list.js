@@ -2,6 +2,7 @@ import React, { Component,Fragment } from 'react'
 import Breadcrumb from '../../common/breadcrumb';
 import data from '../../../assets/data/physical_list';
 import { Edit, Trash2 } from 'react-feather'
+import { Link } from 'react-router-dom';
 
 
 export class Product_list extends Component {
@@ -16,6 +17,11 @@ export class Product_list extends Component {
             <Fragment>
                 <Breadcrumb title="Produits" parent="" />
                 <div className="container-fluid">
+                    <div className="card">
+                        <div className="card-header">
+                        <Link type="button" to="/products/physical/add-product" className="btn btn-primary">Ajouter un Produit</Link>
+                        </div>
+                    </div>
                     <div className="row products-admin ratio_asos">
                         {
                             this.state.data.map((myData, i) => {

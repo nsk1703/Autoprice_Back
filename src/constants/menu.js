@@ -55,7 +55,7 @@ export const MENUITEMS = [
             },
             {
                 title: 'Produits', type: 'sub', active: false, children: [
-                    { path: '/supply/products/list-product', title: 'Liste des Produits', type: 'link' },
+                    { path: '/supply/products/list-product', title: 'Produits approvisionnés', type: 'link' },
                     { path: '/supply/products/create-product', title: 'Créer un Produits', type: 'link' },
                 ]
             }
@@ -132,6 +132,7 @@ export const MENUITEMS = [
     {
         title: 'Paramètres', icon: Settings, type: 'sub', children: [
             { path: '/settings/profile', title: 'Profile', type: 'link' },
+            { path: '/settings/change-profile', title: 'Modifier le Profil', type: 'link' },
         ]
     },
     // {

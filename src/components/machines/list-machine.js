@@ -9,15 +9,15 @@ export class List_machine extends Component {
     render() {
         return (
             <Fragment>
-                <Breadcrumb title="User List" parent="Users" />
+                <Breadcrumb title="Liste des machines" parent="Machines" />
                 <div className="container-fluid">
                     <div className="card">
-                        <div className="card-header">
+                        {/* <div className="card-header">
                             <h5>User Details</h5>
-                        </div>
+                        </div> */}
                         <div className="card-body">
                             <div className="btn-popup pull-right">
-                                <Link to="/users/create-user" className="btn btn-secondary">Create User</Link>
+                                <Link to="/machines/create-machine" className="btn btn-primary">Ajout de Machine</Link>
                             </div>
                             <div className="clearfix"></div>
                             <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">

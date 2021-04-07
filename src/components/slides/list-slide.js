@@ -9,15 +9,15 @@ export class List_slide extends Component {
     render() {
         return (
             <Fragment>
-                <Breadcrumb title="User List" parent="Users" />
+                <Breadcrumb title="Liste des Slides" parent="Slides" />
                 <div className="container-fluid">
                     <div className="card">
-                        <div className="card-header">
+                        {/* <div className="card-header">
                             <h5>User Details</h5>
-                        </div>
+                        </div> */}
                         <div className="card-body">
                             <div className="btn-popup pull-right">
-                                <Link to="/users/create-user" className="btn btn-secondary">Create User</Link>
+                                <Link to="/slides/create-slide" className="btn btn-primary">Créer un slide</Link>
                             </div>
                             <div className="clearfix"></div>
                             <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">

@@ -14,11 +14,11 @@ export class Add_product extends Component {
             file: '',
             dummyimgs: [
                 { img: user },
-                { img: user },
-                { img: user },
-                { img: user },
-                { img: user },
-                { img: user },
+                // { img: user },
+                // { img: user },
+                // { img: user },
+                // { img: user },
+                // { img: user },
             ]
         }
     }
@@ -73,7 +73,7 @@ export class Add_product extends Component {
     render() {
         return (
             <Fragment>
-                <Breadcrumb title="Ajout d'un produit" parent="Physical" />
+                <Breadcrumb title="Ajout d'un produit" parent="Produits" />
 
                 <div className="container-fluid">
                     <div className="row">
@@ -128,27 +128,14 @@ export class Add_product extends Component {
                                                         <div className="valid-feedback">Acceptable!</div>
                                                     </div>
                                                     <div className="form-group mb-3 row">
-                                                        <label className="col-xl-3 col-sm-4 mb-0">Code du Produit :</label>
+                                                        <label className="col-xl-3 col-sm-4 mb-0">Unité :</label>
                                                         <div className="col-xl-8 col-sm-7">
-                                                            <AvField className="form-control " name="product_code" id="validationCustomUsername" type="number" required />
+                                                            <AvField className="form-control " name="unity_product" id="validationCustom03" type="number" required />
                                                         </div>
                                                         <div className="invalid-feedback offset-sm-4 offset-xl-3">Veuillez choisir un code valide.</div>
                                                     </div>
-                                                </div>
-                                                <div className="form">
                                                     <div className="form-group row">
-                                                        <label className="col-xl-3 col-sm-4 mb-0" >Choisir la taille :</label>
-                                                        <div className="col-xl-8 col-sm-7">
-                                                            <select className="form-control digits" id="exampleFormControlSelect1">
-                                                                <option>Small</option>
-                                                                <option>Medium</option>
-                                                                <option>Large</option>
-                                                                <option>Extra Large</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div className="form-group row">
-                                                        <label className="col-xl-3 col-sm-4 mb-0">Nombres d'articles :</label>
+                                                        <label className="col-xl-3 col-sm-4 mb-0">Quantité d'articles :</label>
                                                         <fieldset className="qty-box ml-0">
                                                             <div className="input-group bootstrap-touchspin">
                                                                 <div className="input-group-prepend">
@@ -171,6 +158,33 @@ export class Add_product extends Component {
                                                             </div>
                                                         </fieldset>
                                                     </div>
+                                                    <div className="form-group mb-3 row">
+                                                        <label className="col-xl-3 col-sm-4 mb-0">Reférence du Produit :</label>
+                                                        <div className="col-xl-8 col-sm-7">
+                                                            <AvField className="form-control " name="product_code" id="validationCustomUsername" type="number" required />
+                                                        </div>
+                                                        <div className="invalid-feedback offset-sm-4 offset-xl-3">Veuillez choisir un code valide.</div>
+                                                    </div>
+                                                    <div className="form-group mb-3 row">
+                                                        <label className="col-xl-3 col-sm-4 mb-0">Etat du Produit :</label>
+                                                        <div className="col-xl-8 col-sm-7">
+                                                            <AvField className="form-control " name="state" id="validationCustom04" type="text" required />
+                                                        </div>
+                                                        {/* <div className="invalid-feedback offset-sm-4 offset-xl-3">Veuillez choisir un code valide.</div> */}
+                                                    </div>
+                                                </div>
+                                                <div className="form-group row">
+                                                    <label className="col-xl-3 col-sm-4 mb-0" >Numero de machine :</label>
+                                                    <div className="col-xl-8 col-sm-7">
+                                                        <select className="form-control digits" id="exampleFormControlSelect1">
+                                                            <option>01</option>
+                                                            <option>02</option>
+                                                            <option>03</option>
+                                                            <option>04</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div className="form">
                                                     <div className="form-group row">
                                                         <label className="col-xl-3 col-sm-4">Description du produit :</label>
                                                         <div className="col-xl-8 col-sm-7 description-sm">

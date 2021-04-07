@@ -7,9 +7,9 @@ export class Tabset_profile extends Component {
         return (
             <div>
                 <Tabs>
-                    <TabList className="nav nav-tabs tab-coupon" >
+                    <TabList className="nav nav-tabs tab-coupon justify-content-center" >
                         <Tab className="nav-link"><User className="mr-2" />Profile</Tab>
-                        <Tab className="nav-link"><Settings className="mr-2" />Contact</Tab>
+                        {/* <Tab className="nav-link"><Settings className="mr-2" />Contact</Tab> */}
                     </TabList>
 
                     <TabPanel>
@@ -51,8 +51,8 @@ export class Tabset_profile extends Component {
                             </div>
                         </div>
                     </TabPanel>
-                    <TabPanel>
-                        {/* <div className="tab-pane fade"> */}
+                    {/* <TabPanel>
+                        <div className="tab-pane fade">
                             <div className="account-setting">
                                 
                                 <h5 className="f-w-600 f-16">Notifications</h5>
@@ -117,8 +117,8 @@ export class Tabset_profile extends Component {
                                 </div>
                                 <button type="button" className="btn btn-primary">Delete Account</button>
                             </div>
-                        {/* </div> */}
-                    </TabPanel>
+                        </div>
+                    </TabPanel> */}
                 </Tabs>
             </div>
         )

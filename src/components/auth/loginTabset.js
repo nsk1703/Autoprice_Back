@@ -67,7 +67,7 @@ export class LoginTabset extends Component {
                                 </div> */}
                             </form>
                         </TabPanel>
-                        <TabPanel>
+                        {/* <TabPanel>
                             <form className="form-horizontal auth-form">
                                 <div className="form-group">
                                     <input required="" name="login[username]" type="email" className="form-control" placeholder="Username" id="exampleInputEmail12" />
@@ -100,7 +100,7 @@ export class LoginTabset extends Component {
                                     </ul>
                                 </div>
                             </form>
-                        </TabPanel>
+                        </TabPanel> */}
                     </Tabs>
                 </Fragment>
             </div>

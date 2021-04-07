@@ -1,41 +1,64 @@
 import React, { Component,Fragment } from 'react'
 import { Tabs, TabList, TabPanel, Tab } from 'react-tabs';
+import CKEditors from 'react-ckeditor-component';
 
 export class Tabset_currency extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            open: false,
+        };
+    }
     render() {
         return (
             <Fragment>
-                <Tabs>
-                    <TabList className="nav nav-tabs tab-coupon" >
+                {/* <Tabs> */}
+                    {/* <TabList className="nav nav-tabs tab-coupon" >
                         <Tab className="nav-link">Account</Tab>
                         <Tab className="nav-link">Permission</Tab>
-                    </TabList>
-                    <TabPanel>
-                        <form className="needs-validation user-add" noValidate="">
-                            <h4>Account Details</h4>
+                    </TabList> */}
+                    {/* <TabPanel> */}
+                        <form className="needs-validation currency-add" noValidate="">
+                            {/* <h4>Account Details</h4> */}
                             <div className="form-group row">
-                                <label className="col-xl-3 col-md-4"><span>*</span> First Name</label>
-                                <input className="form-control col-xl-8 col-md-7" id="validationCustom0" type="text" required="" />
+                                <label className="col-xl-3 col-md-4"> Montant</label>
+                                <input className="form-control col-xl-8 col-md-7" id="validationCustom0" type="number" required="" />
                             </div>
                             <div className="form-group row">
-                                <label className="col-xl-3 col-md-4"><span>*</span> Last Name</label>
+                                <label className="col-xl-3 col-md-4"> Etat</label>
                                 <input className="form-control col-xl-8 col-md-7" id="validationCustom1" type="text" required="" />
                             </div>
                             <div className="form-group row">
-                                <label className="col-xl-3 col-md-4"><span>*</span> Email</label>
-                                <input className="form-control col-xl-8 col-md-7" id="validationCustom2" type="text" required="" />
+                                <label className="col-xl-3 col-md-4" >Nom de machine :</label>
+                                <select className="form-control col-xl-8 col-md-7 digits" id="exampleFormControlSelect1">
+                                    <option>machine01</option>
+                                    <option>machine02</option>
+                                    <option>machine03</option>
+                                    <option>machine04</option>
+                                </select>
                             </div>
-                            <div className="form-group row">
-                                <label className="col-xl-3 col-md-4"><span>*</span> Password</label>
-                                <input className="form-control col-xl-8 col-md-7" id="validationCustom3" type="password" required="" />
+                            <div className="form">
+                                <div className="form-group row">
+                                    <label className="col-xl-3 col-sm-4">Description :</label>
+                                    <div className="form-control col-xl-8 col-sm-7 description-sm">
+                                        <CKEditors
+                                            activeclassName="p10"
+                                            content={this.state.content}
+                                            events={{
+                                                "blur": this.onBlur,
+                                                "afterPaste": this.afterPaste,
+                                                "change": this.onChange
+                                            }}
+                                        />
+                                    </div>
+                                </div>
                             </div>
-                            <div className="form-group row">
-                                <label className="col-xl-3 col-md-4"><span>*</span> Confirm Password</label>
-                                <input className="form-control col-xl-8 col-md-7" id="validationCustom4" type="password" required="" />
+                            <div className="offset-xl-3 offset-sm-4">
+                                <button type="button" className="btn btn-primary">Enregister</button>
                             </div>
                         </form>
-                    </TabPanel>
-                    <TabPanel>
+                    {/* </TabPanel> */}
+                    {/* <TabPanel>
                         <form className="needs-validation user-add" noValidate="">
                             <div className="permission-block">
                                 <div className="attribute-blocks">
@@ -182,11 +205,9 @@ export class Tabset_currency extends Component {
                                 </div>
                             </div>
                         </form>
-                    </TabPanel>
-                </Tabs>
-                <div className="pull-right">
-                    <button type="button" className="btn btn-primary">Save</button>
-                </div>
+                    </TabPanel> */}
+                {/* </Tabs> */}
+                
             </Fragment>
         )
     }

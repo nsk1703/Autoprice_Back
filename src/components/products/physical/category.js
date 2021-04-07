@@ -1,6 +1,7 @@
 import React, { Component, Fragment} from 'react'
 import Breadcrumb from '../../common/breadcrumb';
 import Modal from 'react-responsive-modal';
+import CKEditors from 'react-ckeditor-component';
 import 'react-toastify/dist/ReactToastify.css';
 import data from '../../../assets/data/category';
 import Datatable from '../../common/datatable';
@@ -46,6 +47,20 @@ export class Category extends Component {
                                                     <div className="form-group">
                                                         <label htmlFor="recipient-name" className="col-form-label" >Nom de catégorie :</label>
                                                         <input type="text" className="form-control" />
+                                                    </div>
+                                                    <div className="form-group row">
+                                                        <label className="col-xl-3 col-sm-4">Description :</label>
+                                                        <div className="col-xl-8 col-sm-7 description-sm">
+                                                            <CKEditors
+                                                                activeclassName="p10"
+                                                                content={this.state.content}
+                                                                events={{
+                                                                    "blur": this.onBlur,
+                                                                    "afterPaste": this.afterPaste,
+                                                                    "change": this.onChange
+                                                                }}
+                                                            />
+                                                        </div>
                                                     </div>
                                                     <div className="form-group">
                                                         <label htmlFor="message-text" className="col-form-label">Image de Catégorie :</label>
