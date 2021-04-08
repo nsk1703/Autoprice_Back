@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Breadcrumb from '../common/breadcrumb';
 import data from '../../assets/data/listUser';
 import Datatable from '../common/datatable'
+import Data_slides from '../common/dataTables/data_slides';
 
 
 export class List_slide extends Component {
@@ -21,7 +22,7 @@ export class List_slide extends Component {
                             </div>
                             <div className="clearfix"></div>
                             <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
-                                <Datatable
+                                <Data_slides
                                     multiSelectOption={true}
                                     myData={data}
                                     pageSize={10}

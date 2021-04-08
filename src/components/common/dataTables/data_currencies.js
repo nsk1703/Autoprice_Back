@@ -3,9 +3,9 @@ import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Link } from 'react-router-dom';
 
-
-export class Datatable extends Component {
+export class Data_currencies extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -117,7 +117,7 @@ export class Datatable extends Component {
                             <input type="checkbox" name={row.original.id} defaultChecked={this.state.checkedValues.includes(row.original.id)}
                                 onChange={e => this.selectRow(e, row.original.id)} />
                         </span>
-                        <span><i className="fa fa-pencil" style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }}></i></span>
+                        <span><Link to="/supply/currency/create-currency"><i className="fa fa-pencil" style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }}></i></Link></span>
                     </div>
                     
                 ),
@@ -174,4 +174,4 @@ export class Datatable extends Component {
     }
 }
 
-export default Datatable
+export default Data_currencies

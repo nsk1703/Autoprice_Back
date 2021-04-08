@@ -3,26 +3,25 @@ import { Link } from 'react-router-dom'
 import Breadcrumb from '../common/breadcrumb';
 import data from '../../assets/data/listUser';
 import Datatable from '../common/datatable'
-import Data_maintains from '../common/dataTables/data_maintains';
 
 
-export class List_maintain extends Component {
+export class Log extends Component {
     render() {
         return (
             <Fragment>
-                <Breadcrumb title="Liste des maintenance" parent="Maintenance" />
+                <Breadcrumb title="Liste des Journaux" parent="Journaux"/>
                 <div className="container-fluid">
                     <div className="card">
                         {/* <div className="card-header">
                             <h5>User Details</h5>
                         </div> */}
                         <div className="card-body">
-                            <div className="btn-popup pull-right">
-                                <Link to="/maintains/create-maintain" className="btn btn-primary">Effectuer une maintenance</Link>
-                            </div>
+                            {/* <div className="btn-popup pull-right">
+                                <Link to="/logs/create-log" className="btn btn-primary">Créer un journal</Link>
+                            </div> */}
                             <div className="clearfix"></div>
                             <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
-                                <Data_maintains
+                                <Datatable
                                     multiSelectOption={true}
                                     myData={data}
                                     pageSize={10}
@@ -38,4 +37,4 @@ export class List_maintain extends Component {
     }
 }
 
-export default List_maintain
+export default Log

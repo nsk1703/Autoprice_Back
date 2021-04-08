@@ -59,9 +59,13 @@ import Create_maintain from './components/maintains/create-maintain';
 import List_maintain from './components/maintains/list-maintain';
 import Create_slide from './components/slides/create-slide';
 import List_slide from './components/slides/list-slide';
-import Create_log from './components/logs/create-log';
-import List_log from './components/logs/list-log';
+// import Create_log from './components/logs/create-log';
+import List_log, { Log } from './components/logs/log';
 import { Change_profile } from './components/settings/change-profile';
+import Change_password from './components/settings/change-password';
+import Add_roles from './components/roles/add-roles';
+import Roles_list from './components/roles/roles-list';
+import Change_roles from './components/roles/change-role';
 
 
 
@@ -118,6 +122,7 @@ class Root extends Component {
 
                             <Route path={`${process.env.PUBLIC_URL}/settings/profile`} component={Profile} />
                             <Route path={`${process.env.PUBLIC_URL}/settings/change-profile`} component={Change_profile} />
+                            <Route path={`${process.env.PUBLIC_URL}/settings/change-password`} component={Change_password} />
 
                             <Route path={`${process.env.PUBLIC_URL}/invoice`} component={Invoice} />
 
@@ -138,8 +143,11 @@ class Root extends Component {
                             <Route path={`${process.env.PUBLIC_URL}/slides/create-slide`} component={Create_slide}/>
                             <Route path={`${process.env.PUBLIC_URL}/slides/list-slide`} component={List_slide}/>
                             
-                            <Route path={`${process.env.PUBLIC_URL}/logs/create-log`} component={Create_log}/>
-                            <Route path={`${process.env.PUBLIC_URL}/logs/list-log`} component={List_log}/>
+                            <Route path={`${process.env.PUBLIC_URL}/logs/Log`} component={Log}/>
+
+                            <Route path={`${process.env.PUBLIC_URL}/roles/add-roles`} component={Add_roles}/>
+                            <Route path={`${process.env.PUBLIC_URL}/roles/roles-list`} component={Roles_list}/>
+                            <Route path={`${process.env.PUBLIC_URL}/roles/change_roles`} component={Change_roles}/>
 
                         </App>
                     </Switch>

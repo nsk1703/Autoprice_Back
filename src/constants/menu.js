@@ -9,7 +9,7 @@ import {
     UserPlus,
     Users,
     Chrome,
-    BarChart,Settings,Archive, LogIn
+    BarChart,Settings,Archive, LogIn, Download, Loader, Bookmark, Book, Sliders, Server
 } from 'react-feather';
 
 export const MENUITEMS = [
@@ -46,7 +46,7 @@ export const MENUITEMS = [
         ]
     },
     {
-        title: 'Approvisionnement', icon: UserPlus, type: 'sub', active: false, children: [
+        title: 'Approvisionnement', icon: Download, type: 'sub', active: false, children: [
             {
                 title: 'Monnaie', type: 'sub', active: false, children: [
                     { path: '/supply/currency/list-currency', title: 'Liste des Monnaies', type: 'link' },
@@ -56,7 +56,7 @@ export const MENUITEMS = [
             {
                 title: 'Produits', type: 'sub', active: false, children: [
                     { path: '/supply/products/list-product', title: 'Produits approvisionnés', type: 'link' },
-                    { path: '/supply/products/create-product', title: 'Créer un Produits', type: 'link' },
+                    { path: '/supply/products/create-product', title: 'Créer un Produit', type: 'link' },
                 ]
             }
         ]
@@ -83,34 +83,25 @@ export const MENUITEMS = [
     //     ]
     // },
     {
-        title: 'Utilisateurs', icon: UserPlus, type: 'sub', active: false, children: [
-            { path: '/users/list-user', title: 'Liste des Utilisateurs', type: 'link' },
-            { path: '/users/create-user', title: 'Créer un Utilisateur', type: 'link' },
-        ]
-    },
-    {
-        title: 'Machine', icon: UserPlus, type: 'sub', active: false, children: [
+        title: 'Machine', icon: Server, type: 'sub', active: false, children: [
             { path: '/machines/list-machine', title: 'Liste des Machines', type: 'link' },
             { path: '/machines/create-machine', title: 'Créer une machine', type: 'link' },
         ]
     },
     {
-        title: 'Maintenance', icon: UserPlus, type: 'sub', active: false, children: [
+        title: 'Maintenance', icon: Loader, type: 'sub', active: false, children: [
             { path: '/maintains/list-maintain', title: 'Liste des Maintenances', type: 'link' },
             { path: '/maintains/create-maintain', title: 'Créer une Maintenance', type: 'link' },
         ]
     },
     {
-        title: 'Slides', icon: UserPlus, type: 'sub', active: false, children: [
+        title: 'Slides', icon: Sliders, type: 'sub', active: false, children: [
             { path: '/slides/list-slide', title: 'Liste des Slides', type: 'link' },
             { path: '/slides/create-slide', title: 'Créer un Slide', type: 'link' },
         ]
     },
     {
-        title: 'Journaux', icon: Archive, type: 'sub', active: false, children: [
-            { path: '/logs/list-log', title: 'Liste des Journaux', type: 'link' },
-            { path: '/logs/create-log', title: 'Créer un Journal', type: 'link' },
-        ]
+        title: 'Journaux',path:'/logs/Log', icon: Archive, type: 'link', active: false
     },
 
     // {
@@ -130,9 +121,23 @@ export const MENUITEMS = [
         title: 'Statistiques',path:'/reports/report', icon: BarChart, type: 'link', active: false
     },
     {
+        title: 'Utilisateurs', icon: Users, type: 'sub', active: false, children: [
+            { path: '/users/list-user', title: 'Liste des Utilisateurs', type: 'link' },
+            { path: '/users/create-user', title: 'Créer un Utilisateur', type: 'link' },
+        ]
+    },
+    {
+        title: 'Rôles', icon: UserPlus, type: 'sub', active: false, children: [
+            { path: '/roles/roles-list', title: 'Liste des Rôles', type: 'link' },
+            { path: '/roles/add-roles', title: 'Ajouter un rôle', type: 'link' },
+            { path: '/roles/change-roles', title: 'Modifier un rôle', type: 'link' },
+        ]
+    },
+    {
         title: 'Paramètres', icon: Settings, type: 'sub', children: [
-            { path: '/settings/profile', title: 'Profile', type: 'link' },
+            { path: '/settings/profile', title: 'Profil', type: 'link' },
             { path: '/settings/change-profile', title: 'Modifier le Profil', type: 'link' },
+            { path: '/settings/change-password', title: 'Modifier le Mot de Passe', type: 'link' },
         ]
     },
     // {

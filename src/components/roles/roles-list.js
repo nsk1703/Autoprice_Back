@@ -3,25 +3,22 @@ import { Link } from 'react-router-dom'
 import Breadcrumb from '../common/breadcrumb';
 import data from '../../assets/data/listUser';
 import Datatable from '../common/datatable'
+import Data_roles from '../common/dataTables/data_roles';
 
-
-export class List_log extends Component {
+export class Roles_list extends Component {
     render() {
         return (
             <Fragment>
-                <Breadcrumb title="Liste des Journaux" parent="Journaux"/>
+                <Breadcrumb title="Liste des rôles" parent="Rôles" />
                 <div className="container-fluid">
                     <div className="card">
-                        {/* <div className="card-header">
-                            <h5>User Details</h5>
-                        </div> */}
                         <div className="card-body">
                             <div className="btn-popup pull-right">
-                                <Link to="/logs/create-log" className="btn btn-primary">Créer un journal</Link>
+                                <Link to="/roles/add-roles" className="btn btn-primary">Ajout de Rôle</Link>
                             </div>
                             <div className="clearfix"></div>
                             <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
-                                <Datatable
+                                <Data_roles
                                     multiSelectOption={true}
                                     myData={data}
                                     pageSize={10}
@@ -37,4 +34,4 @@ export class List_log extends Component {
     }
 }
 
-export default List_log
+export default Roles_list

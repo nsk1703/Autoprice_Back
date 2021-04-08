@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import Breadcrumb from '../common/breadcrumb';
 import data from '../../assets/data/sales-transactions';
 import Datatable from '../common/datatable';
+import Data_transactions from '../common/dataTables/data_transactions';
 
 export class Transactions_sales extends Component {
     render() {
@@ -18,9 +19,10 @@ export class Transactions_sales extends Component {
                                 </div>
                                 <div className="card-body">
                                     <div id="batchDelete" className="transactions">
-                                        <Datatable
+                                        <Data_transactions
                                             multiSelectOption={false}
                                             myData={data}
+                                            check={false}
                                             pageSize={10}
                                             pagination={true}
                                             class="-striped -highlight"

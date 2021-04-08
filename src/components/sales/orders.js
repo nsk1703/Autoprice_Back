@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import Breadcrumb from '../common/breadcrumb';
 import data from '../../assets/data/orders';
 import Datatable from '../common/datatable'
+import Data_orders from '../common/dataTables/data_orders';
 
 export class Orders extends Component {
 
@@ -18,7 +19,7 @@ export class Orders extends Component {
                                     <h5>Gestionnaire de Commandes</h5>
                                 </div>
                                 <div className="card-body order-datatable">
-                                <Datatable
+                                <Data_orders
                                     multiSelectOption={false}
                                     myData={data}
                                     check={false}

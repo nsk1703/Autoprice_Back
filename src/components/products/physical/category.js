@@ -76,10 +76,9 @@ export class Category extends Component {
                                     </div>
                                     <div className="clearfix"></div>
                                     <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
-                                        <Datatable
+                                        <Data_categories
                                             multiSelectOption={true}
-                                            myData={data}
-                                            check={true}                       
+                                            myData={data}  
                                             pageSize={10} 
                                             pagination={true}
                                             class="-striped -highlight" 

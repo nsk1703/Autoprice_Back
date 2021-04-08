@@ -17,8 +17,8 @@ export class Profile extends Component {
                             <div className="card-body">
                                 <div className="profile-details text-center">
                                     <img src={designer} alt="" className="img-fluid img-90 rounded-circle blur-up lazyloaded" />
-                                    <h5 className="f-w-600 f-16 mb-0">John deo</h5>
-                                    <span>johndeo@gmail.com</span>
+                                    <h5 className="f-w-600 f-16 mb-0">John doe</h5>
+                                    <span>johndoe@gmail.com</span>
                                     {/* <div className="social">
                                         <div className="form-group btn-showcase">
                                             <button className="btn social-btn btn-fb d-inline-block"> <i className="fa fa-facebook"></i></button>
@@ -27,7 +27,7 @@ export class Profile extends Component {
                                         </div>
                                     </div> */}
                                     <hr />
-                                    <Link type="button" to="/settings/change-profile" className="btn btn-primary">Modifier le Profil</Link>
+                                    <Link type="button" to="/settings/change-password" className="btn btn-primary">Modifier le mot de passe</Link>
                                 </div>
                                 
                                 {/* <div className="project-status"> */}

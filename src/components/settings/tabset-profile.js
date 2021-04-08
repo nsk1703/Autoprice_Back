@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Tabs, TabList, TabPanel, Tab } from 'react-tabs';
 import {User,Settings} from 'react-feather'
+import { Link } from 'react-router-dom';
 
 export class Tabset_profile extends Component {
     render() {
@@ -8,13 +9,13 @@ export class Tabset_profile extends Component {
             <div>
                 <Tabs>
                     <TabList className="nav nav-tabs tab-coupon justify-content-center" >
-                        <Tab className="nav-link"><User className="mr-2" />Profile</Tab>
+                        <Tab className="nav-link"><User className="mr-2" />Profil</Tab>
                         {/* <Tab className="nav-link"><Settings className="mr-2" />Contact</Tab> */}
                     </TabList>
 
                     <TabPanel>
                         <div className="tab-pane fade show active">
-                            <h5 className="f-w-600 f-16">Profile</h5>
+                            <h5 className="f-w-600 f-16">Profil</h5>
                             <div className="table-responsive profile-table">
                                 <table className="table table-responsive">
                                     <tbody>
@@ -49,6 +50,8 @@ export class Tabset_profile extends Component {
                                     </tbody>
                                 </table>
                             </div>
+                            <hr/>
+                            <Link type="button" to="/settings/change-profile" className="btn btn-primary">Modifier le Profil</Link>
                         </div>
                     </TabPanel>
                     {/* <TabPanel>
