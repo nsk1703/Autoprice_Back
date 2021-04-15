@@ -1,55 +1,55 @@
 import {
-    ALL_APPROPRODUIT_REQUEST,
-    ALL_APPROPRODUIT_SUCCESS,
-    ALL_APPROPRODUIT_FAIL,
-    ADMIN_APPROPRODUIT_REQUEST,
-    ADMIN_APPROPRODUIT_SUCCESS,
-    ADMIN_APPROPRODUIT_FAIL,
-    NEW_APPROPRODUIT_REQUEST,
-    NEW_APPROPRODUIT_SUCCESS,
-    NEW_APPROPRODUIT_RESET,
-    NEW_APPROPRODUIT_FAIL,
-    DELETE_APPROPRODUIT_REQUEST,
-    DELETE_APPROPRODUIT_SUCCESS,
-    DELETE_APPROPRODUIT_RESET,
-    DELETE_APPROPRODUIT_FAIL,
-    UPDATE_APPROPRODUIT_REQUEST,
-    UPDATE_APPROPRODUIT_SUCCESS,
-    UPDATE_APPROPRODUIT_RESET,
-    UPDATE_APPROPRODUIT_FAIL,
-    APPROPRODUIT_DETAILS_REQUEST,
-    APPROPRODUIT_DETAILS_SUCCESS,
-    APPROPRODUIT_DETAILS_FAIL,
+    ALL_PRODUCTS_REQUEST,
+    ALL_PRODUCTS_SUCCESS,
+    ALL_PRODUCTS_FAIL,
+    ADMIN_PRODUCTS_REQUEST,
+    ADMIN_PRODUCTS_SUCCESS,
+    ADMIN_PRODUCTS_FAIL,
+    NEW_PRODUCT_REQUEST,
+    NEW_PRODUCT_SUCCESS,
+    NEW_PRODUCT_RESET,
+    NEW_PRODUCT_FAIL,
+    DELETE_PRODUCT_REQUEST,
+    DELETE_PRODUCT_SUCCESS,
+    DELETE_PRODUCT_RESET,
+    DELETE_PRODUCT_FAIL,
+    UPDATE_PRODUCT_REQUEST,
+    UPDATE_PRODUCT_SUCCESS,
+    UPDATE_PRODUCT_RESET,
+    UPDATE_PRODUCT_FAIL,
+    PRODUCT_DETAILS_REQUEST,
+    PRODUCT_DETAILS_SUCCESS,
+    PRODUCT_DETAILS_FAIL,
     CLEAR_ERRORS
 
-} from '../constants/approproduitConstants'
+} from '../../constants/productConstants'
 
-export const approproduitsReducer = (state = { approproduits: [] }, action) => {
+export const productsReducer = (state = { products: [] }, action) => {
     switch (action.type) {
-        case ALL_APPROPRODUIT_REQUEST:
-        case ADMIN_APPROPRODUIT_REQUEST:
+        case ALL_PRODUCTS_REQUEST:
+        case ADMIN_PRODUCTS_REQUEST:
             return {
                 loading: true,
-                approproduits: []
+                products: []
             }
 
-        case ALL_APPROPRODUIT_SUCCESS:
+        case ALL_PRODUCTS_SUCCESS:
             return {
                 loading: false,
-                approproduits: action.payload.approproduits,
-                approproduitsCount: action.payload.approproduitsCount,
+                products: action.payload.products,
+                productsCount: action.payload.productsCount,
                 resPerPage: action.payload.resPerPage,
-                filteredapproproduitsCount: action.payload.filteredapproproduitsCount
+                filteredProductsCount: action.payload.filteredProductsCount
             }
 
-        case ADMIN_APPROPRODUIT_SUCCESS:
+        case ADMIN_PRODUCTS_SUCCESS:
             return {
                 loading: false,
-                approproduits: action.payload
+                products: action.payload
             }
 
-        case ALL_APPROPRODUIT_FAIL:
-        case ADMIN_APPROPRODUIT_FAIL:
+        case ALL_PRODUCTS_FAIL:
+        case ADMIN_PRODUCTS_FAIL:
             return {
                 loading: false,
                 error: action.payload
@@ -66,29 +66,29 @@ export const approproduitsReducer = (state = { approproduits: [] }, action) => {
     }
 }
 
-export const newApproproduitReducer = (state = { approproduit: {} }, action) => {
+export const newProductReducer = (state = { product: {} }, action) => {
     switch (action.type) {
 
-        case NEW_APPROPRODUIT_REQUEST:
+        case NEW_PRODUCT_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case NEW_APPROPRODUIT_SUCCESS:
+        case NEW_PRODUCT_SUCCESS:
             return {
                 loading: false,
                 success: action.payload.success,
-                approproduit: action.payload.approproduit
+                product: action.payload.product
             }
 
-        case NEW_APPROPRODUIT_FAIL:
+        case NEW_PRODUCT_FAIL:
             return {
                 ...state,
                 error: action.payload
             }
 
-        case NEW_APPROPRODUIT_RESET:
+        case NEW_PRODUCT_RESET:
             return {
                 ...state,
                 success: false
@@ -105,24 +105,24 @@ export const newApproproduitReducer = (state = { approproduit: {} }, action) => 
     }
 }
 
-export const approproduitReducer = (state = {}, action) => {
+export const productReducer = (state = {}, action) => {
     switch (action.type) {
 
-        case DELETE_APPROPRODUIT_REQUEST:
-        case UPDATE_APPROPRODUIT_REQUEST:
+        case DELETE_PRODUCT_REQUEST:
+        case UPDATE_PRODUCT_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case DELETE_APPROPRODUIT_SUCCESS:
+        case DELETE_PRODUCT_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 isDeleted: action.payload
             }
 
-        case UPDATE_APPROPRODUIT_SUCCESS:
+        case UPDATE_PRODUCT_SUCCESS:
             return {
                 ...state,
                 loading: false,
@@ -130,20 +130,20 @@ export const approproduitReducer = (state = {}, action) => {
             }
 
 
-        case DELETE_APPROPRODUIT_FAIL:
-        case UPDATE_APPROPRODUIT_FAIL:
+        case DELETE_PRODUCT_FAIL:
+        case UPDATE_PRODUCT_FAIL:
             return {
                 ...state,
                 error: action.payload
             }
 
-        case DELETE_APPROPRODUIT_RESET:
+        case DELETE_PRODUCT_RESET:
             return {
                 ...state,
                 isDeleted: false
             }
 
-        case UPDATE_APPROPRODUIT_RESET:
+        case UPDATE_PRODUCT_RESET:
             return {
                 ...state,
                 isUpdated: false
@@ -160,22 +160,22 @@ export const approproduitReducer = (state = {}, action) => {
     }
 }
 
-export const approproduitDetailsReducer = (state = { approproduit: {} }, action) => {
+export const productDetailsReducer = (state = { product: {} }, action) => {
     switch (action.type) {
 
-        case APPROPRODUIT_DETAILS_REQUEST:
+        case PRODUCT_DETAILS_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case APPROPRODUIT_DETAILS_SUCCESS:
+        case PRODUCT_DETAILS_SUCCESS:
             return {
                 loading: false,
-                approproduit: action.payload
+                product: action.payload
             }
 
-        case APPROPRODUIT_DETAILS_FAIL:
+        case PRODUCT_DETAILS_FAIL:
             return {
                 ...state,
                 error: action.payload

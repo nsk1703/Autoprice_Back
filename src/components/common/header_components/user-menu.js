@@ -18,7 +18,7 @@ export class User_menu extends Component {
                         {/* <li><a href="javascript:void(0)"><i data-feather="lock"></i>Lock Screen</a></li> */}
                         {/* <li><a href="javascript:void(0)"><i data-feather="settings"></i>Settings</a></li> */}
                         <li><Link to={`${process.env.PUBLIC_URL}/settings/change-password`} ><i data-feather="change-password"></i>Modifier le mot de passe</Link></li>
-                        <li><Link to={`${process.env.PUBLIC_URL}/`}><i data-feather="log-out"></i>Déconnexion</Link></li>
+                        <li><Link to={`${process.env.PUBLIC_URL}/login`}><i data-feather="log-out"></i>Déconnexion</Link></li>
                     </ul>
                 </li>
             </Fragment>

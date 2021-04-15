@@ -1,55 +1,55 @@
 import {
-    ALL_PRODUCTS_REQUEST,
-    ALL_PRODUCTS_SUCCESS,
-    ALL_PRODUCTS_FAIL,
-    ADMIN_PRODUCTS_REQUEST,
-    ADMIN_PRODUCTS_SUCCESS,
-    ADMIN_PRODUCTS_FAIL,
-    NEW_PRODUCT_REQUEST,
-    NEW_PRODUCT_SUCCESS,
-    NEW_PRODUCT_RESET,
-    NEW_PRODUCT_FAIL,
-    DELETE_PRODUCT_REQUEST,
-    DELETE_PRODUCT_SUCCESS,
-    DELETE_PRODUCT_RESET,
-    DELETE_PRODUCT_FAIL,
-    UPDATE_PRODUCT_REQUEST,
-    UPDATE_PRODUCT_SUCCESS,
-    UPDATE_PRODUCT_RESET,
-    UPDATE_PRODUCT_FAIL,
-    PRODUCT_DETAILS_REQUEST,
-    PRODUCT_DETAILS_SUCCESS,
-    PRODUCT_DETAILS_FAIL,
+    ALL_REMBOURSEMENT_REQUEST,
+    ALL_REMBOURSEMENT_SUCCESS,
+    ALL_REMBOURSEMENT_FAIL,
+    ADMIN_REMBOURSEMENT_REQUEST,
+    ADMIN_REMBOURSEMENT_SUCCESS,
+    ADMIN_REMBOURSEMENT_FAIL,
+    NEW_REMBOURSEMENT_REQUEST,
+    NEW_REMBOURSEMENT_SUCCESS,
+    NEW_REMBOURSEMENT_RESET,
+    NEW_REMBOURSEMENT_FAIL,
+    DELETE_REMBOURSEMENT_REQUEST,
+    DELETE_REMBOURSEMENT_SUCCESS,
+    DELETE_REMBOURSEMENT_RESET,
+    DELETE_REMBOURSEMENT_FAIL,
+    UPDATE_REMBOURSEMENT_REQUEST,
+    UPDATE_REMBOURSEMENT_SUCCESS,
+    UPDATE_REMBOURSEMENT_RESET,
+    UPDATE_REMBOURSEMENT_FAIL,
+    REMBOURSEMENT_DETAILS_REQUEST,
+    REMBOURSEMENT_DETAILS_SUCCESS,
+    REMBOURSEMENT_DETAILS_FAIL,
     CLEAR_ERRORS
 
-} from '../constants/productConstants'
+} from '../../constants/remboursementConstants'
 
-export const productsReducer = (state = { products: [] }, action) => {
+export const remboursementsReducer = (state = { remboursements: [] }, action) => {
     switch (action.type) {
-        case ALL_PRODUCTS_REQUEST:
-        case ADMIN_PRODUCTS_REQUEST:
+        case ALL_REMBOURSEMENT_REQUEST:
+        case ADMIN_REMBOURSEMENT_REQUEST:
             return {
                 loading: true,
-                products: []
+                remboursements: []
             }
 
-        case ALL_PRODUCTS_SUCCESS:
+        case ALL_REMBOURSEMENT_SUCCESS:
             return {
                 loading: false,
-                products: action.payload.products,
-                productsCount: action.payload.productsCount,
+                remboursements: action.payload.remboursements,
+                remboursementsCount: action.payload.remboursementsCount,
                 resPerPage: action.payload.resPerPage,
-                filteredProductsCount: action.payload.filteredProductsCount
+                filteredremboursementsCount: action.payload.filteredremboursementsCount
             }
 
-        case ADMIN_PRODUCTS_SUCCESS:
+        case ADMIN_REMBOURSEMENT_SUCCESS:
             return {
                 loading: false,
-                products: action.payload
+                remboursements: action.payload
             }
 
-        case ALL_PRODUCTS_FAIL:
-        case ADMIN_PRODUCTS_FAIL:
+        case ALL_REMBOURSEMENT_FAIL:
+        case ADMIN_REMBOURSEMENT_FAIL:
             return {
                 loading: false,
                 error: action.payload
@@ -66,29 +66,29 @@ export const productsReducer = (state = { products: [] }, action) => {
     }
 }
 
-export const newProductReducer = (state = { product: {} }, action) => {
+export const newRemboursementReducer = (state = { remboursement: {} }, action) => {
     switch (action.type) {
 
-        case NEW_PRODUCT_REQUEST:
+        case NEW_REMBOURSEMENT_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case NEW_PRODUCT_SUCCESS:
+        case NEW_REMBOURSEMENT_SUCCESS:
             return {
                 loading: false,
                 success: action.payload.success,
-                product: action.payload.product
+                remboursement: action.payload.remboursement
             }
 
-        case NEW_PRODUCT_FAIL:
+        case NEW_REMBOURSEMENT_FAIL:
             return {
                 ...state,
                 error: action.payload
             }
 
-        case NEW_PRODUCT_RESET:
+        case NEW_REMBOURSEMENT_RESET:
             return {
                 ...state,
                 success: false
@@ -105,24 +105,24 @@ export const newProductReducer = (state = { product: {} }, action) => {
     }
 }
 
-export const productReducer = (state = {}, action) => {
+export const remboursementReducer = (state = {}, action) => {
     switch (action.type) {
 
-        case DELETE_PRODUCT_REQUEST:
-        case UPDATE_PRODUCT_REQUEST:
+        case DELETE_REMBOURSEMENT_REQUEST:
+        case UPDATE_REMBOURSEMENT_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case DELETE_PRODUCT_SUCCESS:
+        case DELETE_REMBOURSEMENT_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 isDeleted: action.payload
             }
 
-        case UPDATE_PRODUCT_SUCCESS:
+        case UPDATE_REMBOURSEMENT_SUCCESS:
             return {
                 ...state,
                 loading: false,
@@ -130,20 +130,20 @@ export const productReducer = (state = {}, action) => {
             }
 
 
-        case DELETE_PRODUCT_FAIL:
-        case UPDATE_PRODUCT_FAIL:
+        case DELETE_REMBOURSEMENT_FAIL:
+        case UPDATE_REMBOURSEMENT_FAIL:
             return {
                 ...state,
                 error: action.payload
             }
 
-        case DELETE_PRODUCT_RESET:
+        case DELETE_REMBOURSEMENT_RESET:
             return {
                 ...state,
                 isDeleted: false
             }
 
-        case UPDATE_PRODUCT_RESET:
+        case UPDATE_REMBOURSEMENT_RESET:
             return {
                 ...state,
                 isUpdated: false
@@ -160,22 +160,22 @@ export const productReducer = (state = {}, action) => {
     }
 }
 
-export const productDetailsReducer = (state = { product: {} }, action) => {
+export const remboursementDetailsReducer = (state = { remboursement: {} }, action) => {
     switch (action.type) {
 
-        case PRODUCT_DETAILS_REQUEST:
+        case REMBOURSEMENT_DETAILS_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case PRODUCT_DETAILS_SUCCESS:
+        case REMBOURSEMENT_DETAILS_SUCCESS:
             return {
                 loading: false,
-                product: action.payload
+                remboursement: action.payload
             }
 
-        case PRODUCT_DETAILS_FAIL:
+        case REMBOURSEMENT_DETAILS_FAIL:
             return {
                 ...state,
                 error: action.payload

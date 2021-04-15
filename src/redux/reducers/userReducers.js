@@ -1,13 +1,5 @@
+import { authConstants } from "../../constants/userConstants"; 
 import {
-    LOGIN_REQUEST,
-    LOGIN_SUCCESS,
-    LOGIN_FAIL,
-    REGISTER_USER_REQUEST,
-    REGISTER_USER_SUCCESS,
-    REGISTER_USER_FAIL,
-    LOAD_USER_REQUEST,
-    LOAD_USER_SUCCESS,
-    LOAD_USER_FAIL,
     UPDATE_PASSWORD_REQUEST,
     UPDATE_PASSWORD_SUCCESS,
     UPDATE_PASSWORD_RESET,
@@ -36,40 +28,53 @@ import {
     DELETE_USER_SUCCESS,
     DELETE_USER_RESET,
     DELETE_USER_FAIL,
-    LOGOUT_SUCCESS,
-    LOGOUT_FAIL,
     CLEAR_ERRORS
-} from '../constants/userConstants'
+} from '../../constants/userConstants'
 
-export const authReducer = (state = { user: {} }, action) => {
+export const authReducer = (state = { user: {}, token: null, roles:{}, isAuthenticated: false, isRegistered: true }, action) => {
+    console.log(action.type);
     switch (action.type) {
 
-        case LOGIN_REQUEST:
-        case REGISTER_USER_REQUEST:
-        case LOAD_USER_REQUEST:
+        case authConstants.REGISTER_USER_REQUEST:
+            return {
+                loading: true,
+                isRegistered: false
+            }
+            
+        case authConstants.LOGIN_REQUEST:
+        case authConstants.LOAD_USER_REQUEST:
             return {
                 loading: true,
                 isAuthenticated: false,
-            }
+            } 
 
-        case LOGIN_SUCCESS:
-        case REGISTER_USER_SUCCESS:
-        case LOAD_USER_SUCCESS:
+        case authConstants.LOGIN_SUCCESS:
+        case authConstants.LOAD_USER_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 isAuthenticated: true,
-                user: action.payload
+                user: action.payload.user.username,
+                token: action.payload.token,
+                roles: action.payload.roles
             }
 
-        case LOGOUT_SUCCESS:
+        case authConstants.REGISTER_USER_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isRegistered: true,
+                
+            }
+
+        case authConstants.LOGOUT_SUCCESS:
             return {
                 loading: false,
                 isAuthenticated: false,
                 user: null
             }
 
-        case LOAD_USER_FAIL:
+        case authConstants.LOAD_USER_FAIL:
             return {
                 loading: false,
                 isAuthenticated: false,
@@ -77,20 +82,20 @@ export const authReducer = (state = { user: {} }, action) => {
                 error: action.payload
             }
 
-        case LOGOUT_FAIL:
+        case authConstants.LOGOUT_FAIL:
             return {
                 ...state,
                 error: action.payload
             }
 
-        case LOGIN_FAIL:
-        case REGISTER_USER_FAIL:
+        case authConstants.LOGIN_FAIL:
+        case authConstants.REGISTER_USER_FAIL:
             return {
                 ...state,
                 loading: false,
                 isAuthenticated: false,
                 user: null,
-                error: action.payload
+                message: action.payload
             }
 
         case CLEAR_ERRORS:

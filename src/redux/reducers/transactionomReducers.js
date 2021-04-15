@@ -1,55 +1,55 @@
 import {
-    ALL_MACHINE_REQUEST,
-    ALL_MACHINE_SUCCESS,
-    ALL_MACHINE_FAIL,
-    ADMIN_MACHINE_REQUEST,
-    ADMIN_MACHINE_SUCCESS,
-    ADMIN_MACHINE_FAIL,
-    NEW_MACHINE_REQUEST,
-    NEW_MACHINE_SUCCESS,
-    NEW_MACHINE_RESET,
-    NEW_MACHINE_FAIL,
-    DELETE_MACHINE_REQUEST,
-    DELETE_MACHINE_SUCCESS,
-    DELETE_MACHINE_RESET,
-    DELETE_MACHINE_FAIL,
-    UPDATE_MACHINE_REQUEST,
-    UPDATE_MACHINE_SUCCESS,
-    UPDATE_MACHINE_RESET,
-    UPDATE_MACHINE_FAIL,
-    MACHINE_DETAILS_REQUEST,
-    MACHINE_DETAILS_SUCCESS,
-    MACHINE_DETAILS_FAIL,
+    ALL_TRANSACTIONOM_REQUEST,
+    ALL_TRANSACTIONOM_SUCCESS,
+    ALL_TRANSACTIONOM_FAIL,
+    ADMIN_TRANSACTIONOM_REQUEST,
+    ADMIN_TRANSACTIONOM_SUCCESS,
+    ADMIN_TRANSACTIONOM_FAIL,
+    NEW_TRANSACTIONOM_REQUEST,
+    NEW_TRANSACTIONOM_SUCCESS,
+    NEW_TRANSACTIONOM_RESET,
+    NEW_TRANSACTIONOM_FAIL,
+    DELETE_TRANSACTIONOM_REQUEST,
+    DELETE_TRANSACTIONOM_SUCCESS,
+    DELETE_TRANSACTIONOM_RESET,
+    DELETE_TRANSACTIONOM_FAIL,
+    UPDATE_TRANSACTIONOM_REQUEST,
+    UPDATE_TRANSACTIONOM_SUCCESS,
+    UPDATE_TRANSACTIONOM_RESET,
+    UPDATE_TRANSACTIONOM_FAIL,
+    TRANSACTIONOM_DETAILS_REQUEST,
+    TRANSACTIONOM_DETAILS_SUCCESS,
+    TRANSACTIONOM_DETAILS_FAIL,
     CLEAR_ERRORS
 
-} from '../constants/machineConstants'
+} from '../../constants/transactionomConstants'
 
-export const machinesReducer = (state = { machines: [] }, action) => {
+export const transactionomsReducer = (state = { transactionoms: [] }, action) => {
     switch (action.type) {
-        case ALL_MACHINE_REQUEST:
-        case ADMIN_MACHINE_REQUEST:
+        case ALL_TRANSACTIONOM_REQUEST:
+        case ADMIN_TRANSACTIONOM_REQUEST:
             return {
                 loading: true,
-                machines: []
+                transactionoms: []
             }
 
-        case ALL_MACHINE_SUCCESS:
+        case ALL_TRANSACTIONOM_SUCCESS:
             return {
                 loading: false,
-                machines: action.payload.machines,
-                machinesCount: action.payload.machinesCount,
+                transactionoms: action.payload.transactionoms,
+                transactionomsCount: action.payload.transactionomsCount,
                 resPerPage: action.payload.resPerPage,
-                filteredmachinesCount: action.payload.filteredmachinesCount
+                filteredtransactionomsCount: action.payload.filteredtransactionomsCount
             }
 
-        case ADMIN_MACHINE_SUCCESS:
+        case ADMIN_TRANSACTIONOM_SUCCESS:
             return {
                 loading: false,
-                machines: action.payload
+                transactionoms: action.payload
             }
 
-        case ALL_MACHINE_FAIL:
-        case ADMIN_MACHINE_FAIL:
+        case ALL_TRANSACTIONOM_FAIL:
+        case ADMIN_TRANSACTIONOM_FAIL:
             return {
                 loading: false,
                 error: action.payload
@@ -66,29 +66,29 @@ export const machinesReducer = (state = { machines: [] }, action) => {
     }
 }
 
-export const newMachineReducer = (state = { machine: {} }, action) => {
+export const newTransactionomReducer = (state = { transactionom: {} }, action) => {
     switch (action.type) {
 
-        case NEW_MACHINE_REQUEST:
+        case NEW_TRANSACTIONOM_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case NEW_MACHINE_SUCCESS:
+        case NEW_TRANSACTIONOM_SUCCESS:
             return {
                 loading: false,
                 success: action.payload.success,
-                machine: action.payload.machine
+                transactionom: action.payload.transactionom
             }
 
-        case NEW_MACHINE_FAIL:
+        case NEW_TRANSACTIONOM_FAIL:
             return {
                 ...state,
                 error: action.payload
             }
 
-        case NEW_MACHINE_RESET:
+        case NEW_TRANSACTIONOM_RESET:
             return {
                 ...state,
                 success: false
@@ -105,24 +105,24 @@ export const newMachineReducer = (state = { machine: {} }, action) => {
     }
 }
 
-export const machineReducer = (state = {}, action) => {
+export const transactionomReducer = (state = {}, action) => {
     switch (action.type) {
 
-        case DELETE_MACHINE_REQUEST:
-        case UPDATE_MACHINE_REQUEST:
+        case DELETE_TRANSACTIONOM_REQUEST:
+        case UPDATE_TRANSACTIONOM_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case DELETE_MACHINE_SUCCESS:
+        case DELETE_TRANSACTIONOM_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 isDeleted: action.payload
             }
 
-        case UPDATE_MACHINE_SUCCESS:
+        case UPDATE_TRANSACTIONOM_SUCCESS:
             return {
                 ...state,
                 loading: false,
@@ -130,20 +130,20 @@ export const machineReducer = (state = {}, action) => {
             }
 
 
-        case DELETE_MACHINE_FAIL:
-        case UPDATE_MACHINE_FAIL:
+        case DELETE_TRANSACTIONOM_FAIL:
+        case UPDATE_TRANSACTIONOM_FAIL:
             return {
                 ...state,
                 error: action.payload
             }
 
-        case DELETE_MACHINE_RESET:
+        case DELETE_TRANSACTIONOM_RESET:
             return {
                 ...state,
                 isDeleted: false
             }
 
-        case UPDATE_MACHINE_RESET:
+        case UPDATE_TRANSACTIONOM_RESET:
             return {
                 ...state,
                 isUpdated: false
@@ -160,22 +160,22 @@ export const machineReducer = (state = {}, action) => {
     }
 }
 
-export const machineDetailsReducer = (state = { machine: {} }, action) => {
+export const transactionomDetailsReducer = (state = { transactionom: {} }, action) => {
     switch (action.type) {
 
-        case MACHINE_DETAILS_REQUEST:
+        case TRANSACTIONOM_DETAILS_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case MACHINE_DETAILS_SUCCESS:
+        case TRANSACTIONOM_DETAILS_SUCCESS:
             return {
                 loading: false,
-                machine: action.payload
+                transactionom: action.payload
             }
 
-        case MACHINE_DETAILS_FAIL:
+        case TRANSACTIONOM_DETAILS_FAIL:
             return {
                 ...state,
                 error: action.payload

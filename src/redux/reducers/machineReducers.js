@@ -1,55 +1,55 @@
 import {
-    ALL_REMBOURSEMENT_REQUEST,
-    ALL_REMBOURSEMENT_SUCCESS,
-    ALL_REMBOURSEMENT_FAIL,
-    ADMIN_REMBOURSEMENT_REQUEST,
-    ADMIN_REMBOURSEMENT_SUCCESS,
-    ADMIN_REMBOURSEMENT_FAIL,
-    NEW_REMBOURSEMENT_REQUEST,
-    NEW_REMBOURSEMENT_SUCCESS,
-    NEW_REMBOURSEMENT_RESET,
-    NEW_REMBOURSEMENT_FAIL,
-    DELETE_REMBOURSEMENT_REQUEST,
-    DELETE_REMBOURSEMENT_SUCCESS,
-    DELETE_REMBOURSEMENT_RESET,
-    DELETE_REMBOURSEMENT_FAIL,
-    UPDATE_REMBOURSEMENT_REQUEST,
-    UPDATE_REMBOURSEMENT_SUCCESS,
-    UPDATE_REMBOURSEMENT_RESET,
-    UPDATE_REMBOURSEMENT_FAIL,
-    REMBOURSEMENT_DETAILS_REQUEST,
-    REMBOURSEMENT_DETAILS_SUCCESS,
-    REMBOURSEMENT_DETAILS_FAIL,
+    ALL_MACHINE_REQUEST,
+    ALL_MACHINE_SUCCESS,
+    ALL_MACHINE_FAIL,
+    ADMIN_MACHINE_REQUEST,
+    ADMIN_MACHINE_SUCCESS,
+    ADMIN_MACHINE_FAIL,
+    NEW_MACHINE_REQUEST,
+    NEW_MACHINE_SUCCESS,
+    NEW_MACHINE_RESET,
+    NEW_MACHINE_FAIL,
+    DELETE_MACHINE_REQUEST,
+    DELETE_MACHINE_SUCCESS,
+    DELETE_MACHINE_RESET,
+    DELETE_MACHINE_FAIL,
+    UPDATE_MACHINE_REQUEST,
+    UPDATE_MACHINE_SUCCESS,
+    UPDATE_MACHINE_RESET,
+    UPDATE_MACHINE_FAIL,
+    MACHINE_DETAILS_REQUEST,
+    MACHINE_DETAILS_SUCCESS,
+    MACHINE_DETAILS_FAIL,
     CLEAR_ERRORS
 
-} from '../constants/remboursementConstants'
+} from '../../constants/machineConstants'
 
-export const remboursementsReducer = (state = { remboursements: [] }, action) => {
+export const machinesReducer = (state = { machines: [] }, action) => {
     switch (action.type) {
-        case ALL_REMBOURSEMENT_REQUEST:
-        case ADMIN_REMBOURSEMENT_REQUEST:
+        case ALL_MACHINE_REQUEST:
+        case ADMIN_MACHINE_REQUEST:
             return {
                 loading: true,
-                remboursements: []
+                machines: []
             }
 
-        case ALL_REMBOURSEMENT_SUCCESS:
+        case ALL_MACHINE_SUCCESS:
             return {
                 loading: false,
-                remboursements: action.payload.remboursements,
-                remboursementsCount: action.payload.remboursementsCount,
+                machines: action.payload.machines,
+                machinesCount: action.payload.machinesCount,
                 resPerPage: action.payload.resPerPage,
-                filteredremboursementsCount: action.payload.filteredremboursementsCount
+                filteredmachinesCount: action.payload.filteredmachinesCount
             }
 
-        case ADMIN_REMBOURSEMENT_SUCCESS:
+        case ADMIN_MACHINE_SUCCESS:
             return {
                 loading: false,
-                remboursements: action.payload
+                machines: action.payload
             }
 
-        case ALL_REMBOURSEMENT_FAIL:
-        case ADMIN_REMBOURSEMENT_FAIL:
+        case ALL_MACHINE_FAIL:
+        case ADMIN_MACHINE_FAIL:
             return {
                 loading: false,
                 error: action.payload
@@ -66,29 +66,29 @@ export const remboursementsReducer = (state = { remboursements: [] }, action) =>
     }
 }
 
-export const newRemboursementReducer = (state = { remboursement: {} }, action) => {
+export const newMachineReducer = (state = { machine: {} }, action) => {
     switch (action.type) {
 
-        case NEW_REMBOURSEMENT_REQUEST:
+        case NEW_MACHINE_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case NEW_REMBOURSEMENT_SUCCESS:
+        case NEW_MACHINE_SUCCESS:
             return {
                 loading: false,
                 success: action.payload.success,
-                remboursement: action.payload.remboursement
+                machine: action.payload.machine
             }
 
-        case NEW_REMBOURSEMENT_FAIL:
+        case NEW_MACHINE_FAIL:
             return {
                 ...state,
                 error: action.payload
             }
 
-        case NEW_REMBOURSEMENT_RESET:
+        case NEW_MACHINE_RESET:
             return {
                 ...state,
                 success: false
@@ -105,24 +105,24 @@ export const newRemboursementReducer = (state = { remboursement: {} }, action) =
     }
 }
 
-export const remboursementReducer = (state = {}, action) => {
+export const machineReducer = (state = {}, action) => {
     switch (action.type) {
 
-        case DELETE_REMBOURSEMENT_REQUEST:
-        case UPDATE_REMBOURSEMENT_REQUEST:
+        case DELETE_MACHINE_REQUEST:
+        case UPDATE_MACHINE_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case DELETE_REMBOURSEMENT_SUCCESS:
+        case DELETE_MACHINE_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 isDeleted: action.payload
             }
 
-        case UPDATE_REMBOURSEMENT_SUCCESS:
+        case UPDATE_MACHINE_SUCCESS:
             return {
                 ...state,
                 loading: false,
@@ -130,20 +130,20 @@ export const remboursementReducer = (state = {}, action) => {
             }
 
 
-        case DELETE_REMBOURSEMENT_FAIL:
-        case UPDATE_REMBOURSEMENT_FAIL:
+        case DELETE_MACHINE_FAIL:
+        case UPDATE_MACHINE_FAIL:
             return {
                 ...state,
                 error: action.payload
             }
 
-        case DELETE_REMBOURSEMENT_RESET:
+        case DELETE_MACHINE_RESET:
             return {
                 ...state,
                 isDeleted: false
             }
 
-        case UPDATE_REMBOURSEMENT_RESET:
+        case UPDATE_MACHINE_RESET:
             return {
                 ...state,
                 isUpdated: false
@@ -160,22 +160,22 @@ export const remboursementReducer = (state = {}, action) => {
     }
 }
 
-export const remboursementDetailsReducer = (state = { remboursement: {} }, action) => {
+export const machineDetailsReducer = (state = { machine: {} }, action) => {
     switch (action.type) {
 
-        case REMBOURSEMENT_DETAILS_REQUEST:
+        case MACHINE_DETAILS_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case REMBOURSEMENT_DETAILS_SUCCESS:
+        case MACHINE_DETAILS_SUCCESS:
             return {
                 loading: false,
-                remboursement: action.payload
+                machine: action.payload
             }
 
-        case REMBOURSEMENT_DETAILS_FAIL:
+        case MACHINE_DETAILS_FAIL:
             return {
                 ...state,
                 error: action.payload

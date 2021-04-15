@@ -22,7 +22,7 @@ import {
     APPROMONNAIE_DETAILS_FAIL,
     CLEAR_ERRORS
 
-} from '../constants/appromonnaieConstants'
+} from '../../constants/appromonnaieConstants'
 
 export const appromonnaiesReducer = (state = { appromonnaies: [] }, action) => {
     switch (action.type) {

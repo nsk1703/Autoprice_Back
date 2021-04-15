@@ -37,9 +37,6 @@ import furniture4 from '../images/furniture/product/4.jpg';
 import furniture7 from '../images/furniture/7.jpg';
 import furniture16 from '../images/furniture/product/16.jpg';
 
-
-
-
 const data = [
     {
         oder_id:"#51240",

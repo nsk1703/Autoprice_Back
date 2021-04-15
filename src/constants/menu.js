@@ -14,7 +14,7 @@ import {
 
 export const MENUITEMS = [
     {
-        path: '/dashboard', title: 'Tableau de Bord', icon: Home, type: 'link', badgeType: 'primary', active: false
+        path: '/', title: 'Tableau de Bord', icon: Home, type: 'link', badgeType: 'primary', active: false
     },
     {
         title: 'Produits', icon: Box, type: 'sub', active: false, children: [

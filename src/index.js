@@ -1,9 +1,31 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './index.scss';
 import App from './components/app';
 import { ScrollContext } from 'react-router-scroll-4';
+import { authConstants } from "../src/constants/userConstants";
+
+// Axios
+import axios from "axios";
+
+import { Provider } from 'react-redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+
+// Import of reducers
+import {appromonnaiesReducer, newAppromonnaieReducer, appromonnaieReducer, appromonnaieDetailsReducer} from './redux/reducers/appromonnaieReducers'
+import {approproduitsReducer, newApproproduitReducer, approproduitReducer, approproduitDetailsReducer} from './redux/reducers/approproduitReducers';
+// import {arduinoReducers} from './redux/reducers/arduinoReducers';
+import {logssReducer, newLogsReducer, logsReducer, logsDetailsReducer} from './redux/reducers/logsReducers';
+import {machinesReducer, newMachineReducer, machineReducer, machineDetailsReducer} from './redux/reducers/machineReducers';
+import {maintenancesReducer, newMaintenanceReducer, maintenanceReducer, maintenanceDetailsReducer} from './redux/reducers/maintenanceReducers';
+import {newOrderReducer, myOrdersReducer, orderDetailsReducer, allOrdersReducer, orderReducer} from './redux/reducers/orderReducers';
+import {paiementsReducer, newPaiementReducer, paiementReducer, paiementDetailsReducer} from './redux/reducers/paiementReducers';
+import {productsReducer, newProductReducer, productReducer, productDetailsReducer} from './redux/reducers/productReducers';
+import {remboursementsReducer, newRemboursementReducer, remboursementReducer, remboursementDetailsReducer} from './redux/reducers/remboursementReducers';
+import {transactionomsReducer, transactionomReducer, newTransactionomReducer, transactionomDetailsReducer} from './redux/reducers/transactionomReducers';
+import {authReducer, userReducer, forgotPasswordReducer, allUsersReducer, userDetailsReducer} from './redux/reducers/userReducers';
 
 // Components
 import Dashboard from './components/dashboard';
@@ -66,93 +88,120 @@ import Change_password from './components/settings/change-password';
 import Add_roles from './components/roles/add-roles';
 import Roles_list from './components/roles/roles-list';
 import Change_roles from './components/roles/change-role';
+import { login } from './redux/actions/userActions';
 
+axios.defaults.baseURL = process.env.REACT_APP_NEXT_PUBLIC_REST_API;
 
+const rootReducers = combineReducers({
+    appromonnaie: appromonnaiesReducer, newAppromonnaieReducer, appromonnaieReducer, appromonnaieDetailsReducer,
+    approproducts: approproduitsReducer, newApproproduitReducer, approproduitReducer, approproduitDetailsReducer,
+    // arduino: arduinoReducers,
+    logs: logssReducer, newLogsReducer, logsReducer, logsDetailsReducer,
+    machine: machinesReducer, newMachineReducer, machineReducer, machineDetailsReducer,
+    maintenance: maintenancesReducer, newMaintenanceReducer, maintenanceReducer, maintenanceDetailsReducer,
+    order: newOrderReducer, myOrdersReducer, orderDetailsReducer, allOrdersReducer, orderReducer,
+    paiement: paiementsReducer, newPaiementReducer, paiementReducer, paiementDetailsReducer,
+    product: productsReducer, newProductReducer, productReducer, productDetailsReducer,
+    repayment: remboursementsReducer, newRemboursementReducer, remboursementReducer, remboursementDetailsReducer,
+    transaction: transactionomsReducer, newTransactionomReducer, transactionomReducer, transactionomDetailsReducer,
+    user: authReducer, userReducer, forgotPasswordReducer, allUsersReducer, userDetailsReducer
+});
+
+const store = createStore(rootReducers, applyMiddleware(thunk));
+window.store = store;
+// const token = localStorage.getItem('token');
 
 class Root extends Component {
+    
+    // useEffect(() =>{
+    //     if (!localStorage.getItem('token')) {
+    //         dispatch(login())
+    //     }
+    // })
     render() {
         return (
-            <BrowserRouter basename={'/'}>
-                <ScrollContext>
-                    <Switch>
-                    <Route exact path={`${process.env.PUBLIC_URL}/`} component={Login} />
-                        <Route exact path={`${process.env.PUBLIC_URL}/auth/login`} component={Login} />
+            <Provider store={store}>
+                <BrowserRouter basename={'/'}>
+                    <ScrollContext>
+                        <Switch>
+                            <Route path='/login' component={Login} />
+                            {/* <Route exact path='/login' component={Login} /> */}
+                            <App>
+                                <Route exact path='/' component={Dashboard} />
+                                    
+                                <Route path={`${process.env.PUBLIC_URL}/products/physical/category`} component={Category} />
+                                <Route path={`${process.env.PUBLIC_URL}/products/physical/sub-category`} component={Sub_category} />
+                                <Route path={`${process.env.PUBLIC_URL}/products/physical/product-list`} component={Product_list} />
+                                <Route path={`${process.env.PUBLIC_URL}/products/physical/product-detail`} component={Product_detail} />
+                                <Route path={`${process.env.PUBLIC_URL}/products/physical/add-product`} component={Add_product} />
 
-                        <App>
-                            <Route path={`${process.env.PUBLIC_URL}/dashboard`} component={Dashboard} />
+                                <Route path={`${process.env.PUBLIC_URL}/products/digital/digital-category`} component={Digital_category} />
+                                <Route path={`${process.env.PUBLIC_URL}/products/digital/digital-sub-category`} component={Digital_sub_category} />
+                                <Route path={`${process.env.PUBLIC_URL}/products/digital/digital-product-list`} component={Digital_pro_list} />
+                                <Route path={`${process.env.PUBLIC_URL}/products/digital/digital-add-product`} component={Digital_add_pro} />
+
+                                <Route path={`${process.env.PUBLIC_URL}/sales/orders`} component={Orders} />
+                                <Route path={`${process.env.PUBLIC_URL}/sales/transactions`} component={Transactions_sales} />
+                                <Route path={`${process.env.PUBLIC_URL}/sales/repayment`} component={Repayment_sales} />
+                                <Route path={`${process.env.PUBLIC_URL}/sales/mobile-pay`} component={Mobile_pay} />
+
+                                <Route path={`${process.env.PUBLIC_URL}/coupons/list-coupons`} component={ListCoupons} />
+                                <Route path={`${process.env.PUBLIC_URL}/coupons/create-coupons`} component={Create_coupons} />
+
+                                <Route path={`${process.env.PUBLIC_URL}/pages/list-page`} component={ListPages} />
+                                <Route path={`${process.env.PUBLIC_URL}/pages/create-page`} component={Create_page} />
+
+                                <Route path={`${process.env.PUBLIC_URL}/media`} component={Media} />
+
+                                <Route path={`${process.env.PUBLIC_URL}/menus/list-menu`} component={List_menu} />
+                                <Route path={`${process.env.PUBLIC_URL}/menus/create-menu`} component={Create_menu} />
+
+                                <Route path={`${process.env.PUBLIC_URL}/users/list-user`} component={List_user} />
+                                <Route path={`${process.env.PUBLIC_URL}/users/create-user`} component={Create_user} />
+
+                                <Route path={`${process.env.PUBLIC_URL}/vendors/list_vendors`} component={List_vendors} />
+                                <Route path={`${process.env.PUBLIC_URL}/vendors/create-vendors`} component={Create_vendors} />
+
+                                <Route path={`${process.env.PUBLIC_URL}/localization/transactions`} component={Translations} />
+                                <Route path={`${process.env.PUBLIC_URL}/localization/currency-rates`} component={Rates} />
+                                <Route path={`${process.env.PUBLIC_URL}/localization/taxes`} component={Taxes} />
+
+                                <Route path={`${process.env.PUBLIC_URL}/reports/report`} component={Reports} />
+
+                                <Route path={`${process.env.PUBLIC_URL}/settings/profile`} component={Profile} />
+                                <Route path={`${process.env.PUBLIC_URL}/settings/change-profile`} component={Change_profile} />
+                                <Route path={`${process.env.PUBLIC_URL}/settings/change-password`} component={Change_password} />
+
+                                <Route path={`${process.env.PUBLIC_URL}/invoice`} component={Invoice} />
+
+                                <Route path={`${process.env.PUBLIC_URL}/data-table`} component={Datatable} />
+
+                                <Route path={`${process.env.PUBLIC_URL}/supply/currency/create-currency`} component={Create_currency}/>
+                                <Route path={`${process.env.PUBLIC_URL}/supply/currency/list-currency`} component={List_currency}/>
+
+                                <Route path={`${process.env.PUBLIC_URL}/supply/products/create-product`} component={Create_product}/>
+                                <Route path={`${process.env.PUBLIC_URL}/supply/products/list-product`} component={List_product}/>
+
+                                <Route path={`${process.env.PUBLIC_URL}/machines/create-machine`} component={Create_machine}/>
+                                <Route path={`${process.env.PUBLIC_URL}/machines/list-machine`} component={List_machine}/>
+
+                                <Route path={`${process.env.PUBLIC_URL}/maintains/create-maintain`} component={Create_maintain}/>
+                                <Route path={`${process.env.PUBLIC_URL}/maintains/list-maintain`} component={List_maintain}/>
                                 
-                            <Route path={`${process.env.PUBLIC_URL}/products/physical/category`} component={Category} />
-                            <Route path={`${process.env.PUBLIC_URL}/products/physical/sub-category`} component={Sub_category} />
-                            <Route path={`${process.env.PUBLIC_URL}/products/physical/product-list`} component={Product_list} />
-                            <Route path={`${process.env.PUBLIC_URL}/products/physical/product-detail`} component={Product_detail} />
-                            <Route path={`${process.env.PUBLIC_URL}/products/physical/add-product`} component={Add_product} />
+                                <Route path={`${process.env.PUBLIC_URL}/slides/create-slide`} component={Create_slide}/>
+                                <Route path={`${process.env.PUBLIC_URL}/slides/list-slide`} component={List_slide}/>
+                                
+                                <Route path={`${process.env.PUBLIC_URL}/logs/Log`} component={Log}/>
 
-                            <Route path={`${process.env.PUBLIC_URL}/products/digital/digital-category`} component={Digital_category} />
-                            <Route path={`${process.env.PUBLIC_URL}/products/digital/digital-sub-category`} component={Digital_sub_category} />
-                            <Route path={`${process.env.PUBLIC_URL}/products/digital/digital-product-list`} component={Digital_pro_list} />
-                            <Route path={`${process.env.PUBLIC_URL}/products/digital/digital-add-product`} component={Digital_add_pro} />
+                                <Route path={`${process.env.PUBLIC_URL}/roles/add-roles`} component={Add_roles}/>
+                                <Route path={`${process.env.PUBLIC_URL}/roles/roles-list`} component={Roles_list}/>
+                                <Route path={`${process.env.PUBLIC_URL}/roles/change_roles`} component={Change_roles}/>
 
-                            <Route path={`${process.env.PUBLIC_URL}/sales/orders`} component={Orders} />
-                            <Route path={`${process.env.PUBLIC_URL}/sales/transactions`} component={Transactions_sales} />
-                            <Route path={`${process.env.PUBLIC_URL}/sales/repayment`} component={Repayment_sales} />
-                            <Route path={`${process.env.PUBLIC_URL}/sales/mobile-pay`} component={Mobile_pay} />
-
-                            <Route path={`${process.env.PUBLIC_URL}/coupons/list-coupons`} component={ListCoupons} />
-                            <Route path={`${process.env.PUBLIC_URL}/coupons/create-coupons`} component={Create_coupons} />
-
-                            <Route path={`${process.env.PUBLIC_URL}/pages/list-page`} component={ListPages} />
-                            <Route path={`${process.env.PUBLIC_URL}/pages/create-page`} component={Create_page} />
-
-                            <Route path={`${process.env.PUBLIC_URL}/media`} component={Media} />
-
-                            <Route path={`${process.env.PUBLIC_URL}/menus/list-menu`} component={List_menu} />
-                            <Route path={`${process.env.PUBLIC_URL}/menus/create-menu`} component={Create_menu} />
-
-                            <Route path={`${process.env.PUBLIC_URL}/users/list-user`} component={List_user} />
-                            <Route path={`${process.env.PUBLIC_URL}/users/create-user`} component={Create_user} />
-
-                            <Route path={`${process.env.PUBLIC_URL}/vendors/list_vendors`} component={List_vendors} />
-                            <Route path={`${process.env.PUBLIC_URL}/vendors/create-vendors`} component={Create_vendors} />
-
-                            <Route path={`${process.env.PUBLIC_URL}/localization/transactions`} component={Translations} />
-                            <Route path={`${process.env.PUBLIC_URL}/localization/currency-rates`} component={Rates} />
-                            <Route path={`${process.env.PUBLIC_URL}/localization/taxes`} component={Taxes} />
-
-                            <Route path={`${process.env.PUBLIC_URL}/reports/report`} component={Reports} />
-
-                            <Route path={`${process.env.PUBLIC_URL}/settings/profile`} component={Profile} />
-                            <Route path={`${process.env.PUBLIC_URL}/settings/change-profile`} component={Change_profile} />
-                            <Route path={`${process.env.PUBLIC_URL}/settings/change-password`} component={Change_password} />
-
-                            <Route path={`${process.env.PUBLIC_URL}/invoice`} component={Invoice} />
-
-                            <Route path={`${process.env.PUBLIC_URL}/data-table`} component={Datatable} />
-
-                            <Route path={`${process.env.PUBLIC_URL}/supply/currency/create-currency`} component={Create_currency}/>
-                            <Route path={`${process.env.PUBLIC_URL}/supply/currency/list-currency`} component={List_currency}/>
-
-                            <Route path={`${process.env.PUBLIC_URL}/supply/products/create-product`} component={Create_product}/>
-                            <Route path={`${process.env.PUBLIC_URL}/supply/products/list-product`} component={List_product}/>
-
-                            <Route path={`${process.env.PUBLIC_URL}/machines/create-machine`} component={Create_machine}/>
-                            <Route path={`${process.env.PUBLIC_URL}/machines/list-machine`} component={List_machine}/>
-
-                            <Route path={`${process.env.PUBLIC_URL}/maintains/create-maintain`} component={Create_maintain}/>
-                            <Route path={`${process.env.PUBLIC_URL}/maintains/list-maintain`} component={List_maintain}/>
-                            
-                            <Route path={`${process.env.PUBLIC_URL}/slides/create-slide`} component={Create_slide}/>
-                            <Route path={`${process.env.PUBLIC_URL}/slides/list-slide`} component={List_slide}/>
-                            
-                            <Route path={`${process.env.PUBLIC_URL}/logs/Log`} component={Log}/>
-
-                            <Route path={`${process.env.PUBLIC_URL}/roles/add-roles`} component={Add_roles}/>
-                            <Route path={`${process.env.PUBLIC_URL}/roles/roles-list`} component={Roles_list}/>
-                            <Route path={`${process.env.PUBLIC_URL}/roles/change_roles`} component={Change_roles}/>
-
-                        </App>
-                    </Switch>
-                </ScrollContext>
-            </BrowserRouter>
+                            </App>
+                        </Switch>
+                    </ScrollContext>
+                </BrowserRouter>
+            </Provider>
         )
     }
 }

@@ -1,55 +1,55 @@
 import {
-    ALL_PAIEMENT_REQUEST,
-    ALL_PAIEMENT_SUCCESS,
-    ALL_PAIEMENT_FAIL,
-    ADMIN_PAIEMENT_REQUEST,
-    ADMIN_PAIEMENT_SUCCESS,
-    ADMIN_PAIEMENT_FAIL,
-    NEW_PAIEMENT_REQUEST,
-    NEW_PAIEMENT_SUCCESS,
-    NEW_PAIEMENT_RESET,
-    NEW_PAIEMENT_FAIL,
-    DELETE_PAIEMENT_REQUEST,
-    DELETE_PAIEMENT_SUCCESS,
-    DELETE_PAIEMENT_RESET,
-    DELETE_PAIEMENT_FAIL,
-    UPDATE_PAIEMENT_REQUEST,
-    UPDATE_PAIEMENT_SUCCESS,
-    UPDATE_PAIEMENT_RESET,
-    UPDATE_PAIEMENT_FAIL,
-    PAIEMENT_DETAILS_REQUEST,
-    PAIEMENT_DETAILS_SUCCESS,
-    PAIEMENT_DETAILS_FAIL,
+    ALL_APPROPRODUIT_REQUEST,
+    ALL_APPROPRODUIT_SUCCESS,
+    ALL_APPROPRODUIT_FAIL,
+    ADMIN_APPROPRODUIT_REQUEST,
+    ADMIN_APPROPRODUIT_SUCCESS,
+    ADMIN_APPROPRODUIT_FAIL,
+    NEW_APPROPRODUIT_REQUEST,
+    NEW_APPROPRODUIT_SUCCESS,
+    NEW_APPROPRODUIT_RESET,
+    NEW_APPROPRODUIT_FAIL,
+    DELETE_APPROPRODUIT_REQUEST,
+    DELETE_APPROPRODUIT_SUCCESS,
+    DELETE_APPROPRODUIT_RESET,
+    DELETE_APPROPRODUIT_FAIL,
+    UPDATE_APPROPRODUIT_REQUEST,
+    UPDATE_APPROPRODUIT_SUCCESS,
+    UPDATE_APPROPRODUIT_RESET,
+    UPDATE_APPROPRODUIT_FAIL,
+    APPROPRODUIT_DETAILS_REQUEST,
+    APPROPRODUIT_DETAILS_SUCCESS,
+    APPROPRODUIT_DETAILS_FAIL,
     CLEAR_ERRORS
 
-} from '../constants/paiementConstants'
+} from '../../constants/approproduitConstants'
 
-export const paiementsReducer = (state = { paiements: [] }, action) => {
+export const approproduitsReducer = (state = { approproduits: [] }, action) => {
     switch (action.type) {
-        case ALL_PAIEMENT_REQUEST:
-        case ADMIN_PAIEMENT_REQUEST:
+        case ALL_APPROPRODUIT_REQUEST:
+        case ADMIN_APPROPRODUIT_REQUEST:
             return {
                 loading: true,
-                paiements: []
+                approproduits: []
             }
 
-        case ALL_PAIEMENT_SUCCESS:
+        case ALL_APPROPRODUIT_SUCCESS:
             return {
                 loading: false,
-                paiements: action.payload.paiements,
-                paiementsCount: action.payload.paiementsCount,
+                approproduits: action.payload.approproduits,
+                approproduitsCount: action.payload.approproduitsCount,
                 resPerPage: action.payload.resPerPage,
-                filteredpaiementsCount: action.payload.filteredpaiementsCount
+                filteredapproproduitsCount: action.payload.filteredapproproduitsCount
             }
 
-        case ADMIN_PAIEMENT_SUCCESS:
+        case ADMIN_APPROPRODUIT_SUCCESS:
             return {
                 loading: false,
-                paiements: action.payload
+                approproduits: action.payload
             }
 
-        case ALL_PAIEMENT_FAIL:
-        case ADMIN_PAIEMENT_FAIL:
+        case ALL_APPROPRODUIT_FAIL:
+        case ADMIN_APPROPRODUIT_FAIL:
             return {
                 loading: false,
                 error: action.payload
@@ -66,29 +66,29 @@ export const paiementsReducer = (state = { paiements: [] }, action) => {
     }
 }
 
-export const newPaiementReducer = (state = { paiement: {} }, action) => {
+export const newApproproduitReducer = (state = { approproduit: {} }, action) => {
     switch (action.type) {
 
-        case NEW_PAIEMENT_REQUEST:
+        case NEW_APPROPRODUIT_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case NEW_PAIEMENT_SUCCESS:
+        case NEW_APPROPRODUIT_SUCCESS:
             return {
                 loading: false,
                 success: action.payload.success,
-                paiement: action.payload.paiement
+                approproduit: action.payload.approproduit
             }
 
-        case NEW_PAIEMENT_FAIL:
+        case NEW_APPROPRODUIT_FAIL:
             return {
                 ...state,
                 error: action.payload
             }
 
-        case NEW_PAIEMENT_RESET:
+        case NEW_APPROPRODUIT_RESET:
             return {
                 ...state,
                 success: false
@@ -105,24 +105,24 @@ export const newPaiementReducer = (state = { paiement: {} }, action) => {
     }
 }
 
-export const paiementReducer = (state = {}, action) => {
+export const approproduitReducer = (state = {}, action) => {
     switch (action.type) {
 
-        case DELETE_PAIEMENT_REQUEST:
-        case UPDATE_PAIEMENT_REQUEST:
+        case DELETE_APPROPRODUIT_REQUEST:
+        case UPDATE_APPROPRODUIT_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case DELETE_PAIEMENT_SUCCESS:
+        case DELETE_APPROPRODUIT_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 isDeleted: action.payload
             }
 
-        case UPDATE_PAIEMENT_SUCCESS:
+        case UPDATE_APPROPRODUIT_SUCCESS:
             return {
                 ...state,
                 loading: false,
@@ -130,20 +130,20 @@ export const paiementReducer = (state = {}, action) => {
             }
 
 
-        case DELETE_PAIEMENT_FAIL:
-        case UPDATE_PAIEMENT_FAIL:
+        case DELETE_APPROPRODUIT_FAIL:
+        case UPDATE_APPROPRODUIT_FAIL:
             return {
                 ...state,
                 error: action.payload
             }
 
-        case DELETE_PAIEMENT_RESET:
+        case DELETE_APPROPRODUIT_RESET:
             return {
                 ...state,
                 isDeleted: false
             }
 
-        case UPDATE_PAIEMENT_RESET:
+        case UPDATE_APPROPRODUIT_RESET:
             return {
                 ...state,
                 isUpdated: false
@@ -160,22 +160,22 @@ export const paiementReducer = (state = {}, action) => {
     }
 }
 
-export const paiementDetailsReducer = (state = { paiement: {} }, action) => {
+export const approproduitDetailsReducer = (state = { approproduit: {} }, action) => {
     switch (action.type) {
 
-        case PAIEMENT_DETAILS_REQUEST:
+        case APPROPRODUIT_DETAILS_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case PAIEMENT_DETAILS_SUCCESS:
+        case APPROPRODUIT_DETAILS_SUCCESS:
             return {
                 loading: false,
-                paiement: action.payload
+                approproduit: action.payload
             }
 
-        case PAIEMENT_DETAILS_FAIL:
+        case APPROPRODUIT_DETAILS_FAIL:
             return {
                 ...state,
                 error: action.payload

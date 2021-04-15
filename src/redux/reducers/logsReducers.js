@@ -22,7 +22,7 @@ import {
     LOGS_DETAILS_FAIL,
     CLEAR_ERRORS
 
-} from '../constants/logsConstants'
+} from '../../constants/logsConstants'
 
 export const logssReducer = (state = { logss: [] }, action) => {
     switch (action.type) {

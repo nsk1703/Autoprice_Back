@@ -1,55 +1,55 @@
 import {
-    ALL_TRANSACTIONOM_REQUEST,
-    ALL_TRANSACTIONOM_SUCCESS,
-    ALL_TRANSACTIONOM_FAIL,
-    ADMIN_TRANSACTIONOM_REQUEST,
-    ADMIN_TRANSACTIONOM_SUCCESS,
-    ADMIN_TRANSACTIONOM_FAIL,
-    NEW_TRANSACTIONOM_REQUEST,
-    NEW_TRANSACTIONOM_SUCCESS,
-    NEW_TRANSACTIONOM_RESET,
-    NEW_TRANSACTIONOM_FAIL,
-    DELETE_TRANSACTIONOM_REQUEST,
-    DELETE_TRANSACTIONOM_SUCCESS,
-    DELETE_TRANSACTIONOM_RESET,
-    DELETE_TRANSACTIONOM_FAIL,
-    UPDATE_TRANSACTIONOM_REQUEST,
-    UPDATE_TRANSACTIONOM_SUCCESS,
-    UPDATE_TRANSACTIONOM_RESET,
-    UPDATE_TRANSACTIONOM_FAIL,
-    TRANSACTIONOM_DETAILS_REQUEST,
-    TRANSACTIONOM_DETAILS_SUCCESS,
-    TRANSACTIONOM_DETAILS_FAIL,
+    ALL_MAINTENANCE_REQUEST,
+    ALL_MAINTENANCE_SUCCESS,
+    ALL_MAINTENANCE_FAIL,
+    ADMIN_MAINTENANCE_REQUEST,
+    ADMIN_MAINTENANCE_SUCCESS,
+    ADMIN_MAINTENANCE_FAIL,
+    NEW_MAINTENANCE_REQUEST,
+    NEW_MAINTENANCE_SUCCESS,
+    NEW_MAINTENANCE_RESET,
+    NEW_MAINTENANCE_FAIL,
+    DELETE_MAINTENANCE_REQUEST,
+    DELETE_MAINTENANCE_SUCCESS,
+    DELETE_MAINTENANCE_RESET,
+    DELETE_MAINTENANCE_FAIL,
+    UPDATE_MAINTENANCE_REQUEST,
+    UPDATE_MAINTENANCE_SUCCESS,
+    UPDATE_MAINTENANCE_RESET,
+    UPDATE_MAINTENANCE_FAIL,
+    MAINTENANCE_DETAILS_REQUEST,
+    MAINTENANCE_DETAILS_SUCCESS,
+    MAINTENANCE_DETAILS_FAIL,
     CLEAR_ERRORS
 
-} from '../constants/transactionomConstants'
+} from '../../constants/maintenanceConstants'
 
-export const transactionomsReducer = (state = { transactionoms: [] }, action) => {
+export const maintenancesReducer = (state = { maintenances: [] }, action) => {
     switch (action.type) {
-        case ALL_TRANSACTIONOM_REQUEST:
-        case ADMIN_TRANSACTIONOM_REQUEST:
+        case ALL_MAINTENANCE_REQUEST:
+        case ADMIN_MAINTENANCE_REQUEST:
             return {
                 loading: true,
-                transactionoms: []
+                maintenances: []
             }
 
-        case ALL_TRANSACTIONOM_SUCCESS:
+        case ALL_MAINTENANCE_SUCCESS:
             return {
                 loading: false,
-                transactionoms: action.payload.transactionoms,
-                transactionomsCount: action.payload.transactionomsCount,
+                maintenances: action.payload.maintenances,
+                maintenancesCount: action.payload.maintenancesCount,
                 resPerPage: action.payload.resPerPage,
-                filteredtransactionomsCount: action.payload.filteredtransactionomsCount
+                filteredmaintenancesCount: action.payload.filteredmaintenancesCount
             }
 
-        case ADMIN_TRANSACTIONOM_SUCCESS:
+        case ADMIN_MAINTENANCE_SUCCESS:
             return {
                 loading: false,
-                transactionoms: action.payload
+                maintenances: action.payload
             }
 
-        case ALL_TRANSACTIONOM_FAIL:
-        case ADMIN_TRANSACTIONOM_FAIL:
+        case ALL_MAINTENANCE_FAIL:
+        case ADMIN_MAINTENANCE_FAIL:
             return {
                 loading: false,
                 error: action.payload
@@ -66,29 +66,29 @@ export const transactionomsReducer = (state = { transactionoms: [] }, action) =>
     }
 }
 
-export const newTransactionomReducer = (state = { transactionom: {} }, action) => {
+export const newMaintenanceReducer = (state = { maintenance: {} }, action) => {
     switch (action.type) {
 
-        case NEW_TRANSACTIONOM_REQUEST:
+        case NEW_MAINTENANCE_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case NEW_TRANSACTIONOM_SUCCESS:
+        case NEW_MAINTENANCE_SUCCESS:
             return {
                 loading: false,
                 success: action.payload.success,
-                transactionom: action.payload.transactionom
+                maintenance: action.payload.maintenance
             }
 
-        case NEW_TRANSACTIONOM_FAIL:
+        case NEW_MAINTENANCE_FAIL:
             return {
                 ...state,
                 error: action.payload
             }
 
-        case NEW_TRANSACTIONOM_RESET:
+        case NEW_MAINTENANCE_RESET:
             return {
                 ...state,
                 success: false
@@ -105,24 +105,24 @@ export const newTransactionomReducer = (state = { transactionom: {} }, action) =
     }
 }
 
-export const transactionomReducer = (state = {}, action) => {
+export const maintenanceReducer = (state = {}, action) => {
     switch (action.type) {
 
-        case DELETE_TRANSACTIONOM_REQUEST:
-        case UPDATE_TRANSACTIONOM_REQUEST:
+        case DELETE_MAINTENANCE_REQUEST:
+        case UPDATE_MAINTENANCE_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case DELETE_TRANSACTIONOM_SUCCESS:
+        case DELETE_MAINTENANCE_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 isDeleted: action.payload
             }
 
-        case UPDATE_TRANSACTIONOM_SUCCESS:
+        case UPDATE_MAINTENANCE_SUCCESS:
             return {
                 ...state,
                 loading: false,
@@ -130,20 +130,20 @@ export const transactionomReducer = (state = {}, action) => {
             }
 
 
-        case DELETE_TRANSACTIONOM_FAIL:
-        case UPDATE_TRANSACTIONOM_FAIL:
+        case DELETE_MAINTENANCE_FAIL:
+        case UPDATE_MAINTENANCE_FAIL:
             return {
                 ...state,
                 error: action.payload
             }
 
-        case DELETE_TRANSACTIONOM_RESET:
+        case DELETE_MAINTENANCE_RESET:
             return {
                 ...state,
                 isDeleted: false
             }
 
-        case UPDATE_TRANSACTIONOM_RESET:
+        case UPDATE_MAINTENANCE_RESET:
             return {
                 ...state,
                 isUpdated: false
@@ -160,22 +160,22 @@ export const transactionomReducer = (state = {}, action) => {
     }
 }
 
-export const transactionomDetailsReducer = (state = { transactionom: {} }, action) => {
+export const maintenanceDetailsReducer = (state = { maintenance: {} }, action) => {
     switch (action.type) {
 
-        case TRANSACTIONOM_DETAILS_REQUEST:
+        case MAINTENANCE_DETAILS_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case TRANSACTIONOM_DETAILS_SUCCESS:
+        case MAINTENANCE_DETAILS_SUCCESS:
             return {
                 loading: false,
-                transactionom: action.payload
+                maintenance: action.payload
             }
 
-        case TRANSACTIONOM_DETAILS_FAIL:
+        case MAINTENANCE_DETAILS_FAIL:
             return {
                 ...state,
                 error: action.payload
