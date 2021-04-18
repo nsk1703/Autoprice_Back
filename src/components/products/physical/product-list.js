@@ -1,16 +1,53 @@
 import React, { Component,Fragment } from 'react'
 import Breadcrumb from '../../common/breadcrumb';
-import data from '../../../assets/data/physical_list';
 import { Edit, Trash2 } from 'react-feather'
-import { Link } from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
+import * as productActions from "../../../redux/actions/productActions";
+import {connect} from "react-redux";
+import {Category} from "./category";
 
 
 export class Product_list extends Component {
     constructor(props) {
         super(props);
+        let listProducts = [];
+
         this.state = {
-            data
-        }
+            open: false,
+            data: []
+        };
+
+        this.props.listProducts();
+
+
+        setTimeout(() => {
+            console.log(this.props.product.products)
+
+            this.props.product.products.map(product => {
+                let item = {
+                    image: product.image_urls[0],
+                    Nom: product.name,
+                    Prix: product.price+" FCFA",
+                    machine:product.machineId,
+                    unit:product.unit,
+                    reference:product.reference,
+                    description:product.description,
+                    quantite:product.quantite,
+                    etat:product.etat,
+                    categories :product.categories[0]
+                }
+                listProducts.push(item);
+            })
+            this.setState({
+                    data: listProducts
+                })
+        }, 1000)
+
+
+        this.state = {
+            open: false,
+            data: listProducts
+        };
     }
     render() {
         return (
@@ -32,7 +69,7 @@ export class Product_list extends Component {
                                                 <div className="card-body product-box">
                                                     <div className="img-wrapper">
                                                         <div className="lable-block">
-                                                            {(myData.tag === 'new' )?<span className="lable3">{myData.tag}</span> : ''}
+                                                            {(myData.quantite)?((myData.quantite< 4)?<span className="lable31">{myData.quantite}</span>:<span className="lable3">{myData.quantite}</span>) : <span className="lable32">{myData.quantite}</span>}
                                                             {(myData.discount === 'on sale' )?<span className="lable4">{myData.discount}</span> : '' }
                                                             </div>
                                                         <div className="front">
@@ -54,19 +91,13 @@ export class Product_list extends Component {
                                                         </div>
                                                     </div>
                                                     <div className="product-detail">
-                                                        <div className="rating">
-                                                            <i className="fa fa-star"></i>
-                                                            <i className="fa fa-star"></i>
-                                                            <i className="fa fa-star"></i>
-                                                            <i className="fa fa-star"></i>
-                                                            <i className="fa fa-star"></i>
-                                                        </div>
-                                                        <a> <h6 >{myData.title}</h6></a>
-                                                        <h4 >{myData.price} <del >{myData.discount_price}</del></h4>
-                                                        <ul className="color-variant">
-                                                            <li className="bg-light0"></li>
-                                                            <li className="bg-light1"></li>
-                                                            <li className="bg-light2"></li>
+                                                        <a> <h6 >{myData.Nom}</h6></a>
+                                                        <h4 >{myData.Prix} </h4>
+                                                        <ul>
+                                                            <li>{myData.unit} </li><br/>
+                                                            <li>{myData.description}</li><br/>
+                                                            <li>{myData.machine.nom}</li><br/>
+                                                            <li>Ref: {myData.reference}</li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -83,5 +114,15 @@ export class Product_list extends Component {
         )
     }
 }
+const mapStateToProps = (state) => {
+    return {
+        product: state.product
+    }
+}
+const mapDispatchToProps = (dispatch) =>{
+    return {
+        listProducts: () => {dispatch( productActions.listProducts())}
+    }
+}
 
-export default Product_list
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Product_list))
