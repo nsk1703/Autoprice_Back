@@ -37,9 +37,7 @@ export const remboursementsReducer = (state = { remboursements: [] }, action) =>
             return {
                 loading: false,
                 remboursements: action.payload.remboursements,
-                remboursementsCount: action.payload.remboursementsCount,
-                resPerPage: action.payload.resPerPage,
-                filteredremboursementsCount: action.payload.filteredremboursementsCount
+                remboursementsCount: action.payload.remboursementsCount
             }
 
         case ADMIN_REMBOURSEMENT_SUCCESS:

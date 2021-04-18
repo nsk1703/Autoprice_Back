@@ -3,15 +3,10 @@ import Breadcrumb from '../../common/breadcrumb';
 import Modal from 'react-responsive-modal';
 import CKEditors from 'react-ckeditor-component';
 import 'react-toastify/dist/ReactToastify.css';
-import data from '../../../assets/data/category';
-import Datatable from '../../common/datatable';
 import Data_categories from '../../common/dataTables/data_categories';
-import * as userActions from "../../../redux/actions/userActions";
 import * as categoryActions from "../../../redux/actions/categoryActions";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
-import {LoginTabset} from "../../auth/loginTabset";
-import pro16 from "../../../assets/images/dashboard/product/1.jpg";
 
 export class Category extends Component {
     constructor(props) {

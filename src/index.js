@@ -99,11 +99,11 @@ const rootReducers = combineReducers({
     category: categoriesReducer, newCategoryReducer, categoryReducer,
     machine: machinesReducer, newMachineReducer, machineReducer, machineDetailsReducer,
     maintenance: maintenancesReducer, newMaintenanceReducer, maintenanceReducer, maintenanceDetailsReducer,
-    order: newOrderReducer, myOrdersReducer, orderDetailsReducer, allOrdersReducer, orderReducer,
+    order: allOrdersReducer, orderReducer,
     paiement: paiementsReducer, newPaiementReducer, paiementReducer, paiementDetailsReducer,
     product: productsReducer, newProductReducer, productReducer, productDetailsReducer,
-    repayment: remboursementsReducer, newRemboursementReducer, remboursementReducer, remboursementDetailsReducer,
-    transaction: transactionomsReducer, newTransactionomReducer, transactionomReducer, transactionomDetailsReducer,
+    remboursement: remboursementsReducer, newRemboursementReducer, remboursementReducer, remboursementDetailsReducer,
+    transactionom: transactionomsReducer, newTransactionomReducer, transactionomReducer, transactionomDetailsReducer,
     user: authReducer, userReducer, forgotPasswordReducer, allUsersReducer, userDetailsReducer
 });
 

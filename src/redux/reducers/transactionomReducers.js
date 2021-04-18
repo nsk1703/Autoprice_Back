@@ -37,9 +37,7 @@ export const transactionomsReducer = (state = { transactionoms: [] }, action) =>
             return {
                 loading: false,
                 transactionoms: action.payload.transactionoms,
-                transactionomsCount: action.payload.transactionomsCount,
-                resPerPage: action.payload.resPerPage,
-                filteredtransactionomsCount: action.payload.filteredtransactionomsCount
+                transactionomsCount: action.payload.transactionomsCount
             }
 
         case ADMIN_TRANSACTIONOM_SUCCESS:

@@ -74,7 +74,7 @@ export class Data_transactions extends Component {
             if (key === "status") {
                 editable = null;
             }
-            if (key === "avtar") {
+            if (key === "total") {
                 editable = null;
             }
             if (key === "vendor") {

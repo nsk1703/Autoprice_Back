@@ -37,9 +37,7 @@ export const paiementsReducer = (state = { paiements: [] }, action) => {
             return {
                 loading: false,
                 paiements: action.payload.paiements,
-                paiementsCount: action.payload.paiementsCount,
-                resPerPage: action.payload.resPerPage,
-                filteredpaiementsCount: action.payload.filteredpaiementsCount
+                paiementsCount: action.payload.paiementsCount
             }
 
         case ADMIN_PAIEMENT_SUCCESS:
