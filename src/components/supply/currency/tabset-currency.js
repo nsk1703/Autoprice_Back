@@ -26,7 +26,7 @@ export class Tabset_currency extends Component {
             
         };
         this.handleInputChange = this.handleInputChange.bind(this)
-        this.handleChange = this.handleChange()
+        this.handleChange = this.handleChange.bind(this)
         this.handleSubmitChange = this.handleSubmitChange.bind(this)
         this.handleCkeditorChange = this.handleCkeditorChange.bind(this)
 
@@ -50,7 +50,6 @@ export class Tabset_currency extends Component {
                 
                 options.push(option)
             })
-            console.log('11111',options)
           
             this.setState({
                 AllOptions: options
@@ -67,9 +66,9 @@ export class Tabset_currency extends Component {
             [e.target.name]: e.target.value
         })
     }
-    handleChange = machine_id => {
+    handleChange = (e) => {
         
-        this.setState({machine_id});
+        this.setState({machine_id: e.value});
         console.log('Option selected:', this.state.machine_id)
         
     }
@@ -99,7 +98,6 @@ export class Tabset_currency extends Component {
     }
     render() {
         const {AllOptions, quantite, description, machine_id, isLoading} =this.state
-        console.log("22222", AllOptions)
         console.log(machine_id)
         return (
             <Fragment>
