@@ -1,59 +1,35 @@
-import {
-    ALL_PRODUCTS_REQUEST,
-    ALL_PRODUCTS_SUCCESS,
-    ALL_PRODUCTS_FAIL,
-    ADMIN_PRODUCTS_REQUEST,
-    ADMIN_PRODUCTS_SUCCESS,
-    ADMIN_PRODUCTS_FAIL,
-    NEW_PRODUCT_REQUEST,
-    NEW_PRODUCT_SUCCESS,
-    NEW_PRODUCT_RESET,
-    NEW_PRODUCT_FAIL,
-    DELETE_PRODUCT_REQUEST,
-    DELETE_PRODUCT_SUCCESS,
-    DELETE_PRODUCT_RESET,
-    DELETE_PRODUCT_FAIL,
-    UPDATE_PRODUCT_REQUEST,
-    UPDATE_PRODUCT_SUCCESS,
-    UPDATE_PRODUCT_RESET,
-    UPDATE_PRODUCT_FAIL,
-    PRODUCT_DETAILS_REQUEST,
-    PRODUCT_DETAILS_SUCCESS,
-    PRODUCT_DETAILS_FAIL,
-    CLEAR_ERRORS
-
-} from '../../constants/productConstants'
+import {productConstants} from '../../constants/productConstants'
 
 export const productsReducer = (state = { products: [] }, action) => {
     switch (action.type) {
-        case ALL_PRODUCTS_REQUEST:
-        case ADMIN_PRODUCTS_REQUEST:
+        case productConstants.ALL_PRODUCTS_REQUEST:
+        case productConstants.ADMIN_PRODUCTS_REQUEST:
             return {
                 loading: true,
                 products: []
             }
 
-        case ALL_PRODUCTS_SUCCESS:
+        case productConstants.ALL_PRODUCTS_SUCCESS:
             return {
                 loading: false,
                 products: action.payload.products,
                 productsCount: action.payload.productsCount
             }
 
-        case ADMIN_PRODUCTS_SUCCESS:
+        case productConstants.ADMIN_PRODUCTS_SUCCESS:
             return {
                 loading: false,
                 products: action.payload
             }
 
-        case ALL_PRODUCTS_FAIL:
-        case ADMIN_PRODUCTS_FAIL:
+        case productConstants.ALL_PRODUCTS_FAIL:
+        case productConstants.ADMIN_PRODUCTS_FAIL:
             return {
                 loading: false,
                 error: action.payload
             }
 
-        case CLEAR_ERRORS:
+        case productConstants.CLEAR_ERRORS:
             return {
                 ...state,
                 error: null
@@ -67,32 +43,32 @@ export const productsReducer = (state = { products: [] }, action) => {
 export const newProductReducer = (state = { product: {} }, action) => {
     switch (action.type) {
 
-        case NEW_PRODUCT_REQUEST:
+        case productConstants.NEW_PRODUCT_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case NEW_PRODUCT_SUCCESS:
+        case productConstants.NEW_PRODUCT_SUCCESS:
             return {
                 loading: false,
                 success: action.payload.success,
                 product: action.payload.product
             }
 
-        case NEW_PRODUCT_FAIL:
+        case productConstants.NEW_PRODUCT_FAIL:
             return {
                 ...state,
                 error: action.payload
             }
 
-        case NEW_PRODUCT_RESET:
+        case productConstants.NEW_PRODUCT_RESET:
             return {
                 ...state,
                 success: false
             }
 
-        case CLEAR_ERRORS:
+        case productConstants.CLEAR_ERRORS:
             return {
                 ...state,
                 error: null
@@ -106,21 +82,21 @@ export const newProductReducer = (state = { product: {} }, action) => {
 export const productReducer = (state = {}, action) => {
     switch (action.type) {
 
-        case DELETE_PRODUCT_REQUEST:
-        case UPDATE_PRODUCT_REQUEST:
+        case productConstants.DELETE_PRODUCT_REQUEST:
+        case productConstants.UPDATE_PRODUCT_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case DELETE_PRODUCT_SUCCESS:
+        case productConstants.DELETE_PRODUCT_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 isDeleted: action.payload
             }
 
-        case UPDATE_PRODUCT_SUCCESS:
+        case productConstants.UPDATE_PRODUCT_SUCCESS:
             return {
                 ...state,
                 loading: false,
@@ -128,26 +104,26 @@ export const productReducer = (state = {}, action) => {
             }
 
 
-        case DELETE_PRODUCT_FAIL:
-        case UPDATE_PRODUCT_FAIL:
+        case productConstants.DELETE_PRODUCT_FAIL:
+        case productConstants.UPDATE_PRODUCT_FAIL:
             return {
                 ...state,
                 error: action.payload
             }
 
-        case DELETE_PRODUCT_RESET:
+        case productConstants.DELETE_PRODUCT_RESET:
             return {
                 ...state,
                 isDeleted: false
             }
 
-        case UPDATE_PRODUCT_RESET:
+        case productConstants.UPDATE_PRODUCT_RESET:
             return {
                 ...state,
                 isUpdated: false
             }
 
-        case CLEAR_ERRORS:
+        case productConstants.CLEAR_ERRORS:
             return {
                 ...state,
                 error: null
@@ -161,25 +137,25 @@ export const productReducer = (state = {}, action) => {
 export const productDetailsReducer = (state = { product: {} }, action) => {
     switch (action.type) {
 
-        case PRODUCT_DETAILS_REQUEST:
+        case productConstants.PRODUCT_DETAILS_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case PRODUCT_DETAILS_SUCCESS:
+        case productConstants.PRODUCT_DETAILS_SUCCESS:
             return {
                 loading: false,
                 product: action.payload
             }
 
-        case PRODUCT_DETAILS_FAIL:
+        case productConstants.PRODUCT_DETAILS_FAIL:
             return {
                 ...state,
                 error: action.payload
             }
 
-        case CLEAR_ERRORS:
+        case productConstants.CLEAR_ERRORS:
             return {
                 ...state,
                 error: null

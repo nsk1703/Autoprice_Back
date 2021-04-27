@@ -3,10 +3,10 @@ import Breadcrumb from '../common/breadcrumb';
 import data from '../../assets/data/sales-transactions';
 import Datatable from '../common/datatable';
 import Data_mobilePay from '../common/dataTables/data_mobilePay';
-import * as transactionomActions from "../../redux/actions/transactionomActions";
-import {connect} from "react-redux";
+import * as transactionomActions  from "../../redux/actions/transactionomActions";
+import { connect } from 'react-redux';  
 import {withRouter} from "react-router-dom";
-import {Repayment_sales} from "./repayment";
+import { ToastContainer, toast } from 'react-toastify';
 
 export class Mobile_pay extends Component {
     constructor(props) {
@@ -15,10 +15,10 @@ export class Mobile_pay extends Component {
 
         this.state = {
             open: false,
-            data: []
+            transactions: []
         };
 
-        this.props.listTransactions();
+        this.props.transactions();
 
 
         setTimeout(() => {
@@ -41,18 +41,18 @@ export class Mobile_pay extends Component {
 
 
             this.setState({
-                    data: listTransactions
-                })
+                transactions: listTransactions
+            })
         }, 2000)
 
 
         this.state = {
             open: false,
-            data: listTransactions
+            transactions: listTransactions
         };
     }
-
     render() {
+        const {transactions} = this.state
         return (
             <Fragment>
                 <Breadcrumb title="Mobile Money" parent="Ventes" />
@@ -64,11 +64,12 @@ export class Mobile_pay extends Component {
                                 <div className="card-header">
                                     <h5>Paiements mobile</h5>
                                 </div>
+                                <ToastContainer />
                                 <div className="card-body">
                                     <div id="batchDelete" className="transactions">
                                         <Data_mobilePay
                                             multiSelectOption={false}
-                                            myData={this.state.data}
+                                            myData={transactions}
                                             check={false}
                                             pageSize={10}
                                             pagination={true}
@@ -92,7 +93,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) =>{
     return {
-        listTransactions: () => {dispatch( transactionomActions.listTransactions())}
+        transactions: () => {dispatch( transactionomActions.transactions())}
     }
 }
 

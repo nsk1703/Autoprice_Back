@@ -1,36 +1,41 @@
-import { ALL_REMBOURSEMENT_FAIL, ALL_REMBOURSEMENT_REQUEST, ALL_REMBOURSEMENT_SUCCESS } from "../../constants/remboursementConstants";
+import { remboursementConstants } from "../../constants/remboursementConstants";
 import axios from "axios";
 import { toast } from 'react-toastify';
 
-export const listRemboursements = () => {
+export const remboursements = () => {
 
     return (dispatch) => {
         dispatch({
-            type: ALL_REMBOURSEMENT_REQUEST
+            type: remboursementConstants.ALL_REMBOURSEMENT_REQUEST
         });
 
         axios.get('/remboursements')
-            .then((response) => {
-                console.log(response);
-                if (response.data.success) {
+        .then((response) => {
+            // console.log(response.data)
+            if(response.data.success === true){
+                const { remboursements } = response.data;
+                console.log(remboursements)
+                const remboursementsCount = response.data.page_meta.total_items_count
+                dispatch({
+                    type: remboursementConstants.ALL_REMBOURSEMENT_SUCCESS,
+                    payload: { remboursements: remboursements, remboursementsCount: remboursementsCount }
+                })
+                // console.log(remboursements)
+            }else{
+                if (response.data.success === false) {
+                    // console.log(response.data.full_messages[0])
+                    const error =  response.data.full_messages[0]
                     dispatch({
-                        type: ALL_REMBOURSEMENT_SUCCESS,
-                        payload: { remboursements: response.data.remboursements, remboursementsCount: response.data.page_meta.total_items_count }
+                        type: remboursementConstants.ALL_REMBOURSEMENT_FAIL,
+                        payload: { error: error}
                     });
-                } else {
-                    if (response.data.success === false) {
-                        // console.log(response.data.full_messages[0])
-                        toast.error(response.data.full_messages[0]);
+                    toast.error(error);
 
-                        dispatch({
-                            type: ALL_REMBOURSEMENT_FAIL,
-                            payload: { message: response.data.full_messages[0] }
-                        });
-                    }
                 }
-            })
-            .catch((error) => {
-                console.log("Oops, Request failed!");
-            });
+            }
+        })
+        .catch((error) => {
+            console.log("Oops, Request failed!");
+        });
     }
 }

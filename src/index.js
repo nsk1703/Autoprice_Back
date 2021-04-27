@@ -6,7 +6,6 @@ import App from './components/app';
 import { ScrollContext } from 'react-router-scroll-4';
 import { authConstants } from "../src/constants/userConstants";
 
-import Create_product from './components/supply/products/create-product';
 // Axios
 import axios from "axios";
 
@@ -26,6 +25,7 @@ import {newOrderReducer, myOrdersReducer, orderDetailsReducer, allOrdersReducer,
 import {paiementsReducer, newPaiementReducer, paiementReducer, paiementDetailsReducer} from './redux/reducers/paiementReducers';
 import {productsReducer, newProductReducer, productReducer, productDetailsReducer} from './redux/reducers/productReducers';
 import {remboursementsReducer, newRemboursementReducer, remboursementReducer, remboursementDetailsReducer} from './redux/reducers/remboursementReducers';
+import {slidesReducer, newSlideReducer, slideReducer, slideDetailsReducer} from './redux/reducers/slideReducers';
 import {transactionomsReducer, transactionomReducer, newTransactionomReducer, transactionomDetailsReducer} from './redux/reducers/transactionomReducers';
 import {authReducer, userReducer, forgotPasswordReducer, allUsersReducer, userDetailsReducer} from './redux/reducers/userReducers';
 
@@ -48,6 +48,7 @@ import Digital_add_pro from './components/products/digital/digital-add-pro';
 //Sales
 import Orders from './components/sales/orders';
 import Transactions_sales from './components/sales/transactions-sales';
+import Mobile_pay from './components/sales/mobile-pay';
 import Repayment_sales from './components/sales/repayment';
 
 //Coupons
@@ -72,49 +73,52 @@ import Reports from './components/reports/report';
 import Invoice from './components/invoice';
 import Datatable from './components/common/datatable'
 import Login from './components/auth/login';
-import Create_slide from "./components/slides/create-slide";
-import Change_roles from "./components/roles/change-role";
-import Roles_list from "./components/roles/roles-list";
-import Add_roles from "./components/roles/add-roles";
-import List_slide from "./components/slides/list-slide";
-import List_maintain from "./components/maintains/list-maintain";
-import Create_maintain from "./components/maintains/create-maintain";
-import List_machine from "./components/machines/list-machine";
-import Create_machine from "./components/machines/create-machine";
-import List_product from "./components/supply/products/list-product";
-import List_currency from "./components/supply/currency/list-currency";
-import Create_currency from "./components/supply/products/create-product";
-import Change_password from "./components/settings/change-password";
-import Change_profile from "./components/settings/change-profile";
-import Mobile_pay from "./components/sales/mobile-pay";
-import Log from "./components/logs/log";
+import Create_currency from './components/supply/currency/create_currency';
+import List_currency from './components/supply/currency/list-currency';
+import Create_product from './components/supply/products/create-product';
+import List_product from './components/supply/products/list-product';
+import Create_machine from './components/machines/create-machine';
+import List_machine from './components/machines/list-machine';
+import Create_maintain from './components/maintains/create-maintain';
+import List_maintain from './components/maintains/list-maintain';
+import Create_slide from './components/slides/create-slide';
+import List_slide from './components/slides/list-slide';
+// import Create_log from './components/logs/create-log';
+import Log  from './components/logs/log';
+import { Change_profile } from './components/settings/change-profile';
+import Change_password from './components/settings/change-password';
+import Add_roles from './components/roles/add-roles';
+import Roles_list from './components/roles/roles-list';
+import Change_roles from './components/roles/change-role';
+import { login } from './redux/actions/userActions';
 
 axios.defaults.baseURL = process.env.REACT_APP_NEXT_PUBLIC_REST_API;
 
 const rootReducers = combineReducers({
     appromonnaie: appromonnaiesReducer, newAppromonnaieReducer, appromonnaieReducer, appromonnaieDetailsReducer,
-    approproducts: approproduitsReducer, newApproproduitReducer, approproduitReducer, approproduitDetailsReducer,
+    approproduit: approproduitsReducer, newApproproduitReducer, approproduitReducer, approproduitDetailsReducer,
     // arduino: arduinoReducers,
-    logs: logssReducer, newLogsReducer, logsReducer, logsDetailsReducer,
+    log: logssReducer, newLogsReducer, logsReducer, logsDetailsReducer,
     category: categoriesReducer, newCategoryReducer, categoryReducer,
     machine: machinesReducer, newMachineReducer, machineReducer, machineDetailsReducer,
     maintenance: maintenancesReducer, newMaintenanceReducer, maintenanceReducer, maintenanceDetailsReducer,
-    order: allOrdersReducer, orderReducer,
+    order: allOrdersReducer,
     paiement: paiementsReducer, newPaiementReducer, paiementReducer, paiementDetailsReducer,
     product: productsReducer, newProductReducer, productReducer, productDetailsReducer,
     remboursement: remboursementsReducer, newRemboursementReducer, remboursementReducer, remboursementDetailsReducer,
+    slide: slidesReducer, newSlideReducer, slideReducer, slideDetailsReducer,
     transactionom: transactionomsReducer, newTransactionomReducer, transactionomReducer, transactionomDetailsReducer,
     user: authReducer, userReducer, forgotPasswordReducer, allUsersReducer, userDetailsReducer
 });
 
 const store = createStore(rootReducers, applyMiddleware(thunk));
 window.store = store;
-// const token = localStorage.getItem('token');
+const token = window.localStorage.getItem('token')
 
 class Root extends Component {
-
+    
     // useEffect(() =>{
-    //     if (!localStorage.getItem('token')) {
+    //     if (!token) {
     //         dispatch(login())
     //     }
     // })
@@ -128,7 +132,7 @@ class Root extends Component {
                             {/* <Route exact path='/login' component={Login} /> */}
                             <App>
                                 <Route exact path='/' component={Dashboard} />
-
+                                    
                                 <Route path={`${process.env.PUBLIC_URL}/products/physical/category`} component={Category} />
                                 <Route path={`${process.env.PUBLIC_URL}/products/physical/sub-category`} component={Sub_category} />
                                 <Route path={`${process.env.PUBLIC_URL}/products/physical/product-list`} component={Product_list} />
@@ -187,10 +191,10 @@ class Root extends Component {
 
                                 <Route path={`${process.env.PUBLIC_URL}/maintains/create-maintain`} component={Create_maintain}/>
                                 <Route path={`${process.env.PUBLIC_URL}/maintains/list-maintain`} component={List_maintain}/>
-
+                                
                                 <Route path={`${process.env.PUBLIC_URL}/slides/create-slide`} component={Create_slide}/>
                                 <Route path={`${process.env.PUBLIC_URL}/slides/list-slide`} component={List_slide}/>
-
+                                
                                 <Route path={`${process.env.PUBLIC_URL}/logs/Log`} component={Log}/>
 
                                 <Route path={`${process.env.PUBLIC_URL}/roles/add-roles`} component={Add_roles}/>
@@ -207,4 +211,5 @@ class Root extends Component {
 }
 
 ReactDOM.render(<Root />, document.getElementById('root'));
+
 

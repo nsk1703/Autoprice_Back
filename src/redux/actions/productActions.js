@@ -1,21 +1,24 @@
-import { ALL_PRODUCTS_FAIL, ALL_PRODUCTS_REQUEST, ALL_PRODUCTS_SUCCESS } from "../../constants/productConstants";
+import { productConstants } from "../../constants/productConstants";
 import axios from "axios";
 import { toast } from 'react-toastify';
 
-export const listProducts = () => {
+export const products = () => {
 
     return (dispatch) => {
         dispatch({
-            type: ALL_PRODUCTS_REQUEST
+            type: productConstants.ALL_PRODUCTS_REQUEST
         });
 
         axios.get('/products')
             .then((response) => {
                 console.log(response);
-                if (response.data.success) {
+                if (response.data.success === true) {
+                    const { products } = response.data
+                    const productsCount = response.data.page_meta.total_items_count
+                    
                     dispatch({
-                        type: ALL_PRODUCTS_SUCCESS,
-                        payload: { products: response.data.products, productsCount: response.data.page_meta.total_items_count }
+                        type: productConstants.ALL_PRODUCTS_SUCCESS,
+                        payload: { products: products, productsCount: productsCount }
                     });
                 } else {
                     if (response.data.success === false) {
@@ -23,8 +26,8 @@ export const listProducts = () => {
                         toast.error(response.data.full_messages[0]);
 
                         dispatch({
-                            type: ALL_PRODUCTS_FAIL,
-                            payload: { message: response.data.full_messages[0] }
+                            type: productConstants.ALL_PRODUCTS_FAIL,
+                            payload: { error: response.data.full_messages[0] }
                         });
                     }
                 }

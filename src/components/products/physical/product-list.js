@@ -1,10 +1,11 @@
 import React, { Component,Fragment } from 'react'
 import Breadcrumb from '../../common/breadcrumb';
+import data from '../../../assets/data/physical_list';
 import { Edit, Trash2 } from 'react-feather'
-import {Link, withRouter} from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import * as productActions from "../../../redux/actions/productActions";
 import {connect} from "react-redux";
-import {Category} from "./category";
+import { ToastContainer, toast } from 'react-toastify';
 
 
 export class Product_list extends Component {
@@ -14,11 +15,10 @@ export class Product_list extends Component {
 
         this.state = {
             open: false,
-            data: []
+            products: []
         };
 
-        this.props.listProducts();
-
+        this.props.products();
 
         setTimeout(() => {
             console.log(this.props.product.products)
@@ -39,17 +39,16 @@ export class Product_list extends Component {
                 listProducts.push(item);
             })
             this.setState({
-                    data: listProducts
+                    peoducts: listProducts
                 })
         }, 1000)
-
-
         this.state = {
             open: false,
-            data: listProducts
+            products: listProducts
         };
     }
     render() {
+
         return (
             <Fragment>
                 <Breadcrumb title="Produits" parent="" />
@@ -60,8 +59,10 @@ export class Product_list extends Component {
                         </div>
                     </div>
                     <div className="row products-admin ratio_asos">
+                    <ToastContainer />
                         {
-                            this.state.data.map((myData, i) => {
+                            
+                            this.state.products.map((myData, i) => {
                                 return (
                                     <div className="col-xl-3 col-sm-6" key={i}>
                                         <div className="card">
@@ -71,7 +72,7 @@ export class Product_list extends Component {
                                                         <div className="lable-block">
                                                             {(myData.quantite)?((myData.quantite< 4)?<span className="lable31">{myData.quantite}</span>:<span className="lable3">{myData.quantite}</span>) : <span className="lable32">{myData.quantite}</span>}
                                                             {(myData.discount === 'on sale' )?<span className="lable4">{myData.discount}</span> : '' }
-                                                            </div>
+                                                        </div>
                                                         <div className="front">
                                                             <a className="bg-size"><img className="img-fluid blur-up bg-img lazyloaded" src={myData.image} /></a>
                                                             <div className="product-hover">
@@ -99,6 +100,20 @@ export class Product_list extends Component {
                                                             <li>{myData.machine.nom}</li><br/>
                                                             <li>Ref: {myData.reference}</li>
                                                         </ul>
+                                                        {/* <div className="rating">
+                                                            <i className="fa fa-star"></i>
+                                                            <i className="fa fa-star"></i>
+                                                            <i className="fa fa-star"></i>
+                                                            <i className="fa fa-star"></i>
+                                                            <i className="fa fa-star"></i>
+                                                        </div>
+                                                        <a> <h6 >{myData.title}</h6></a>
+                                                        <h4 >{myData.price} <del >{myData.discount_price}</del></h4>
+                                                        <ul className="color-variant">
+                                                            <li className="bg-light0"></li>
+                                                            <li className="bg-light1"></li>
+                                                            <li className="bg-light2"></li>
+                                                        </ul> */}
                                                     </div>
                                                 </div>
                                             </div>
@@ -114,6 +129,7 @@ export class Product_list extends Component {
         )
     }
 }
+
 const mapStateToProps = (state) => {
     return {
         product: state.product
@@ -121,7 +137,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) =>{
     return {
-        listProducts: () => {dispatch( productActions.listProducts())}
+        products: () => {dispatch( productActions.products())}
     }
 }
 

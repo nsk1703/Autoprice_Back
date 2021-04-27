@@ -1,20 +1,21 @@
-import { ALL_TRANSACTIONOM_FAIL, ALL_TRANSACTIONOM_REQUEST, ALL_TRANSACTIONOM_SUCCESS } from "../../constants/transactionomConstants";
+import { transactionsConstants } from "../../constants/transactionomConstants";
 import axios from "axios";
 import { toast } from 'react-toastify';
 
-export const listTransactions = () => {
+export const transactions = () => {
 
     return (dispatch) => {
         dispatch({
-            type: ALL_TRANSACTIONOM_REQUEST
+            type: transactionsConstants.ALL_TRANSACTIONOM_REQUEST
         });
 
         axios.get('/transactionoms')
             .then((response) => {
                 console.log(response);
-                if (response.data.success) {
+                if (response.data.success === true) {
+                    
                     dispatch({
-                        type: ALL_TRANSACTIONOM_SUCCESS,
+                        type: transactionsConstants.ALL_TRANSACTIONOM_SUCCESS,
                         payload: { transactionoms: response.data.transactionoms, transactionomsCount: response.data.page_meta.total_items_count }
                     });
                 } else {
@@ -23,7 +24,7 @@ export const listTransactions = () => {
                         toast.error(response.data.full_messages[0]);
 
                         dispatch({
-                            type: ALL_TRANSACTIONOM_FAIL,
+                            type: transactionsConstants.ALL_TRANSACTIONOM_FAIL,
                             payload: { message: response.data.full_messages[0] }
                         });
                     }

@@ -2,10 +2,6 @@ import React, { Component, Fragment } from 'react';
 import { Tabs, TabList, TabPanel, Tab } from 'react-tabs';
 import { User, Unlock } from 'react-feather';
 import { withRouter, Redirect, Router } from 'react-router-dom';
-import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../redux/actions/userActions";
-import {auth} from '../../redux/reducers/userReducers'
-import { authConstants } from '../../constants/userConstants';
 import * as userActions  from "../../redux/actions/userActions";
 import { connect } from 'react-redux';  
 import { ToastContainer, toast } from 'react-toastify';
@@ -26,7 +22,6 @@ export class LoginTabset extends Component {
 
         this.handleChange = this.handleChange.bind(this)
         this.handleInputChange = this.handleInputChange.bind(this)
-        // this.handleInputChangePassword = this.handleInputChangePassword.bind(this)
         this.handleSubmitChange = this.handleSubmitChange.bind(this)
         this.onChange = this.onChange.bind(this)
     }
@@ -48,13 +43,6 @@ export class LoginTabset extends Component {
         })
     }
 
-    // handleInputChangePassword = (e) => {
-    //     e.preventDefault()
-    //     this.setState({
-    //         password: e.target.value
-    //     })
-    // }
-
     onChange = (e) =>{
         this.setState({ [e.target.name]: e.target.value });
     }
@@ -62,17 +50,26 @@ export class LoginTabset extends Component {
     handleSubmitChange = (e) => {
         e.preventDefault();
         this.setState({
-            isLoading: true
+            loading: true
         })
+        console.log(this.props.user.isAuthenticated)
+        console.log(this.props.user.token)
+        console.log(this.props.user.user)
+        console.log(this.props.user.roles)
+
         this.props.login(this.state)
         setTimeout(() =>{
             console.log(this.props.user.isAuthenticated)
+            console.log(this.props.user.token)
+            console.log(this.props.user.user)
+            console.log(this.props.user.roles)
+
             if(this.props.user.isAuthenticated == true){
                 this.props.history.push('/');
             }else{
                 this.props.history.push('/login');
                 this.setState({
-                    isLoading: false
+                    loading: false
                 })
             }
         }, 1000);
@@ -97,7 +94,7 @@ export class LoginTabset extends Component {
     }
 
     render() {
-        const {isLoading, email, username, password, confirm_password} = this.state
+        const {loading, isLoading, email, username, password, confirm_password} = this.state
         return (
             <div>
                 <Fragment>
@@ -112,7 +109,7 @@ export class LoginTabset extends Component {
                                 <div className="form-group">
                                     <input required="" 
                                     name="username"
-                                     value={username} 
+                                    value={username} 
                                     onChange={this.handleInputChange}
                                     type="text" className="form-control" 
                                     placeholder="Nom d'utilisateur" id="exampleInputEmail1" />
@@ -133,20 +130,12 @@ export class LoginTabset extends Component {
                                         </label>
                                     </div>
                                 </div> */}
-                                    
-                                
-                                {/* <div className="form-footer">
-                                    <span>Or Login up with social platforms</span>
-                                    <ul className="social">
-                                        <li><a className="fa fa-facebook" href=""></a></li>
-                                        <li><a className="fa fa-twitter" href=""></a></li>
-                                        <li><a className="fa fa-instagram" href=""></a></li>
-                                        <li><a className="fa fa-pinterest" href=""></a></li>
-                                    </ul>
-                                </div> */}
                                 <ToastContainer />
                             </form>
-                            <button className="btn btn-primary" disabled={isLoading} onClick={this.handleSubmitChange} >
+                            <button className="btn btn-primary" 
+                                disabled={loading} 
+                                onClick={this.handleSubmitChange} 
+                                >
                                 Connexion
                             </button>
                         </TabPanel>
@@ -192,9 +181,11 @@ export class LoginTabset extends Component {
                                 </div> */}
                                 <ToastContainer />
                                 <div className="form-button">
-                                    <button className="btn btn-primary" type="submit" disabled={isLoading}
-                                    //  onClick={() => this.onSubmit}
-                                     >Inscription</button>
+                                    <button className="btn btn-primary" 
+                                    type="submit" disabled={isLoading}
+                                     onClick={() => this.onSubmit}
+                                     >
+                                    Inscription</button>
                                 </div>
                                 {/* <div className="form-footer">
                                     <span>Or Sign up with social platforms</span>

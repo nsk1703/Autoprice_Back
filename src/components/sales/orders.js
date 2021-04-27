@@ -1,26 +1,23 @@
 import React, { Component, Fragment } from 'react'
 import Breadcrumb from '../common/breadcrumb';
 import data from '../../assets/data/orders';
-import Image from '../../components/common/image';
 import Datatable from '../common/datatable'
+import Image from '../../components/common/image';
 import Data_orders from '../common/dataTables/data_orders';
-import * as orderActions from "../../redux/actions/orderActions";
-import {connect} from "react-redux";
-import {withRouter} from "react-router-dom";
+import * as orderActions  from "../../redux/actions/orderActions";
+import { connect } from 'react-redux';  
+import { ToastContainer, toast } from 'react-toastify';
 
 export class Orders extends Component {
-
     constructor(props) {
         super(props);
-        let listOrders = [];
+        let listOrders = []
 
         this.state = {
-            open: false,
-            data: []
+           orders: []
         };
 
-        this.props.listOrders();
-
+        this.props.orders()
 
         setTimeout(() => {
             console.log(this.props.order.orders)
@@ -40,8 +37,8 @@ export class Orders extends Component {
                     Payé: (order.paiement_id)? <span className="badge badge-success">OUI</span>:<span className="badge badge-warning">NON</span>,
                     Remboursement: (order.remboursement_id)? <span className="badge badge-success">OUI</span>:<span className="badge badge-warning">NON</span>,
                     Machine: order.machine_id.nom,
-                    payment_method: (order.paiement_id)? <span className="badge badge-success">{order.paiement_id.methode} - {order.paiement_id.telephone}</span>:'',
-                    repayment_method: (order.remboursement_id)? <span className="badge badge-success">{order.remboursement_id.methode} - {order.remboursement_id.telephone}</span>:'',
+                    methode_paiement: (order.paiement_id)? <span className="badge badge-success">{order.paiement_id.methode} - {order.paiement_id.telephone}</span>:'',
+                    methode_remboursement: (order.remboursement_id)? <span className="badge badge-success">{order.remboursement_id.methode} - {order.remboursement_id.telephone}</span>:'',
                     date: Date(order.created_on)
                 }
                 listOrders.push(item);
@@ -49,18 +46,20 @@ export class Orders extends Component {
 
 
             this.setState({
-                    data: listOrders
+                    orders: listOrders
                 })
         }, 2000)
 
-
         this.state = {
             open: false,
-            data: listOrders
+            orders: listOrders
         };
+
     }
 
+
     render() {
+        const {orders} = this.state
         return (
             <Fragment>
                 <Breadcrumb title="Commandes" parent="Ventes" />
@@ -72,12 +71,13 @@ export class Orders extends Component {
                                 <div className="card-header">
                                     <h5>Gestionnaire de Commandes</h5>
                                 </div>
+                                <ToastContainer />
                                 <div className="card-body order-datatable">
                                 <Data_orders
                                     multiSelectOption={false}
-                                    myData={this.state.data}
+                                    myData={orders}
                                     check={false}
-                                    pageSize={20}
+                                    pageSize={10}
                                     pagination={true}
                                     class="-striped -highlight"
                                 />
@@ -91,15 +91,15 @@ export class Orders extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state) =>{
     return {
         order: state.order
     }
 }
+
 const mapDispatchToProps = (dispatch) =>{
     return {
-        listOrders: () => {dispatch( orderActions.listOrders())}
+        orders: () => {dispatch(orderActions.orders())}
     }
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Orders))
+export default connect(mapStateToProps, mapDispatchToProps)(Orders)

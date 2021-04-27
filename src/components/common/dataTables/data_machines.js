@@ -71,7 +71,7 @@ export class Data_machines extends Component {
             if (key === "image") {
                 editable = null;
             }
-            if (key === "status") {
+            if (key === "machine") {
                 editable = null;
             }
             if (key === "avtar") {

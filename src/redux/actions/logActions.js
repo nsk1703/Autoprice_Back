@@ -1,23 +1,24 @@
-import { categoriesConstants } from "../../constants/categoryConstants";
+import { logsConstants } from "../../constants/logsConstants";
 import axios from "axios";
 import { toast } from 'react-toastify';
 
-export const categories = () => {
+export const logs = () => {
 
     return (dispatch) => {
         dispatch({
-            type: categoriesConstants.ALL_CATEGORY_REQUEST
+            type: logsConstants.ALL_LOGS_REQUEST
         });
 
-        axios.get('/categories')
+        axios.get('/logs')
             .then((response) => {
-                console.log(response.data);
+                console.log(response);
                 if (response.data.success === true) {
-                    const {categories} = response.data
-                    const categoriesCount = response.data.page_meta.total_items_count
+                    const { logss } = response.data
+                    const logsCount = response.data.page_meta.total_items_count
+                    
                     dispatch({
-                        type: categoriesConstants.ALL_CATEGORY_SUCCESS,
-                        payload: { categories: categories, categoriesCount: categoriesCount }
+                        type: logsConstants.ALL_LOGS_SUCCESS,
+                        payload: { logss: logss, logsCount: logsCount }
                     });
                 } else {
                     if (response.data.success === false) {
@@ -25,7 +26,7 @@ export const categories = () => {
                         toast.error(response.data.full_messages[0]);
 
                         dispatch({
-                            type: categoriesConstants.ALL_CATEGORY_FAIL,
+                            type: logsConstants.ALL_LOGS_FAIL,
                             payload: { error: response.data.full_messages[0] }
                         });
                     }

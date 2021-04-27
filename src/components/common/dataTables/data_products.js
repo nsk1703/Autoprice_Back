@@ -71,7 +71,7 @@ export class Data_products extends Component {
             if (key === "image") {
                 editable = null;
             }
-            if (key === "status") {
+            if (key === "quantite") {
                 editable = null;
             }
             if (key === "avtar") {
