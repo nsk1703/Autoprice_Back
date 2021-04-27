@@ -3,7 +3,7 @@ import { authConstants } from "../../constants/userConstants";
 const initialState ={
     user: {},
     token: null, 
-    roles:{}, 
+    roles: {}, 
     isAuthenticated: false
 }
 

@@ -4,15 +4,44 @@ import Modal from 'react-responsive-modal';
 import CKEditors from 'react-ckeditor-component';
 import 'react-toastify/dist/ReactToastify.css';
 import data from '../../../assets/data/category';
+import * as categoryActions from "../../../redux/actions/categoryActions";
 import Datatable from '../../common/datatable';
 import Data_categories from '../../common/dataTables/data_categories';
+// import * as categoryActions from "../../../redux/actions/categoryActions";
+import {connect} from "react-redux";
+import {withRouter} from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
 
 export class Category extends Component {
     constructor(props) {
         super(props);
+        let listCategories = []
         this.state = {
             open: false,
+            categories: []
         };
+
+        this.props.categories()
+
+        setTimeout(() => {
+            console.log(this.props.category.categories)
+
+            this.props.category.categories.map(category => {
+                let item = {
+                    image: <img src={category.image_urls} style={{width:50,height:50}}/>,
+                    Nom: category.name,
+                    Description: category.description
+                }
+                listCategories.push(item);
+            })
+            this.setState({
+                    categories: listCategories
+                })
+        }, 1000)
+        this.state = {
+            categories: listCategories
+        };
+
     }
     onOpenModal = () => {
         this.setState({ open: true });
@@ -23,7 +52,7 @@ export class Category extends Component {
     };
 
     render() {
-        const { open } = this.state;
+        const { open, categories } = this.state;
         return (
             <Fragment>
                 <Breadcrumb title="Categories" parent="Produits" />
@@ -36,6 +65,7 @@ export class Category extends Component {
                                     <h5>Liste des Catégories</h5>
                                 </div>
                                 <div className="card-body">
+                                <ToastContainer />
                                     <div className="btn-popup pull-right">
                                         <button type="button" className="btn btn-primary" onClick={this.onOpenModal} data-toggle="modal" data-original-title="test" data-target="#exampleModal">Ajouter une catégorie</button>
                                         <Modal open={open} onClose={this.onCloseModal} >
@@ -78,7 +108,7 @@ export class Category extends Component {
                                     <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
                                         <Data_categories
                                             multiSelectOption={true}
-                                            myData={data}  
+                                            myData={categories}  
                                             pageSize={10} 
                                             pagination={true}
                                             class="-striped -highlight" 
@@ -95,5 +125,16 @@ export class Category extends Component {
     }
 }
 
-export default Category
+const mapStateToProps = (state) => {
+    return {
+        category: state.category
+    }
+}
+const mapDispatchToProps = (dispatch) =>{
+    return {
+        categories: () => {dispatch( categoryActions.categories())}
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Category))
 

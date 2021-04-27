@@ -677,16 +677,56 @@ a {
     .lable-block {
       .lable3 {
         border-radius: 100%;
-        background-color: $theme-deafult;
+        background-color: #0FE523;
         text-align: center;
         font-size: 14px;
         font-weight: 700;
         position: absolute;
-        padding: 12px 6px;
+        padding: 6px 6px;
         text-transform: uppercase;
         color: $white;
         top: 7px;
         left: 7px;
+        z-index: 1;
+      }
+      .lable31 {
+        border-radius: 100%;
+        background-color: #FF8000;
+        text-align: center;
+        font-size: 14px;
+        font-weight: 700;
+        position: absolute;
+        padding: 6px 6px;
+        text-transform: uppercase;
+        color: $white;
+        top: 7px;
+        left: 7px;
+        z-index: 1;
+      }
+      .lable32 {
+        border-radius: 100%;
+        background-color: #E50F26;
+        text-align: center;
+        font-size: 14px;
+        font-weight: 700;
+        position: absolute;
+        padding: 6px 6px;
+        text-transform: uppercase;
+        color: $white;
+        top: 7px;
+        left: 7px;
+        z-index: 1;
+      }
+      .lable4 {
+        position: absolute;
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        writing-mode: vertical-rl;
+        transform: rotate(-180deg);
+        top: 7px;
+        right: 7px;
+        letter-spacing: 0.1em;
         z-index: 1;
       }
       .lable4 {

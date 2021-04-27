@@ -71,10 +71,10 @@ export class Data_repayment extends Component {
             if (key === "image") {
                 editable = null;
             }
-            if (key === "status") {
+            if (key === "montant") {
                 editable = null;
             }
-            if (key === "avtar") {
+            if (key === "status") {
                 editable = null;
             }
             if (key === "vendor") {

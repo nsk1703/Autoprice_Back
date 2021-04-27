@@ -74,7 +74,7 @@ export class Data_currencies extends Component {
             if (key === "status") {
                 editable = null;
             }
-            if (key === "avtar") {
+            if (key === "quantite") {
                 editable = null;
             }
             if (key === "vendor") {

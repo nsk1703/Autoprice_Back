@@ -71,16 +71,25 @@ export class Data_orders extends Component {
             if (key === "image") {
                 editable = null;
             }
-            if (key === "status") {
+            if (key === "Remboursement") {
                 editable = null;
             }
-            if (key === "avtar") {
+            if (key === "payment_method") {
                 editable = null;
             }
-            if (key === "vendor") {
+            if (key === "repayment_method") {
+                editable = null;
+            }
+            if (key === "Payé") {
+                editable = null;
+            }
+            if (key === "Délivré") {
                 editable = null;
             }
             if(key === "order_status"){
+                editable = null;
+            }
+            if(key === "total"){
                 editable = null;
             }
 

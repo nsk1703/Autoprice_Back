@@ -4,6 +4,8 @@
     "private": true,
     "homepage": "http://react.pixelstrap.com/multikart-admin/",
     "dependencies": {
+        "@ckeditor/ckeditor5-build-classic": "^27.1.0",
+        "@ckeditor/ckeditor5-react": "^3.0.2",
         "availity-reactstrap-validation": "^2.6.0",
         "axios": "^0.21.0",
         "bootstrap": "^4.3.1",
@@ -33,6 +35,7 @@
         "react-router-dom": "^5.0.1",
         "react-router-scroll-4": "^1.0.0-beta.2",
         "react-scripts": "^3.0.1",
+        "react-select": "^4.3.0",
         "react-slick": "^0.24.0",
         "react-smart-data-table": "^0.7.1",
         "react-star-rating-component": "^1.4.1",

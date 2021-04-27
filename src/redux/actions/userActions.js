@@ -15,15 +15,22 @@ export const login = (user) => {
         })
         .then((response) => {
             if(response.data.success === true){
-                const { token, user, roles } = response.data;
-                // console.log(response.data.user.token)
-                localStorage.setItem('token', user.token);
-                localStorage.setItem('user', JSON.stringify(user.username));
-                localStorage.setItem('roles', user.roles);
+                const lastToken = localStorage.getItem('token')
+                if(lastToken !== null) {
+                    localStorage.removeItem('token')
+                }
+                const { token, user } = response.data;
+                const roles = response.data.user.roles
+                console.log(token)
+                
+                localStorage.setItem('token', response.data.user.token);
+                console.log(token)
+                localStorage.setItem('user', response.data.user.username);
+                localStorage.setItem('roles', response.data.user.roles);
                 toast.success("Successfully Connected !");
                 dispatch({
                     type: authConstants.LOGIN_SUCCESS,
-                    payload: { token, user, roles }
+                    payload: { token: token, user: user, roles: roles }
                 });
             }else{
                 if (response.data.success === false) {

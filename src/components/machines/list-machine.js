@@ -4,10 +4,48 @@ import Breadcrumb from '../common/breadcrumb';
 import data from '../../assets/data/listUser';
 import Datatable from '../common/datatable'
 import Data_machines from '../common/dataTables/data_machines';
-
+import * as machineActions from "../../redux/actions/machineActions";
+import {connect} from "react-redux";
+import { ToastContainer, toast } from 'react-toastify';
 
 export class List_machine extends Component {
+    constructor(props) {
+        super(props);
+        let listMachines = [];
+
+        this.state = {
+            open: false,
+            machines: []
+        };
+
+        this.props.machines();
+
+        setTimeout(() => {
+            console.log(this.props.machine.machines)
+
+            this.props.machine.machines.map(machine => {
+                let item = {
+                    ID: '#' + machine.id,
+                    Nom: machine.nom,
+                    Type: machine.type,
+                    lien:machine.lien,
+                    statut:machine.status,
+                    etat:machine.etat,
+                    description:machine.description
+                }
+                listMachines.push(item);
+            })
+            this.setState({
+                    machines: listMachines
+                })
+        }, 1000)
+        this.state = {
+            open: false,
+            machines: listMachines
+        };
+    }
     render() {
+        const {machines} =this.state
         return (
             <Fragment>
                 <Breadcrumb title="Liste des machines" parent="Machines" />
@@ -24,7 +62,7 @@ export class List_machine extends Component {
                             <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
                                 <Data_machines
                                     multiSelectOption={true}
-                                    myData={data}
+                                    myData={machines}
                                     pageSize={10}
                                     pagination={true}
                                     class="-striped -highlight"
@@ -38,4 +76,15 @@ export class List_machine extends Component {
     }
 }
 
-export default List_machine
+const mapStateToProps = (state) => {
+    return {
+        machine: state.machine
+    }
+}
+const mapDispatchToProps = (dispatch) =>{
+    return {
+        machines: () => {dispatch( machineActions.machines())}
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(List_machine)

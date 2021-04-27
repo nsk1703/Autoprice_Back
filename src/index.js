@@ -18,12 +18,14 @@ import {appromonnaiesReducer, newAppromonnaieReducer, appromonnaieReducer, appro
 import {approproduitsReducer, newApproproduitReducer, approproduitReducer, approproduitDetailsReducer} from './redux/reducers/approproduitReducers';
 // import {arduinoReducers} from './redux/reducers/arduinoReducers';
 import {logssReducer, newLogsReducer, logsReducer, logsDetailsReducer} from './redux/reducers/logsReducers';
+import {categoryReducer, categoriesReducer, newCategoryReducer} from './redux/reducers/categoryReducers';
 import {machinesReducer, newMachineReducer, machineReducer, machineDetailsReducer} from './redux/reducers/machineReducers';
 import {maintenancesReducer, newMaintenanceReducer, maintenanceReducer, maintenanceDetailsReducer} from './redux/reducers/maintenanceReducers';
 import {newOrderReducer, myOrdersReducer, orderDetailsReducer, allOrdersReducer, orderReducer} from './redux/reducers/orderReducers';
 import {paiementsReducer, newPaiementReducer, paiementReducer, paiementDetailsReducer} from './redux/reducers/paiementReducers';
 import {productsReducer, newProductReducer, productReducer, productDetailsReducer} from './redux/reducers/productReducers';
 import {remboursementsReducer, newRemboursementReducer, remboursementReducer, remboursementDetailsReducer} from './redux/reducers/remboursementReducers';
+import {slidesReducer, newSlideReducer, slideReducer, slideDetailsReducer} from './redux/reducers/slideReducers';
 import {transactionomsReducer, transactionomReducer, newTransactionomReducer, transactionomDetailsReducer} from './redux/reducers/transactionomReducers';
 import {authReducer, userReducer, forgotPasswordReducer, allUsersReducer, userDetailsReducer} from './redux/reducers/userReducers';
 
@@ -82,7 +84,7 @@ import List_maintain from './components/maintains/list-maintain';
 import Create_slide from './components/slides/create-slide';
 import List_slide from './components/slides/list-slide';
 // import Create_log from './components/logs/create-log';
-import List_log, { Log } from './components/logs/log';
+import Log  from './components/logs/log';
 import { Change_profile } from './components/settings/change-profile';
 import Change_password from './components/settings/change-password';
 import Add_roles from './components/roles/add-roles';
@@ -94,27 +96,29 @@ axios.defaults.baseURL = process.env.REACT_APP_NEXT_PUBLIC_REST_API;
 
 const rootReducers = combineReducers({
     appromonnaie: appromonnaiesReducer, newAppromonnaieReducer, appromonnaieReducer, appromonnaieDetailsReducer,
-    approproducts: approproduitsReducer, newApproproduitReducer, approproduitReducer, approproduitDetailsReducer,
+    approproduit: approproduitsReducer, newApproproduitReducer, approproduitReducer, approproduitDetailsReducer,
     // arduino: arduinoReducers,
-    logs: logssReducer, newLogsReducer, logsReducer, logsDetailsReducer,
+    log: logssReducer, newLogsReducer, logsReducer, logsDetailsReducer,
+    category: categoriesReducer, newCategoryReducer, categoryReducer,
     machine: machinesReducer, newMachineReducer, machineReducer, machineDetailsReducer,
     maintenance: maintenancesReducer, newMaintenanceReducer, maintenanceReducer, maintenanceDetailsReducer,
-    order: newOrderReducer, myOrdersReducer, orderDetailsReducer, allOrdersReducer, orderReducer,
+    order: allOrdersReducer,
     paiement: paiementsReducer, newPaiementReducer, paiementReducer, paiementDetailsReducer,
     product: productsReducer, newProductReducer, productReducer, productDetailsReducer,
-    repayment: remboursementsReducer, newRemboursementReducer, remboursementReducer, remboursementDetailsReducer,
-    transaction: transactionomsReducer, newTransactionomReducer, transactionomReducer, transactionomDetailsReducer,
+    remboursement: remboursementsReducer, newRemboursementReducer, remboursementReducer, remboursementDetailsReducer,
+    slide: slidesReducer, newSlideReducer, slideReducer, slideDetailsReducer,
+    transactionom: transactionomsReducer, newTransactionomReducer, transactionomReducer, transactionomDetailsReducer,
     user: authReducer, userReducer, forgotPasswordReducer, allUsersReducer, userDetailsReducer
 });
 
 const store = createStore(rootReducers, applyMiddleware(thunk));
 window.store = store;
-// const token = localStorage.getItem('token');
+const token = window.localStorage.getItem('token')
 
 class Root extends Component {
     
     // useEffect(() =>{
-    //     if (!localStorage.getItem('token')) {
+    //     if (!token) {
     //         dispatch(login())
     //     }
     // })

@@ -1,35 +1,37 @@
-import {paiementsConstants} from '../../constants/paiementConstants'
+import {slideConstants} from '../../constants/slideConstants'
 
-export const paiementsReducer = (state = { paiements: [] }, action) => {
+export const slidesReducer = (state = { slides: [] }, action) => {
     switch (action.type) {
-        case paiementsConstants.ALL_PAIEMENTS_REQUEST:
-        case paiementsConstants.ADMIN_PAIEMENT_REQUEST:
+        case slideConstants.ALL_SLIDES_REQUEST:
+        case slideConstants.ADMIN_SLIDES_REQUEST:
             return {
                 loading: true,
-                paiements: []
+                slides: []
             }
 
-        case paiementsConstants.ALL_PAIEMENTS_SUCCESS:
+        case slideConstants.ALL_SLIDES_SUCCESS:
             return {
                 loading: false,
-                paiements: action.payload.paiements,
-                paiementsCount: action.payload.paiementsCount,
+                slides: action.payload.slides,
+                slidesCount: action.payload.slidesCount,
+                // resPerPage: action.payload.resPerPage,
+                // filteredslidesCount: action.payload.filteredslidesCount
             }
 
-        case paiementsConstants.ADMIN_PAIEMENT_SUCCESS:
+        case slideConstants.ADMIN_SLIDES_SUCCESS:
             return {
                 loading: false,
-                paiements: action.payload
+                slides: action.payload
             }
 
-        case paiementsConstants.ALL_PAIEMENTS_FAIL:
-        case paiementsConstants.ADMIN_PAIEMENT_FAIL:
+        case slideConstants.ALL_SLIDES_FAIL:
+        case slideConstants.ADMIN_SLIDES_FAIL:
             return {
                 loading: false,
                 error: action.payload
             }
 
-        case paiementsConstants.CLEAR_ERRORS:
+        case slideConstants.CLEAR_ERRORS:
             return {
                 ...state,
                 error: null
@@ -40,35 +42,35 @@ export const paiementsReducer = (state = { paiements: [] }, action) => {
     }
 }
 
-export const newPaiementReducer = (state = { paiement: {} }, action) => {
+export const newSlideReducer = (state = { slide: {} }, action) => {
     switch (action.type) {
 
-        case paiementsConstants.NEW_PAIEMENT_REQUEST:
+        case slideConstants.NEW_SLIDE_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case paiementsConstants.NEW_PAIEMENT_SUCCESS:
+        case slideConstants.NEW_SLIDE_SUCCESS:
             return {
                 loading: false,
                 success: action.payload.success,
-                paiement: action.payload.paiement
+                slide: action.payload.slide
             }
 
-        case paiementsConstants.NEW_PAIEMENT_FAIL:
+        case slideConstants.NEW_SLIDE_FAIL:
             return {
                 ...state,
                 error: action.payload
             }
 
-        case paiementsConstants.NEW_PAIEMENT_RESET:
+        case slideConstants.NEW_SLIDE_RESET:
             return {
                 ...state,
                 success: false
             }
 
-        case paiementsConstants.CLEAR_ERRORS:
+        case slideConstants.CLEAR_ERRORS:
             return {
                 ...state,
                 error: null
@@ -79,24 +81,24 @@ export const newPaiementReducer = (state = { paiement: {} }, action) => {
     }
 }
 
-export const paiementReducer = (state = {}, action) => {
+export const slideReducer = (state = {}, action) => {
     switch (action.type) {
 
-        case paiementsConstants.DELETE_PAIEMENT_REQUEST:
-        case paiementsConstants.UPDATE_PAIEMENT_REQUEST:
+        case slideConstants.DELETE_SLIDE_REQUEST:
+        case slideConstants.UPDATE_SLIDE_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case paiementsConstants.DELETE_PAIEMENT_SUCCESS:
+        case slideConstants.DELETE_SLIDE_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 isDeleted: action.payload
             }
 
-        case paiementsConstants.UPDATE_PAIEMENT_SUCCESS:
+        case slideConstants.UPDATE_SLIDE_SUCCESS:
             return {
                 ...state,
                 loading: false,
@@ -104,26 +106,26 @@ export const paiementReducer = (state = {}, action) => {
             }
 
 
-        case paiementsConstants.DELETE_PAIEMENT_FAIL:
-        case paiementsConstants.UPDATE_PAIEMENT_FAIL:
+        case slideConstants.DELETE_SLIDE_FAIL:
+        case slideConstants.UPDATE_SLIDE_FAIL:
             return {
                 ...state,
                 error: action.payload
             }
 
-        case paiementsConstants.DELETE_PAIEMENT_RESET:
+        case slideConstants.DELETE_SLIDE_RESET:
             return {
                 ...state,
                 isDeleted: false
             }
 
-        case paiementsConstants.UPDATE_PAIEMENT_RESET:
+        case slideConstants.UPDATE_SLIDE_RESET:
             return {
                 ...state,
                 isUpdated: false
             }
 
-        case paiementsConstants.CLEAR_ERRORS:
+        case slideConstants.CLEAR_ERRORS:
             return {
                 ...state,
                 error: null
@@ -134,28 +136,28 @@ export const paiementReducer = (state = {}, action) => {
     }
 }
 
-export const paiementDetailsReducer = (state = { paiement: {} }, action) => {
+export const slideDetailsReducer = (state = { slide: {} }, action) => {
     switch (action.type) {
 
-        case paiementsConstants.PAIEMENT_DETAILS_REQUEST:
+        case slideConstants.SLIDE_DETAILS_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case paiementsConstants.PAIEMENT_DETAILS_SUCCESS:
+        case slideConstants.SLIDE_DETAILS_SUCCESS:
             return {
                 loading: false,
-                paiement: action.payload
+                slide: action.payload
             }
 
-        case paiementsConstants.PAIEMENT_DETAILS_FAIL:
+        case slideConstants.SLIDE_DETAILS_FAIL:
             return {
                 ...state,
                 error: action.payload
             }
 
-        case paiementsConstants.CLEAR_ERRORS:
+        case slideConstants.CLEAR_ERRORS:
             return {
                 ...state,
                 error: null
