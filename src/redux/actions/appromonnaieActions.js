@@ -48,7 +48,7 @@ export const newAppromonnaies = (monnaie) => {
         });
         let body = {
             etat: "1",
-            machine_id: monnaie.machine_id,
+            machine_id: monnaie.machine_id.value,
             description: monnaie.description,
             quantite: monnaie.montant
         }

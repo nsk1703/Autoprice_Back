@@ -66,9 +66,9 @@ export class Tabset_currency extends Component {
             [e.target.name]: e.target.value
         })
     }
-    handleChange = (e) => {
+    handleChange = (machine_id) => {
         
-        this.setState({machine_id: e.value});
+        this.setState({machine_id});
         console.log('Option selected:', this.state.machine_id)
         
     }
