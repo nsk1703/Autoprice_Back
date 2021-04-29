@@ -2,12 +2,14 @@ import React, { Component,Fragment } from 'react'
 import { Tabs, TabList, TabPanel, Tab } from 'react-tabs';
 // import CKEditors from 'react-ckeditor-component';
 import * as machineActions from "../../../redux/actions/machineActions";
+import { withRouter, Redirect, Router } from 'react-router-dom';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import {CKEditor} from '@ckeditor/ckeditor5-react';
 import {connect} from "react-redux";
 import { ToastContainer, toast } from 'react-toastify';
 import * as appromonnaieActions from '../../../redux/actions/appromonnaieActions';
 import Select from 'react-select';
+
 
 export class Tabset_currency extends Component {
     constructor(props) {
@@ -33,7 +35,7 @@ export class Tabset_currency extends Component {
         this.props.machines();
 
         setTimeout(() => {
-            console.log(this.props.machine.machines)
+            // console.log(this.props.machine.machines)
 
             this.props.machine.machines.map(machine => {
                 let item = {
@@ -67,17 +69,15 @@ export class Tabset_currency extends Component {
         })
     }
     handleChange = (machine_id) => {
-        
-        this.setState({machine_id});
-        console.log('Option selected:', this.state.machine_id)
-        
+        this.setState({machine_id});        
     }
+    
     handleCkeditorChange = (e, editor) => {
         const data = editor.getData()
         this.setState({
             description: data
         })
-        console.log(this.state.description)
+        // console.log(this.state.description)
     } 
     handleSubmitChange = (e) => {
         e.preventDefault();
@@ -85,20 +85,25 @@ export class Tabset_currency extends Component {
             isLoading: true
         })
         // console.log(this.state.AllOptions)
-        this.props.newAppromonnaies(this.state)
-        if(this.props.appromonnaie.success === true){
-            this.props.history.push('/list-machine');
-        }else{
-            this.setState({
-                isLoading: false
-            })
-        }
+        this.props.newAppromonnaies(this.state);
+       
+        setTimeout(()=> {
+            console.log(this.props.addappromonnaie)
+            if(this.props.addappromonnaie.success === true){
+                this.props.history.push('/supply/currency/list-currency');
+            }else{
+                this.props.history.push('/supply/currency/create-currency');
+                this.setState({
+                    isLoading: false
+                })
+            }
+        }, 1000)
        
 
     }
     render() {
         const {AllOptions, quantite, description, machine_id, isLoading} =this.state
-        console.log(machine_id)
+        // console.log(machine_id)
         return (
             <Fragment>
                 <form className="needs-validation currency-add" noValidate="">
@@ -157,7 +162,7 @@ export class Tabset_currency extends Component {
 const mapStateToProps = (state) => {
     return {
         machine: state.machine,
-        appromonnaie: state.appromonnaie
+        addappromonnaie: state.addappromonnaie
     }
 }
 const mapDispatchToProps = (dispatch) =>{
@@ -167,4 +172,4 @@ const mapDispatchToProps = (dispatch) =>{
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Tabset_currency)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Tabset_currency))

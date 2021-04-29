@@ -1,9 +1,76 @@
 import React, { Component,Fragment } from 'react'
 import Breadcrumb from '../common/breadcrumb';
 import Tabset_slide from './tabset-slide';
+import {connect} from "react-redux";
+import Select from 'react-select';
+import * as slideActions from "../../redux/actions/slideActions";
+import { withRouter } from 'react-router';
+
+
+const typeChoices = [
+    {value: 'home', label:'Home'},
+    {value: 'produit', label:'Produit'},
+]
+
+const formatChoices = [
+    {value: 'image', label: 'Image'},
+    {value: 'video', label: 'Video'}
+]
 
 export class Create_slide extends Component {
+    constructor(props){
+        super(props);
+
+        this.state = {
+           type: '',
+           format: '',
+           images: null,
+           isLoading: false, 
+        }
+
+        this.handleTypeChange = this.handleTypeChange.bind(this)
+        this.handleFormatChange = this.handleFormatChange.bind(this)
+        this.handleFileChange = this.handleFileChange.bind(this)
+        this.handleSubmitChange = this.handleSubmitChange.bind(this)
+
+    }
+  
+    handleTypeChange = (type)=> {
+        this.setState({type});
+    }
+
+    handleFormatChange = (format)=> {
+        this.setState({format});
+    }
+
+    handleFileChange = (e)=> {
+        this.setState({
+            images: e.target.files[0]
+        });
+    }
+    
+    handleSubmitChange = (e) => {
+        e.preventDefault();
+        this.setState({
+            isLoading: true
+        })
+        this.props.newSlide(this.state)
+        setTimeout(() => {
+            // console.log(this.props.addmachine.success)
+            if(this.props.addslide.success === true){
+                this.props.history.push('/slides/list-slide');
+            }else{
+                this.props.history.push('/slides/create-slide');
+                this.setState({
+                    isLoading: false
+                });
+            }
+        }, 1000)
+       
+
+    }
     render() {
+        const {type, format, isLoading} = this.state
         return (
             <Fragment>
                 <Breadcrumb title="Ajouter un slide" parent="Slides" />
@@ -15,28 +82,42 @@ export class Create_slide extends Component {
                                     <h5> Ajouter un slide</h5>
                                 </div>
                                 <div className="card-body">
-                                    <form className="needs-validation user-add" noValidate="">
+                                    <form className="needs-validation user-add">
                                         <div className="form-group row">
                                             <label className="col-xl-3 col-md-4"><span>*</span> Format</label>
-                                            <input className="form-control col-xl-8 col-md-7" id="validationCustom0" type="text" required="" />
+                                            <Select className="col-xl-8 col-md-7"
+                                                name="Format"
+                                                value={format}
+                                                onChange={this.handleFormatChange}
+                                                options={formatChoices}
+                                                required="" 
+                                            />
                                         </div>
                                         <div className="form-group row">
                                             <label className="col-xl-3 col-md-4" ><span>*</span> type :</label>
                                             {/* <div className="col-xl-8 col-md-7"> */}
-                                                <select className="form-control col-xl-8 col-md-7 digits" id="exampleFormControlSelect1">
-                                                    <option>lorem</option>
-                                                    <option>ipsum</option>
-                                                    <option>dolar</option>
-                                                    <option>vaug</option>
-                                                </select>
+                                                <Select className="col-xl-8 col-md-7"
+                                                    name="type"
+                                                    value={type}
+                                                    onChange={this.handleTypeChange}
+                                                    options={typeChoices}
+                                                    required="" 
+                                                />
                                             {/* </div> */}
                                         </div>
                                         <div className="form-group row">
                                             <label htmlFor="message-text" className="col-form-label"><span>*</span>Image de Catégorie :</label>
-                                            <input className="form-control" id="validationCustom02" type="file" />
+                                            <input className="form-control col-xl-8 col-md-7" 
+                                                type="file" 
+                                                onChange={this.handleFileChange}
+                                            />
                                         </div>
                                         <div className="pull-right">
-                                            <button type="button" className="btn btn-primary">Enregister</button>
+                                            <button type="button" 
+                                                className="btn btn-primary"
+                                                disabled={isLoading}
+                                                onClick={this.handleSubmitChange}
+                                            >Enregister</button>
                                         </div>
                                     </form>
                                 </div>
@@ -48,5 +129,15 @@ export class Create_slide extends Component {
         )
     }
 }
+const mapStateToProps = (state) => {
+    return {
+        addslide: state.addslide,
+    }
+}
+const mapDispatchToProps = (dispatch) =>{
+    return {
+        newSlide: (slide) => {dispatch( slideActions.newSlide(slide))},
+    }
+}
 
-export default Create_slide
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Create_slide))

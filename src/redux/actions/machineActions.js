@@ -47,40 +47,45 @@ export const newMachine = (machine) => {
         });
         let body = {
             etat: "1",
+            status: "1",
             nom: machine.nom,
-            type: machine.type,
+            type: machine.type['value'],
             lien: machine.lien,
-            montant: machine.montant,
+            montant: parseInt(machine.montant,10),
             description: machine.description,
         }
         console.log(body)
         const token = localStorage.getItem('token');
-        axios.post('/machine', body,
-            {headers: {
-                'USER-KEY': `Bearer ${token}`
+        let config = {
+            headers: {
+            'Content-Type': 'application/json',
+            'USER-KEY': `Bearer ${token}`
             }
-        })
+        }
+        axios.post('/machine', body, config)
         .then((response) => {
             console.log(response.data)
             if(response.data.success === true){
-                const { machine, success } = response.data
-                // const MachineCount = response.data.success
+                const { success } = response.data
                 
                 dispatch({
                     type: machineConstants.NEW_MACHINE_SUCCESS,
-                    payload: {machine: machine, success: success, token: token }
+                    payload: {success: success }
                 })
                 toast.success(response.data.full_messages[0])
             }
             else{
                 if (response.data.success === false) {
                     // console.log(response.data.full_messages[0])
-                    const {success} = response.data
-                    toast.error(response.data.full_messages[0]);
+                    // const {success} = response.data
+                    // toast.error(response.data.full_messages[0]);
                     dispatch({
                         type: machineConstants.NEW_MACHINE_FAIL,
-                        payload: { success: success }
+                        // payload: { success: success }
                     });
+                    for(var i=0; i<response.data.full_messages[i]; i++){
+                        toast.error(response.data.full_messages[i])
+                    }
                 }
             }
         })

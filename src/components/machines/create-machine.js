@@ -8,14 +8,15 @@ import {connect} from "react-redux";
 import { ToastContainer, toast } from 'react-toastify';
 import { withRouter, Redirect, Router } from 'react-router-dom';
 
-// const options= [
-    
-// ]
+const options = [
+    {value: 'type1', label:'Type 1'},
+    {value: 'type2', label:'Type 2'},
+    {value: 'type3', label:'Type 3'}
+]
 export class Create_machine extends Component {
     constructor(props) {
         super(props);
-        let options = []
-        let listMachines = []
+
         this.state = {
             open: false,
             nom: '',
@@ -24,18 +25,12 @@ export class Create_machine extends Component {
             montant: '',
             description: '',
             isLoading: false,
-            options: [
-                {value: 'type1', label:'Type 1'},
-                {value: 'type2', label:'Type 2'},
-                {value: 'type3', label:'Type 3'}
-            ]
             
         };
 
         this.handleInputChange = this.handleInputChange.bind(this)
-        this.handleChange = this.handleChange()
+        this.handleChange = this.handleChange.bind(this)
         this.handleSubmitChange = this.handleSubmitChange.bind(this)
-        this.handleCkeditorChange = this.handleCkeditorChange.bind(this)
 
         
     }
@@ -46,18 +41,11 @@ export class Create_machine extends Component {
         })
     }
   
-    handleChange = type => {
-
+    handleChange = (type )=> {
         this.setState({type});
-        console.log('Option selected:', type)
+        // console.log('Option selected:', type)
     }
-    handleCkeditorChange = (e, editor) => {
-        const data = editor.getData()
-        this.setState({
-            description: data
-        })
-        console.log(this.state.description)
-    } 
+    
     handleSubmitChange = (e) => {
         e.preventDefault();
         this.setState({
@@ -65,19 +53,23 @@ export class Create_machine extends Component {
         })
         // console.log(this.state.AllOptions)
         this.props.newMachine(this.state)
-        if(this.props.machine.success === true){
-            this.props.history.push('/list-machine');
-        }else{
-            this.setState({
-                isLoading: false
-            })
-        }
+        setTimeout(() => {
+            // console.log(this.props.addmachine.success)
+            if(this.props.addmachine.success === true){
+                this.props.history.push('/machines/list-machine');
+            }else{
+                this.props.history.push('/machines/create-machine');
+                this.setState({
+                    isLoading: false
+                })
+            }
+        }, 1000)
        
 
     }
     render() {
-        const {isLoading, options, nom, type, lien, montant, description} =this.state
-        console.log(options)
+        const {isLoading, nom, type, lien, montant, description} =this.state
+        // console.log(options)
         return (
             <Fragment>
                 <Breadcrumb title="Créer une machine " parent="Machines" />
@@ -89,7 +81,7 @@ export class Create_machine extends Component {
                                     <h5> Créer une machine</h5>
                                 </div>
                                 <div className="card-body">
-                                    <form className="needs-validation user-add" noValidate="">
+                                    <form className="needs-validation" enctype="multipart/form-data">
                                         <div className="form-group row">
                                             <label className="col-xl-3 col-md-4"><span>*</span> Nom de Machine</label>
                                             <input className="form-control col-xl-8 col-md-7" 
@@ -102,7 +94,7 @@ export class Create_machine extends Component {
                                         <div className="form-group row">
                                             <label className="col-xl-3 col-md-4" >type :</label>
                                             {/* <div className=""> */}
-                                            <Select className=" col-xl-8 col-md-7"
+                                            <Select className="col-xl-8 col-md-7"
                                                 name="type"
                                                 value={type}
                                                 onChange={this.handleChange}
@@ -131,22 +123,19 @@ export class Create_machine extends Component {
                                         </div>
                                         <div className="form-group row">
                                             <label className="col-xl-3 col-md-4">Description du produit :</label>
-                                            <div className="form-control col-xl-8 col-md-7 description-sm">
-                                            <CKEditor
-                                                editor={ClassicEditor}
-                                                data={description}
-                                                onInit={ editor=>{
-                                                    
-                                                }}
-                                                onChange={this.handleCkeditorChange}
-                                            />
-                                            </div>
+                                            {/* <div className="form-control col-xl-8 col-md-7 description-sm"> */}
+                                                <textarea className=" form-control col-xl-8 col-md-7" 
+                                                name="description" value={description} 
+                                                    onChange={this.handleInputChange}
+                                                    rows="10" cols="92"
+                                                />
+                                            {/* </div> */}
                                         </div>
                                         <div className="offset-xl-3 offset-sm-4">
                                             <button type="button" 
                                             className="btn btn-primary"
                                             disabled={isLoading}
-                                            onClick={() => this.handleSubmitChange}
+                                            onClick={this.handleSubmitChange}
                                             >Enregister</button>
                                         </div>
                                     </form>
@@ -162,7 +151,7 @@ export class Create_machine extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        machine: state.machine,
+        addmachine: state.addmachine,
     }
 }
 const mapDispatchToProps = (dispatch) =>{

@@ -55,7 +55,7 @@ export const newAppromonnaieReducer = (state = { appromonnaie: {} }, action) => 
             return {
                 loading: false,
                 success: action.payload.success,
-                appromonnaie: action.payload.appromonnaie,
+                // appromonnaie: action.payload.appromonnaie,
                 // token: action.payload.token
             }
 

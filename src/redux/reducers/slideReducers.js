@@ -55,7 +55,7 @@ export const newSlideReducer = (state = { slide: {} }, action) => {
             return {
                 loading: false,
                 success: action.payload.success,
-                slide: action.payload.slide
+                // slide: action.payload.slide
             }
 
         case slideConstants.NEW_SLIDE_FAIL:

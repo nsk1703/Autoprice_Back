@@ -43,45 +43,50 @@ export const newMaintenance = (maintenance) => {
 
     return (dispatch) => {
         dispatch({
-            type: maintenanceConstants.NEW_Maintenance_REQUEST
+            type: maintenanceConstants.NEW_MAINTENANCE_REQUEST
         });
         let body = {
             etat: "1",
             nom: maintenance.nom,
-            type: maintenance.type,
+            type: maintenance.type['value'],
             dateMaintenance: maintenance.dateMaintenance,
-            montant: maintenance.montant,
+            montant: parseInt(maintenance.montant, 10),
             description: maintenance.description,
-            machine_id: maintenance.machine_id
+            machine_id: maintenance.machine_id.value
         }
         console.log(body)
         const token = localStorage.getItem('token');
-        axios.post('/maintenance', body,
-            {headers: {
-                'USER-KEY': `Bearer ${token}`
+        let config = {
+            headers: {
+            'Content-Type': 'application/json',
+            'USER-KEY': `Bearer ${token}`
             }
-        })
+        }
+        axios.post('/maintenance', body, config)
         .then((response) => {
             console.log(response.data)
             if(response.data.success === true){
-                const { maintenance, success } = response.data
+                const { success } = response.data
                 // const MaintenanceCount = response.data.success
                 
                 dispatch({
-                    type: maintenanceConstants.NEW_Maintenance_SUCCESS,
-                    payload: {maintenance: maintenance, success: success, token: token }
+                    type: maintenanceConstants.NEW_MAINTENANCE_SUCCESS,
+                    payload: { success: success }
                 })
                 toast.success(response.data.full_messages[0])
             }
             else{
                 if (response.data.success === false) {
                     // console.log(response.data.full_messages[0])
-                    const {success} = response.data
-                    toast.error(response.data.full_messages[0]);
+                    // const {success} = response.data
+                    // toast.error(response.data.full_messages[0]);
                     dispatch({
-                        type: maintenanceConstants.NEW_Maintenance_FAIL,
-                        payload: { success: success }
+                        type: maintenanceConstants.NEW_MAINTENANCE_FAIL,
+                        // payload: { success: success }
                     });
+                    for(var i=0; i<response.data.full_messages[i]; i++){
+                        toast.error(response.data.full_messages[i])
+                    }
                 }
             }
         })

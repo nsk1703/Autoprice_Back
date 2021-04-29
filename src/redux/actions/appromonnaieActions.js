@@ -46,43 +46,48 @@ export const newAppromonnaies = (monnaie) => {
         dispatch({
             type: appromonnaieConstants.NEW_APPROMONNAIE_REQUEST
         });
+        console.log(monnaie.machine_id.value)
         let body = {
             etat: "1",
             machine_id: monnaie.machine_id.value,
             description: monnaie.description,
-            quantite: monnaie.montant
+            quantite: parseInt(monnaie.montant, 10)
         }
-        console.log(body)
         const token = localStorage.getItem('token');
-        // console.log( 'asss', token)
-        axios.post('/appromonnaie', body,
-            {headers: {
-                'USER-KEY': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-                
+        let config = {
+            headers: {
+              'USER-KEY': `Bearer ${token}`,
+              'Content-Type': 'application/json'
             }
-        })
+          }
+        console.log(body)
+        // console.log( 'asss', token)
+        axios.post('/appromonnaie', body, config)
         .then((response) => {
             console.log(response)
             if(response.data.success === true){
-                const {appromonnaies, success} = response.data
+                const {success} = response.data
                 // const appromonnaiesCount = response.data.success
-                
+                // console.log(appromonnaies)
+                console.log(success)
                 dispatch({
                     type: appromonnaieConstants.NEW_APPROMONNAIE_SUCCESS,
-                    payload: {appromonnaie: appromonnaies, success: success, token: token }
+                    payload: { success: success }
                 })
                 toast.success('Ajouter avec succes!!')
             }
             else{
                 if (response.data.success === false) {
                     // console.log(response.data.full_messages[0])
-                    const {success} = response.data
-                    toast.error(response.data.full_messages[0]);
+                    // const {success} = response.data
+                    // toast.error(response.data.full_messages[0]);
                     dispatch({
-                        type: appromonnaieConstants.NEW_APPROMONNAIE_FAIL,
-                        payload: { success: success }
+                        type: appromonnaieConstants.NEW_APPROMONNAIE_FAIL
+                        // payload: { error: response.data.full_messages[0] }
                     });
+                    for(var i=0; i<response.data.full_messages[i]; i++){
+                        toast.error(response.data.full_messages[i])
+                    }
                 }
             }
         })

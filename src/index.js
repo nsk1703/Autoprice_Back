@@ -95,18 +95,25 @@ import { login } from './redux/actions/userActions';
 axios.defaults.baseURL = process.env.REACT_APP_NEXT_PUBLIC_REST_API;
 
 const rootReducers = combineReducers({
-    appromonnaie: appromonnaiesReducer, newAppromonnaieReducer, appromonnaieReducer, appromonnaieDetailsReducer,
-    approproduit: approproduitsReducer, newApproproduitReducer, approproduitReducer, approproduitDetailsReducer,
+    appromonnaie: appromonnaiesReducer,  appromonnaieReducer, appromonnaieDetailsReducer,
+    approproduit: approproduitsReducer,  approproduitReducer, approproduitDetailsReducer,
     // arduino: arduinoReducers,
     log: logssReducer, newLogsReducer, logsReducer, logsDetailsReducer,
-    category: categoriesReducer, newCategoryReducer, categoryReducer,
-    machine: machinesReducer, newMachineReducer, machineReducer, machineDetailsReducer,
-    maintenance: maintenancesReducer, newMaintenanceReducer, maintenanceReducer, maintenanceDetailsReducer,
+    category: categoriesReducer,  categoryReducer,
+    machine: machinesReducer,  machineReducer, machineDetailsReducer,
+    maintenance: maintenancesReducer, maintenanceReducer, maintenanceDetailsReducer,
     order: allOrdersReducer,
     paiement: paiementsReducer, newPaiementReducer, paiementReducer, paiementDetailsReducer,
-    product: productsReducer, newProductReducer, productReducer, productDetailsReducer,
+    product: productsReducer, productReducer, productDetailsReducer,
+    addappromonnaie: newAppromonnaieReducer, 
+    addapproproduit: newApproproduitReducer,
+    addmaintenance: newMaintenanceReducer,
+    addmachine: newMachineReducer,
+    addslide: newSlideReducer,
+    addcategory: newCategoryReducer,
+    addproduct: newProductReducer,
     remboursement: remboursementsReducer, newRemboursementReducer, remboursementReducer, remboursementDetailsReducer,
-    slide: slidesReducer, newSlideReducer, slideReducer, slideDetailsReducer,
+    slide: slidesReducer, slideReducer, slideDetailsReducer,
     transactionom: transactionomsReducer, newTransactionomReducer, transactionomReducer, transactionomDetailsReducer,
     user: authReducer, userReducer, forgotPasswordReducer, allUsersReducer, userDetailsReducer
 });

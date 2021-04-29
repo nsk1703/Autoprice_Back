@@ -15,10 +15,10 @@ export const login = (user) => {
         })
         .then((response) => {
             if(response.data.success === true){
-                const lastToken = localStorage.getItem('token')
-                if(lastToken !== null) {
-                    localStorage.removeItem('token')
-                }
+                // const lastToken = localStorage.getItem('token')
+                // if(lastToken !== null) {
+                //     localStorage.removeItem('token')
+                // }
                 const { token, user } = response.data;
                 const roles = response.data.user.roles
                 console.log(token)

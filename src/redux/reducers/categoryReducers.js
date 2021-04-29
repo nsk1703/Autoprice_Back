@@ -45,7 +45,7 @@ export const newCategoryReducer = (state = { category: {} }, action) => {
             return {
                 loading: false,
                 success: action.payload.success,
-                category: action.payload.category
+                // category: action.payload.category
             }
 
         case categoriesConstants.NEW_CATEGORY_FAIL:

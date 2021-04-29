@@ -49,38 +49,44 @@ export const newApproproduits = (produit) => {
         });
         let body = {
             etat: "1",
-            machine_id: produit.machine,
+            productId: produit.product_id.value,
             description: produit.description,
-            quantite: produit.montant
+            quantite: parseInt(produit.quantite, 10)
         }
+        
         console.log(body)
         const token = localStorage.getItem('token');
-        axios.post('/approproduit', body,
-            {headers: {
-                'USER-KEY': `Bearer ${token}`
+        let config = {
+            headers: {
+              'USER-KEY': `Bearer ${token}`,
+              'Content-Type': 'application/json'
             }
-        })
+          }
+        axios.post('/approproduit', body, config)
         .then((response) => {
             console.log(response.data)
             if(response.data.success === true){
-                const {approproduits, success} = response.data
+                const { success } = response.data
                 // const approproduitsCount = response.data.success
                 
                 dispatch({
-                    type: approproduitConstants.NEW_APPROproduit_SUCCESS,
-                    payload: {approproduit: approproduits, success: success, token: token }
+                    type: approproduitConstants.NEW_APPROPRODUIT_SUCCESS,
+                    payload: { success: success }
                 })
                 toast.success('Ajouter avec succes!!')
             }
             else{
                 if (response.data.success === false) {
                     // console.log(response.data.full_messages[0])
-                    const {success} = response.data
+                    // const {error} = response.data
                     toast.error(response.data.full_messages[0]);
                     dispatch({
-                        type: approproduitConstants.NEW_APPROproduit_FAIL,
-                        payload: { success: success }
+                        type: approproduitConstants.NEW_APPROPRODUIT_FAIL,
+                        // payload: { error: response.data.full_messages[0] }
                     });
+                    for(var i=0; i<response.data.full_messages[i]; i++){
+                        toast.error(response.data.full_messages[i])
+                    }
                 }
             }
         })
