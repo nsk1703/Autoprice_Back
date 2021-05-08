@@ -112,14 +112,17 @@ export class Data_products extends Component {
                     textAlign: 'center'
                 },
                 Cell: (row) => (
+                    // console.log(row.original.ID)
                     <div>
                         <span >
-                            <input type="checkbox" name={row.original.id} defaultChecked={this.state.checkedValues.includes(row.original.id)}
-                                onChange={e => this.selectRow(e, row.original.id)} />
+                            <input type="checkbox" name={row.original.ID} defaultChecked={this.state.checkedValues.includes(row.original.id)}
+                                onChange={e => this.selectRow(e, row.original.ID)} />
                         </span>
-                        <span><Link to="/supply/products/create-product"><i className="fa fa-pencil" style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }}></i></Link></span>
+                        <span><Link to={`/supply/products/edit-product/${row.original.ID}`}>
+                            <i className="fa fa-pencil" style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }}></i>
+                        </Link></span>
                     </div>
-                    
+        
                 ),
                 accessor: key,
                 style: {
@@ -147,7 +150,6 @@ export class Data_products extends Component {
                             <i className="fa fa-trash" style={{ width: 35, fontSize: 20, padding: 11, color: '#e4566e' }}
                             ></i>
                         </span>
-
                     <span><i className="fa fa-pencil" style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }}></i></span>
                 </div>
                 ),

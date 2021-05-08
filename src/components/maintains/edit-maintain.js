@@ -1,7 +1,7 @@
 import React, { Component,Fragment } from 'react'
 import Breadcrumb from '../common/breadcrumb';
 import Tabset_maintain from './tabset-maintain';
-import CKEditors from 'react-ckeditor-component';
+import moment from 'moment';
 import * as maintenanceActions from "../../redux/actions/maintenanceActions";
 import {connect} from "react-redux";
 import * as machineActions from "../../redux/actions/machineActions";
@@ -13,8 +13,9 @@ const choices = [
     {value: 'type3', label:'Type 3'}
 ]
 
-export class Create_maintain extends Component {
-        constructor(props) {
+export class Edit_maintain extends Component {
+
+    constructor(props) {
         super(props);
         let options = []
         let listMachines = []
@@ -23,11 +24,12 @@ export class Create_maintain extends Component {
             open: false,
             nom: '',
             type: '',
-            dateMaintenance: '',
+            dateMaintenance: new Date().toString(),
             montant: '',
             description: '',
             machine_id: '',
             AllOptions: [],
+            isLoading: false,
 
         };
 
@@ -36,7 +38,6 @@ export class Create_maintain extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmitChange = this.handleSubmitChange.bind(this)
         this.handleSelect = this.handleSelect.bind(this)
-        // this.handleCkeditorChange = this.handleCkeditorChange.bind(this)
 
         this.props.machines();
 
@@ -61,7 +62,7 @@ export class Create_maintain extends Component {
                 // console.log(option)
                 options.push(option)
             })
-            // console.log('11111',options)
+            console.log('11111',options)
           
             this.setState({
                 AllOptions: options
@@ -87,17 +88,38 @@ export class Create_maintain extends Component {
         this.setState({ type })   
     }
 
+    componentDidMount = () => {
+        console.log(this.props.maintenance)
+        console.log(this.props.maintenance.dateMaintenance)
+
+        let type = {value: this.props.maintenance.type, label: this.props.maintenance.type}
+        let machine = {value: this.props.maintenance.machine_id.id, label: this.props.maintenance.machine_id.nom}
+        // console.log(type)
+        console.log(machine)
+        this.setState({
+            id: this.props.maintenance.id,
+            nom: this.props.maintenance.nom,
+            type: type ? type : '',
+            machine_id: machine ? machine : '',
+            dateMaintenance: this.props.maintenance.dateMaintenance,
+            montant: this.props.maintenance.montant,
+            description: this.props.maintenance.description
+        })
+    }
+
     handleSubmitChange = (e) => {
         e.preventDefault();
-        // console.log(this.state.AllOptions)
-        this.props.newMaintenance(this.state)
+        this.setState({
+            isLoading: true
+        })
+        this.props.editMaintenance(this.state)
 
         setTimeout(()=> {
-            console.log(this.props.addmaintenance.success)
-            if(this.props.addmaintenance.success === true){
+            console.log(this.props.editmaintenance.isUpdated)
+            if(this.props.editmaintenance.isUpdated.isUpdated === true){
                 this.props.history.push('/maintains/list-maintain');
             }else{
-                this.props.history.push('/maintains/create-maintain');
+                this.props.history.push('/maintains/edit-maintain/'+ this.state.id);
                 this.setState({
                     isLoading: false
                 })
@@ -106,6 +128,7 @@ export class Create_maintain extends Component {
        
 
     }
+    
     render() {
         const {AllOptions, nom, type, montant, dateMaintenance, description, machine_id, isLoading} = this.state
 
@@ -120,7 +143,7 @@ export class Create_maintain extends Component {
                                     <h5> Effectuer une maintenance</h5>
                                 </div>
                                 <div className="card-body">
-                                    <form className="needs-validation user-add" noValidate="">
+                                    <form className="needs-validation">
                                         <div className="form-group row">
                                             <label className="col-xl-3 col-md-4"><span>*</span> Nom</label>
                                             <input className="form-control col-xl-8 col-md-7" 
@@ -142,9 +165,10 @@ export class Create_maintain extends Component {
                                         <div className="form-group row">
                                             <label className="col-xl-3 col-md-4"><span>*</span> Date de Maintenance</label>
                                             <input className="form-control col-xl-8 col-md-7" 
-                                            id="validationCustom1" type="date" 
+                                            id="validationCustom1" 
+                                            type="date" 
                                             name='dateMaintenance'
-                                            value={dateMaintenance}
+                                            value={moment(dateMaintenance).format("YYYY-MM-DD")}
                                             onChange={this.handleInputChange}
                                             required="" />
                                         </div>
@@ -176,7 +200,8 @@ export class Create_maintain extends Component {
                                             <div className="form-group row">
                                                 <label className="col-xl-3 col-md-4">Description :</label>
                                                 {/* <div className=" form-control col-xl-8 col-md-7"> */}
-                                                    <textarea className=" form-control col-xl-8 col-md-7" name="description" value={description} 
+                                                    <textarea className=" form-control col-xl-8 col-md-7" 
+                                                    name="description" value={description} 
                                                         onChange={this.handleInputChange}
                                                         rows="10" cols="92"
                                                     />
@@ -201,17 +226,20 @@ export class Create_maintain extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
+    // console.log(props.match.params.id)
+    // console.log(state.maintenance.maintenances.find(maintenance => maintenance.id == props.match.params.id))
     return {
-        addmaintenance: state.addmaintenance,
+        maintenance: state.maintenance.maintenances.find(maintenance => maintenance.id == props.match.params.id),
+        editmaintenance: state.editmaintenance,
         machine: state.machine
     }
 }
 const mapDispatchToProps = (dispatch) =>{
     return {
-        newMaintenance: (maintenance) => {dispatch( maintenanceActions.newMaintenance(maintenance))},
+        editMaintenance: (maintenance) => {dispatch( maintenanceActions.editMaintenance(maintenance))},
         machines: () => {dispatch( machineActions.machines())}
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Create_maintain)
+export default connect(mapStateToProps, mapDispatchToProps)(Edit_maintain)

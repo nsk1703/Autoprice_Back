@@ -112,12 +112,15 @@ export class Data_slides extends Component {
                     textAlign: 'center'
                 },
                 Cell: (row) => (
+                    // console.log(row)
                     <div>
                         <span >
                             <input type="checkbox" name={row.original.id} defaultChecked={this.state.checkedValues.includes(row.original.id)}
                                 onChange={e => this.selectRow(e, row.original.id)} />
                         </span>
-                        <span><Link to="/slides/create-slide"><i className="fa fa-pencil" style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }}></i></Link></span>
+                        <span><Link to={`/slides/edit-slide/${row.original.id}`}>
+                            <i className="fa fa-pencil" style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }}></i>
+                        </Link></span>
                     </div>
                     
                 ),

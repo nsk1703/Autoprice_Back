@@ -8,23 +8,25 @@ import { withRouter } from 'react-router';
 
 
 const typeChoices = [
-    {value: 'home', label:'Home'},
-    {value: 'produit', label:'Produit'},
+    {value: 'Home', label:'Home'},
+    {value: 'Produit', label:'Produit'},
 ]
 
 const formatChoices = [
-    {value: 'image', label: 'Image'},
-    {value: 'video', label: 'Video'}
+    {value: 'Image', label: 'Image'},
+    {value: 'Video', label: 'Video'}
 ]
 
-export class Create_slide extends Component {
+export class Edit_slide extends Component {
     constructor(props){
         super(props);
 
         this.state = {
+           id: '',
            type: '',
            format: '',
            images: null,
+           actualFile: null,
            isLoading: false, 
         }
 
@@ -35,6 +37,25 @@ export class Create_slide extends Component {
 
     }
   
+    componentDidMount = () => {
+        let type = {value: this.props.slide.type, label: this.props.slide.type}
+        let format = {value: this.props.slide.format, label: this.props.slide.format}
+
+        // console.log('slide',this.props.slide)
+        // console.log('images',this.props.slide.filePath)
+        // console.log(' type ', type);
+        console.log(this.state.images)
+
+        this.setState({
+            id: this.props.slide.id,
+            type: type ? type : '',
+            format: format ? format : '',
+            actualFile: this.props.slide.filePath,
+            // images: this.state.images ? this.state.images : this.props.slide.fileName 
+        })
+    }
+
+
     handleTypeChange = (type)=> {
         this.setState({type});
     }
@@ -44,9 +65,11 @@ export class Create_slide extends Component {
     }
 
     handleFileChange = (e)=> {
-        this.setState({
-            images: e.target.files[0]
-        });
+        if(!this.state.images){
+            this.setState({
+                images: e.target.files[0]
+            });
+        }
     }
     
     handleSubmitChange = (e) => {
@@ -54,13 +77,13 @@ export class Create_slide extends Component {
         this.setState({
             isLoading: true
         })
-        this.props.newSlide(this.state)
+        this.props.editSlide(this.state)
         setTimeout(() => {
-            // console.log(this.props.addmachine.success)
-            if(this.props.addslide.success === true){
+            // console.log(this.props.editslidecess)
+            if(this.props.editslide.isUpdated.isUpdated === true){
                 this.props.history.push('/slides/list-slide');
             }else{
-                this.props.history.push('/slides/create-slide');
+                this.props.history.push('/slides/edit-slide/'+this.state.id);
                 this.setState({
                     isLoading: false
                 });
@@ -69,8 +92,9 @@ export class Create_slide extends Component {
        
 
     }
+
     render() {
-        const {type, format, isLoading} = this.state
+        const {type, format, actualFile, images, isLoading} = this.state
         return (
             <Fragment>
                 <Breadcrumb title="Ajouter un slide" parent="Slides" />
@@ -79,10 +103,10 @@ export class Create_slide extends Component {
                         <div className="col-sm-12">
                             <div className="card">
                                 <div className="card-header">
-                                    <h5> Ajouter un slide</h5>
+                                    <h5> Modifier le slide</h5>
                                 </div>
                                 <div className="card-body">
-                                    <form className="needs-validation user-add">
+                                    <form className="needs-validation">
                                         <div className="form-group row">
                                             <label className="col-xl-3 col-md-4"><span>*</span> Format</label>
                                             <Select className="col-xl-8 col-md-7"
@@ -111,6 +135,7 @@ export class Create_slide extends Component {
                                                 type="file" 
                                                 onChange={this.handleFileChange}
                                             />
+                                            {/* <img src={ images ? images : actualFile} style="width: 50px; height: 50px" /> */}
                                         </div>
                                         <div className="pull-right">
                                             <button type="button" 
@@ -129,15 +154,19 @@ export class Create_slide extends Component {
         )
     }
 }
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
+    // console.log(props.match.params.id)
+    console.log(state.slide.slides)
+
     return {
-        addslide: state.addslide,
+        slide: state.slide.slides.find(sly => sly.id == props.match.params.id),
+        editslide: state.editslide
     }
 }
 const mapDispatchToProps = (dispatch) =>{
     return {
-        newSlide: (slide) => {dispatch( slideActions.newSlide(slide))},
+        editSlide: (slide) => {dispatch( slideActions.editSlide(slide))},
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Create_slide)
+export default connect(mapStateToProps, mapDispatchToProps)(Edit_slide)

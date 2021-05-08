@@ -24,18 +24,17 @@ export class List_product extends Component {
             this.props.approproduit.approproduits.map(approproduit => {
                
                 let item = {
-                    ID: "#"+approproduit.id,
+                    ID: approproduit.id,
                     etat: approproduit.etat,
                     quantite: <span className="badge badge-info">{approproduit.quantite} FCFA</span>,
-                    produit: approproduit.productId,
+                    produit: approproduit.productId.name,
                     Description: approproduit.description,
                     // utilisateur: approproduit.utilisateurid.username
                    
                 }
                 listProducts.push(item);
             })
-
-
+            
             this.setState({
                 products: listProducts
             })

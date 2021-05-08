@@ -20,12 +20,12 @@ export class List_currency extends Component {
         this.props.appromonnaies();
 
         setTimeout(() => {
-            console.log(this.props.appromonnaie.appromonnaies)
+            // console.log(this.props.appromonnaie.appromonnaies)
 
             this.props.appromonnaie.appromonnaies.map(appromonnaie => {
                
                 let item = {
-                    ID: "#"+appromonnaie.id,
+                    ID: appromonnaie.id,
                     etat: appromonnaie.etat,
                     quantite: <span className="badge badge-info">{appromonnaie.quantite} FCFA</span>,
                     Machine: appromonnaie.machine_id.nom,

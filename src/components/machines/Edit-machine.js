@@ -13,14 +13,16 @@ const options = [
     {value: 'type2', label:'Type 2'},
     {value: 'type3', label:'Type 3'}
 ]
-export class Create_machine extends Component {
+export class Edit_machine extends Component {
     constructor(props) {
         super(props);
-
+        // console.log(this.props.machine.id)
+       
         this.state = {
             open: false,
+            id: null,
             nom: '',
-            type: null,
+            type: '',
             lien: '',
             montant: '',
             description: '',
@@ -32,7 +34,6 @@ export class Create_machine extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmitChange = this.handleSubmitChange.bind(this)
 
-        
     }
 
     handleInputChange = (e) => {
@@ -43,7 +44,27 @@ export class Create_machine extends Component {
   
     handleChange = (type )=> {
         this.setState({type});
-        // console.log('Option selected:', type)
+    }
+
+    componentDidMount = () => {
+        // let param = this.props.match.params.id
+        // console.log(param)
+        // this.props.machineDetail(param)
+
+        // setTimeout(() => {
+        //     console.log(this.props.machdetails)
+        // }, 1000)
+        // console.log(this.props.machine.type)
+        let type = {value: this.props.machine.type, label: this.props.machine.type}
+
+        this.setState({
+            id: this.props.machine.id,
+            nom: this.props.machine.nom,
+            type: type,
+            lien: this.props.machine.lien,
+            montant: this.props.machine.montant,
+            description: this.props.machine.description
+        })
     }
     
     handleSubmitChange = (e) => {
@@ -51,21 +72,20 @@ export class Create_machine extends Component {
         this.setState({
             isLoading: true
         })
-        // console.log(this.state.AllOptions)
-        this.props.newMachine(this.state)
+        this.props.editMachine(this.state)
         setTimeout(() => {
-            // console.log(this.props.addmachine.success)
-            if(this.props.addmachine.success === true){
+            // console.log(this.props.editmachine.isUpdated)
+            // console.log(this.props.editmachine.isUpdated.isUpdated)
+            if(this.props.editmachine.isUpdated.isUpdated === true){
                 this.props.history.push('/machines/list-machine');
             }else{
-                this.props.history.push('/machines/create-machine');
+                
+                this.props.history.push('/machines/edit-machine/'+this.state.id);
                 this.setState({
                     isLoading: false
                 })
             }
         }, 1000)
-       
-
     }
     render() {
         const {isLoading, nom, type, lien, montant, description} =this.state
@@ -149,15 +169,20 @@ export class Create_machine extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
+    // console.log(props.match.params.id)
+    // console.log(state.machine.machines.find(mach => mach.id == props.match.params.id))
     return {
-        addmachine: state.addmachine,
+        machine: state.machine.machines.find(mach => mach.id == props.match.params.id),
+        editmachine: state.editmachine,
+        machdetails: state.machdetails
     }
 }
 const mapDispatchToProps = (dispatch) =>{
     return {
-        newMachine: (machine) => {dispatch( machineActions.newMachine(machine))},
+        editMachine: (machine) => {dispatch( machineActions.editMachine(machine))},
+        machineDetail: (paramID) => {dispatch( machineActions.machineDetail(paramID))},
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Create_machine))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Edit_machine))

@@ -11,7 +11,7 @@ export const maintenances = () => {
 
         axios.get('/maintenances')
             .then((response) => {
-                console.log(response);
+                // console.log(response);
                 if (response.data.success === true) {
                     const { maintenances } = response.data
                     const maintenancesCount = response.data.page_meta.total_items_count
@@ -45,6 +45,7 @@ export const newMaintenance = (maintenance) => {
         dispatch({
             type: maintenanceConstants.NEW_MAINTENANCE_REQUEST
         });
+        console.log(maintenance.machine_id)
         let body = {
             etat: "1",
             nom: maintenance.nom,
@@ -54,7 +55,7 @@ export const newMaintenance = (maintenance) => {
             description: maintenance.description,
             machine_id: maintenance.machine_id.value
         }
-        console.log(body)
+        // console.log(body)
         const token = localStorage.getItem('token');
         let config = {
             headers: {
@@ -64,7 +65,7 @@ export const newMaintenance = (maintenance) => {
         }
         axios.post('/maintenance', body, config)
         .then((response) => {
-            console.log(response.data)
+            // console.log(response.data)
             if(response.data.success === true){
                 const { success } = response.data
                 // const MaintenanceCount = response.data.success
@@ -82,6 +83,69 @@ export const newMaintenance = (maintenance) => {
                     // toast.error(response.data.full_messages[0]);
                     dispatch({
                         type: maintenanceConstants.NEW_MAINTENANCE_FAIL,
+                        // payload: { success: success }
+                    });
+                    for(var i=0; i<response.data.full_messages[i]; i++){
+                        toast.error(response.data.full_messages[i])
+                    }
+                }
+            }
+        })
+        .catch((error) => {
+            console.log("Oops, Request failed!");
+        });
+
+    }
+}
+
+export const editMaintenance = (maintenance) => {
+    // console.log()
+
+    return (dispatch) => {
+        dispatch({
+            type: maintenanceConstants.UPDATE_MAINTENANCE_REQUEST
+        });
+        // console.log(maintenance)
+        // console.log(maintenance.machine_id.value)
+        // console.log(maintenance.type.value)
+        // console.log(maintenance.dateMaintenance)
+        let body = {
+            etat: "1",
+            nom: maintenance.nom,
+            type: maintenance.type.value,
+            dateMaintenance: maintenance.dateMaintenance,
+            montant: parseInt(maintenance.montant, 10),
+            description: maintenance.description,
+            machine_id: maintenance.machine_id.value
+        }
+        // console.log(body)
+        const token = localStorage.getItem('token');
+        let config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'USER-KEY': `Bearer ${token}`
+            }
+        }
+        axios.put(`/maintenance/${maintenance.id}`, body, config)
+        .then((response) => {
+            console.log(response)
+            if(response.data.success === true){
+                const { success } = response.data
+                // const MaintenanceCount = response.data.success
+                
+                dispatch({
+                    type: maintenanceConstants.UPDATE_MAINTENANCE_SUCCESS,
+                    payload: { isUpdated: success }
+                })
+                toast.success(response.data.full_messages[0])
+            }
+            else{
+                if (response.data.success === false) {
+                    // console.log(response.data.full_messages[0])
+                    // const {success} = response.data
+                    // toast.error(response.data.full_messages[0]);
+                    dispatch({
+                        type: maintenanceConstants.UPDATE_MAINTENANCE_FAIL,
                         // payload: { success: success }
                     });
                     for(var i=0; i<response.data.full_messages[i]; i++){

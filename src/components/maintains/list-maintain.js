@@ -21,15 +21,15 @@ export class List_maintain extends Component {
         this.props.maintenances();
 
         setTimeout(() => {
-            console.log(this.props.maintenance.maintenances)
+            // console.log(this.props.maintenance.maintenances)
 
             this.props.maintenance.maintenances.map(maintenance => {
                 let item = {
-
-                    Maintenance: maintenance.id,
+                    id: maintenance.id,
                     Nom: maintenance.nom,
                     Type: maintenance.type,
                     Montant: maintenance.montant,
+                    Machine: maintenance.machine_id.nom,
                     etat:maintenance.etat,
                     description:maintenance.description,
                     date: maintenance.dateMaintenance,

@@ -10,7 +10,8 @@ export class Data_currencies extends Component {
         super(props)
         this.state = {
             checkedValues: [],
-            myData: this.props.myData
+            myData: this.props.myData,
+            listData: []
         }
     }
 
@@ -67,6 +68,9 @@ export class Data_currencies extends Component {
         const columns = [];
         for (var key in myData[0]) {
 
+            // console.log("myData = " + myData[0].ID);
+            // console.log("key = " + myData[0][key]);
+
             let editable = this.renderEditable
             if (key === "image") {
                 editable = null;
@@ -112,12 +116,18 @@ export class Data_currencies extends Component {
                     textAlign: 'center'
                 },
                 Cell: (row) => (
+                    // console.log(row.original.ID)
                     <div>
                         <span >
                             <input type="checkbox" name={row.original.id} defaultChecked={this.state.checkedValues.includes(row.original.id)}
                                 onChange={e => this.selectRow(e, row.original.id)} />
                         </span>
-                        <span><Link to="/supply/currency/create-currency"><i className="fa fa-pencil" style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }}></i></Link></span>
+                        
+                        <span><Link to={`/supply/currency/edit-currency/${row.original.ID}`}>
+                            <i className="fa fa-pencil" 
+                            style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }}>
+                            </i></Link>
+                        </span>
                     </div>
                     
                 ),
@@ -148,7 +158,9 @@ export class Data_currencies extends Component {
                             ></i>
                         </span>
 
-                    <span><i className="fa fa-pencil" style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }}></i></span>
+                    <span><i className="fa fa-pencil" 
+                    style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }}>
+                        </i></span>
                 </div>
                 ),
                 style: {

@@ -44,7 +44,7 @@ export const newCategory = (category) => {
         dispatch({
             type: categoriesConstants.NEW_CATEGORY_REQUEST
         });
-        console.log(category)
+        // console.log(category)
         let formData = new FormData();
         formData.append('name', category.nom);
         formData.append('description', category.description);
@@ -62,7 +62,7 @@ export const newCategory = (category) => {
         console.log( 'asss', token)
         axios.post('/category', formData, config)
         .then((response) => {
-            console.log(response)
+            // console.log(response)
             if(response.data.success === true){
                 const {success} = response.data
                 // const CategoryCount = response.data.success

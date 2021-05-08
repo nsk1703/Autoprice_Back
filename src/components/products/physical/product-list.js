@@ -25,6 +25,8 @@ export class Product_list extends Component {
 
             this.props.product.products.map(product => {
                 let item = {
+                    product_id: product.product_id
+                    ,
                     image: product.image_urls[0],
                     Nom: product.name,
                     Prix: product.price+" FCFA",
@@ -39,7 +41,7 @@ export class Product_list extends Component {
                 listProducts.push(item);
             })
             this.setState({
-                    peoducts: listProducts
+                    products: listProducts
                 })
         }, 1000)
         this.state = {
@@ -78,9 +80,9 @@ export class Product_list extends Component {
                                                             <div className="product-hover">
                                                                 <ul>
                                                                     <li>
-                                                                        <button className="btn" type="button">
+                                                                        <Link className="btn" type="button" to={`/products/physical/edit-products/${myData.product_id}`}>
                                                                             <Edit className="editBtn" />
-                                                                        </button>
+                                                                        </Link>
                                                                     </li>
                                                                     <li>
                                                                         <button className="btn" type="button">

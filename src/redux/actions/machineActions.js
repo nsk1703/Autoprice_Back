@@ -11,7 +11,7 @@ export const machines = () => {
 
         axios.get('/machines')
             .then((response) => {
-                console.log(response);
+                // console.log(response);
                 if (response.data.success === true) {
                     const { machines } = response.data
                     const machinesCount = response.data.page_meta.total_items_count
@@ -93,5 +93,102 @@ export const newMachine = (machine) => {
             console.log("Oops, Request failed!");
         });
 
+    }
+}
+
+export const editMachine = (machine) => {
+    // console.log()
+
+    return (dispatch) => {
+        dispatch({
+            type: machineConstants.UPDATE_MACHINE_REQUEST
+        });
+        console.log(machine)
+        let body = {
+            etat: "1",
+            status: "1",
+            nom: machine.nom,
+            type: machine.type['value'],
+            lien: machine.lien,
+            montant: parseInt(machine.montant,10),
+            description: machine.description,
+        }
+        console.log(body)
+        const token = localStorage.getItem('token');
+        let config = {
+            headers: {
+            'Content-Type': 'application/json',
+            'USER-KEY': `Bearer ${token}`
+            }
+        }
+        console.log(token)
+        axios.put(`/machine/${machine.id}`, body, config)
+        .then((response) => {
+            console.log(response)
+            if(response.data.success === true){
+                const { success } = response.data
+                
+                dispatch({
+                    type: machineConstants.UPDATE_MACHINE_SUCCESS,
+                    payload: {isUpdated: success }
+                })
+                toast.success(response.data.full_messages[0])
+            }else{
+                if (response.data.success === false) {
+                    // console.log(response.data.full_messages[0])
+                    // const {success} = response.data
+                    // toast.error(response.data.full_messages[0]);
+                    dispatch({
+                        type: machineConstants.UPDATE_MACHINE_FAIL,
+                        // payload: { success: success }
+                    });
+                    for(var i=0; i<response.data.full_messages[i]; i++){
+                        toast.error(response.data.full_messages[i])
+                    }
+                }
+            }
+        })
+        .catch((error) => {
+            console.log("Oops, Request failed!");
+        });
+
+    }
+}
+
+export const machineDetail = (paramID) => {
+
+    return (dispatch) => {
+        dispatch({
+            type: machineConstants.MACHINE_DETAILS_REQUEST
+        });
+        
+        console.log(paramID)
+        axios.get(`/machine/${paramID}`)
+            .then((response) => {
+                console.log(response);
+                if (response.data.success === true) {
+                    const machine  = response.data
+                    console.log(machine)
+                    dispatch({
+                        type: machineConstants.MACHINE_DETAILS_SUCCESS,
+                        payload: { machine: machine }
+                    });
+                } 
+            // else {
+            //         if (response.data.success === false) {
+            //             // console.log(response.data.full_messages[0])
+            //             toast.error(response.data.full_messages[0]);
+
+            //             dispatch({
+            //                 type: machineConstants.MACHINE_DETAILS_FAIL,
+            //                 payload: { error: response.data.full_messages[0] }
+            //             });
+            //         }
+            //     }
+            // })
+            // .catch((error) => {
+            //     console.log("Oops, Request failed!");
+            // });
+        })
     }
 }

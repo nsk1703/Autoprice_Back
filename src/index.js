@@ -6,6 +6,7 @@ import App from './components/app';
 import { ScrollContext } from 'react-router-scroll-4';
 import { authConstants } from "../src/constants/userConstants";
 
+// import { Match } from 'react-router-dom';
 // Axios
 import axios from "axios";
 
@@ -37,6 +38,7 @@ import Category from './components/products/physical/category';
 import Sub_category from './components/products/physical/sub-category';
 import Product_list from './components/products/physical/product-list';
 import Add_product from './components/products/physical/add-product';
+import Edit_products from './components/products/physical/edit-products';
 import Product_detail from './components/products/physical/product-detail';
 
 //Product Digital
@@ -73,38 +75,67 @@ import Reports from './components/reports/report';
 import Invoice from './components/invoice';
 import Datatable from './components/common/datatable'
 import Login from './components/auth/login';
+
 import Create_currency from './components/supply/currency/create_currency';
 import List_currency from './components/supply/currency/list-currency';
+import Edit_currency from './components/supply/currency/edit-currency';
+
 import Create_product from './components/supply/products/create-product';
 import List_product from './components/supply/products/list-product';
+import Edit_product from './components/supply/products/edit-product';
+
 import Create_machine from './components/machines/create-machine';
 import List_machine from './components/machines/list-machine';
+import Edit_machine from './components/machines/Edit-machine';
+
 import Create_maintain from './components/maintains/create-maintain';
 import List_maintain from './components/maintains/list-maintain';
+import Edit_maintain from './components/maintains/edit-maintain';
+
 import Create_slide from './components/slides/create-slide';
 import List_slide from './components/slides/list-slide';
+import Edit_slide from './components/slides/edit-slide';
+
+
 // import Create_log from './components/logs/create-log';
 import Log  from './components/logs/log';
+
 import { Change_profile } from './components/settings/change-profile';
 import Change_password from './components/settings/change-password';
+
 import Add_roles from './components/roles/add-roles';
 import Roles_list from './components/roles/roles-list';
 import Change_roles from './components/roles/change-role';
+
 import { login } from './redux/actions/userActions';
 
 axios.defaults.baseURL = process.env.REACT_APP_NEXT_PUBLIC_REST_API;
 
 const rootReducers = combineReducers({
-    appromonnaie: appromonnaiesReducer,  appromonnaieReducer, appromonnaieDetailsReducer,
-    approproduit: approproduitsReducer,  approproduitReducer, approproduitDetailsReducer,
+    appromonnaie: appromonnaiesReducer,
+    
+    approproduit: approproduitsReducer, 
     // arduino: arduinoReducers,
     log: logssReducer, newLogsReducer, logsReducer, logsDetailsReducer,
     category: categoriesReducer,  categoryReducer,
-    machine: machinesReducer,  machineReducer, machineDetailsReducer,
-    maintenance: maintenancesReducer, maintenanceReducer, maintenanceDetailsReducer,
+    machine: machinesReducer,
+    maintenance: maintenancesReducer, maintenanceDetailsReducer,
     order: allOrdersReducer,
     paiement: paiementsReducer, newPaiementReducer, paiementReducer, paiementDetailsReducer,
-    product: productsReducer, productReducer, productDetailsReducer,
+    product: productsReducer,
+
+    editproduct: productReducer,
+    editappromonnaie: appromonnaieReducer,
+    editapproproduit: approproduitReducer,
+    editmachine: machineReducer,
+    editmaintenance: maintenanceReducer,
+    editslide: slideReducer,
+
+    machdetails:  machineDetailsReducer,
+    appromondetails: appromonnaieDetailsReducer,
+    approprodetails: approproduitDetailsReducer,
+    prodetails: productDetailsReducer,
+    
     addappromonnaie: newAppromonnaieReducer, 
     addapproproduit: newApproproduitReducer,
     addmaintenance: newMaintenanceReducer,
@@ -112,8 +143,9 @@ const rootReducers = combineReducers({
     addslide: newSlideReducer,
     addcategory: newCategoryReducer,
     addproduct: newProductReducer,
+
     remboursement: remboursementsReducer, newRemboursementReducer, remboursementReducer, remboursementDetailsReducer,
-    slide: slidesReducer, slideReducer, slideDetailsReducer,
+    slide: slidesReducer, slideDetailsReducer,
     transactionom: transactionomsReducer, newTransactionomReducer, transactionomReducer, transactionomDetailsReducer,
     user: authReducer, userReducer, forgotPasswordReducer, allUsersReducer, userDetailsReducer
 });
@@ -145,6 +177,7 @@ class Root extends Component {
                                 <Route path={`${process.env.PUBLIC_URL}/products/physical/product-list`} component={Product_list} />
                                 <Route path={`${process.env.PUBLIC_URL}/products/physical/product-detail`} component={Product_detail} />
                                 <Route path={`${process.env.PUBLIC_URL}/products/physical/add-product`} component={Add_product} />
+                                <Route path={`${process.env.PUBLIC_URL}/products/physical/edit-products/:id`} component={Edit_products} />
 
                                 <Route path={`${process.env.PUBLIC_URL}/products/digital/digital-category`} component={Digital_category} />
                                 <Route path={`${process.env.PUBLIC_URL}/products/digital/digital-sub-category`} component={Digital_sub_category} />
@@ -189,18 +222,23 @@ class Root extends Component {
 
                                 <Route path={`${process.env.PUBLIC_URL}/supply/currency/create-currency`} component={Create_currency}/>
                                 <Route path={`${process.env.PUBLIC_URL}/supply/currency/list-currency`} component={List_currency}/>
+                                <Route path={`${process.env.PUBLIC_URL}/supply/currency/edit-currency/:id`} component={Edit_currency}/>
 
                                 <Route path={`${process.env.PUBLIC_URL}/supply/products/create-product`} component={Create_product}/>
                                 <Route path={`${process.env.PUBLIC_URL}/supply/products/list-product`} component={List_product}/>
-
+                                <Route path={`${process.env.PUBLIC_URL}/supply/products/edit-product/:id`} component={Edit_product}/>
+                                
                                 <Route path={`${process.env.PUBLIC_URL}/machines/create-machine`} component={Create_machine}/>
                                 <Route path={`${process.env.PUBLIC_URL}/machines/list-machine`} component={List_machine}/>
+                                <Route path={`${process.env.PUBLIC_URL}/machines/edit-machine/:id`} component={Edit_machine}/>
 
                                 <Route path={`${process.env.PUBLIC_URL}/maintains/create-maintain`} component={Create_maintain}/>
                                 <Route path={`${process.env.PUBLIC_URL}/maintains/list-maintain`} component={List_maintain}/>
+                                <Route path={`${process.env.PUBLIC_URL}/maintains/edit-maintain/:id`} component={Edit_maintain}/>
                                 
                                 <Route path={`${process.env.PUBLIC_URL}/slides/create-slide`} component={Create_slide}/>
                                 <Route path={`${process.env.PUBLIC_URL}/slides/list-slide`} component={List_slide}/>
+                                <Route path={`${process.env.PUBLIC_URL}/slides/edit-slide/:id`} component={Edit_slide}/>
                                 
                                 <Route path={`${process.env.PUBLIC_URL}/logs/Log`} component={Log}/>
 
@@ -217,6 +255,6 @@ class Root extends Component {
     }
 }
 
-ReactDOM.render(<Root />, document.getElementById('root'));
+ReactDOM.render(<Root/>, document.getElementById('root'));
 
 
