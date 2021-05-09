@@ -60,7 +60,7 @@ export class List_machine extends Component {
                             <h5>User Details</h5>
                         </div> */}
                         <div className="card-body">
-                            <div className="btn-popup pull-right">
+                            <div className="btn-popup pull-left">
                                 <Link to="/machines/create-machine" className="btn btn-primary">Ajout de Machine</Link>
                             </div>
                             <div className="clearfix"></div>

@@ -125,3 +125,35 @@ export const categoryReducer = (state = {}, action) => {
             return state
     }
 }
+
+export const categoryDetailsReducer = (state = { category: {} }, action) => {
+    switch (action.type) {
+
+        case categoriesConstants.CATEGORY_DETAILS_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+
+        case categoriesConstants.CATEGORY_DETAILS_SUCCESS:
+            return {
+                loading: false,
+                category: action.payload
+            }
+
+        case categoriesConstants.CATEGORY_DETAILS_FAIL:
+            return {
+                ...state,
+                error: action.payload
+            }
+
+        case categoriesConstants.CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state
+    }
+}

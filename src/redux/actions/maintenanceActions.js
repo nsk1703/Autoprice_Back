@@ -160,3 +160,39 @@ export const editMaintenance = (maintenance) => {
 
     }
 }
+
+export const detailmaintenance = (mainId) => {
+
+    return (dispatch) => {
+        dispatch({
+            type: maintenanceConstants.MAINTENANCE_DETAILS_REQUEST
+        });
+
+        axios.get(`/maintenance/${mainId}`)
+            .then((response) => {
+                // console.log(response);
+                if (response.data.success === true) {
+                    const maintenance  = response.data
+                    
+                    dispatch({
+                        type: maintenanceConstants.MAINTENANCE_DETAILS_SUCCESS,
+                        payload: { maintenance: maintenance }
+                    });
+                } else {
+                    if (response.data.success === false) {
+
+                        dispatch({
+                            type: maintenanceConstants.MAINTENANCE_DETAILS_FAIL,
+                            // payload: { error: success }
+                        });
+                        for(var i=0; i<response.data.full_messages[i]; i++){
+                            toast.error(response.data.full_messages[i])
+                        }
+                    }
+                }
+            })
+            .catch((error) => {
+                console.log("Oops, Request failed!");
+            });
+    }
+}

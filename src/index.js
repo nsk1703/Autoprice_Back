@@ -19,7 +19,7 @@ import {appromonnaiesReducer, newAppromonnaieReducer, appromonnaieReducer, appro
 import {approproduitsReducer, newApproproduitReducer, approproduitReducer, approproduitDetailsReducer} from './redux/reducers/approproduitReducers';
 // import {arduinoReducers} from './redux/reducers/arduinoReducers';
 import {logssReducer, newLogsReducer, logsReducer, logsDetailsReducer} from './redux/reducers/logsReducers';
-import {categoryReducer, categoriesReducer, newCategoryReducer} from './redux/reducers/categoryReducers';
+import {categoryReducer, categoriesReducer, newCategoryReducer, categoryDetailsReducer} from './redux/reducers/categoryReducers';
 import {machinesReducer, newMachineReducer, machineReducer, machineDetailsReducer} from './redux/reducers/machineReducers';
 import {maintenancesReducer, newMaintenanceReducer, maintenanceReducer, maintenanceDetailsReducer} from './redux/reducers/maintenanceReducers';
 import {newOrderReducer, myOrdersReducer, orderDetailsReducer, allOrdersReducer, orderReducer} from './redux/reducers/orderReducers';
@@ -117,9 +117,9 @@ const rootReducers = combineReducers({
     approproduit: approproduitsReducer, 
     // arduino: arduinoReducers,
     log: logssReducer, newLogsReducer, logsReducer, logsDetailsReducer,
-    category: categoriesReducer,  categoryReducer,
+    category: categoriesReducer,  
     machine: machinesReducer,
-    maintenance: maintenancesReducer, maintenanceDetailsReducer,
+    maintenance: maintenancesReducer, 
     order: allOrdersReducer,
     paiement: paiementsReducer, newPaiementReducer, paiementReducer, paiementDetailsReducer,
     product: productsReducer,
@@ -130,11 +130,15 @@ const rootReducers = combineReducers({
     editmachine: machineReducer,
     editmaintenance: maintenanceReducer,
     editslide: slideReducer,
+    editcategory: categoryReducer,
 
-    machdetails:  machineDetailsReducer,
+    maindetails: maintenanceDetailsReducer,
+    machdetails: machineDetailsReducer,
     appromondetails: appromonnaieDetailsReducer,
     approprodetails: approproduitDetailsReducer,
     prodetails: productDetailsReducer,
+    slidetails: slideDetailsReducer,
+    catdetails: categoryDetailsReducer,
     
     addappromonnaie: newAppromonnaieReducer, 
     addapproproduit: newApproproduitReducer,
@@ -145,7 +149,7 @@ const rootReducers = combineReducers({
     addproduct: newProductReducer,
 
     remboursement: remboursementsReducer, newRemboursementReducer, remboursementReducer, remboursementDetailsReducer,
-    slide: slidesReducer, slideDetailsReducer,
+    slide: slidesReducer, 
     transactionom: transactionomsReducer, newTransactionomReducer, transactionomReducer, transactionomDetailsReducer,
     user: authReducer, userReducer, forgotPasswordReducer, allUsersReducer, userDetailsReducer
 });

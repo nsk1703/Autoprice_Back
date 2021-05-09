@@ -52,10 +52,10 @@ export class List_currency extends Component {
                 <Breadcrumb title="Liste des monnaies" parent="Monnaies" />
                 <div className="container-fluid">
                     <div className="card">
+                        <div className="card-header">
+                            <Link to="/supply/currency/create-currency" className="btn btn-primary">Ajout de Monnaie</Link>
+                        </div>
                         <div className="card-body">
-                            <div className="btn-popup pull-right">
-                                <Link to="/supply/currency/create-currency" className="btn btn-primary">Ajout de Monnaie</Link>
-                            </div>
                             <ToastContainer />
                             <div className="clearfix"></div>
                             <div id="batchDelete" className="category-table user-list appromonnaie-table coupon-list-delete">

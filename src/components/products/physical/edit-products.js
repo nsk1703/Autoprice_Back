@@ -41,7 +41,10 @@ export class Edit_product extends Component {
             CatOptions: [],
             MacOptions: [],
             images: null,
-            isLoading: false
+            isLoading: false,
+            dummyimgs: [
+                { img: user }
+            ]
             
         }
 
@@ -155,13 +158,13 @@ export class Edit_product extends Component {
         e.preventDefault();
     }
 
-    _handleImgChange(e) {
+    _handleImgChange(e, i) {
         e.preventDefault();
 
-        // let reader = edit FileReader();
+        // let reader = new FileReader();
         let file = e.target.files[0];
         // const { dummyimgs } = this.state;
-
+        // console.log('state', dummyimgs)
         // reader.onloadend = () => {
             // dummyimgs[i].img = reader.result;
             this.setState({
@@ -177,14 +180,14 @@ export class Edit_product extends Component {
         this.props.detailProduct(this.props.match.params.id)
 
         setTimeout(() => {
-            console.log(this.props.prodetails)
+            // console.log(this.props.prodetails)
 
             let category = {value: this.props.prodetails.product.product.categories[0].category_id, 
                             label: this.props.prodetails.product.product.categories[0].name}
 
             let machine =  {value: this.props.prodetails.product.product.machineId.id, 
                             label: this.props.prodetails.product.product.machineId.nom}
-
+            // console.log(category)
             this.setState({
                 id: this.props.prodetails.product.product.product_id,
                 nom: this.props.prodetails.product.product.name,
@@ -227,7 +230,7 @@ export class Edit_product extends Component {
 
     render() {
         const {isLoading, CatOptions, images, MacOptions, nom , price, quantite, unite, reference, description, machine_id, category} = this.state
-        // console.log(dummyimgs)
+        // console.log('dum', dummyimgs)
         return (
             <Fragment>
                 <Breadcrumb title="Ajout d'un produit" parent="Produits" />
@@ -250,7 +253,7 @@ export class Edit_product extends Component {
                                                     <div className="col-xl-3 xl-50 col-sm-6 col-3">
                                                         <ul className="file-upload-product">
                                                             {
-                                                                // dummyimgs.map((res, i) => {
+                                                                // this.state.dummyimgs.map((res, i) => {
                                                                 //     return (
                                                                 //         <li key={i}>
                                                                             <div className="box-input-file">
@@ -261,9 +264,9 @@ export class Edit_product extends Component {
                                                                                 <img src={images} style={{ width: 50, height: 50 }} />
                                                                                 <a id="result1" onClick={(e) => this._handleSubmit(e.target.id)}></a>
                                                                             </div>
-                                                                //         </li>
-                                                                //     )
-                                                                // })
+                                                                        // </li>
+                                                            //         )
+                                                            //     })
                                                             }
                                                         </ul>
                                                     </div>
@@ -387,6 +390,7 @@ export class Edit_product extends Component {
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <ToastContainer />
                                                 <div className="offset-xl-3 offset-sm-4">
                                                     <button type="submit" className="btn btn-primary"
                                                     disabled={isLoading}

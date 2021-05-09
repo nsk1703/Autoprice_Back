@@ -89,22 +89,32 @@ export class Edit_maintain extends Component {
     }
 
     componentDidMount = () => {
-        console.log(this.props.maintenance)
-        console.log(this.props.maintenance.dateMaintenance)
+        // console.log(this.props.maintenance)
+        // console.log(this.props.maintenance.dateMaintenance)
 
-        let type = {value: this.props.maintenance.type, label: this.props.maintenance.type}
-        let machine = {value: this.props.maintenance.machine_id.id, label: this.props.maintenance.machine_id.nom}
-        // console.log(type)
-        console.log(machine)
-        this.setState({
-            id: this.props.maintenance.id,
-            nom: this.props.maintenance.nom,
-            type: type ? type : '',
-            machine_id: machine ? machine : '',
-            dateMaintenance: this.props.maintenance.dateMaintenance,
-            montant: this.props.maintenance.montant,
-            description: this.props.maintenance.description
-        })
+        this.props.detailmaintenance(this.props.match.params.id)
+
+        setTimeout(() => {
+
+            // console.log(this.props.maindetails.maintenance.maintenance)
+            
+            let type = {value: this.props.maindetails.maintenance.maintenance.type, 
+                        label: this.props.maindetails.maintenance.maintenance.type}
+
+            let machine = {value: this.props.maindetails.maintenance.maintenance.machine_id.id, 
+                           label: this.props.maindetails.maintenance.maintenance.nom}
+
+            console.log(machine)
+            this.setState({
+                id: this.props.maindetails.maintenance.maintenance.id,
+                nom: this.props.maindetails.maintenance.maintenance.nom,
+                type: type ? type : '',
+                machine_id: machine ? machine : '',
+                dateMaintenance: this.props.maindetails.maintenance.maintenance.dateMaintenance,
+                montant: this.props.maindetails.maintenance.maintenance.montant,
+                description: this.props.maindetails.maintenance.maintenance.description
+            })
+        }, 1000)
     }
 
     handleSubmitChange = (e) => {
@@ -227,18 +237,18 @@ export class Edit_maintain extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-    // console.log(props.match.params.id)
-    // console.log(state.maintenance.maintenances.find(maintenance => maintenance.id == props.match.params.id))
+
     return {
-        maintenance: state.maintenance.maintenances.find(maintenance => maintenance.id == props.match.params.id),
         editmaintenance: state.editmaintenance,
-        machine: state.machine
+        machine: state.machine,
+        maindetails: state.maindetails
     }
 }
 const mapDispatchToProps = (dispatch) =>{
     return {
         editMaintenance: (maintenance) => {dispatch( maintenanceActions.editMaintenance(maintenance))},
-        machines: () => {dispatch( machineActions.machines())}
+        machines: () => {dispatch( machineActions.machines())},
+        detailmaintenance: (mainid) => {dispatch( maintenanceActions.detailmaintenance(mainid))},
     }
 }
 

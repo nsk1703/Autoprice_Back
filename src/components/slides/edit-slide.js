@@ -38,21 +38,33 @@ export class Edit_slide extends Component {
     }
   
     componentDidMount = () => {
-        let type = {value: this.props.slide.type, label: this.props.slide.type}
-        let format = {value: this.props.slide.format, label: this.props.slide.format}
 
-        // console.log('slide',this.props.slide)
-        // console.log('images',this.props.slide.filePath)
-        // console.log(' type ', type);
-        console.log(this.state.images)
+        this.props.detailslide(this.props.match.params.id)
 
-        this.setState({
-            id: this.props.slide.id,
-            type: type ? type : '',
-            format: format ? format : '',
-            actualFile: this.props.slide.filePath,
-            // images: this.state.images ? this.state.images : this.props.slide.fileName 
-        })
+        setTimeout(() => {
+            console.log(this.props.slidetails)
+
+            let type = {value: this.props.slidetails.slide.slide.type, 
+                        label: this.props.slidetails.slide.slide.type}
+
+            let format = {value: this.props.slidetails.slide.slide.format, 
+                          label: this.props.slidetails.slide.slide.format}
+
+            // console.log('slide',this.props.slide)
+            // console.log('images',this.props.slide.filePath)
+            // console.log(' type ', type);
+            // console.log(this.state.images)
+
+            this.setState({
+                id: this.props.slidetails.slide.slide.id,
+                type: type ? type : '',
+                format: format ? format : '',
+                actualFile: this.props.slidetails.slide.slide.filePath,
+                // images: this.state.images ? this.state.images : this.props.slide.fileName 
+            })
+        },1000)
+
+        
     }
 
 
@@ -160,12 +172,14 @@ const mapStateToProps = (state, props) => {
 
     return {
         slide: state.slide.slides.find(sly => sly.id == props.match.params.id),
-        editslide: state.editslide
+        editslide: state.editslide,
+        slidetails: state.slidetails
     }
 }
 const mapDispatchToProps = (dispatch) =>{
     return {
         editSlide: (slide) => {dispatch( slideActions.editSlide(slide))},
+        detailslide: (slideid) => {dispatch( slideActions.detailslide(slideid))},
     }
 }
 

@@ -128,7 +128,9 @@ export class Data_categories extends Component {
                             <input type="checkbox" name={row.original.id} defaultChecked={this.state.checkedValues.includes(row.original.id)}
                                 onChange={e => this.selectRow(e, row.original.id)} />
                         </span>
-                        <span><i className="fa fa-pencil"  style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }} onClick={this.onOpenModal} data-toggle="modal" data-original-title="test" data-target="#exampleModal"></i></span>
+                        <span>
+                            <i className="fa fa-pencil"  style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }} onClick={this.onOpenModal} data-toggle="modal" data-original-title="test" data-target="#exampleModal"></i>
+                        </span>
                         <Modal open={open} onClose={this.onCloseModal} >
                             <div className="modal-header">
                                 <h5 className="modal-title f-w-600" id="exampleModalLabel2">Ajout d'une catégorie</h5>

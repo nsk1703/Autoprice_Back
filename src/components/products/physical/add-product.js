@@ -18,6 +18,7 @@ const dummyimgs= [
 ]
 
 export class Add_product extends Component {
+    
     constructor(props) {
         super(props)
         let catoptions = []
@@ -212,7 +213,7 @@ export class Add_product extends Component {
                                             <div className="add-product">
                                                 <div className="row">
                                                     <div className="col-xl-9 xl-50 col-sm-6 col-9">
-                                                        <img src={ images ? images : user } alt="" className="img-fluid image_zoom_1 blur-up lazyloaded" />
+                                                        <img src={ images ? images : one } alt="" className="img-fluid image_zoom_1 blur-up lazyloaded" />
                                                     </div>
                                                     <div className="col-xl-3 xl-50 col-sm-6 col-3">
                                                         <ul className="file-upload-product">
@@ -238,6 +239,7 @@ export class Add_product extends Component {
                                             </div>
                                         </div>
                                         <div className="col-xl-7">
+                                         <ToastContainer />
                                             <AvForm className="needs-validation add-product-form" onValidSubmit={this.handleValidSubmit} onInvalidSubmit={this.handleInvalidSubmit}>
                                                 <div className="form form-label-center">
                                                     <div className="form-group mb-3 row">
@@ -354,6 +356,7 @@ export class Add_product extends Component {
                                                         </div>
                                                     </div>
                                                 </div>
+                                                
                                                 <div className="offset-xl-3 offset-sm-4">
                                                     <button type="submit" className="btn btn-primary"
                                                     disabled={isLoading}

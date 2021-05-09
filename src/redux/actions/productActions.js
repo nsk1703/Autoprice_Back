@@ -121,7 +121,7 @@ export const editProduct = (product) => {
         // console.log(product.machine_id.value)
         // console.log(product.category_id.value)
         // console.log(product.category_id)
-
+        console.log('pro',product)
         let formData = new FormData();
         formData.append('etat', 1);
         formData.append('status', 1);
@@ -146,37 +146,39 @@ export const editProduct = (product) => {
             }
           }
 
-        // // console.log( 'asss', token)
-        axios.put(`/product/${product.id}`, formData, config)
-        .then((response) => {
-            console.log(response)
-            if(response.data.success === true){
-                const {success} = response.data
+          // // console.log( 'asss', token)
+        // axios.put(`/product/${product.id}`, formData, config)
+        // .then((response) => {
+        //     console.log(response)
+        //     if(response.data.success === true){
+        //         const {success} = response.data
 
-                dispatch({
-                    type: productConstants.UPDATE_PRODUCT_SUCCESS,
-                    payload: { isUpdated: success }
-                })
-                toast.success('Modifier avec succes!!')
-            }
-            else{
-                if (response.data.success === false) {
-                    // console.log(response.data.full_messages[0])
-                    // const {success} = response.data
-                    // toast.error(response.data.full_messages[0]);
-                    dispatch({
-                        type: productConstants.UPDATE_PRODUCT_FAIL
-                        // payload: { error: response.data.full_messages[0] }
-                    });
-                    for(var i=0; i<response.data.full_messages[i]; i++){
-                        toast.error(response.data.full_messages[i])
-                    }
-                }
-            }
-        })
-        .catch((error) => {
-            console.log("Oops, Request failed!");
-        });
+        //         dispatch({
+        //             type: productConstants.UPDATE_PRODUCT_SUCCESS,
+        //             payload: { isUpdated: success }
+        //         })
+        //         toast.success('Modifier avec succes!!')
+        //     }
+        //     else{
+        //         if (response.data.success === false) {
+        //             // console.log(response.data.full_messages[0])
+        //             // const {success} = response.data
+        //             // toast.error(response.data.full_messages[0]);
+        //             dispatch({
+        //                 type: productConstants.UPDATE_PRODUCT_FAIL,
+        //                 payload: { error: response.data.errors[0].message }
+        //             });
+        //             toast.error(response.data.errors[0].messager)
+
+        //             // for(var i=0; i<response.data.full_messages[i]; i++){
+        //             //     toast.error(response.data.full_messages[i])
+        //             // }
+        //         }
+        //     }
+        // })
+        // .catch((error) => {
+        //     console.log("Oops, Request failed!");
+        // });
 
     }
 }
@@ -190,7 +192,7 @@ export const detailProduct = (productId) => {
         // console.log(productId)
         axios.get(`/product/${productId}`)
             .then((response) => {
-                console.log(response.data);
+                // console.log(response.data);
                 if (response.data.success === true) {
                     const product = response.data
                     // console.log(product)

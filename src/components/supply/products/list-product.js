@@ -51,10 +51,10 @@ export class List_product extends Component {
                 <Breadcrumb title="Liste des produits" parent="Produits" />
                 <div className="container-fluid">
                     <div className="card">
+                        <div className="card-header">
+                            <Link to="/supply/products/create-product" className="btn btn-primary">Ajout de Produit</Link>
+                        </div>
                         <div className="card-body">
-                            <div className="btn-popup pull-right">
-                                <Link to="/supply/products/create-product" className="btn btn-primary">Ajout Produit</Link>
-                            </div>
                             <div className="clearfix"></div>
                             <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
                                 <Data_products

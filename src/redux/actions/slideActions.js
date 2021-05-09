@@ -119,7 +119,7 @@ export const editSlide = (slide) => {
                 'USER-KEY': `Bearer ${token}`
             }
         }
-        // axios.put(`/slide/${slide.id}`, formData, config)
+        // axios.put(`/slide/${slide}`, formData, config)
         // .then((response) => {
         //     console.log(response.data)
         //     if(response.data.success === true){
@@ -150,5 +150,44 @@ export const editSlide = (slide) => {
         //     console.log("Oops, Request failed!");
         // });
 
+    }
+}
+
+export const detailslide = (slideId) => {
+
+    return (dispatch) => {
+        dispatch({
+            type: slideConstants.SLIDE_DETAILS_REQUEST
+        });
+
+        axios.get(`/slide/${slideId}`)
+            .then((response) => {
+                // console.log(response);
+                if (response.data.success === true) {
+                    const slide  = response.data   
+                    
+                    console.log(slide)
+                    dispatch({
+                        type: slideConstants.SLIDE_DETAILS_SUCCESS,
+                        payload: { slide: slide }
+                    });
+                } else {
+                    if (response.data.success === false) {
+                        // console.log(response.data.full_messages[0])
+                        toast.error(response.data.full_messages[0]);
+
+                        dispatch({
+                            type: slideConstants.SLIDE_DETAILS_FAIL,
+                            // payload: { error: success }
+                        });
+                        for(var i=0; i<response.data.full_messages[i]; i++){
+                            toast.error(response.data.full_messages[i])
+                        }
+                    }
+                }
+            })
+            .catch((error) => {
+                console.log("Oops, Request failed!");
+            });
     }
 }

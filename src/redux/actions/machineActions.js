@@ -162,33 +162,36 @@ export const machineDetail = (paramID) => {
             type: machineConstants.MACHINE_DETAILS_REQUEST
         });
         
-        console.log(paramID)
+        // console.log(paramID)
         axios.get(`/machine/${paramID}`)
             .then((response) => {
-                console.log(response);
+                // console.log(response);
                 if (response.data.success === true) {
                     const machine  = response.data
-                    console.log(machine)
+
+                    console.log('machine details',machine)
+
                     dispatch({
                         type: machineConstants.MACHINE_DETAILS_SUCCESS,
                         payload: { machine: machine }
                     });
-                } 
-            // else {
-            //         if (response.data.success === false) {
-            //             // console.log(response.data.full_messages[0])
-            //             toast.error(response.data.full_messages[0]);
+                }else {
+                    if (response.data.success === false) {
+                        // console.log(response.data.full_messages[0])
+                        toast.error(response.data.full_messages[0]);
 
-            //             dispatch({
-            //                 type: machineConstants.MACHINE_DETAILS_FAIL,
-            //                 payload: { error: response.data.full_messages[0] }
-            //             });
-            //         }
-            //     }
-            // })
-            // .catch((error) => {
-            //     console.log("Oops, Request failed!");
-            // });
-        })
+                        dispatch({
+                            type: machineConstants.MACHINE_DETAILS_FAIL,
+                            // payload: { error: success }
+                        });
+                        for(var i=0; i<response.data.full_messages[i]; i++){
+                            toast.error(response.data.full_messages[i])
+                        }
+                    }
+                }
+            })
+            .catch((error) => {
+                console.log("Oops, Request failed!");
+            });
     }
 }

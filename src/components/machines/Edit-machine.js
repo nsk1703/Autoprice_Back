@@ -47,24 +47,26 @@ export class Edit_machine extends Component {
     }
 
     componentDidMount = () => {
-        // let param = this.props.match.params.id
-        // console.log(param)
-        // this.props.machineDetail(param)
+        let param = this.props.match.params.id
+        
+        this.props.machineDetail(param)
 
-        // setTimeout(() => {
-        //     console.log(this.props.machdetails)
-        // }, 1000)
-        // console.log(this.props.machine.type)
-        let type = {value: this.props.machine.type, label: this.props.machine.type}
+        setTimeout(() => {
+            console.log('machdetails',this.props.machdetails.machine.machine)
 
-        this.setState({
-            id: this.props.machine.id,
-            nom: this.props.machine.nom,
-            type: type,
-            lien: this.props.machine.lien,
-            montant: this.props.machine.montant,
-            description: this.props.machine.description
-        })
+            let type = {value: this.props.machdetails.machine.machine.type,
+                label: this.props.machdetails.machine.machine.type}
+
+            this.setState({
+                id: this.props.machdetails.machine.machine.id,
+                nom: this.props.machdetails.machine.machine.nom,
+                type: type,
+                lien: this.props.machdetails.machine.machine.lien,
+                montant: this.props.machdetails.machine.machine.montant,
+                description: this.props.machdetails.machine.machine.description
+            })
+        }, 1000)        
+       
     }
     
     handleSubmitChange = (e) => {
@@ -170,10 +172,7 @@ export class Edit_machine extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-    // console.log(props.match.params.id)
-    // console.log(state.machine.machines.find(mach => mach.id == props.match.params.id))
     return {
-        machine: state.machine.machines.find(mach => mach.id == props.match.params.id),
         editmachine: state.editmachine,
         machdetails: state.machdetails
     }

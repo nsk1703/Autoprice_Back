@@ -13,6 +13,7 @@ import {withRouter} from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 
 export class Category extends Component {
+
     constructor(props) {
         super(props);
         let listCategories = []
@@ -66,6 +67,11 @@ export class Category extends Component {
         this.setState({ open: false });
     };
 
+    componentDidMount = ()  => {
+
+        // this.props.detailCategory()
+    }
+
     handleFileChange = (e)=> {
         this.setState({
             files: e.target.files[0]
@@ -93,6 +99,7 @@ export class Category extends Component {
             }
         }, 1000)
     }
+
     render() {
         const { open, categories, name, description, isLoading } = this.state;
         return (
@@ -181,14 +188,17 @@ export class Category extends Component {
 const mapStateToProps = (state) => {
     return {
         category: state.category,
-        addcategory: state.addcategory
+        addcategory: state.addcategory,
+        catdetails: state.catdetails
 
     }
 }
 const mapDispatchToProps = (dispatch) =>{
     return {
         categories: () => {dispatch( categoryActions.categories())},
-        newCategory: (category) => {dispatch(categoryActions.newCategory(category))}
+        newCategory: (category) => {dispatch(categoryActions.newCategory(category))},
+        // detailCategory: (categoryid) => {dispatch(categoryActions.detailCategory(categoryid))}
+
     }
 }
 
