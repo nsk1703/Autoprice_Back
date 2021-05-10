@@ -124,7 +124,7 @@ export class Tabset_product extends Component {
         
         return (
             <Fragment>
-                <Breadcrumb title="Reajustement du Produit" parent="Produit" />
+                <Breadcrumb title="Reajustement du Produit" parent="Approvisionnement / Produit Approvisionnés" />
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-sm-12">

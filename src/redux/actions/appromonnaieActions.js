@@ -69,7 +69,7 @@ export const newAppromonnaies = (monnaie) => {
                 const {appromonnaies, success} = response.data
                 // const appromonnaiesCount = response.data.success
                 // console.log(appromonnaies)
-                console.log(success)
+                // console.log(success)
                 dispatch({
                     type: appromonnaieConstants.NEW_APPROMONNAIE_SUCCESS,
                     payload: { appromonnaie: appromonnaies, success: success }
@@ -185,6 +185,43 @@ export const detailAppromonnaie = (moneyId) => {
         .catch((error) => {
             console.log("Oops, Request failed!");
         });
+
+    }
+}
+
+export const deleteAppromonnaie = (moneyID) => {
+    // console.log()
+
+    return (dispatch) => {
+        dispatch({
+            type: appromonnaieConstants.DELETE_APPROMONNAIE_REQUEST
+        });
+
+        // console.log(moneyId)
+        axios.delete(`/appromonnaie/${moneyID}`)
+        .then((response) => {
+            console.log(response.data)
+        //     if(response.data.success === true){
+        //         const appromonnaie = response.data
+        //             // console.log(appromonnaie)
+        //         dispatch({
+        //             type: appromonnaieConstants.DELETE_APPROMONNAIE_SUCCESS,
+        //             payload: {appromonnaie: appromonnaie}
+        //         })
+        //     }else{
+        //         if (response.data.success === false) {
+        //             // console.log(response.data.full_messages[0])
+        //             toast.error(response.data.full_messages[0]);
+        //             dispatch({
+        //                 type: appromonnaieConstants.DELETE_APPROMONNAIE_FAIL,
+        //                 payload: { error: response.data.full_messages[0] }
+        //             });
+        //         }
+        //     }
+        })
+        // .catch((error) => {
+        //     console.log("Oops, Request failed!");
+        // });
 
     }
 }

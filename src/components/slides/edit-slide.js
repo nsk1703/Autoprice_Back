@@ -142,19 +142,19 @@ export class Edit_slide extends Component {
                                             {/* </div> */}
                                         </div>
                                         <div className="form-group row">
-                                            <label htmlFor="message-text" className="col-form-label"><span>*</span>Image de Catégorie :</label>
+                                            <label className="col-xl-3 col-md-4"><span>*</span>Image de Catégorie :</label>
                                             <input className="form-control col-xl-8 col-md-7" 
                                                 type="file" 
                                                 onChange={this.handleFileChange}
-                                            />
-                                            {/* <img src={ images ? images : actualFile} style="width: 50px; height: 50px" /> */}
+                                            /> 
+                                            <img className="offset-xl-3 offset-sm-4 mt-2" src={ images ? images : actualFile} style={{width: '100px', height: '100px'}} />
                                         </div>
-                                        <div className="pull-right">
+                                        <div className="offset-xl-3 offset-sm-4 mt-3">
                                             <button type="button" 
                                                 className="btn btn-primary"
-                                                disabled={isLoading}
                                                 onClick={this.handleSubmitChange}
-                                            >Enregister</button>
+                                                disabled={isLoading}
+                                            >Modifier</button>
                                         </div>
                                     </form>
                                 </div>

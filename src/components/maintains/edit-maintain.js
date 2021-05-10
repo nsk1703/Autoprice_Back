@@ -150,7 +150,7 @@ export class Edit_maintain extends Component {
                         <div className="col-sm-12">
                             <div className="card">
                                 <div className="card-header">
-                                    <h5> Effectuer une maintenance</h5>
+                                    <h5> Modifier une maintenance</h5>
                                 </div>
                                 <div className="card-body">
                                     <form className="needs-validation">
@@ -223,7 +223,7 @@ export class Edit_maintain extends Component {
                                             className="btn btn-primary"
                                             onClick={this.handleSubmitChange}
                                             disabled={isLoading}
-                                            >Enregister</button>
+                                            >Modifier</button>
                                         </div>
                                     </form>
                                 </div>

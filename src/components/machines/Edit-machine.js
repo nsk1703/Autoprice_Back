@@ -94,13 +94,13 @@ export class Edit_machine extends Component {
         // console.log(options)
         return (
             <Fragment>
-                <Breadcrumb title="Créer une machine " parent="Machines" />
+                <Breadcrumb title="Modifier une machine " parent="Machines / Liste des Machines" />
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-sm-12">
                             <div className="card">
                                 <div className="card-header">
-                                    <h5> Créer une machine</h5>
+                                    <h5> Modifier une machine</h5>
                                 </div>
                                 <div className="card-body">
                                     <form className="needs-validation" encType="multipart/form-data">
@@ -158,7 +158,7 @@ export class Edit_machine extends Component {
                                             className="btn btn-primary"
                                             disabled={isLoading}
                                             onClick={this.handleSubmitChange}
-                                            >Enregister</button>
+                                            >Modifier</button>
                                         </div>
                                     </form>
                                 </div>
@@ -171,7 +171,7 @@ export class Edit_machine extends Component {
     }
 }
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state) => {
     return {
         editmachine: state.editmachine,
         machdetails: state.machdetails

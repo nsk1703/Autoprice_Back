@@ -47,7 +47,7 @@ export class Log extends Component {
         const {logs} = this.state
         return (
             <Fragment>
-                <Breadcrumb title="Liste des Journaux" parent="Journaux"/>
+                <Breadcrumb title="Liste des Logs" parent="Logs"/>
                 <div className="container-fluid">
                     <div className="card">
                         {/* <div className="card-header">

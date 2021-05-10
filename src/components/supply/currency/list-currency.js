@@ -17,6 +17,7 @@ export class List_currency extends Component {
             currencies: []
         };
 
+        // console.log(this.props)
         this.props.appromonnaies();
 
         setTimeout(() => {
@@ -49,7 +50,7 @@ export class List_currency extends Component {
         const { currencies } = this.state
         return (
             <Fragment>
-                <Breadcrumb title="Liste des monnaies" parent="Monnaies" />
+                <Breadcrumb title="Liste des monnaies" parent="Approvisionnement / Monnaies" />
                 <div className="container-fluid">
                     <div className="card">
                         <div className="card-header">
@@ -83,7 +84,8 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps = (dispatch) =>{
     return {
-        appromonnaies: () => {dispatch(appromonnaieActions.appromonnaies())}
+        appromonnaies: () => {dispatch(appromonnaieActions.appromonnaies())},
+        // deleteAppromonnaie: (moneyID) => {dispatch(appromonnaieActions.deleteAppromonnaie(moneyID))}
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(List_currency)

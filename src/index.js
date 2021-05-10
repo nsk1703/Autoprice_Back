@@ -6,8 +6,6 @@ import App from './components/app';
 import { ScrollContext } from 'react-router-scroll-4';
 import { authConstants } from "../src/constants/userConstants";
 
-// import { Match } from 'react-router-dom';
-// Axios
 import axios from "axios";
 
 import { Provider } from 'react-redux';

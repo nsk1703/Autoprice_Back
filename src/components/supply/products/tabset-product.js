@@ -122,7 +122,7 @@ export class Tabset_product extends Component {
                     </div>
                     <div className="form-group row">
                         <label className="col-xl-3 col-md-4" >Nom de produit :</label>
-                        <Select className="form-control col-xl-8 col-md-7"
+                        <Select className="col-xl-8 col-md-7"
                             name="product_id"
                             value={product_id}
                             options={AllOptions}

@@ -61,18 +61,6 @@ export class Tabset_currency extends Component {
         };
         
     }
-    
-    // componentDidMount = () => {
-    //     // nextProps.appromonnaie.map(next => {
-    //     console.log('next', this.props.appromonnaie)
-    //     this.setState({
-    //         id: this.props.appromonnaie['id'],
-    //         quantite: this.props.appromonnaie['quantite'],
-    //         description: this.props.appromonnaie['description'],
-    //         machine_id: this.props.appromonnaie['id']['machine_id']['nom']
-    //     })
-    //     // })
-    // }
 
     handleInputChange = (e) => {
         this.setState({
@@ -90,40 +78,26 @@ export class Tabset_currency extends Component {
             isLoading: true
         })
 
-        if(this.state.id){
-            this.props.updateAppromonnaie(this.state)
-            setTimeout(()=> {
-                console.log(this.props.editappromonnaie)
-                if(this.props.editappromonnaie.isUpdated === true){
-                    this.props.history.push('/supply/currency/list-currency');
-                }else{
-                    this.props.history.push('/supply/currency/create-currency');
-                    this.setState({
-                        isLoading: false
-                    })
-                }
-            }, 1000)
-        }else{
-            // console.log(this.state.AllOptions)
-            this.props.newAppromonnaies(this.state);
-            setTimeout(()=> {
-                console.log(this.props.addappromonnaie)
-                if(this.props.addappromonnaie.success === true){
-                    this.props.history.push('/supply/currency/list-currency');
-                }else{
-                    this.props.history.push('/supply/currency/create-currency');
-                    this.setState({
-                        isLoading: false
-                    })
-                }
-            }, 1000)
-        }
+        // console.log(this.state.AllOptions)
+        this.props.newAppromonnaies(this.state);
+        setTimeout(()=> {
+            // console.log(this.props.addappromonnaie)
+            if(this.props.addappromonnaie.success === true){
+                this.props.history.push('/supply/currency/list-currency');
+            }else{
+                this.props.history.push('/supply/currency/create-currency');
+                this.setState({
+                    isLoading: false
+                })
+            }
+        }, 1000)
+        
 
     }
 
     render() {
         const {AllOptions, quantite, description, machine_id, isLoading} =this.state
-        console.log("appappa",quantite)
+        // console.log("appappa",quantite)
         return (
             <Fragment>
                 <form className="needs-validation">

@@ -53,11 +53,11 @@ export class Product_list extends Component {
 
         return (
             <Fragment>
-                <Breadcrumb title="Produits" parent="" />
+                <Breadcrumb title="Liste des Produits" parent="Produits" />
                 <div className="container-fluid">
                     <div className="card">
                         <div className="card-header">
-                        <Link type="button" to="/products/physical/add-product" className="btn btn-primary">Ajouter un Produit</Link>
+                            <Link type="button" to="/products/physical/add-product" className="btn btn-primary">Ajouter un Produit</Link>
                         </div>
                     </div>
                     <div className="row products-admin ratio_asos">

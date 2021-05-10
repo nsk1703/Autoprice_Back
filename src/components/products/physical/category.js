@@ -111,12 +111,11 @@ export class Category extends Component {
                         <div className="col-sm-12">
                             <div className="card">
                                 <div className="card-header">
-                                    <h5>Liste des Catégories</h5>
+                                    <button type="button" className="btn btn-primary" onClick={this.onOpenModal} data-toggle="modal" data-original-title="test" data-target="#exampleModal">Ajouter une catégorie</button>
                                 </div>
                                 <div className="card-body">
                                 <ToastContainer />
                                     <div className="btn-popup pull-right">
-                                        <button type="button" className="btn btn-primary" onClick={this.onOpenModal} data-toggle="modal" data-original-title="test" data-target="#exampleModal">Ajouter une catégorie</button>
                                         <Modal open={open} onClose={this.onCloseModal} >
                                             <div className="modal-header">
                                                 <h5 className="modal-title f-w-600" id="exampleModalLabel2">Ajout d'une catégorie</h5>

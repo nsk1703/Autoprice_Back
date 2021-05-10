@@ -8,7 +8,7 @@ export class Create_currency extends Component {
     render() {
         return (
             <Fragment>
-                <Breadcrumb title="Approvisionnement de Produit" parent="Approvisionnement" />
+                <Breadcrumb title="Approvisionnement de Produit" parent="Approvisionnement / Produits" />
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-sm-12">

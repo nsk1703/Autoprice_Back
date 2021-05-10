@@ -48,7 +48,7 @@ export class List_product extends Component {
         const {products} = this.state
         return (
             <Fragment>
-                <Breadcrumb title="Liste des produits" parent="Produits" />
+                <Breadcrumb title="Liste des produits" parent="Approvisionnement / Produits" />
                 <div className="container-fluid">
                     <div className="card">
                         <div className="card-header">

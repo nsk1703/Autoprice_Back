@@ -351,18 +351,18 @@ export class Add_product extends Component {
                                                             <textarea name="description" 
                                                                 value={description} 
                                                                 onChange={this.handleInputChange}
-                                                                rows="5" cols="92"
+                                                                rows="5" cols="88"
                                                             />
                                                         </div>
                                                     </div>
                                                 </div>
                                                 
                                                 <div className="offset-xl-3 offset-sm-4">
-                                                    <button type="submit" className="btn btn-primary"
+                                                    <button type="submit" className="btn btn-primary mr-2"
                                                     disabled={isLoading}
                                                     onClick={this.handleSubmitChange}
                                                     >Ajouter</button>
-                                                    <button type="button" className="btn btn-light">Supprimer</button>
+                                                    <Link to="/products/physical/product-list" type="button" className="btn btn-secondary">Annuler</Link>
                                                 </div>
                                             </AvForm>
                                         </div>

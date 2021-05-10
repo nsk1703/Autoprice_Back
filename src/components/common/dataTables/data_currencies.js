@@ -4,8 +4,12 @@ import 'react-table/react-table.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
+import {connect} from "react-redux";
+import * as appromonnaieActions from "../../../redux/actions/appromonnaieActions";
+import { withRouter, Redirect, Router } from 'react-router-dom';
 
-export class Data_currencies extends Component {
+class Data_currencies extends Component {
+
     constructor(props) {
         super(props)
         this.state = {
@@ -13,6 +17,8 @@ export class Data_currencies extends Component {
             myData: this.props.myData,
             listData: []
         }
+       
+        this.handleRemoveRow = this.handleRemoveRow.bind(this)
     }
 
     selectRow = (e, i) => {
@@ -21,21 +27,30 @@ export class Data_currencies extends Component {
                 checkedValues: this.state.checkedValues.filter((item, j) => i !== item)
             });
         } else {
+            // console.log(this.state.checkedValues)
             this.state.checkedValues.push(i);
             this.setState({
                 checkedValues: this.state.checkedValues
             })
+            // console.log(this.state.checkedValues)
         }
     }
 
     handleRemoveRow = () => {
         const selectedValues = this.state.checkedValues;
+        console.log(this.state.checkedValues);
+
+        // console.log(this.props)
+
         const updatedData = this.state.myData.filter(function (el) {
             return selectedValues.indexOf(el.id) < 0;
         });
+
+        console.log(updatedData)
         this.setState({
             myData: updatedData
         })
+        // console.log(this.state.myData)
         toast.success("Successfully Deleted !")
     };
 
@@ -64,13 +79,15 @@ export class Data_currencies extends Component {
     render() {
         const { pageSize, myClass, check, multiSelectOption, pagination } = this.props;
         const { myData } = this.state
-
+        
         const columns = [];
+        console.log("myData = ", myData);
+        this.props.myData.map(data =>
+            console.log('data ', data)
+        )
         for (var key in myData[0]) {
 
-            // console.log("myData = " + myData[0].ID);
-            // console.log("key = " + myData[0][key]);
-
+            console.log('key', key)
             let editable = this.renderEditable
             if (key === "image") {
                 editable = null;
@@ -119,8 +136,9 @@ export class Data_currencies extends Component {
                     // console.log(row.original.ID)
                     <div>
                         <span >
-                            <input type="checkbox" name={row.original.id} defaultChecked={this.state.checkedValues.includes(row.original.id)}
-                                onChange={e => this.selectRow(e, row.original.id)} />
+                            <input type="checkbox" name={row.original.ID} 
+                            defaultChecked={this.state.checkedValues.includes(row.original.ID)}
+                                onChange={e => this.selectRow(e, row.original.ID)} />
                         </span>
                         
                         <span><Link to={`/supply/currency/edit-currency/${row.original.ID}`}>
@@ -186,4 +204,12 @@ export class Data_currencies extends Component {
     }
 }
 
-export default Data_currencies
+
+// const mapDispatchToProps = (dispatch) => {
+//     // console.log(dispatch)
+//     return {
+//         deleteAppromonnaie: (moneyID) => {dispatch(appromonnaieActions.deleteAppromonnaie(moneyID))}
+//     }
+// }
+
+export default Data_currencies;
