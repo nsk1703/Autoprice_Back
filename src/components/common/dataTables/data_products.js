@@ -4,6 +4,8 @@ import 'react-table/react-table.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
+import axios from "axios";
+
 
 export class Data_products extends Component {
     constructor(props) {
@@ -29,12 +31,26 @@ export class Data_products extends Component {
 
     handleRemoveRow = () => {
         const selectedValues = this.state.checkedValues;
-        const updatedData = this.state.myData.filter(function (el) {
-            return selectedValues.indexOf(el.id) < 0;
-        });
-        this.setState({
-            myData: updatedData
-        })
+        console.log(selectedValues);
+
+        const token = localStorage.getItem('token');
+        let config = {
+            headers: {
+              'USER-KEY': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            }
+          }
+
+        axios.delete(`approproduit/${selectedValues}`, config)
+            .then(() => {
+                axios.get('/approproduits')
+                    .then((response) => {
+                        const {approproduits} = response.data
+                        this.setState({
+                            myData: approproduits
+                        })
+                    })
+            })
         toast.success("Successfully Deleted !")
     };
 
@@ -115,7 +131,8 @@ export class Data_products extends Component {
                     // console.log(row.original.ID)
                     <div>
                         <span >
-                            <input type="checkbox" name={row.original.ID} defaultChecked={this.state.checkedValues.includes(row.original.id)}
+                            <input type="checkbox" name={row.original.ID} 
+                            defaultChecked={this.state.checkedValues.includes(row.original.ID)}
                                 onChange={e => this.selectRow(e, row.original.ID)} />
                         </span>
                         <span><Link to={`/supply/products/edit-product/${row.original.ID}`}>

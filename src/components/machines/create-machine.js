@@ -7,6 +7,7 @@ import {CKEditor} from '@ckeditor/ckeditor5-react';
 import {connect} from "react-redux";
 import { ToastContainer, toast } from 'react-toastify';
 import { withRouter, Redirect, Router } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const options = [
     {value: 'type1', label:'Type 1'},
@@ -78,7 +79,8 @@ export class Create_machine extends Component {
                         <div className="col-sm-12">
                             <div className="card">
                                 <div className="card-header">
-                                    <h5> Créer une machine</h5>
+                                    <Link type="button" to="/machines/list-machine" 
+                                    className="btn btn-primary">Retour</Link>
                                 </div>
                                 <div className="card-body">
                                     <form className="needs-validation" encType="multipart/form-data">
@@ -131,6 +133,7 @@ export class Create_machine extends Component {
                                                 />
                                             {/* </div> */}
                                         </div>
+                                        <ToastContainer />
                                         <div className="offset-xl-3 offset-sm-4">
                                             <button type="button" 
                                             className="btn btn-primary"

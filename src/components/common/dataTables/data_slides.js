@@ -115,7 +115,8 @@ export class Data_slides extends Component {
                     // console.log(row)
                     <div>
                         <span >
-                            <input type="checkbox" name={row.original.id} defaultChecked={this.state.checkedValues.includes(row.original.id)}
+                            <input type="checkbox" name={row.original.id} 
+                                defaultChecked={this.state.checkedValues.includes(row.original.id)}
                                 onChange={e => this.selectRow(e, row.original.id)} />
                         </span>
                         <span><Link to={`/slides/edit-slide/${row.original.id}`}>

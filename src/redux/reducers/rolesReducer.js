@@ -1,35 +1,28 @@
-import {productConstants} from '../../constants/productConstants'
+import { roleConstants } from '../../constants/roleConstants'
 
-export const productsReducer = (state = { products: [] }, action) => {
+export const rolesReducer = (state = { roles: [] }, action) => {
     switch (action.type) {
-        case productConstants.ALL_PRODUCTS_REQUEST:
-        case productConstants.ADMIN_PRODUCTS_REQUEST:
+        case roleConstants.ALL_ROLES_REQUEST:
             return {
                 loading: true,
-                products: []
+                roles: []
             }
 
-        case productConstants.ALL_PRODUCTS_SUCCESS:
+        case roleConstants.ALL_ROLES_SUCCESS:
             return {
                 loading: false,
-                products: action.payload.products,
-                productsCount: action.payload.productsCount
+                roles: action.payload.roles,
+                success: action.payload.success,
+
             }
 
-        case productConstants.ADMIN_PRODUCTS_SUCCESS:
-            return {
-                loading: false,
-                products: action.payload
-            }
-
-        case productConstants.ALL_PRODUCTS_FAIL:
-        case productConstants.ADMIN_PRODUCTS_FAIL:
+        case roleConstants.ALL_ROLES_FAIL:
             return {
                 loading: false,
                 error: action.payload
             }
 
-        case productConstants.CLEAR_ERRORS:
+        case roleConstants.CLEAR_ERRORS:
             return {
                 ...state,
                 error: null
@@ -40,35 +33,30 @@ export const productsReducer = (state = { products: [] }, action) => {
     }
 }
 
-export const newProductReducer = (state = { product: {} }, action) => {
+export const newRoleReducer = (state = { role: {} }, action) => {
     switch (action.type) {
 
-        case productConstants.NEW_PRODUCT_REQUEST:
+        case roleConstants.NEW_ROLES_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case productConstants.NEW_PRODUCT_SUCCESS:
+        case roleConstants.NEW_ROLES_SUCCESS:
             return {
                 loading: false,
                 success: action.payload.success,
-                // product: action.payload.product
+                role: action.payload.role,
+                // token: action.payload.token
             }
 
-        case productConstants.NEW_PRODUCT_FAIL:
+        case roleConstants.NEW_ROLES_FAIL:
             return {
                 ...state,
                 error: action.payload
             }
 
-        case productConstants.NEW_PRODUCT_RESET:
-            return {
-                ...state,
-                success: false
-            }
-
-        case productConstants.CLEAR_ERRORS:
+        case roleConstants.CLEAR_ERRORS:
             return {
                 ...state,
                 error: null
@@ -79,24 +67,24 @@ export const newProductReducer = (state = { product: {} }, action) => {
     }
 }
 
-export const productReducer = (state = {}, action) => {
+export const roleReducer = (state = {}, action) => {
     switch (action.type) {
 
-        case productConstants.DELETE_PRODUCT_REQUEST:
-        case productConstants.UPDATE_PRODUCT_REQUEST:
+        case roleConstants.DELETE_ROLES_REQUEST:
+        case roleConstants.UPDATE_ROLES_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case productConstants.DELETE_PRODUCT_SUCCESS:
+        case roleConstants.DELETE_ROLES_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 isDeleted: action.payload.isDeleted
             }
 
-        case productConstants.UPDATE_PRODUCT_SUCCESS:
+        case roleConstants.UPDATE_ROLES_SUCCESS:
             return {
                 ...state,
                 loading: false,
@@ -104,26 +92,26 @@ export const productReducer = (state = {}, action) => {
             }
 
 
-        case productConstants.DELETE_PRODUCT_FAIL:
-        case productConstants.UPDATE_PRODUCT_FAIL:
+        case roleConstants.DELETE_ROLES_FAIL:
+        case roleConstants.UPDATE_ROLES_FAIL:
             return {
                 ...state,
                 error: action.payload.error
             }
 
-        case productConstants.DELETE_PRODUCT_RESET:
+        case roleConstants.DELETE_ROLES_RESET:
             return {
                 ...state,
                 isDeleted: false
             }
 
-        case productConstants.UPDATE_PRODUCT_RESET:
+        case roleConstants.UPDATE_ROLES_RESET:
             return {
                 ...state,
                 isUpdated: false
             }
 
-        case productConstants.CLEAR_ERRORS:
+        case roleConstants.CLEAR_ERRORS:
             return {
                 ...state,
                 error: null
@@ -134,28 +122,29 @@ export const productReducer = (state = {}, action) => {
     }
 }
 
-export const productDetailsReducer = (state = { product: {} }, action) => {
+export const roleDetailsReducer = (state = { role: {} }, action) => {
     switch (action.type) {
 
-        case productConstants.PRODUCT_DETAILS_REQUEST:
+        case roleConstants.ROLE_DETAILS_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case productConstants.PRODUCT_DETAILS_SUCCESS:
+        case roleConstants.ROLE_DETAILS_SUCCESS:
             return {
                 loading: false,
-                product: action.payload
+                // success: action.payload.success,
+                role: action.payload.role
             }
 
-        case productConstants.PRODUCT_DETAILS_FAIL:
+        case roleConstants.ROLE_DETAILS_FAIL:
             return {
                 ...state,
                 error: action.payload
             }
 
-        case productConstants.CLEAR_ERRORS:
+        case roleConstants.CLEAR_ERRORS:
             return {
                 ...state,
                 error: null

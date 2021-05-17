@@ -8,6 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 
 export class LoginTabset extends Component {
+    
     constructor(props) {
         super(props);
         this.state = {
@@ -52,24 +53,26 @@ export class LoginTabset extends Component {
         this.setState({
             loading: true
         })
-        console.log(this.props.user.isAuthenticated)
-        console.log(this.props.user.token)
-        console.log(this.props.user.user)
-        console.log(this.props.user.roles)
+        // console.log(this.props.auth.isAuthenticated)
+        // console.log(this.props.auth.token)
+        // console.log(this.props.auth.user)
+        // console.log(this.props.auth.roles)
 
         this.props.login(this.state)
         setTimeout(() =>{
-            console.log(this.props.user.isAuthenticated)
-            console.log(this.props.user.token)
-            console.log(this.props.user.user)
-            console.log(this.props.user.roles)
+            console.log(this.props.auth.isAuthenticated)
+            console.log(this.props.auth.token)
+            console.log(this.props.auth.user)
+            console.log(this.props.auth.roles)
 
-            if(this.props.user.isAuthenticated == true){
+            if(this.props.auth.isAuthenticated == true){
                 this.props.history.push('/');
+                // window.location.reload()
             }else{
                 this.props.history.push('/login');
                 this.setState({
-                    loading: false
+                    loading: false,
+                    password: ''
                 })
             }
         }, 1000);
@@ -83,18 +86,27 @@ export class LoginTabset extends Component {
         });
         this.props.register(this.state);
         setTimeout(() => {
-            if(this.props.user.isRegistered == true){
+            if(this.props.auth.isRegistered == true){
                 this.props.history.push('/login');
             }else{
                 this.setState({
-                    isLoading: false
+                    isLoading: false,
+                    password: '',
+                    confirm_password: ''
                 })
             }
         }, 1000)
+        this.setState({
+            username: '',
+            email: '',
+            password: '',
+            confirm_password: '',
+        })
     }
 
     render() {
         const {loading, isLoading, email, username, password, confirm_password} = this.state
+        
         return (
             <div>
                 <Fragment>
@@ -207,13 +219,13 @@ export class LoginTabset extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.user
+        auth: state.auth
     }
 }
 const mapDispatchToProps = (dispatch) =>{
     return {
-        login: (user) => {dispatch( userActions.login(user))},
-        register: (user) => {dispatch(userActions.register(user))}
+        login: (auth) => {dispatch( userActions.login(auth))},
+        register: (auth) => {dispatch(userActions.register(auth))}
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(LoginTabset))

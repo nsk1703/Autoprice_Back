@@ -4,6 +4,7 @@ import 'react-table/react-table.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
+import axios from "axios";
 
 export class Data_users extends Component {
     constructor(props) {
@@ -29,13 +30,26 @@ export class Data_users extends Component {
 
     handleRemoveRow = () => {
         const selectedValues = this.state.checkedValues;
-        const updatedData = this.state.myData.filter(function (el) {
-            return selectedValues.indexOf(el.id) < 0;
-        });
-        this.setState({
-            myData: updatedData
-        })
+        // console.log(selectedValues)
+        const token = localStorage.getItem('token');
+        let config = {
+            headers: {
+              'USER-KEY': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            }
+        }
+          axios.delete(`utilisateur/${selectedValues}`, config)
+            .then(() => {
+                axios.get('/users', config)
+                    .then((response) => {
+                        const {users} = response.data
+                        this.setState({
+                            myData: users
+                        })
+                    })
+            })
         toast.success("Successfully Deleted !")
+        
     };
 
     renderEditable = (cellInfo) => {
@@ -114,10 +128,13 @@ export class Data_users extends Component {
                 Cell: (row) => (
                     <div>
                         <span >
-                            <input type="checkbox" name={row.original.id} defaultChecked={this.state.checkedValues.includes(row.original.id)}
-                                onChange={e => this.selectRow(e, row.original.id)} />
+                            <input type="checkbox" name={row.original.ID} 
+                            defaultChecked={this.state.checkedValues.includes(row.original.ID)}
+                                onChange={e => this.selectRow(e, row.original.ID)} />
                         </span>
-                        <span><Link to="/users/create-user"><i className="fa fa-pencil" style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }}></i></Link></span>
+                        <span><Link to={`/users/edit-user/${row.original.ID}`}>
+                            <i className="fa fa-pencil" style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }}></i>
+                        </Link></span>
                     </div>
                     
                 ),

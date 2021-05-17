@@ -12,8 +12,9 @@ export class Create_currency extends Component {
                     <div className="row">
                         <div className="col-sm-12">
                             <div className="card">
-                            <div className="card-header">
-                                    <Link type="button" to="/supply/currency/list-currency" className="btn btn-primary">Retour</Link>
+                                <div className="card-header">
+                                    <Link type="button" to="/supply/currency/list-currency" 
+                                    className="btn btn-primary">Retour</Link>
                                 </div>
                                 <div className="card-body">
                                     <Tabset_currency />

@@ -6,6 +6,9 @@ import * as maintenanceActions from "../../redux/actions/maintenanceActions";
 import {connect} from "react-redux";
 import * as machineActions from "../../redux/actions/machineActions";
 import Select from 'react-select';
+import { Link } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+
 
 const choices = [
     {value: 'type1', label:'Type 1'},
@@ -28,6 +31,7 @@ export class Create_maintain extends Component {
             description: '',
             machine_id: '',
             AllOptions: [],
+            isLoading: false,
 
         };
 
@@ -90,6 +94,9 @@ export class Create_maintain extends Component {
     handleSubmitChange = (e) => {
         e.preventDefault();
         // console.log(this.state.AllOptions)
+        this.setState({
+            isLoading: true
+        })
         this.props.newMaintenance(this.state)
 
         setTimeout(()=> {
@@ -117,7 +124,8 @@ export class Create_maintain extends Component {
                         <div className="col-sm-12">
                             <div className="card">
                                 <div className="card-header">
-                                    <h5> Effectuer une maintenance</h5>
+                                    <Link type="button" to="/maintains/list-maintain" 
+                                    className="btn btn-primary">Retour</Link>
                                 </div>
                                 <div className="card-body">
                                     <form className="needs-validation user-add" noValidate="">
@@ -183,6 +191,7 @@ export class Create_maintain extends Component {
                                                 {/* </div> */}
                                             </div>
                                         </div>
+                                        <ToastContainer />
                                         <div className="offset-xl-3 offset-sm-4">
                                             <button type="button" 
                                             className="btn btn-primary"

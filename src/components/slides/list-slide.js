@@ -53,7 +53,7 @@ export class List_slide extends Component {
                         </div> */}
                         <div className="card-body">
                             <div className="btn-popup pull-right">
-                                <Link to="/slides/create-slide" className="btn btn-primary">Créer un slide</Link>
+                                <Link to="/slides/create-slide" className="btn btn-primary">Ajouter un slide</Link>
                             </div>
                             <div className="clearfix"></div>
                             <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">

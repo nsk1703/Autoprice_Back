@@ -215,7 +215,7 @@ export class Edit_product extends Component {
         this.props.editProduct(this.state);
        
         setTimeout(()=> {
-            console.log(this.props.editproduct)
+            console.log(this.props.productaction)
             // if(this.props.editproduct.isUpdated.isUpdated === true){
             //     this.props.history.push('/products/physical/product-list');
             // }else{
@@ -416,7 +416,7 @@ const mapStateToProps = (state, props) => {
     return {
         machine: state.machine,
         category: state.category,
-        editproduct: state.editproduct,
+        productaction: state.productaction,
         prodetails: state.prodetails
     }
 }

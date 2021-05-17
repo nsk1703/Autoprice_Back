@@ -24,7 +24,6 @@ export class Edit_currency extends Component {
                 machine_id:  '',
                 AllOptions: []
             };
-        // })
         
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleChange = this.handleChange.bind(this)

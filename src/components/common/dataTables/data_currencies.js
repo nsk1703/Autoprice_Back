@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 import {connect} from "react-redux";
 import * as appromonnaieActions from "../../../redux/actions/appromonnaieActions";
 import { withRouter, Redirect, Router } from 'react-router-dom';
+import axios from "axios";
+
 
 class Data_currencies extends Component {
 
@@ -18,7 +20,6 @@ class Data_currencies extends Component {
             listData: []
         }
        
-        this.handleRemoveRow = this.handleRemoveRow.bind(this)
     }
 
     selectRow = (e, i) => {
@@ -27,31 +28,37 @@ class Data_currencies extends Component {
                 checkedValues: this.state.checkedValues.filter((item, j) => i !== item)
             });
         } else {
-            // console.log(this.state.checkedValues)
             this.state.checkedValues.push(i);
             this.setState({
                 checkedValues: this.state.checkedValues
             })
-            // console.log(this.state.checkedValues)
         }
     }
 
     handleRemoveRow = () => {
         const selectedValues = this.state.checkedValues;
-        console.log(this.state.checkedValues);
+        console.log(selectedValues);
+        
+        const token = localStorage.getItem('token');
+        let config = {
+            headers: {
+              'USER-KEY': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            }
+          }
 
-        // console.log(this.props)
-
-        const updatedData = this.state.myData.filter(function (el) {
-            return selectedValues.indexOf(el.id) < 0;
-        });
-
-        console.log(updatedData)
-        this.setState({
-            myData: updatedData
-        })
-        // console.log(this.state.myData)
-        toast.success("Successfully Deleted !")
+        axios.delete(`appromonnaie/${selectedValues}`, config)
+            .then(() => {
+                axios.get('/appromonnaies')
+                    .then((response) => {
+                        const {appromonnaies} = response.data
+                        this.setState({
+                            myData: appromonnaies
+                        })
+                    })
+            })
+        
+        toast.success("Successfully Deleted !")        
     };
 
     renderEditable = (cellInfo) => {
@@ -81,13 +88,10 @@ class Data_currencies extends Component {
         const { myData } = this.state
         
         const columns = [];
-        console.log("myData = ", myData);
-        this.props.myData.map(data =>
-            console.log('data ', data)
-        )
+
         for (var key in myData[0]) {
 
-            console.log('key', key)
+            // console.log('key', key)
             let editable = this.renderEditable
             if (key === "image") {
                 editable = null;
@@ -203,13 +207,5 @@ class Data_currencies extends Component {
         )
     }
 }
-
-
-// const mapDispatchToProps = (dispatch) => {
-//     // console.log(dispatch)
-//     return {
-//         deleteAppromonnaie: (moneyID) => {dispatch(appromonnaieActions.deleteAppromonnaie(moneyID))}
-//     }
-// }
 
 export default Data_currencies;

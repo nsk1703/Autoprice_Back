@@ -1,8 +1,25 @@
 import React, { Component,Fragment } from 'react'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
+
 //images import
 import user_man from '../../../assets/images/dashboard/user_man.png'
 export class User_menu extends Component {
+    constructor(props){
+        super(props)
+
+        this.handleDisconnectChange = this.handleDisconnectChange.bind(this)
+        
+    }
+
+    handleDisconnectChange = () => {
+        // let token
+        // localStorage.removeItem('token')
+        window.location.reload()
+        localStorage.clear();
+        
+        // this.props.history.push('/login');
+    }
+
     render() {
         return (
             <Fragment>
@@ -18,9 +35,16 @@ export class User_menu extends Component {
                         {/* <li><a href="javascript:void(0)"><i data-feather="lock"></i>Lock Screen</a></li> */}
                         {/* <li><a href="javascript:void(0)"><i data-feather="settings"></i>Settings</a></li> */}
                         <li><Link to={`${process.env.PUBLIC_URL}/settings/change-password`} ><i data-feather="change-password"></i>Modifier le mot de passe</Link></li>
-                        <li><Link to={`${process.env.PUBLIC_URL}/login`}><i data-feather="log-out"></i>Déconnexion</Link></li>
+                        <li>
+                            <Link to={`${process.env.PUBLIC_URL}/login`} 
+                                onClick={this.handleDisconnectChange}>
+                            <i data-feather="log-out"></i>
+                                Déconnexion
+                            </Link>
+                        </li>
                     </ul>
                 </li>
+                {/*  */}
             </Fragment>
         )
     }

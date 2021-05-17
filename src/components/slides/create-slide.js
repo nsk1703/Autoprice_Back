@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import Select from 'react-select';
 import * as slideActions from "../../redux/actions/slideActions";
 import { withRouter } from 'react-router';
+import { Link } from "react-router-dom";
 
 
 const typeChoices = [
@@ -79,7 +80,8 @@ export class Create_slide extends Component {
                         <div className="col-sm-12">
                             <div className="card">
                                 <div className="card-header">
-                                    <h5> Ajouter un slide</h5>
+                                <Link type="button" to="/slides/list-slide" 
+                                    className="btn btn-primary">Retour</Link>
                                 </div>
                                 <div className="card-body">
                                     <form className="needs-validation user-add">
@@ -106,13 +108,13 @@ export class Create_slide extends Component {
                                             {/* </div> */}
                                         </div>
                                         <div className="form-group row">
-                                            <label htmlFor="message-text" className="col-form-label"><span>*</span>Image de Catégorie :</label>
+                                            <label className="col-xl-3 col-md-4"><span>*</span>Image de Catégorie :</label>
                                             <input className="form-control col-xl-8 col-md-7" 
                                                 type="file" 
                                                 onChange={this.handleFileChange}
                                             />
                                         </div>
-                                        <div className="pull-right">
+                                        <div className="offset-xl-3 offset-sm-4 mt-3">
                                             <button type="button" 
                                                 className="btn btn-primary"
                                                 disabled={isLoading}

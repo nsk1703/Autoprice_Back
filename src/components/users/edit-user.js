@@ -8,7 +8,7 @@ import * as roleActions from "../../redux/actions/roleActions";
 import Select from 'react-select';
 import { ToastContainer, toast } from 'react-toastify';
 
-export class Create_user extends Component {
+export class Edit_user extends Component {
 
     constructor(props){
         super(props)
@@ -16,6 +16,11 @@ export class Create_user extends Component {
         let listRoles= []
 
         this.state = {
+            active: '1',
+            desactive:'0',
+
+            id: '',
+            etat: '0',
             lastName: '',
             username: '',
             email: '',
@@ -24,19 +29,14 @@ export class Create_user extends Component {
             confirm_password: '',
             AllOptions: [],
             isLoading: false,
-            active: '1',
-            desactive: '0',
-            etat: '0',
-
         }
 
         this.handleInputChange = this.handleInputChange.bind(this)
-        this.handleSelect = this.handleSelect.bind(this)
         this.handleSubmitChange = this.handleSubmitChange.bind(this)
-        
+        this.handleSelect = this.handleSelect.bind(this)
 
         this.props.roles();
-        console.log(this.state)
+
         setTimeout(() => {
             // console.log(this.props.role.roles)
 
@@ -62,18 +62,11 @@ export class Create_user extends Component {
                 AllOptions: options
             })
         }, 1000)
-
-        this.props.actionsdetailRole(localStorage.getItem('roles'))
-        setTimeout(() => {
-           console.log( this.props.roledetails)
-        })
         this.state = {
             open: false,
-            AllOptions: options,
-            active: '1',
-            desactive: '0',
-            etat: '0',
+            AllOptions: options
         };
+
 
     }
 
@@ -89,30 +82,50 @@ export class Create_user extends Component {
 
     handleSubmitChange = (e) => {
         e.preventDefault();
-
+        // console.log(this.state.AllOptions)
         this.setState({
             isLoading: true
         })
-        // console.log(this.state)
-        this.props.newUser(this.state)
+        this.props.editUser(this.state)
 
         setTimeout(()=> {
-            // console.log(this.props.adduser.success)
-            if(this.props.adduser.success === true){
+            // console.log(this.props.edituser.success)
+            if(this.props.edituser.success === true){
                 this.props.history.push('/users/list-user');
             }else{
-                this.props.history.push('/users/create-user');
+                this.props.history.push('/users/edit-user/'+this.state.id);
                 this.setState({
                     isLoading: false
                 })
             }
         }, 1000)
+       
 
     }
 
+    componentDidMount = () => {
+        // console.log(this.props.match.params.id)
+        
+        this.props.detailUser(this.props.match.params.id)
+        // console.log('role', role)
+
+        setTimeout(() => {
+            // let role = {value: this.props.userdetails.user.role_id.id, 
+            //                label: this.props.userdetails.user.role_id.nom}
+
+            console.log(this.props.userdetails)
+            // this.setState({
+            //     id: this.props.userdetails.user.id,
+            //     quantite: this.props.userdetails.user.quantite,
+            //     description: this.props.userdetails.user.description,
+            //     role_id: role
+            // })
+        }, 1000)
+    }
+
     render() {
-        const {AllOptions, active, desactive, etat, lastName, username, email, role_id, isLoading, password, confirm_password} = this.state
-        // console.log(this.state.etat)
+        const {AllOptions, lastName, username, email, role_id, isLoading, password, confirm_password} = this.state
+
         return (
             <Fragment>
                 <Breadcrumb title="Ajout d'un Utilisateur" parent="Utilisateurs" />
@@ -125,7 +138,7 @@ export class Create_user extends Component {
                                     className="btn btn-primary">Retour</Link>
                                 </div>
                                 <div className="card-body">
-                                    <form className="needs-validation user-add">
+                                    <form className="needs-validation user-edit" noValidate="">
                                         <div className="attribute-blocks">
                                             <div className="row">
                                                 <div className="col-xl-3 col-sm-4">
@@ -134,22 +147,22 @@ export class Create_user extends Component {
                                                 <div className="col-xl-9 col-sm-8">
                                                     <div className="form-group m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated">
                                                         <label className="d-block">
-                                                            <input className="radio_animated" id="ido-eni1" 
+                                                            <input className="radio_animated" id="edo-ani1" 
                                                                 type="radio" name="etat"
-                                                                value={active}
+                                                                value={this.state.active}
                                                                 onChange={this.handleInputChange}
-                                                                checked={etat === active} 
+                                                                checked={this.state.etat === this.state.active} 
                                                             />
-                                                            Actif
+                                                            Activé
                                                         </label>
-                                                        <label className="d-block">
-                                                            <input className="radio_animated" id="ido-eni2" 
-                                                                type="radio" name="etat" 
-                                                                value={desactive}
-                                                                onChange={this.handleInputChange}
-                                                                checked={etat === desactive}
+                                                        <label className="d-block" >
+                                                            <input className="radio_animated" id="edo-ani2" 
+                                                            type="radio" name="etat" 
+                                                            value={this.state.desactive}
+                                                            onChange={this.handleInputChange}
+                                                            checked={this.state.etat === this.state.desactive}
                                                             />
-                                                            Inactif
+                                                            Désactivé
                                                         </label>
                                                     </div>
                                                 </div>
@@ -218,7 +231,7 @@ export class Create_user extends Component {
                                                 className="btn btn-primary"
                                                 onClick={this.handleSubmitChange}
                                                 disabled={isLoading}
-                                            >Enregistrer
+                                            >Save
                                             </button>
                                         </div>
                                     </form>
@@ -231,20 +244,19 @@ export class Create_user extends Component {
         )
     }
 }
-
 const mapStateToProps = (state) => {
     return {
-        adduser: state.adduser,
+        edituser: state.edituser,
         role: state.role,
-        roledetails: state.roledetails
+        userdetails: state.userdetails
     }
 }
 const mapDispatchToProps = (dispatch) =>{
     return {
-        newUser: (user) => {dispatch( userActions.newUser(user))},
+        editUser: (user) => {dispatch( userActions.editUser(user))},
         roles: () => {dispatch( roleActions.roles())},
-        actionsdetailRole: (rolename) => {dispatch( roleActions.actionsdetailRole(rolename))}
+        detailUser: (user)  => {dispatch( userActions.detailUser(user))},
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Create_user)
+export default connect(mapStateToProps, mapDispatchToProps)(Edit_user)

@@ -130,7 +130,7 @@ export const MENUITEMS = [
         title: 'Rôles', icon: UserPlus, type: 'sub', active: false, children: [
             { path: '/roles/roles-list', title: 'Liste des Rôles', type: 'link' },
             { path: '/roles/add-roles', title: 'Ajouter un rôle', type: 'link' },
-            { path: '/roles/change-roles', title: 'Modifier un rôle', type: 'link' },
+            // { path: '/roles/change-roles', title: 'Modifier un rôle', type: 'link' },
         ]
     },
     {

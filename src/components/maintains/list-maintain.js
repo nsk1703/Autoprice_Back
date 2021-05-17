@@ -25,7 +25,7 @@ export class List_maintain extends Component {
 
             this.props.maintenance.maintenances.map(maintenance => {
                 let item = {
-                    id: maintenance.id,
+                    ID: maintenance.id,
                     Nom: maintenance.nom,
                     Type: maintenance.type,
                     Montant: maintenance.montant,

@@ -1,6 +1,6 @@
 import React, { Component, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import './index.scss';
 import App from './components/app';
 import { ScrollContext } from 'react-router-scroll-4';
@@ -15,7 +15,7 @@ import thunk from 'redux-thunk';
 // Import of reducers
 import {appromonnaiesReducer, newAppromonnaieReducer, appromonnaieReducer, appromonnaieDetailsReducer} from './redux/reducers/appromonnaieReducers'
 import {approproduitsReducer, newApproproduitReducer, approproduitReducer, approproduitDetailsReducer} from './redux/reducers/approproduitReducers';
-// import {arduinoReducers} from './redux/reducers/arduinoReducers';
+import {newRoleReducer, roleReducer, rolesReducer, roleDetailsReducer} from './redux/reducers/rolesReducer';
 import {logssReducer, newLogsReducer, logsReducer, logsDetailsReducer} from './redux/reducers/logsReducers';
 import {categoryReducer, categoriesReducer, newCategoryReducer, categoryDetailsReducer} from './redux/reducers/categoryReducers';
 import {machinesReducer, newMachineReducer, machineReducer, machineDetailsReducer} from './redux/reducers/machineReducers';
@@ -26,7 +26,7 @@ import {productsReducer, newProductReducer, productReducer, productDetailsReduce
 import {remboursementsReducer, newRemboursementReducer, remboursementReducer, remboursementDetailsReducer} from './redux/reducers/remboursementReducers';
 import {slidesReducer, newSlideReducer, slideReducer, slideDetailsReducer} from './redux/reducers/slideReducers';
 import {transactionomsReducer, transactionomReducer, newTransactionomReducer, transactionomDetailsReducer} from './redux/reducers/transactionomReducers';
-import {authReducer, userReducer, forgotPasswordReducer, allUsersReducer, userDetailsReducer} from './redux/reducers/userReducers';
+import {authReducer, userReducer, forgotPasswordReducer, newUsersReducer, allUsersReducer, userDetailsReducer} from './redux/reducers/userReducers';
 
 // Components
 import Dashboard from './components/dashboard';
@@ -61,8 +61,7 @@ import Create_page from './components/pages/create-page';
 import Media from './components/media/media';
 import List_menu from './components/menus/list-menu';
 import Create_menu from './components/menus/create-menu';
-import List_user from './components/users/list-user';
-import Create_user from './components/users/create-user';
+
 import List_vendors from './components/vendors/list-vendors';
 import Create_vendors from './components/vendors/create.vendors';
 import Translations from './components/localization/translations';
@@ -81,6 +80,10 @@ import Edit_currency from './components/supply/currency/edit-currency';
 import Create_product from './components/supply/products/create-product';
 import List_product from './components/supply/products/list-product';
 import Edit_product from './components/supply/products/edit-product';
+
+import List_user from './components/users/list-user';
+import Edit_user from './components/users/edit-user';
+import Create_user from './components/users/create-user';
 
 import Create_machine from './components/machines/create-machine';
 import List_machine from './components/machines/list-machine';
@@ -104,8 +107,11 @@ import Change_password from './components/settings/change-password';
 import Add_roles from './components/roles/add-roles';
 import Roles_list from './components/roles/roles-list';
 import Change_roles from './components/roles/change-role';
+import Edit_roles from './components/roles/edit-roles';
 
-import { login } from './redux/actions/userActions';
+import PageNotFound from './components/PageNotFound';
+
+import ProtectedRoute from './routes/ProtectedRoute';
 
 axios.defaults.baseURL = process.env.REACT_APP_NEXT_PUBLIC_REST_API;
 
@@ -121,14 +127,19 @@ const rootReducers = combineReducers({
     order: allOrdersReducer,
     paiement: paiementsReducer, newPaiementReducer, paiementReducer, paiementDetailsReducer,
     product: productsReducer,
+    role: rolesReducer,
 
-    editproduct: productReducer,
+    productaction: productReducer,
+
+    // editproduct: productReducer,
     editappromonnaie: appromonnaieReducer,
     editapproproduit: approproduitReducer,
     editmachine: machineReducer,
     editmaintenance: maintenanceReducer,
     editslide: slideReducer,
     editcategory: categoryReducer,
+    edituser: userReducer,
+    editrole: roleReducer,
 
     maindetails: maintenanceDetailsReducer,
     machdetails: machineDetailsReducer,
@@ -137,6 +148,8 @@ const rootReducers = combineReducers({
     prodetails: productDetailsReducer,
     slidetails: slideDetailsReducer,
     catdetails: categoryDetailsReducer,
+    userdetails: userDetailsReducer,
+    roledetails: roleDetailsReducer,
     
     addappromonnaie: newAppromonnaieReducer, 
     addapproproduit: newApproproduitReducer,
@@ -144,12 +157,15 @@ const rootReducers = combineReducers({
     addmachine: newMachineReducer,
     addslide: newSlideReducer,
     addcategory: newCategoryReducer,
+    adduser: newUsersReducer,
+    addrole: newRoleReducer,
     addproduct: newProductReducer,
 
     remboursement: remboursementsReducer, newRemboursementReducer, remboursementReducer, remboursementDetailsReducer,
     slide: slidesReducer, 
     transactionom: transactionomsReducer, newTransactionomReducer, transactionomReducer, transactionomDetailsReducer,
-    user: authReducer, userReducer, forgotPasswordReducer, allUsersReducer, userDetailsReducer
+    auth: authReducer, 
+    user: allUsersReducer, userDetailsReducer,  userReducer, forgotPasswordReducer,
 });
 
 const store = createStore(rootReducers, applyMiddleware(thunk));
@@ -157,6 +173,17 @@ window.store = store;
 const token = window.localStorage.getItem('token')
 
 class Root extends Component {
+
+    componentDidMount = () => {
+        console.log(token)
+        // localStorage.
+        // let token = localStorage.removeItem('token')
+        // console.log(token)
+        // if(!token){
+        //     <Redirect to="/login"/>
+        // }
+    }
+
     
     // useEffect(() =>{
     //     if (!token) {
@@ -169,86 +196,92 @@ class Root extends Component {
                 <BrowserRouter basename={'/'}>
                     <ScrollContext>
                         <Switch>
-                            <Route path='/login' component={Login} />
+                            <Route exact path='/login' component={Login} />
+                            
                             {/* <Route exact path='/login' component={Login} /> */}
                             <App>
-                                <Route exact path='/' component={Dashboard} />
+                                {/* <Route component={PageNotFound} /> */}
+                                <ProtectedRoute exact path='/' component={Dashboard} />
                                     
-                                <Route path={`${process.env.PUBLIC_URL}/products/physical/category`} component={Category} />
-                                <Route path={`${process.env.PUBLIC_URL}/products/physical/sub-category`} component={Sub_category} />
-                                <Route path={`${process.env.PUBLIC_URL}/products/physical/product-list`} component={Product_list} />
-                                <Route path={`${process.env.PUBLIC_URL}/products/physical/product-detail`} component={Product_detail} />
-                                <Route path={`${process.env.PUBLIC_URL}/products/physical/add-product`} component={Add_product} />
-                                <Route path={`${process.env.PUBLIC_URL}/products/physical/edit-products/:id`} component={Edit_products} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/products/physical/category`} component={Category} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/products/physical/sub-category`} component={Sub_category} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/products/physical/product-list`} component={Product_list} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/products/physical/product-detail`} component={Product_detail} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/products/physical/add-product`} component={Add_product} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/products/physical/edit-products/:id`} component={Edit_products} />
 
-                                <Route path={`${process.env.PUBLIC_URL}/products/digital/digital-category`} component={Digital_category} />
-                                <Route path={`${process.env.PUBLIC_URL}/products/digital/digital-sub-category`} component={Digital_sub_category} />
-                                <Route path={`${process.env.PUBLIC_URL}/products/digital/digital-product-list`} component={Digital_pro_list} />
-                                <Route path={`${process.env.PUBLIC_URL}/products/digital/digital-add-product`} component={Digital_add_pro} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/products/digital/digital-category`} component={Digital_category} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/products/digital/digital-sub-category`} component={Digital_sub_category} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/products/digital/digital-product-list`} component={Digital_pro_list} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/products/digital/digital-add-product`} component={Digital_add_pro} />
 
-                                <Route path={`${process.env.PUBLIC_URL}/sales/orders`} component={Orders} />
-                                <Route path={`${process.env.PUBLIC_URL}/sales/transactions`} component={Transactions_sales} />
-                                <Route path={`${process.env.PUBLIC_URL}/sales/repayment`} component={Repayment_sales} />
-                                <Route path={`${process.env.PUBLIC_URL}/sales/mobile-pay`} component={Mobile_pay} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/sales/orders`} component={Orders} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/sales/transactions`} component={Transactions_sales} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/sales/repayment`} component={Repayment_sales} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/sales/mobile-pay`} component={Mobile_pay} />
 
-                                <Route path={`${process.env.PUBLIC_URL}/coupons/list-coupons`} component={ListCoupons} />
-                                <Route path={`${process.env.PUBLIC_URL}/coupons/create-coupons`} component={Create_coupons} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/coupons/list-coupons`} component={ListCoupons} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/coupons/create-coupons`} component={Create_coupons} />
 
-                                <Route path={`${process.env.PUBLIC_URL}/pages/list-page`} component={ListPages} />
-                                <Route path={`${process.env.PUBLIC_URL}/pages/create-page`} component={Create_page} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/pages/list-page`} component={ListPages} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/pages/create-page`} component={Create_page} />
 
-                                <Route path={`${process.env.PUBLIC_URL}/media`} component={Media} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/media`} component={Media} />
 
-                                <Route path={`${process.env.PUBLIC_URL}/menus/list-menu`} component={List_menu} />
-                                <Route path={`${process.env.PUBLIC_URL}/menus/create-menu`} component={Create_menu} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/menus/list-menu`} component={List_menu} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/menus/create-menu`} component={Create_menu} />
 
-                                <Route path={`${process.env.PUBLIC_URL}/users/list-user`} component={List_user} />
-                                <Route path={`${process.env.PUBLIC_URL}/users/create-user`} component={Create_user} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/users/list-user`} component={List_user} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/users/create-user`} component={Create_user} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/users/edit-user/:id`} component={Edit_user} />
 
-                                <Route path={`${process.env.PUBLIC_URL}/vendors/list_vendors`} component={List_vendors} />
-                                <Route path={`${process.env.PUBLIC_URL}/vendors/create-vendors`} component={Create_vendors} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/vendors/list_vendors`} component={List_vendors} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/vendors/create-vendors`} component={Create_vendors} />
 
-                                <Route path={`${process.env.PUBLIC_URL}/localization/transactions`} component={Translations} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/localization/transactions`} component={Translations} />
                                 <Route path={`${process.env.PUBLIC_URL}/localization/currency-rates`} component={Rates} />
                                 <Route path={`${process.env.PUBLIC_URL}/localization/taxes`} component={Taxes} />
 
-                                <Route path={`${process.env.PUBLIC_URL}/reports/report`} component={Reports} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/reports/report`} component={Reports} />
 
-                                <Route path={`${process.env.PUBLIC_URL}/settings/profile`} component={Profile} />
-                                <Route path={`${process.env.PUBLIC_URL}/settings/change-profile`} component={Change_profile} />
-                                <Route path={`${process.env.PUBLIC_URL}/settings/change-password`} component={Change_password} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/settings/profile`} component={Profile} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/settings/change-profile`} component={Change_profile} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/settings/change-password`} component={Change_password} />
 
-                                <Route path={`${process.env.PUBLIC_URL}/invoice`} component={Invoice} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/invoice`} component={Invoice} />
 
-                                <Route path={`${process.env.PUBLIC_URL}/data-table`} component={Datatable} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/data-table`} component={Datatable} />
 
-                                <Route path={`${process.env.PUBLIC_URL}/supply/currency/create-currency`} component={Create_currency}/>
-                                <Route path={`${process.env.PUBLIC_URL}/supply/currency/list-currency`} component={List_currency}/>
-                                <Route path={`${process.env.PUBLIC_URL}/supply/currency/edit-currency/:id`} component={Edit_currency}/>
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/supply/currency/create-currency`} component={Create_currency}/>
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/supply/currency/list-currency`} component={List_currency}/>
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/supply/currency/edit-currency/:id`} component={Edit_currency}/>
 
-                                <Route path={`${process.env.PUBLIC_URL}/supply/products/create-product`} component={Create_product}/>
-                                <Route path={`${process.env.PUBLIC_URL}/supply/products/list-product`} component={List_product}/>
-                                <Route path={`${process.env.PUBLIC_URL}/supply/products/edit-product/:id`} component={Edit_product}/>
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/supply/products/create-product`} component={Create_product}/>
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/supply/products/list-product`} component={List_product}/>
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/supply/products/edit-product/:id`} component={Edit_product}/>
                                 
-                                <Route path={`${process.env.PUBLIC_URL}/machines/create-machine`} component={Create_machine}/>
-                                <Route path={`${process.env.PUBLIC_URL}/machines/list-machine`} component={List_machine}/>
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/machines/create-machine`} component={Create_machine}/>
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/machines/list-machine`} component={List_machine}/>
                                 <Route path={`${process.env.PUBLIC_URL}/machines/edit-machine/:id`} component={Edit_machine}/>
 
-                                <Route path={`${process.env.PUBLIC_URL}/maintains/create-maintain`} component={Create_maintain}/>
-                                <Route path={`${process.env.PUBLIC_URL}/maintains/list-maintain`} component={List_maintain}/>
-                                <Route path={`${process.env.PUBLIC_URL}/maintains/edit-maintain/:id`} component={Edit_maintain}/>
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/maintains/create-maintain`} component={Create_maintain}/>
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/maintains/list-maintain`} component={List_maintain}/>
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/maintains/edit-maintain/:id`} component={Edit_maintain}/>
                                 
-                                <Route path={`${process.env.PUBLIC_URL}/slides/create-slide`} component={Create_slide}/>
-                                <Route path={`${process.env.PUBLIC_URL}/slides/list-slide`} component={List_slide}/>
-                                <Route path={`${process.env.PUBLIC_URL}/slides/edit-slide/:id`} component={Edit_slide}/>
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/slides/create-slide`} component={Create_slide}/>
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/slides/list-slide`} component={List_slide}/>
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/slides/edit-slide/:id`} component={Edit_slide}/>
                                 
-                                <Route path={`${process.env.PUBLIC_URL}/logs/Log`} component={Log}/>
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/logs/Log`} component={Log}/>
 
-                                <Route path={`${process.env.PUBLIC_URL}/roles/add-roles`} component={Add_roles}/>
-                                <Route path={`${process.env.PUBLIC_URL}/roles/roles-list`} component={Roles_list}/>
-                                <Route path={`${process.env.PUBLIC_URL}/roles/change_roles`} component={Change_roles}/>
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/roles/add-roles`} component={Add_roles}/>
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/roles/roles-list`} component={Roles_list}/>
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/roles/change_roles`} component={Change_roles}/>
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/roles/edit-roles/:id`} component={Edit_roles}/>
 
+                               
                             </App>
+
                         </Switch>
                     </ScrollContext>
                 </BrowserRouter>

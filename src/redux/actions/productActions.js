@@ -217,3 +217,51 @@ export const detailProduct = (productId) => {
             });
     }
 }
+
+export const deleteProduct = (productID) => {
+    // console.log()
+
+    return (dispatch) => {
+        dispatch({
+            type: productConstants.DELETE_PRODUCT_REQUEST
+        });
+
+        const token = localStorage.getItem('token');
+        let config = {
+            headers: {
+              'USER-KEY': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            }
+          }
+
+        // console.log(productID)
+        axios.delete(`/product/${productID}`,config)
+        .then((response) => {
+            console.log(response)
+            if(response.data.success === true){
+                const {success} = response.data
+                    console.log(success)
+
+                // axios.get('products')
+                //     .then((response))
+                dispatch({
+                    type: productConstants.DELETE_PRODUCT_SUCCESS,
+                    payload: {isDeleted: success}
+                })
+            }else{
+                if (response.data.success === false) {
+                    // console.log(response.data.full_messages[0])
+                    toast.error(response.data.full_messages[0]);
+                    dispatch({
+                        type: productConstants.DELETE_PRODUCT_FAIL,
+                        payload: { error: response.data.full_messages[0] }
+                    });
+                }
+            }
+        })
+        .catch((error) => {
+            console.log("Oops, Request failed!");
+        });
+
+    }
+}

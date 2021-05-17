@@ -1,55 +1,24 @@
-import { authConstants } from "../../constants/userConstants"; 
-import {
-    UPDATE_PASSWORD_REQUEST,
-    UPDATE_PASSWORD_SUCCESS,
-    UPDATE_PASSWORD_RESET,
-    UPDATE_PASSWORD_FAIL,
-    UPDATE_PROFILE_REQUEST,
-    UPDATE_PROFILE_SUCCESS,
-    UPDATE_PROFILE_RESET,
-    UPDATE_PROFILE_FAIL,
-    FORGOT_PASSWORD_REQUEST,
-    FORGOT_PASSWORD_SUCCESS,
-    FORGOT_PASSWORD_FAIL,
-    NEW_PASSWORD_REQUEST,
-    NEW_PASSWORD_SUCCESS,
-    NEW_PASSWORD_FAIL,
-    ALL_USERS_REQUEST,
-    ALL_USERS_SUCCESS,
-    ALL_USERS_FAIL,
-    USER_DETAILS_REQUEST,
-    USER_DETAILS_SUCCESS,
-    USER_DETAILS_FAIL,
-    UPDATE_USER_REQUEST,
-    UPDATE_USER_SUCCESS,
-    UPDATE_USER_RESET,
-    UPDATE_USER_FAIL,
-    DELETE_USER_REQUEST,
-    DELETE_USER_SUCCESS,
-    DELETE_USER_RESET,
-    DELETE_USER_FAIL,
-    CLEAR_ERRORS
-} from '../../constants/userConstants'
+import { userConstants } from "../../constants/userConstants"; 
 
 export const authReducer = (state = { user: {}, token: null, roles:{}, isAuthenticated: false, isRegistered: true }, action) => {
     console.log(action.type);
     switch (action.type) {
 
-        case authConstants.REGISTER_USER_REQUEST:
+        case userConstants.REGISTER_USER_REQUEST:
             return {
                 loading: true,
                 isRegistered: false
             }
             
-        case authConstants.LOGIN_REQUEST:
-        case authConstants.LOAD_USER_REQUEST:
+        case userConstants.LOGIN_REQUEST:
+        case userConstants.LOAD_USER_REQUEST:
             return {
                 loading: true,
                 isAuthenticated: false,
             } 
 
-        case authConstants.LOGIN_SUCCESS:
-        case authConstants.LOAD_USER_SUCCESS:
+        case userConstants.LOGIN_SUCCESS:
+        case userConstants.LOAD_USER_SUCCESS:
             return {
                 ...state,
                 loading: false,
@@ -59,7 +28,7 @@ export const authReducer = (state = { user: {}, token: null, roles:{}, isAuthent
                 roles: action.payload.roles
             }
 
-        case authConstants.REGISTER_USER_SUCCESS:
+        case userConstants.REGISTER_USER_SUCCESS:
             return {
                 ...state,
                 loading: false,
@@ -67,14 +36,14 @@ export const authReducer = (state = { user: {}, token: null, roles:{}, isAuthent
                 
             }
 
-        case authConstants.LOGOUT_SUCCESS:
+        case userConstants.LOGOUT_SUCCESS:
             return {
                 loading: false,
                 isAuthenticated: false,
                 user: null
             }
 
-        case authConstants.LOAD_USER_FAIL:
+        case userConstants.LOAD_USER_FAIL:
             return {
                 loading: false,
                 isAuthenticated: false,
@@ -82,14 +51,14 @@ export const authReducer = (state = { user: {}, token: null, roles:{}, isAuthent
                 error: action.payload
             }
 
-        case authConstants.LOGOUT_FAIL:
+        case userConstants.LOGOUT_FAIL:
             return {
                 ...state,
                 error: action.payload
             }
 
-        case authConstants.LOGIN_FAIL:
-        case authConstants.REGISTER_USER_FAIL:
+        case userConstants.LOGIN_FAIL:
+        case userConstants.REGISTER_USER_FAIL:
             return {
                 ...state,
                 loading: false,
@@ -98,7 +67,7 @@ export const authReducer = (state = { user: {}, token: null, roles:{}, isAuthent
                 message: action.payload
             }
 
-        case CLEAR_ERRORS:
+        case userConstants.CLEAR_ERRORS:
             return {
                 ...state,
                 error: null
@@ -112,56 +81,56 @@ export const authReducer = (state = { user: {}, token: null, roles:{}, isAuthent
 export const userReducer = (state = {}, action) => {
     switch (action.type) {
 
-        case UPDATE_PROFILE_REQUEST:
-        case UPDATE_PASSWORD_REQUEST:
-        case UPDATE_USER_REQUEST:
-        case DELETE_USER_REQUEST:
+        case userConstants.UPDATE_PROFILE_REQUEST:
+        case userConstants.UPDATE_PASSWORD_REQUEST:
+        case userConstants.UPDATE_USER_REQUEST:
+        case userConstants.DELETE_USER_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case UPDATE_PROFILE_SUCCESS:
-        case UPDATE_PASSWORD_SUCCESS:
-        case UPDATE_USER_SUCCESS:
+        case userConstants.UPDATE_PROFILE_SUCCESS:
+        case userConstants.UPDATE_PASSWORD_SUCCESS:
+        case userConstants.UPDATE_USER_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 isUpdated: action.payload
             }
 
-        case DELETE_USER_SUCCESS:
+        case userConstants.DELETE_USER_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 isDeleted: action.payload
             }
 
-        case UPDATE_PROFILE_RESET:
-        case UPDATE_PASSWORD_RESET:
-        case UPDATE_USER_RESET:
+        case userConstants.UPDATE_PROFILE_RESET:
+        case userConstants.UPDATE_PASSWORD_RESET:
+        case userConstants.UPDATE_USER_RESET:
             return {
                 ...state,
                 isUpdated: false
             }
 
-        case DELETE_USER_RESET:
+        case userConstants.DELETE_USER_RESET:
             return {
                 ...state,
                 isDeleted: false
             }
 
-        case UPDATE_PROFILE_FAIL:
-        case UPDATE_PASSWORD_FAIL:
-        case UPDATE_USER_FAIL:
-        case DELETE_USER_FAIL:
+        case userConstants.UPDATE_PROFILE_FAIL:
+        case userConstants.UPDATE_PASSWORD_FAIL:
+        case userConstants.UPDATE_USER_FAIL:
+        case userConstants.DELETE_USER_FAIL:
             return {
                 ...state,
                 loading: false,
                 error: action.payload
             }
 
-        case CLEAR_ERRORS:
+        case userConstants.CLEAR_ERRORS:
             return {
                 ...state,
                 error: null
@@ -175,36 +144,70 @@ export const userReducer = (state = {}, action) => {
 export const forgotPasswordReducer = (state = {}, action) => {
     switch (action.type) {
 
-        case FORGOT_PASSWORD_REQUEST:
-        case NEW_PASSWORD_REQUEST:
+        case userConstants.FORGOT_PASSWORD_REQUEST:
+        case userConstants.NEW_PASSWORD_REQUEST:
             return {
                 ...state,
                 loading: true,
                 error: null
             }
 
-        case FORGOT_PASSWORD_SUCCESS:
+        case userConstants.FORGOT_PASSWORD_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 message: action.payload
             }
 
-        case NEW_PASSWORD_SUCCESS:
+        case userConstants.NEW_PASSWORD_SUCCESS:
             return {
                 ...state,
                 success: action.payload
             }
 
-        case FORGOT_PASSWORD_FAIL:
-        case NEW_PASSWORD_FAIL:
+        case userConstants.FORGOT_PASSWORD_FAIL:
+        case userConstants.NEW_PASSWORD_FAIL:
             return {
                 ...state,
                 loading: false,
                 error: action.payload
             }
 
-        case CLEAR_ERRORS:
+        case userConstants.CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state;
+    }
+}
+
+export const newUsersReducer = (state = { users: [] }, action) => {
+    switch (action.type) {
+
+        case userConstants.NEW_USERS_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+
+        case userConstants.NEW_USERS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                success: action.payload.success,
+            }
+
+        case userConstants.NEW_USERS_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+
+        case userConstants.CLEAR_ERRORS:
             return {
                 ...state,
                 error: null
@@ -218,27 +221,27 @@ export const forgotPasswordReducer = (state = {}, action) => {
 export const allUsersReducer = (state = { users: [] }, action) => {
     switch (action.type) {
 
-        case ALL_USERS_REQUEST:
+        case userConstants.ALL_USERS_REQUEST:
             return {
                 ...state,
                 loading: true,
             }
 
-        case ALL_USERS_SUCCESS:
+        case userConstants.ALL_USERS_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                users: action.payload
+                users: action.payload.users
             }
 
-        case ALL_USERS_FAIL:
+        case userConstants.ALL_USERS_FAIL:
             return {
                 ...state,
                 loading: false,
                 error: action.payload
             }
 
-        case CLEAR_ERRORS:
+        case userConstants.CLEAR_ERRORS:
             return {
                 ...state,
                 error: null
@@ -252,27 +255,27 @@ export const allUsersReducer = (state = { users: [] }, action) => {
 export const userDetailsReducer = (state = { user: {} }, action) => {
     switch (action.type) {
 
-        case USER_DETAILS_REQUEST:
+        case userConstants.USER_DETAILS_REQUEST:
             return {
                 ...state,
                 loading: true,
             }
 
-        case USER_DETAILS_SUCCESS:
+        case userConstants.USER_DETAILS_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                user: action.payload
+                user: action.payload.user
             }
 
-        case USER_DETAILS_FAIL:
+        case userConstants.USER_DETAILS_FAIL:
             return {
                 ...state,
                 loading: false,
                 error: action.payload
             }
 
-        case CLEAR_ERRORS:
+        case userConstants.CLEAR_ERRORS:
             return {
                 ...state,
                 error: null
