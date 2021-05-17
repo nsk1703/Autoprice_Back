@@ -55,8 +55,8 @@ export const newMachineReducer = (state = { machine: {} }, action) => {
             return {
                 loading: false,
                 success: action.payload.success,
-                machine: action.payload.machine,
-                token: action.payload.token
+                // machine: action.payload.machine,
+                // token: action.payload.token
             }
 
         case machineConstants.NEW_MACHINE_FAIL:

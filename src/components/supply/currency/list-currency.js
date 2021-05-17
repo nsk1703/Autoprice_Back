@@ -17,15 +17,16 @@ export class List_currency extends Component {
             currencies: []
         };
 
+        // console.log(this.props)
         this.props.appromonnaies();
 
         setTimeout(() => {
-            console.log(this.props.appromonnaie.appromonnaies)
+            // console.log(this.props.appromonnaie.appromonnaies)
 
             this.props.appromonnaie.appromonnaies.map(appromonnaie => {
                
                 let item = {
-                    ID: "#"+appromonnaie.id,
+                    ID: appromonnaie.id,
                     etat: appromonnaie.etat,
                     quantite: <span className="badge badge-info">{appromonnaie.quantite} FCFA</span>,
                     Machine: appromonnaie.machine_id.nom,
@@ -49,13 +50,13 @@ export class List_currency extends Component {
         const { currencies } = this.state
         return (
             <Fragment>
-                <Breadcrumb title="Liste des monnaies" parent="Monnaies" />
+                <Breadcrumb title="Liste des monnaies" parent="Approvisionnement / Monnaies" />
                 <div className="container-fluid">
                     <div className="card">
+                        <div className="card-header">
+                            <Link to="/supply/currency/create-currency" className="btn btn-primary">Ajout de Monnaie</Link>
+                        </div>
                         <div className="card-body">
-                            <div className="btn-popup pull-right">
-                                <Link to="/supply/currency/create-currency" className="btn btn-primary">Ajout de Monnaie</Link>
-                            </div>
                             <ToastContainer />
                             <div className="clearfix"></div>
                             <div id="batchDelete" className="category-table user-list appromonnaie-table coupon-list-delete">
@@ -83,7 +84,8 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps = (dispatch) =>{
     return {
-        appromonnaies: () => {dispatch(appromonnaieActions.appromonnaies())}
+        appromonnaies: () => {dispatch(appromonnaieActions.appromonnaies())},
+        // deleteAppromonnaie: (moneyID) => {dispatch(appromonnaieActions.deleteAppromonnaie(moneyID))}
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(List_currency)

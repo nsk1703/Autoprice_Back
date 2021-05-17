@@ -25,9 +25,9 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 
 export class Dashboard extends Component {
-
+    
     render() {
-
+        // console.log(localStorage.getItem('roles'))
         const lineData = {
             labels: ['100', '200', '300', '400', '500', '600', '700', '800'],
             datasets: [

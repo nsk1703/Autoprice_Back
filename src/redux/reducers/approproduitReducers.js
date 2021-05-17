@@ -55,7 +55,7 @@ export const newApproproduitReducer = (state = { approproduit: {} }, action) => 
             return {
                 loading: false,
                 success: action.payload.success,
-                approproduit: action.payload.approproduit
+                // approproduit: action.payload.approproduit
             }
 
         case approproduitConstants.NEW_APPROPRODUIT_FAIL:

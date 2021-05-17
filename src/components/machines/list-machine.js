@@ -25,20 +25,25 @@ export class List_machine extends Component {
 
             this.props.machine.machines.map(machine => {
                 let item = {
-                    ID: '#' + machine.id,
+                    ID: machine.id,
                     Nom: machine.nom,
                     Type: machine.type,
-                    lien:machine.lien,
-                    statut:machine.status,
-                    etat:machine.etat,
-                    description:machine.description
+                    Montant: machine.montant,
+                    lien: machine.lien,
+                    statut: machine.status,
+                    etat: machine.etat,
+                    description: machine.description
                 }
+
                 listMachines.push(item);
             })
+            
             this.setState({
-                    machines: listMachines
-                })
+                machines: listMachines
+            })
+            
         }, 1000)
+
         this.state = {
             open: false,
             machines: listMachines
@@ -55,7 +60,7 @@ export class List_machine extends Component {
                             <h5>User Details</h5>
                         </div> */}
                         <div className="card-body">
-                            <div className="btn-popup pull-right">
+                            <div className="btn-popup pull-left">
                                 <Link to="/machines/create-machine" className="btn btn-primary">Ajout de Machine</Link>
                             </div>
                             <div className="clearfix"></div>

@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 export class Datatable extends Component {
+
     constructor(props) {
         super(props)
         this.state = {
@@ -29,9 +30,11 @@ export class Datatable extends Component {
 
     handleRemoveRow = () => {
         const selectedValues = this.state.checkedValues;
+
         const updatedData = this.state.myData.filter(function (el) {
             return selectedValues.indexOf(el.id) < 0;
         });
+
         this.setState({
             myData: updatedData
         })

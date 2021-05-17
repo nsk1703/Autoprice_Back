@@ -1,14 +1,11 @@
 import React, { Component,Fragment } from 'react'
 import Breadcrumb from '../common/breadcrumb';
 import Tabset_maintain from './tabset-maintain';
-import CKEditors from 'react-ckeditor-component';
+import moment from 'moment';
 import * as maintenanceActions from "../../redux/actions/maintenanceActions";
 import {connect} from "react-redux";
 import * as machineActions from "../../redux/actions/machineActions";
 import Select from 'react-select';
-import { Link } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-
 
 const choices = [
     {value: 'type1', label:'Type 1'},
@@ -16,8 +13,9 @@ const choices = [
     {value: 'type3', label:'Type 3'}
 ]
 
-export class Create_maintain extends Component {
-        constructor(props) {
+export class Edit_maintain extends Component {
+
+    constructor(props) {
         super(props);
         let options = []
         let listMachines = []
@@ -26,7 +24,7 @@ export class Create_maintain extends Component {
             open: false,
             nom: '',
             type: '',
-            dateMaintenance: '',
+            dateMaintenance: new Date().toString(),
             montant: '',
             description: '',
             machine_id: '',
@@ -40,7 +38,6 @@ export class Create_maintain extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmitChange = this.handleSubmitChange.bind(this)
         this.handleSelect = this.handleSelect.bind(this)
-        // this.handleCkeditorChange = this.handleCkeditorChange.bind(this)
 
         this.props.machines();
 
@@ -65,7 +62,7 @@ export class Create_maintain extends Component {
                 // console.log(option)
                 options.push(option)
             })
-            // console.log('11111',options)
+            console.log('11111',options)
           
             this.setState({
                 AllOptions: options
@@ -91,20 +88,48 @@ export class Create_maintain extends Component {
         this.setState({ type })   
     }
 
+    componentDidMount = () => {
+        // console.log(this.props.maintenance)
+        // console.log(this.props.maintenance.dateMaintenance)
+
+        this.props.detailmaintenance(this.props.match.params.id)
+
+        setTimeout(() => {
+
+            // console.log(this.props.maindetails.maintenance.maintenance)
+            
+            let type = {value: this.props.maindetails.maintenance.maintenance.type, 
+                        label: this.props.maindetails.maintenance.maintenance.type}
+
+            let machine = {value: this.props.maindetails.maintenance.maintenance.machine_id.id, 
+                           label: this.props.maindetails.maintenance.maintenance.nom}
+
+            console.log(machine)
+            this.setState({
+                id: this.props.maindetails.maintenance.maintenance.id,
+                nom: this.props.maindetails.maintenance.maintenance.nom,
+                type: type ? type : '',
+                machine_id: machine ? machine : '',
+                dateMaintenance: this.props.maindetails.maintenance.maintenance.dateMaintenance,
+                montant: this.props.maindetails.maintenance.maintenance.montant,
+                description: this.props.maindetails.maintenance.maintenance.description
+            })
+        }, 1000)
+    }
+
     handleSubmitChange = (e) => {
         e.preventDefault();
-        // console.log(this.state.AllOptions)
         this.setState({
             isLoading: true
         })
-        this.props.newMaintenance(this.state)
+        this.props.editMaintenance(this.state)
 
         setTimeout(()=> {
-            console.log(this.props.addmaintenance.success)
-            if(this.props.addmaintenance.success === true){
+            console.log(this.props.editmaintenance.isUpdated)
+            if(this.props.editmaintenance.isUpdated.isUpdated === true){
                 this.props.history.push('/maintains/list-maintain');
             }else{
-                this.props.history.push('/maintains/create-maintain');
+                this.props.history.push('/maintains/edit-maintain/'+ this.state.id);
                 this.setState({
                     isLoading: false
                 })
@@ -113,6 +138,7 @@ export class Create_maintain extends Component {
        
 
     }
+    
     render() {
         const {AllOptions, nom, type, montant, dateMaintenance, description, machine_id, isLoading} = this.state
 
@@ -124,11 +150,10 @@ export class Create_maintain extends Component {
                         <div className="col-sm-12">
                             <div className="card">
                                 <div className="card-header">
-                                    <Link type="button" to="/maintains/list-maintain" 
-                                    className="btn btn-primary">Retour</Link>
+                                    <h5> Modifier une maintenance</h5>
                                 </div>
                                 <div className="card-body">
-                                    <form className="needs-validation user-add" noValidate="">
+                                    <form className="needs-validation">
                                         <div className="form-group row">
                                             <label className="col-xl-3 col-md-4"><span>*</span> Nom</label>
                                             <input className="form-control col-xl-8 col-md-7" 
@@ -150,9 +175,10 @@ export class Create_maintain extends Component {
                                         <div className="form-group row">
                                             <label className="col-xl-3 col-md-4"><span>*</span> Date de Maintenance</label>
                                             <input className="form-control col-xl-8 col-md-7" 
-                                            id="validationCustom1" type="date" 
+                                            id="validationCustom1" 
+                                            type="date" 
                                             name='dateMaintenance'
-                                            value={dateMaintenance}
+                                            value={moment(dateMaintenance).format("YYYY-MM-DD")}
                                             onChange={this.handleInputChange}
                                             required="" />
                                         </div>
@@ -184,20 +210,20 @@ export class Create_maintain extends Component {
                                             <div className="form-group row">
                                                 <label className="col-xl-3 col-md-4">Description :</label>
                                                 {/* <div className=" form-control col-xl-8 col-md-7"> */}
-                                                    <textarea className=" form-control col-xl-8 col-md-7" name="description" value={description} 
+                                                    <textarea className=" form-control col-xl-8 col-md-7" 
+                                                    name="description" value={description} 
                                                         onChange={this.handleInputChange}
                                                         rows="10" cols="92"
                                                     />
                                                 {/* </div> */}
                                             </div>
                                         </div>
-                                        <ToastContainer />
                                         <div className="offset-xl-3 offset-sm-4">
                                             <button type="button" 
                                             className="btn btn-primary"
                                             onClick={this.handleSubmitChange}
                                             disabled={isLoading}
-                                            >Enregister</button>
+                                            >Modifier</button>
                                         </div>
                                     </form>
                                 </div>
@@ -210,17 +236,20 @@ export class Create_maintain extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
+
     return {
-        addmaintenance: state.addmaintenance,
-        machine: state.machine
+        editmaintenance: state.editmaintenance,
+        machine: state.machine,
+        maindetails: state.maindetails
     }
 }
 const mapDispatchToProps = (dispatch) =>{
     return {
-        newMaintenance: (maintenance) => {dispatch( maintenanceActions.newMaintenance(maintenance))},
-        machines: () => {dispatch( machineActions.machines())}
+        editMaintenance: (maintenance) => {dispatch( maintenanceActions.editMaintenance(maintenance))},
+        machines: () => {dispatch( machineActions.machines())},
+        detailmaintenance: (mainid) => {dispatch( maintenanceActions.detailmaintenance(mainid))},
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Create_maintain)
+export default connect(mapStateToProps, mapDispatchToProps)(Edit_maintain)

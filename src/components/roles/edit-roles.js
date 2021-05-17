@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import * as roleActions from "../../redux/actions/roleActions";
 import {connect} from "react-redux";
 
-export class Add_roles extends Component {
+export class edit_roles extends Component {
     constructor(props) {
         super(props);
 
@@ -16,7 +16,7 @@ export class Add_roles extends Component {
 
             active: "1",
             desactive: "0",
-
+            id: null,
             name: '',
             description: '',           
             
@@ -71,6 +71,7 @@ export class Add_roles extends Component {
             ajouterUtilisateur: '0',
             modifierUtilisateur: '0',
             supprimerUtilisateur: '0',
+
         };
 
         this.handleInputChange = this.handleInputChange.bind(this)
@@ -80,8 +81,79 @@ export class Add_roles extends Component {
 
     handleInputChange = (e) => {
         this.setState({
-                [e.target.name]: e.target.value,
+            [e.target.name]: e.target.value,
         })
+    }
+
+    componentDidMount = () => {
+        let param = this.props.match.params.id
+        console.log(param)
+
+        this.props.detailRole(param);
+
+        setTimeout(() => {
+            console.log(this.props.roledetails.role)
+
+            this.setState({
+                id: this.props.match.params.id,
+                name: this.props.roledetails.role.name,
+                description: this.props.roledetails.role.description,           
+                
+                dashboard: this.props.roledetails.role.dashboard,
+                log: this.props.roledetails.role.log,
+                statistique: this.props.roledetails.role.statistique,
+                commandes: this.props.roledetails.role.commandes,
+                paiements: this.props.roledetails.role.paiements,
+                remboursements: this.props.roledetails.role.remboursements,
+
+                listeProduit: this.props.roledetails.role.listeProduit,
+                ajouterProduit: this.props.roledetails.role.ajouterProduit,
+                modifierProduit: this.props.roledetails.role.modifierProduit,
+                supprimerProduit: this.props.roledetails.role.supprimerProduit,
+
+                listeCategorie: this.props.roledetails.role.listeCategorie,
+                ajouterCategorie: this.props.roledetails.role.ajouterCategorie,
+                modifierCategorie: this.props.roledetails.role.modifierCategorie,
+                supprimerCategorie: this.props.roledetails.role.supprimerCategorie,
+
+                listeApproMonnaie: this.props.roledetails.role.listeApproMonnaie,
+                ajouterApproMonnaie: this.props.roledetails.role.ajouterApproMonnaie,
+                modifierApproMonnaie: this.props.roledetails.role.modifierApproMonnaie,
+                supprimerApproMonnaie: this.props.roledetails.role.supprimerApproMonnaie,
+
+                listeApproProduit: this.props.roledetails.role.listeApproProduit,
+                ajouterApproProduit: this.props.roledetails.role.ajouterApproProduit,
+                modifierApproProduit: this.props.roledetails.role.modifierApproProduit,
+                supprimerApproProduit: this.props.roledetails.role.supprimerApproProduit,
+
+                listeMachine: this.props.roledetails.role.listeMachine,
+                ajouterMachine: this.props.roledetails.role.ajouterMachine,
+                modifierMachine: this.props.roledetails.role.modifierMachine,
+                supprimerMachine: this.props.roledetails.role.supprimerMachine,
+
+                listeMaintenance: this.props.roledetails.role.listeMaintenance,
+                ajouterMaintenance: this.props.roledetails.role.ajouterMaintenance,
+                modifierMaintenance: this.props.roledetails.role.modifierMaintenance,
+                supprimerMaintenance: this.props.roledetails.role.supprimerMaintenance,
+
+                listeSlide:this.props.roledetails.role.listeSlide,
+                ajouterSlide:this.props.roledetails.role.ajouterSlide,
+                modifierSlide:this.props.roledetails.role.modifierSlide,
+                supprimerSlide:this.props.roledetails.role.supprimerSlide,
+
+                listeRole: this.props.roledetails.role.listeRole,
+                ajouterRole: this.props.roledetails.role.ajouterRole,
+                modifierRole: this.props.roledetails.role.modifierRole,
+                supprimerRole: this.props.roledetails.role.supprimerRole,
+
+                listeUtilisateur: this.props.roledetails.role.listeUtilisateur,
+                ajouterUtilisateur: this.props.roledetails.role.ajouterUtilisateur,
+                modifierUtilisateur: this.props.roledetails.role.modifierUtilisateur,
+                supprimerUtilisateur: this.props.roledetails.role.supprimerUtilisateur,
+
+            })
+            
+        },1000)
     }
 
     handleSubmitChange = (e) => {
@@ -90,14 +162,14 @@ export class Add_roles extends Component {
         this.setState({
             isLoading: true
         })
-        this.props.newRole(this.state)
+        this.props.editRole(this.state)
 
         setTimeout(()=> {
-            console.log(this.props.addrole.success)
-            if(this.props.addrole.success === true){
+            console.log(this.props.editrole.isUpdated)
+            if(this.props.editrole.isUpdated === true){
                 this.props.history.push('/roles/roles-list');
             }else{
-                this.props.history.push('/roles/add-roles');
+                this.props.history.push('/roles/edit-roles/'+this.state.id);
                 this.setState({
                     isLoading: false
                 })
@@ -106,7 +178,6 @@ export class Add_roles extends Component {
     }
 
     render() {
-        
         return (
             <Fragment>    
                 <Breadcrumb title="Ajouter un rôle " parent="Rôles" />
@@ -161,6 +232,7 @@ export class Add_roles extends Component {
                                                             value={this.state.desactive}
                                                             onChange={this.handleInputChange}
                                                             checked={this.state.listeProduit === this.state.desactive}
+                                                            // defaultChecked 
                                                             />
                                                             Désactivé
                                                         </label>
@@ -1324,13 +1396,16 @@ export class Add_roles extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        addrole: state.addrole,
-    }
-}
-const mapDispatchToProps = (dispatch) =>{
-    return {
-        newRole: (role) => {dispatch(roleActions.newRole(role))},
+        editrole: state.editrole,
+        roledetails: state.roledetails
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Add_roles)
+const mapDispatchToProps = (dispatch) =>{
+    return {
+        editRole: (roleid) => {dispatch(roleActions.editRole(roleid))},
+        detailRole: (roleid) => {dispatch(roleActions.detailRole(roleid))},
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(edit_roles)

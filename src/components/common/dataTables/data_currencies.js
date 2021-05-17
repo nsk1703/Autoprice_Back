@@ -4,14 +4,22 @@ import 'react-table/react-table.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
+import {connect} from "react-redux";
+import * as appromonnaieActions from "../../../redux/actions/appromonnaieActions";
+import { withRouter, Redirect, Router } from 'react-router-dom';
+import axios from "axios";
 
-export class Data_currencies extends Component {
+
+class Data_currencies extends Component {
+
     constructor(props) {
         super(props)
         this.state = {
             checkedValues: [],
-            myData: this.props.myData
+            myData: this.props.myData,
+            listData: []
         }
+       
     }
 
     selectRow = (e, i) => {
@@ -29,13 +37,28 @@ export class Data_currencies extends Component {
 
     handleRemoveRow = () => {
         const selectedValues = this.state.checkedValues;
-        const updatedData = this.state.myData.filter(function (el) {
-            return selectedValues.indexOf(el.id) < 0;
-        });
-        this.setState({
-            myData: updatedData
-        })
-        toast.success("Successfully Deleted !")
+        console.log(selectedValues);
+        
+        const token = localStorage.getItem('token');
+        let config = {
+            headers: {
+              'USER-KEY': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            }
+          }
+
+        axios.delete(`appromonnaie/${selectedValues}`, config)
+            .then(() => {
+                axios.get('/appromonnaies')
+                    .then((response) => {
+                        const {appromonnaies} = response.data
+                        this.setState({
+                            myData: appromonnaies
+                        })
+                    })
+            })
+        
+        toast.success("Successfully Deleted !")        
     };
 
     renderEditable = (cellInfo) => {
@@ -63,10 +86,12 @@ export class Data_currencies extends Component {
     render() {
         const { pageSize, myClass, check, multiSelectOption, pagination } = this.props;
         const { myData } = this.state
-
+        
         const columns = [];
+
         for (var key in myData[0]) {
 
+            // console.log('key', key)
             let editable = this.renderEditable
             if (key === "image") {
                 editable = null;
@@ -112,12 +137,19 @@ export class Data_currencies extends Component {
                     textAlign: 'center'
                 },
                 Cell: (row) => (
+                    // console.log(row.original.ID)
                     <div>
                         <span >
-                            <input type="checkbox" name={row.original.id} defaultChecked={this.state.checkedValues.includes(row.original.id)}
-                                onChange={e => this.selectRow(e, row.original.id)} />
+                            <input type="checkbox" name={row.original.ID} 
+                            defaultChecked={this.state.checkedValues.includes(row.original.ID)}
+                                onChange={e => this.selectRow(e, row.original.ID)} />
                         </span>
-                        <span><Link to="/supply/currency/create-currency"><i className="fa fa-pencil" style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }}></i></Link></span>
+                        
+                        <span><Link to={`/supply/currency/edit-currency/${row.original.ID}`}>
+                            <i className="fa fa-pencil" 
+                            style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }}>
+                            </i></Link>
+                        </span>
                     </div>
                     
                 ),
@@ -148,7 +180,9 @@ export class Data_currencies extends Component {
                             ></i>
                         </span>
 
-                    <span><i className="fa fa-pencil" style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }}></i></span>
+                    <span><i className="fa fa-pencil" 
+                    style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }}>
+                        </i></span>
                 </div>
                 ),
                 style: {
@@ -174,4 +208,4 @@ export class Data_currencies extends Component {
     }
 }
 
-export default Data_currencies
+export default Data_currencies;

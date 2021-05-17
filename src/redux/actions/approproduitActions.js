@@ -49,37 +49,138 @@ export const newApproproduits = (produit) => {
         });
         let body = {
             etat: "1",
-            machine_id: produit.machine,
+            productId: produit.product_id.value,
             description: produit.description,
-            quantite: produit.montant
+            quantite: parseInt(produit.quantite, 10)
         }
+        
         console.log(body)
         const token = localStorage.getItem('token');
-        axios.post('/approproduit', body,
-            {headers: {
-                'USER-KEY': `Bearer ${token}`
+        let config = {
+            headers: {
+              'USER-KEY': `Bearer ${token}`,
+              'Content-Type': 'application/json'
             }
-        })
+          }
+        axios.post('/approproduit', body, config)
         .then((response) => {
             console.log(response.data)
             if(response.data.success === true){
-                const {approproduits, success} = response.data
+                const { success } = response.data
                 // const approproduitsCount = response.data.success
                 
                 dispatch({
-                    type: approproduitConstants.NEW_APPROproduit_SUCCESS,
-                    payload: {approproduit: approproduits, success: success, token: token }
+                    type: approproduitConstants.NEW_APPROPRODUIT_SUCCESS,
+                    payload: { success: success }
                 })
                 toast.success('Ajouter avec succes!!')
             }
             else{
                 if (response.data.success === false) {
                     // console.log(response.data.full_messages[0])
-                    const {success} = response.data
+                    // const {error} = response.data
                     toast.error(response.data.full_messages[0]);
                     dispatch({
-                        type: approproduitConstants.NEW_APPROproduit_FAIL,
-                        payload: { success: success }
+                        type: approproduitConstants.NEW_APPROPRODUIT_FAIL,
+                        // payload: { error: response.data.full_messages[0] }
+                    });
+                    for(var i=0; i<response.data.full_messages[i]; i++){
+                        toast.error(response.data.full_messages[i])
+                    }
+                }
+            }
+        })
+        .catch((error) => {
+            console.log("Oops, Request failed!");
+        });
+
+    }
+}
+
+export const editApproproduits = (produit) => {
+    // console.log()
+
+    return (dispatch) => {
+        dispatch({
+            type: approproduitConstants.UPDATE_APPROPRODUIT_REQUEST
+        });
+        console.log(produit)
+        let body = {
+            etat: "1",
+            productId: produit.productId.value,
+            description: produit.description,
+            quantite: parseInt(produit.quantite, 10)
+        }
+        
+        console.log(body)
+        const token = localStorage.getItem('token');
+        let config = {
+            headers: {
+              'USER-KEY': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            }
+          }
+        axios.put(`/approproduit/${produit.id}`, body, config)
+        .then((response) => {
+            console.log(response)
+            if(response.data.success === true){
+                const { success } = response.data
+                
+                dispatch({
+                    type: approproduitConstants.UPDATE_APPROPRODUIT_SUCCESS,
+                    payload: { isUpdated: success }
+                })
+                toast.success('Modifier avec succes!!')
+            }
+            else{
+                if (response.data.success === false) {
+                    // console.log(response.data)
+                    // const {error} = response.data
+                    // toast.error(response.data.full_messages[0]);
+                    dispatch({
+                        type: approproduitConstants.UPDATE_APPROPRODUIT_FAIL,
+                        // payload: { error: response.data.full_messages[0] }
+                    });
+                    for(var i=0; i<response.data.full_messages[i]; i++){
+                        toast.error(response.data.full_messages[i])
+                    }
+                }
+            }
+        })
+        .catch((error) => {
+            console.log("Oops, Request failed!");
+        });
+
+    }
+}
+
+export const detailApproproduit = (productId) => {
+    // console.log()
+
+    return (dispatch) => {
+        dispatch({
+            type: approproduitConstants.APPROPRODUIT_DETAILS_REQUEST
+        });
+
+        // console.log(productId)
+        axios.get(`/approproduit/${productId}`)
+        .then((response) => {
+            // console.log(response.data)
+            if(response.data.success === true){
+                const approproduit = response.data
+                    console.log(approproduit)
+
+                dispatch({
+                    type: approproduitConstants.APPROPRODUIT_DETAILS_SUCCESS,
+                    payload: {approproduit: approproduit}
+                })
+            }else{
+                if (response.data.success === false) {
+                    // console.log(response.data.full_messages[0])
+                    toast.error(response.data.full_messages[0]);
+                    dispatch({
+                        type: approproduitConstants.APPROPRODUIT_DETAILS_FAIL,
+                        payload: { error: response.data.full_messages[0] }
                     });
                 }
             }

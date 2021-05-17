@@ -1,27 +1,28 @@
-import {categoriesConstants} from '../../constants/categoryConstants'
+import { roleConstants } from '../../constants/roleConstants'
 
-export const categoriesReducer = (state = { categories: [] }, action) => {
+export const rolesReducer = (state = { roles: [] }, action) => {
     switch (action.type) {
-        case categoriesConstants.ALL_CATEGORY_REQUEST:
+        case roleConstants.ALL_ROLES_REQUEST:
             return {
                 loading: true,
-                categories: []
+                roles: []
             }
 
-        case categoriesConstants.ALL_CATEGORY_SUCCESS:
+        case roleConstants.ALL_ROLES_SUCCESS:
             return {
                 loading: false,
-                categories: action.payload.categories,
-                categoriesCount: action.payload.categoriesCount
+                roles: action.payload.roles,
+                success: action.payload.success,
+
             }
 
-        case categoriesConstants.ALL_CATEGORY_FAIL:
+        case roleConstants.ALL_ROLES_FAIL:
             return {
                 loading: false,
                 error: action.payload
             }
 
-        case categoriesConstants.CLEAR_ERRORS:
+        case roleConstants.CLEAR_ERRORS:
             return {
                 ...state,
                 error: null
@@ -32,35 +33,30 @@ export const categoriesReducer = (state = { categories: [] }, action) => {
     }
 }
 
-export const newCategoryReducer = (state = { category: {} }, action) => {
+export const newRoleReducer = (state = { role: {} }, action) => {
     switch (action.type) {
 
-        case categoriesConstants.NEW_CATEGORY_REQUEST:
+        case roleConstants.NEW_ROLES_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case categoriesConstants.NEW_CATEGORY_SUCCESS:
+        case roleConstants.NEW_ROLES_SUCCESS:
             return {
                 loading: false,
                 success: action.payload.success,
-                // category: action.payload.category
+                role: action.payload.role,
+                // token: action.payload.token
             }
 
-        case categoriesConstants.NEW_CATEGORY_FAIL:
+        case roleConstants.NEW_ROLES_FAIL:
             return {
                 ...state,
                 error: action.payload
             }
 
-        case categoriesConstants.NEW_CATEGORY_RESET:
-            return {
-                ...state,
-                success: false
-            }
-
-        case categoriesConstants.CLEAR_ERRORS:
+        case roleConstants.CLEAR_ERRORS:
             return {
                 ...state,
                 error: null
@@ -71,51 +67,51 @@ export const newCategoryReducer = (state = { category: {} }, action) => {
     }
 }
 
-export const categoryReducer = (state = {}, action) => {
+export const roleReducer = (state = {}, action) => {
     switch (action.type) {
 
-        case categoriesConstants.DELETE_CATEGORY_REQUEST:
-        case categoriesConstants.UPDATE_CATEGORY_REQUEST:
+        case roleConstants.DELETE_ROLES_REQUEST:
+        case roleConstants.UPDATE_ROLES_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case categoriesConstants.DELETE_CATEGORY_SUCCESS:
+        case roleConstants.DELETE_ROLES_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                isDeleted: action.payload
+                isDeleted: action.payload.isDeleted
             }
 
-        case categoriesConstants.UPDATE_CATEGORY_SUCCESS:
+        case roleConstants.UPDATE_ROLES_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                isUpdated: action.payload
+                isUpdated: action.payload.isUpdated
             }
 
 
-        case categoriesConstants.DELETE_CATEGORY_FAIL:
-        case categoriesConstants.UPDATE_CATEGORY_FAIL:
+        case roleConstants.DELETE_ROLES_FAIL:
+        case roleConstants.UPDATE_ROLES_FAIL:
             return {
                 ...state,
-                error: action.payload
+                error: action.payload.error
             }
 
-        case categoriesConstants.DELETE_CATEGORY_RESET:
+        case roleConstants.DELETE_ROLES_RESET:
             return {
                 ...state,
                 isDeleted: false
             }
 
-        case categoriesConstants.UPDATE_CATEGORY_RESET:
+        case roleConstants.UPDATE_ROLES_RESET:
             return {
                 ...state,
                 isUpdated: false
             }
 
-        case categoriesConstants.CLEAR_ERRORS:
+        case roleConstants.CLEAR_ERRORS:
             return {
                 ...state,
                 error: null
@@ -126,28 +122,29 @@ export const categoryReducer = (state = {}, action) => {
     }
 }
 
-export const categoryDetailsReducer = (state = { category: {} }, action) => {
+export const roleDetailsReducer = (state = { role: {} }, action) => {
     switch (action.type) {
 
-        case categoriesConstants.CATEGORY_DETAILS_REQUEST:
+        case roleConstants.ROLE_DETAILS_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case categoriesConstants.CATEGORY_DETAILS_SUCCESS:
+        case roleConstants.ROLE_DETAILS_SUCCESS:
             return {
                 loading: false,
-                category: action.payload
+                // success: action.payload.success,
+                role: action.payload.role
             }
 
-        case categoriesConstants.CATEGORY_DETAILS_FAIL:
+        case roleConstants.ROLE_DETAILS_FAIL:
             return {
                 ...state,
                 error: action.payload
             }
 
-        case categoriesConstants.CLEAR_ERRORS:
+        case roleConstants.CLEAR_ERRORS:
             return {
                 ...state,
                 error: null

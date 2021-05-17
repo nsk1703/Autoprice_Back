@@ -23,16 +23,17 @@ export class List_slide extends Component {
         setTimeout(() => {
             console.log(this.props.slide.slides)
 
-            this.props.slide.slides.map(slide => {
-                let item = {
-                    image: <img src={slide.filePath} style={{width:50,height:50}}/>,
-                    Type: slide.type,
-                    format:slide.format,
-                }
-                listSlides.push(item);
-            })
-            this.setState({
-                    slides: listSlides
+                this.props.slide.slides.map(slide => {
+                    let item = {
+                        id: slide.id,
+                        image: <img src={slide.filePath} style={{width:50,height:50}}/>,
+                        Type: slide.type,
+                        format:slide.format,
+                    }
+                    listSlides.push(item);
+                })
+                this.setState({
+                   slides: listSlides
                 })
         }, 1000)
         this.state = {
@@ -52,7 +53,7 @@ export class List_slide extends Component {
                         </div> */}
                         <div className="card-body">
                             <div className="btn-popup pull-right">
-                                <Link to="/slides/create-slide" className="btn btn-primary">Créer un slide</Link>
+                                <Link to="/slides/create-slide" className="btn btn-primary">Ajouter un slide</Link>
                             </div>
                             <div className="clearfix"></div>
                             <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
@@ -79,7 +80,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) =>{
     return {
-        slides: () => {dispatch( slideActions.slides())}
+        slides: () => {dispatch(slideActions.slides())}
     }
 }
 

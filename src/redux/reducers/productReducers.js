@@ -53,7 +53,7 @@ export const newProductReducer = (state = { product: {} }, action) => {
             return {
                 loading: false,
                 success: action.payload.success,
-                product: action.payload.product
+                // product: action.payload.product
             }
 
         case productConstants.NEW_PRODUCT_FAIL:
@@ -93,14 +93,14 @@ export const productReducer = (state = {}, action) => {
             return {
                 ...state,
                 loading: false,
-                isDeleted: action.payload
+                isDeleted: action.payload.isDeleted
             }
 
         case productConstants.UPDATE_PRODUCT_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                isUpdated: action.payload
+                isUpdated: action.payload.isUpdated
             }
 
 
@@ -108,7 +108,7 @@ export const productReducer = (state = {}, action) => {
         case productConstants.UPDATE_PRODUCT_FAIL:
             return {
                 ...state,
-                error: action.payload
+                error: action.payload.error
             }
 
         case productConstants.DELETE_PRODUCT_RESET:

@@ -7,21 +7,22 @@ import {CKEditor} from '@ckeditor/ckeditor5-react';
 import {connect} from "react-redux";
 import { ToastContainer, toast } from 'react-toastify';
 import { withRouter, Redirect, Router } from 'react-router-dom';
-import { Link } from "react-router-dom";
 
 const options = [
     {value: 'type1', label:'Type 1'},
     {value: 'type2', label:'Type 2'},
     {value: 'type3', label:'Type 3'}
 ]
-export class Create_machine extends Component {
+export class Edit_machine extends Component {
     constructor(props) {
         super(props);
-
+        // console.log(this.props.machine.id)
+       
         this.state = {
             open: false,
+            id: null,
             nom: '',
-            type: null,
+            type: '',
             lien: '',
             montant: '',
             description: '',
@@ -33,7 +34,6 @@ export class Create_machine extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmitChange = this.handleSubmitChange.bind(this)
 
-        
     }
 
     handleInputChange = (e) => {
@@ -44,7 +44,29 @@ export class Create_machine extends Component {
   
     handleChange = (type )=> {
         this.setState({type});
-        // console.log('Option selected:', type)
+    }
+
+    componentDidMount = () => {
+        let param = this.props.match.params.id
+        
+        this.props.machineDetail(param)
+
+        setTimeout(() => {
+            console.log('machdetails',this.props.machdetails.machine.machine)
+
+            let type = {value: this.props.machdetails.machine.machine.type,
+                label: this.props.machdetails.machine.machine.type}
+
+            this.setState({
+                id: this.props.machdetails.machine.machine.id,
+                nom: this.props.machdetails.machine.machine.nom,
+                type: type,
+                lien: this.props.machdetails.machine.machine.lien,
+                montant: this.props.machdetails.machine.machine.montant,
+                description: this.props.machdetails.machine.machine.description
+            })
+        }, 1000)        
+       
     }
     
     handleSubmitChange = (e) => {
@@ -52,35 +74,33 @@ export class Create_machine extends Component {
         this.setState({
             isLoading: true
         })
-        // console.log(this.state.AllOptions)
-        this.props.newMachine(this.state)
+        this.props.editMachine(this.state)
         setTimeout(() => {
-            // console.log(this.props.addmachine.success)
-            if(this.props.addmachine.success === true){
+            // console.log(this.props.editmachine.isUpdated)
+            // console.log(this.props.editmachine.isUpdated.isUpdated)
+            if(this.props.editmachine.isUpdated.isUpdated === true){
                 this.props.history.push('/machines/list-machine');
             }else{
-                this.props.history.push('/machines/create-machine');
+                
+                this.props.history.push('/machines/edit-machine/'+this.state.id);
                 this.setState({
                     isLoading: false
                 })
             }
         }, 1000)
-       
-
     }
     render() {
         const {isLoading, nom, type, lien, montant, description} =this.state
         // console.log(options)
         return (
             <Fragment>
-                <Breadcrumb title="Créer une machine " parent="Machines" />
+                <Breadcrumb title="Modifier une machine " parent="Machines / Liste des Machines" />
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-sm-12">
                             <div className="card">
                                 <div className="card-header">
-                                    <Link type="button" to="/machines/list-machine" 
-                                    className="btn btn-primary">Retour</Link>
+                                    <h5> Modifier une machine</h5>
                                 </div>
                                 <div className="card-body">
                                     <form className="needs-validation" encType="multipart/form-data">
@@ -133,13 +153,12 @@ export class Create_machine extends Component {
                                                 />
                                             {/* </div> */}
                                         </div>
-                                        <ToastContainer />
                                         <div className="offset-xl-3 offset-sm-4">
                                             <button type="button" 
                                             className="btn btn-primary"
                                             disabled={isLoading}
                                             onClick={this.handleSubmitChange}
-                                            >Enregister</button>
+                                            >Modifier</button>
                                         </div>
                                     </form>
                                 </div>
@@ -154,13 +173,15 @@ export class Create_machine extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        addmachine: state.addmachine,
+        editmachine: state.editmachine,
+        machdetails: state.machdetails
     }
 }
 const mapDispatchToProps = (dispatch) =>{
     return {
-        newMachine: (machine) => {dispatch( machineActions.newMachine(machine))},
+        editMachine: (machine) => {dispatch( machineActions.editMachine(machine))},
+        machineDetail: (paramID) => {dispatch( machineActions.machineDetail(paramID))},
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Create_machine))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Edit_machine))

@@ -36,3 +36,159 @@ export const categories = () => {
             });
     }
 }
+
+export const newCategory = (category) => {
+    // console.log()
+
+    return (dispatch) => {
+        dispatch({
+            type: categoriesConstants.NEW_CATEGORY_REQUEST
+        });
+        // console.log(category)
+        let formData = new FormData();
+        formData.append('name', category.nom);
+        formData.append('description', category.description);
+        formData.append('files', category.files);
+
+        const token = localStorage.getItem('token');
+        console.log(token)
+        let config = {
+            headers: {
+              'USER-KEY': `Bearer ${token}`,
+              'Content-type': 'multipart/form-data'
+            }
+          }
+
+        console.log( 'asss', token)
+        axios.post('/category', formData, config)
+        .then((response) => {
+            // console.log(response)
+            if(response.data.success === true){
+                const {success} = response.data
+                // const CategoryCount = response.data.success
+                // console.log(Category)
+                console.log(success)
+                dispatch({
+                    type: categoriesConstants.NEW_CATEGORY_SUCCESS,
+                    payload: { success: success }
+                })
+                toast.success('Ajouter avec succes!!')
+            }
+            else{
+                if (response.data.success === false) {
+                    // console.log(response.data.full_messages[0])
+                    // const {success} = response.data
+                    // toast.error(response.data.full_messages[0]);
+                    dispatch({
+                        type: categoriesConstants.NEW_CATEGORY_FAIL
+                        // payload: { error: response.data.full_messages[0] }
+                    });
+                    for(var i=0; i<response.data.full_messages[i]; i++){
+                        toast.error(response.data.full_messages[i])
+                    }
+                }
+            }
+        })
+        .catch((error) => {
+            console.log("Oops, Request failed!");
+        });
+
+    }
+}
+
+export const editCategory = (category) => {
+    // console.log()
+
+    return (dispatch) => {
+        dispatch({
+            type: categoriesConstants.UPDATE_CATEGORY_REQUEST
+        });
+        console.log(category)
+        // let formData = new FormData();
+        // formData.append('name', category.nom);
+        // formData.append('description', category.description);
+        // formData.append('files', category.files);
+
+        // const token = localStorage.getItem('token');
+        // console.log(token)
+        // let config = {
+        //     headers: {
+        //       'USER-KEY': `Bearer ${token}`,
+        //       'Content-type': 'multipart/form-data'
+        //     }
+        //   }
+
+        // console.log( 'asss', token)
+        // axios.put(`/category/${category.id}`, formData, config)
+        // .then((response) => {
+        //     // console.log(response)
+        //     if(response.data.success === true){
+        //         const {success} = response.data
+        //         // const CategoryCount = response.data.success
+        //         // console.log(Category)
+        //         console.log(success)
+        //         dispatch({
+        //             type: categoriesConstants.UPDATE_CATEGORY_SUCCESS,
+        //             payload: { success: success }
+        //         })
+        //         toast.success('Ajouter avec succes!!')
+        //     }
+        //     else{
+        //         if (response.data.success === false) {
+        //             // console.log(response.data.full_messages[0])
+        //             // const {success} = response.data
+        //             // toast.error(response.data.full_messages[0]);
+        //             dispatch({
+        //                 type: categoriesConstants.UPDATE_CATEGORY_FAIL
+        //                 // payload: { error: response.data.full_messages[0] }
+        //             });
+        //             for(var i=0; i<response.data.full_messages[i]; i++){
+        //                 toast.error(response.data.full_messages[i])
+        //             }
+        //         }
+        //     }
+        // })
+        // .catch((error) => {
+        //     console.log("Oops, Request failed!");
+        // });
+
+    }
+}
+
+// export const detailCategory = (category) => {
+
+//     return (dispatch) => {
+//         dispatch({
+//             type: categoriesConstants.CATEGORY_DETAILS_REQUEST
+//         });
+
+//         axios.get(`/category/${category.id}`)
+//             .then((response) => {
+//                 console.log(response.data);
+//                 if (response.data.success === true) {
+//                     const category = response.data
+
+//                     dispatch({
+//                         type: categoriesConstants.CATEGORY_DETAILS_SUCCESS,
+//                         payload: { category: category }
+//                     });
+//                 } else {
+//                     if (response.data.success === false) {
+//                         // console.log(response.data.full_messages[0])
+//                         toast.error(response.data.full_messages[0]);
+
+//                         dispatch({
+//                             type: categoriesConstants.CATEGORY_DETAILS_FAIL,
+//                             // payload: { error: success }
+//                         });
+//                         for(var i=0; i<response.data.full_messages[i]; i++){
+//                             toast.error(response.data.full_messages[i])
+//                         }
+//                     }
+//                 }
+//             })
+//             .catch((error) => {
+//                 console.log("Oops, Request failed!");
+//             });
+//     }
+// }

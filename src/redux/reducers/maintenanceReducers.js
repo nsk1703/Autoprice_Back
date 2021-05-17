@@ -55,7 +55,7 @@ export const newMaintenanceReducer = (state = { maintenance: {} }, action) => {
             return {
                 loading: false,
                 success: action.payload.success,
-                maintenance: action.payload.maintenance
+                // maintenance: action.payload.maintenance
             }
 
         case maintenanceConstants.NEW_MAINTENANCE_FAIL:

@@ -13,13 +13,21 @@ import {withRouter} from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 
 export class Category extends Component {
+
     constructor(props) {
         super(props);
         let listCategories = []
         this.state = {
+            isLoading: false,
             open: false,
-            categories: []
+            categories: [],
+            nom: '',
+            description: '',
+            files: null
         };
+        this.handleInputChange = this.handleInputChange.bind(this)
+        this.handleFileChange = this.handleFileChange.bind(this)
+        this.handleSubmitChange = this.handleSubmitChange.bind(this)
 
         this.props.categories()
 
@@ -35,14 +43,22 @@ export class Category extends Component {
                 listCategories.push(item);
             })
             this.setState({
-                    categories: listCategories
-                })
+                categories: listCategories
+            })
         }, 1000)
         this.state = {
+            open: false,
             categories: listCategories
         };
 
     }
+
+    handleInputChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
     onOpenModal = () => {
         this.setState({ open: true });
     };
@@ -51,8 +67,41 @@ export class Category extends Component {
         this.setState({ open: false });
     };
 
+    componentDidMount = ()  => {
+
+        // this.props.detailCategory()
+    }
+
+    handleFileChange = (e)=> {
+        this.setState({
+            files: e.target.files[0]
+        });
+    }
+
+    handleSubmitChange = (e) => {
+        e.preventDefault();
+        this.setState({
+            isLoading: true
+        })
+        // console.log(this.state.AllOptions)
+        this.props.newCategory(this.state)
+        setTimeout(() => {
+            // console.log(this.props.addcategory.success)
+            if(this.props.addcategory.success === true){
+                this.onCloseModal();
+                this.props.history.push('/products/physical/category');
+            }else{
+                // this.props.history.push('/products/physical/category');
+                this.onOpenModal();
+                this.setState({
+                    isLoading: false
+                })
+            }
+        }, 1000)
+    }
+
     render() {
-        const { open, categories } = this.state;
+        const { open, categories, name, description, isLoading } = this.state;
         return (
             <Fragment>
                 <Breadcrumb title="Categories" parent="Produits" />
@@ -62,12 +111,11 @@ export class Category extends Component {
                         <div className="col-sm-12">
                             <div className="card">
                                 <div className="card-header">
-                                    <h5>Liste des Catégories</h5>
+                                    <button type="button" className="btn btn-primary" onClick={this.onOpenModal} data-toggle="modal" data-original-title="test" data-target="#exampleModal">Ajouter une catégorie</button>
                                 </div>
                                 <div className="card-body">
                                 <ToastContainer />
                                     <div className="btn-popup pull-right">
-                                        <button type="button" className="btn btn-primary" onClick={this.onOpenModal} data-toggle="modal" data-original-title="test" data-target="#exampleModal">Ajouter une catégorie</button>
                                         <Modal open={open} onClose={this.onCloseModal} >
                                             <div className="modal-header">
                                                 <h5 className="modal-title f-w-600" id="exampleModalLabel2">Ajout d'une catégorie</h5>
@@ -75,31 +123,42 @@ export class Category extends Component {
                                             <div className="modal-body">
                                                 <form>
                                                     <div className="form-group">
-                                                        <label htmlFor="recipient-name" className="col-form-label" >Nom de catégorie :</label>
-                                                        <input type="text" className="form-control" />
+                                                        <label className="col-form-label" >Nom de catégorie :</label>
+                                                        <input type="text" className="form-control"
+                                                            id="validationCustom0" 
+                                                            name='nom'
+                                                            value={name}
+                                                            onChange={this.handleInputChange}
+                                                            required=""
+                                                        />
                                                     </div>
-                                                    <div className="form-group row">
-                                                        <label className="col-xl-3 col-sm-4">Description :</label>
-                                                        <div className="col-xl-8 col-sm-7 description-sm">
-                                                            <CKEditors
-                                                                activeclassName="p10"
-                                                                content={this.state.content}
-                                                                events={{
-                                                                    "blur": this.onBlur,
-                                                                    "afterPaste": this.afterPaste,
-                                                                    "change": this.onChange
-                                                                }}
+                                                    <div className="form-group">
+                                                        <label className="col-form-label">Description :</label>
+                                                        <div className="col-xl-8 col-sm-7">
+                                                            <textarea className=" form-control " 
+                                                                name="description" 
+                                                                value={description} 
+                                                                onChange={this.handleInputChange}
+                                                                rows="5" cols="60"
+                                                                required=""
                                                             />
                                                         </div>
                                                     </div>
                                                     <div className="form-group">
                                                         <label htmlFor="message-text" className="col-form-label">Image de Catégorie :</label>
-                                                        <input className="form-control" id="validationCustom02" type="file" />
+                                                        <input className="form-control col-xl-8 col-md-7" 
+                                                            type="file" 
+                                                            onChange={this.handleFileChange}
+                                                        />
                                                     </div>
                                                 </form>
                                             </div>
                                             <div className="modal-footer">
-                                                <button type="button" className="btn btn-primary" onClick={() => this.onCloseModal('VaryingMdo')}>Enregistrer</button>
+                                            {/* this.onCloseModal('VaryingMdo') */}
+                                                <button type="button" className="btn btn-primary"
+                                                 disabled={isLoading}
+                                                 onClick={this.handleSubmitChange}
+                                                 >Enregistrer</button>
                                                 <button type="button" className="btn btn-secondary" onClick={() => this.onCloseModal('VaryingMdo')}>Fermer</button>
                                             </div>
                                         </Modal>
@@ -127,12 +186,18 @@ export class Category extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        category: state.category
+        category: state.category,
+        addcategory: state.addcategory,
+        catdetails: state.catdetails
+
     }
 }
 const mapDispatchToProps = (dispatch) =>{
     return {
-        categories: () => {dispatch( categoryActions.categories())}
+        categories: () => {dispatch( categoryActions.categories())},
+        newCategory: (category) => {dispatch(categoryActions.newCategory(category))},
+        // detailCategory: (categoryid) => {dispatch(categoryActions.detailCategory(categoryid))}
+
     }
 }
 

@@ -149,6 +149,7 @@ export const appromonnaieDetailsReducer = (state = { appromonnaie: {} }, action)
         case appromonnaieConstants.APPROMONNAIE_DETAILS_SUCCESS:
             return {
                 loading: false,
+                success: action.payload,
                 appromonnaie: action.payload
             }
 

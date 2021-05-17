@@ -1,6 +1,6 @@
 import React, { Component,Fragment } from 'react'
 import Breadcrumb from '../../common/breadcrumb';
-import data from '../../../assets/data/physical_list';
+import axios from "axios";
 import { Edit, Trash2 } from 'react-feather'
 import { Link, withRouter } from 'react-router-dom';
 import * as productActions from "../../../redux/actions/productActions";
@@ -25,6 +25,7 @@ export class Product_list extends Component {
 
             this.props.product.products.map(product => {
                 let item = {
+                    product_id: product.product_id,
                     image: product.image_urls[0],
                     Nom: product.name,
                     Prix: product.price+" FCFA",
@@ -39,23 +40,43 @@ export class Product_list extends Component {
                 listProducts.push(item);
             })
             this.setState({
-                    peoducts: listProducts
+                    products: listProducts
                 })
         }, 1000)
         this.state = {
             open: false,
             products: listProducts
         };
+
+        this.handleDeleteProduct = this.handleDeleteProduct.bind(this)
+
+    }
+
+    handleDeleteProduct = (productid) => {
+        
+        // console.log(productid)
+        this.props.deleteProduct(productid);
+
+        // setTimeout(() => {
+            // axios.get('/products')
+            //     .then((response) => {
+            //         const { products } = response.data
+            //         console.log(products)
+            //         this.setState({
+            //             products: products
+            //         })
+            //     })
+        // },1000)
     }
     render() {
-
+        // console.log(this.props)
         return (
             <Fragment>
-                <Breadcrumb title="Produits" parent="" />
+                <Breadcrumb title="Liste des Produits" parent="Produits" />
                 <div className="container-fluid">
                     <div className="card">
                         <div className="card-header">
-                        <Link type="button" to="/products/physical/add-product" className="btn btn-primary">Ajouter un Produit</Link>
+                            <Link type="button" to="/products/physical/add-product" className="btn btn-primary">Ajouter un Produit</Link>
                         </div>
                     </div>
                     <div className="row products-admin ratio_asos">
@@ -78,13 +99,22 @@ export class Product_list extends Component {
                                                             <div className="product-hover">
                                                                 <ul>
                                                                     <li>
-                                                                        <button className="btn" type="button">
+                                                                        <Link className="btn" type="button" 
+                                                                            to={`/products/physical/edit-products/${myData.product_id}`}>
                                                                             <Edit className="editBtn" />
-                                                                        </button>
+                                                                        </Link>
                                                                     </li>
                                                                     <li>
-                                                                        <button className="btn" type="button">
-                                                                            <Trash2 className="deleteBtn" />
+                                                                        <button className="btn" 
+                                                                            type="button"
+                                                                            onClick={(e) =>{
+                                                                                if (window.confirm('Are you sure you wish to delete this item?'))
+                                                                                    this.handleDeleteProduct(myData.product_id)
+                                                                                    setTimeout(() => {
+                                                                                        window.location.reload()
+                                                                                    },1000)
+                                                                            }}
+                                                                            ><Trash2 className="deleteBtn" />
                                                                         </button>
                                                                     </li>
                                                                 </ul>
@@ -132,12 +162,14 @@ export class Product_list extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        product: state.product
+        product: state.product,
+        productaction: state.productaction
     }
 }
 const mapDispatchToProps = (dispatch) =>{
     return {
-        products: () => {dispatch( productActions.products())}
+        products: () => {dispatch( productActions.products())},
+        deleteProduct: (productID) => {dispatch(productActions.deleteProduct(productID))}
     }
 }
 

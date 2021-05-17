@@ -22,7 +22,7 @@ export const MENUITEMS = [
                 // title: 'Physical', type: 'sub', active: false, children: [
                     { path: '/products/physical/category', active: false, title: 'Categories', type: 'link' },
                     // { path: '/products/physical/sub-category', title: 'Sub Category', type: 'link' },
-                    { path: '/products/physical/product-list', active:false, title: 'Produits', type: 'link' },
+                    { path: '/products/physical/product-list', active:false, title: 'Liste des Produits', type: 'link' },
                     // { path: '/products/physical/product-detail', title: 'Product Detail', type: 'link' },
                     { path: '/products/physical/add-product', title: 'Ajout de Produit', type: 'link' },
                 // ]
@@ -48,8 +48,8 @@ export const MENUITEMS = [
     {
         title: 'Approvisionnement', icon: Download, type: 'sub', active: false, children: [
             {
-                title: 'Monnaie', type: 'sub', active: false, children: [
-                    { path: '/supply/currency/list-currency', title: 'Liste des Monnaies', type: 'link' },
+                title: 'Monnaies', type: 'sub', active: false, children: [
+                    { path: '/supply/currency/list-currency', title: 'Monnaies approvisionnées', type: 'link' },
                     { path: '/supply/currency/create-currency', title: 'Ajout de monnaie', type: 'link' },
                 ]
             },
@@ -101,7 +101,7 @@ export const MENUITEMS = [
         ]
     },
     {
-        title: 'Journaux',path:'/logs/Log', icon: Archive, type: 'link', active: false
+        title: 'Logs',path:'/logs/Log', icon: Archive, type: 'link', active: false
     },
 
     // {
@@ -130,7 +130,7 @@ export const MENUITEMS = [
         title: 'Rôles', icon: UserPlus, type: 'sub', active: false, children: [
             { path: '/roles/roles-list', title: 'Liste des Rôles', type: 'link' },
             { path: '/roles/add-roles', title: 'Ajouter un rôle', type: 'link' },
-            { path: '/roles/change-roles', title: 'Modifier un rôle', type: 'link' },
+            // { path: '/roles/change-roles', title: 'Modifier un rôle', type: 'link' },
         ]
     },
     {

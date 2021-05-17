@@ -24,18 +24,17 @@ export class List_product extends Component {
             this.props.approproduit.approproduits.map(approproduit => {
                
                 let item = {
-                    ID: "#"+approproduit.id,
+                    ID: approproduit.id,
                     etat: approproduit.etat,
                     quantite: <span className="badge badge-info">{approproduit.quantite} FCFA</span>,
-                    produit: approproduit.produit_id,
+                    produit: approproduit.productId.name,
                     Description: approproduit.description,
-                    utilisateur: approproduit.utilisateurid.username
+                    // utilisateur: approproduit.utilisateurid.username
                    
                 }
                 listProducts.push(item);
             })
-
-
+            
             this.setState({
                 products: listProducts
             })
@@ -49,13 +48,13 @@ export class List_product extends Component {
         const {products} = this.state
         return (
             <Fragment>
-                <Breadcrumb title="Liste des produits" parent="Produits" />
+                <Breadcrumb title="Liste des produits" parent="Approvisionnement / Produits" />
                 <div className="container-fluid">
                     <div className="card">
+                        <div className="card-header">
+                            <Link to="/supply/products/create-product" className="btn btn-primary">Ajout de Produit</Link>
+                        </div>
                         <div className="card-body">
-                            <div className="btn-popup pull-right">
-                                <Link to="/supply/products/create-product" className="btn btn-primary">Ajout Produit</Link>
-                            </div>
                             <div className="clearfix"></div>
                             <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
                                 <Data_products
