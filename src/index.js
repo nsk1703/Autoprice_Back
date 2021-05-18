@@ -112,7 +112,7 @@ import Edit_roles from './components/roles/edit-roles';
 import PageNotFound from './components/PageNotFound';
 
 import ProtectedRoute from './routes/ProtectedRoute';
-import PrivateRouteListAppromonnaie from './routes/appromonnaies/PrivateRouteListAppromonnaie';
+// import PrivateRouteListAppromonnaie from './routes/appromonnaies/PrivateRouteListAppromonnaie';
 
 axios.defaults.baseURL = process.env.REACT_APP_NEXT_PUBLIC_REST_API;
 

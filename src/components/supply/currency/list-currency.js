@@ -16,11 +16,11 @@ export class List_currency extends Component {
         let rol = null
 
         this.state = {
-            roles: [],
+            roles: null,
             currencies: []
         };
 
-        console.log(localStorage.getItem('roles'))
+        // console.log(localStorage.getItem('roles'))
         this.props.appromonnaies();
 
         setTimeout(() => {
@@ -73,7 +73,7 @@ export class List_currency extends Component {
         const { currencies, roles } = this.state
         console.log(roles)
         
-        if(roles !== null) {
+        if(roles != 0) {
             return (
                 <Fragment>
                     <Breadcrumb title="Liste des monnaies" parent="Approvisionnement / Monnaies" />
@@ -99,10 +99,10 @@ export class List_currency extends Component {
                     </div>
                 </Fragment>
             )
-        }else{
+        }else{ 
             return (
                 <Fragment>
-                    
+
                 </Fragment>
             )
         }
