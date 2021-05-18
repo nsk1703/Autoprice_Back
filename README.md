@@ -31,9 +31,9 @@ créer le fichier .env dqns l'arboressene principale du projet et inserer :
 
 ```javascript
 
-NEXT_PUBLIC_STRIPE_PUBLIC_KEY=put_your_stripe_public_key_here
-NEXT_PUBLIC_REST_API_ENDPOINT=http://localhost:3000
-NEXT_PUBLIC_REST_API=http://localhost:9000
+REACT_APP_NEXT_PUBLIC_STRIPE_PUBLIC_KEY=put_your_stripe_public_key_here
+REACT_APP_NEXT_PUBLIC_REST_API_ENDPOINT=http://localhost:3000
+REACT_APP_NEXT_PUBLIC_REST_API=http://localhost:9000
 
 ```
 
