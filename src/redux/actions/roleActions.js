@@ -20,7 +20,7 @@ export const roles = () => {
     
         axios.get('/roles', config)
         .then((response) => {
-            console.log(response.data)
+            // console.log(response.data)
             if(response.data.success === true){
                 const {roles, success} = response.data
 
@@ -311,31 +311,30 @@ export const actionsdetailRole = (rolename) => {
             headers: {
               'USER-KEY': `Bearer ${token}`,
               'Content-Type': 'application/json'
-            },
+            }
           }
-          
-
+        //   rolename
         console.log(rolename)
-        axios.get(`/role_name`, config)
+        axios.get(`/role_name/${rolename}`, config)
         .then((response) => {
-            console.log(response.data)
-            // if(response.data.success === true){
-            //     const role = response.data
-            //         // console.log(role)
-            //     dispatch({
-            //         type: roleConstants.ROLE_DETAILS_SUCCESS,
-            //         payload: {role: role}
-            //     })
-            // }else{
-            //     if (response.data.success === false) {
-            //         // console.log(response.data.full_messages[0])
-            //         toast.error(response.data.full_messages[0]);
-            //         dispatch({
-            //             type: roleConstants.ROLE_DETAILS_FAIL,
-            //             payload: { error: response.data.full_messages[0] }
-            //         });
-            //     }
-            // }
+            // console.log(response.data)
+            if(response.data.success === true){
+                const {role} = response.data
+                    // console.log(role)
+                dispatch({
+                    type: roleConstants.ROLE_DETAILS_SUCCESS,
+                    payload: {role: role}
+                })
+            }else{
+                if (response.data.success === false) {
+                    // console.log(response.data.full_messages[0])
+                    toast.error(response.data.full_messages[0]);
+                    dispatch({
+                        type: roleConstants.ROLE_DETAILS_FAIL,
+                        payload: { error: response.data.full_messages[0] }
+                    });
+                }
+            }
         })
         .catch((error) => {
             console.log("Oops, Request failed!");

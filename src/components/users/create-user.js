@@ -36,7 +36,7 @@ export class Create_user extends Component {
         
 
         this.props.roles();
-        console.log(this.state)
+        // console.log(this.state)
         setTimeout(() => {
             // console.log(this.props.role.roles)
 
@@ -63,10 +63,6 @@ export class Create_user extends Component {
             })
         }, 1000)
 
-        this.props.actionsdetailRole(localStorage.getItem('roles'))
-        setTimeout(() => {
-           console.log( this.props.roledetails)
-        })
         this.state = {
             open: false,
             AllOptions: options,

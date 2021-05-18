@@ -1,6 +1,6 @@
 import React, { Component, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import './index.scss';
 import App from './components/app';
 import { ScrollContext } from 'react-router-scroll-4';
@@ -112,6 +112,7 @@ import Edit_roles from './components/roles/edit-roles';
 import PageNotFound from './components/PageNotFound';
 
 import ProtectedRoute from './routes/ProtectedRoute';
+import PrivateRouteListAppromonnaie from './routes/appromonnaies/PrivateRouteListAppromonnaie';
 
 axios.defaults.baseURL = process.env.REACT_APP_NEXT_PUBLIC_REST_API;
 
@@ -193,14 +194,14 @@ class Root extends Component {
     render() {
         return (
             <Provider store={store}>
-                <BrowserRouter basename={'/'}>
+                <Router basename={'/'}>
                     <ScrollContext>
                         <Switch>
                             <Route exact path='/login' component={Login} />
-                            
+                            {/* <Redirect to="/404" /> */}
                             {/* <Route exact path='/login' component={Login} /> */}
                             <App>
-                                {/* <Route component={PageNotFound} /> */}
+                                
                                 <ProtectedRoute exact path='/' component={Dashboard} />
                                     
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/products/physical/category`} component={Category} />
@@ -223,10 +224,10 @@ class Root extends Component {
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/coupons/list-coupons`} component={ListCoupons} />
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/coupons/create-coupons`} component={Create_coupons} />
 
-                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/pages/list-page`} component={ListPages} />
-                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/pages/create-page`} component={Create_page} />
+                                {/* <ProtectedRoute path={`${process.env.PUBLIC_URL}/pages/list-page`} component={ListPages} /> */}
+                                {/* <ProtectedRoute path={`${process.env.PUBLIC_URL}/pages/create-page`} component={Create_page} /> */}
 
-                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/media`} component={Media} />
+                                {/* <ProtectedRoute path={`${process.env.PUBLIC_URL}/media`} component={Media} /> */}
 
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/menus/list-menu`} component={List_menu} />
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/menus/create-menu`} component={Create_menu} />
@@ -238,19 +239,19 @@ class Root extends Component {
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/vendors/list_vendors`} component={List_vendors} />
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/vendors/create-vendors`} component={Create_vendors} />
 
-                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/localization/transactions`} component={Translations} />
+                                {/* <Route path={`${process.env.PUBLIC_URL}/localization/transactions`} component={Translations} />
                                 <Route path={`${process.env.PUBLIC_URL}/localization/currency-rates`} component={Rates} />
-                                <Route path={`${process.env.PUBLIC_URL}/localization/taxes`} component={Taxes} />
+                                <Route path={`${process.env.PUBLIC_URL}/localization/taxes`} component={Taxes} /> */}
 
-                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/reports/report`} component={Reports} />
+                                {/* <Route path={`${process.env.PUBLIC_URL}/reports/report`} component={Reports} /> */}
 
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/settings/profile`} component={Profile} />
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/settings/change-profile`} component={Change_profile} />
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/settings/change-password`} component={Change_password} />
 
-                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/invoice`} component={Invoice} />
+                                {/* <ProtectedRoute path={`${process.env.PUBLIC_URL}/invoice`} component={Invoice} /> */}
 
-                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/data-table`} component={Datatable} />
+                                {/* <ProtectedRoute path={`${process.env.PUBLIC_URL}/data-table`} component={Datatable} /> */}
 
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/supply/currency/create-currency`} component={Create_currency}/>
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/supply/currency/list-currency`} component={List_currency}/>
@@ -276,15 +277,15 @@ class Root extends Component {
 
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/roles/add-roles`} component={Add_roles}/>
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/roles/roles-list`} component={Roles_list}/>
-                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/roles/change_roles`} component={Change_roles}/>
+                                {/* <ProtectedRoute path={`${process.env.PUBLIC_URL}/roles/change_roles`} component={Change_roles}/> */}
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/roles/edit-roles/:id`} component={Edit_roles}/>
 
-                               
                             </App>
 
+                            {/* <Route path="*" component={PageNotFound} /> */}
                         </Switch>
                     </ScrollContext>
-                </BrowserRouter>
+                </Router>
             </Provider>
         )
     }

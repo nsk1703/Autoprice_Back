@@ -1,27 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';  
-import * as userActions  from "../redux/actions/userActions";
 
 export const ProtectedRoute = ({component: Component, ...rest}) => {
+
     return (
         <Route
             {...rest}
                 render = {(props) => {
                     const token = localStorage.getItem('token');
-                    if(token) {
-                        return <Component {...props} />
-                    }else{
+                    
+                    if(!token) {
                         return <Redirect to='/login' />
                     }
-                }}
-        />  
 
+                    return <Component {...props} />
+
+                }
+            }
+        />  
+         
     )
 }
 
-// const mapDispatchToProps = () => {
-    
-// }
-// connect(null, mapDispatchToProps)
 export default ProtectedRoute;
