@@ -17,7 +17,8 @@ export class List_currency extends Component {
 
         this.state = {
             roles: null,
-            currencies: []
+            currencies: [],
+            visible: false
         };
 
         // console.log(localStorage.getItem('roles'))
@@ -38,50 +39,52 @@ export class List_currency extends Component {
                 }
                 listCurrencies.push(item);
             })
-
+            console.log(listCurrencies)
             this.setState({
                 currencies: listCurrencies
             })
         }, 1000)
 
-        // this.state ={
-        //     currencies: listCurrencies
-        // }
-
         this.props.actionsdetailRole(localStorage.getItem('roles'))
 
         setTimeout(() => {
+
             this.props.roledetails.role.map(rl => {
-                // console.log(rl.listeApproMonnaie)
-                // role.push(rol.listeApproMonnaie)
                 rol = rl.listeApproMonnaie;
-                console.log(rol)
             })
             this.setState({
                 roles: rol
             })
+            if(this.props.roledetails.role[0].ajouterApproMonnaie == '1'){
+                this.setState({
+                    visible: true
+                })
+            }
         }, 1000)
 
-        // console.log(rol)
-        this.state ={
+        this.state = {
             currencies: listCurrencies,
             roles: rol
         }
  
     }
     render() {
-        const { currencies, roles } = this.state
-        console.log(roles)
-        
+        const { currencies, roles, visible } = this.state
+
         if(roles != 0) {
             return (
                 <Fragment>
                     <Breadcrumb title="Liste des monnaies" parent="Approvisionnement / Monnaies" />
                     <div className="container-fluid">
                         <div className="card">
-                            <div className="card-header">
-                                <Link to="/supply/currency/create-currency" className="btn btn-primary">Ajout de Monnaie</Link>
-                            </div>
+                           {visible == true ?
+                            (
+                                <div className="card-header">
+                                    <Link to="/supply/currency/create-currency" className="btn btn-primary">Ajout de Monnaie</Link>
+                                </div>
+                            ):
+                            null
+                        }
                             <div className="card-body">
                                 <ToastContainer />
                                 <div className="clearfix"></div>

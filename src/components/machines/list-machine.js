@@ -7,21 +7,28 @@ import Data_machines from '../common/dataTables/data_machines';
 import * as machineActions from "../../redux/actions/machineActions";
 import {connect} from "react-redux";
 import { ToastContainer, toast } from 'react-toastify';
+import * as roleActions  from "../../redux/actions/roleActions";
 
 export class List_machine extends Component {
     constructor(props) {
         super(props);
         let listMachines = [];
-
+        let Roles = []
+        let listeMachine= null
+        let ajouterMachine= null
+        
         this.state = {
             open: false,
-            machines: []
+            machines: [],
+            roles: null,
+            visible: false,
+
         };
 
         this.props.machines();
 
         setTimeout(() => {
-            console.log(this.props.machine.machines)
+            // console.log(this.props.machine.machines)
 
             this.props.machine.machines.map(machine => {
                 let item = {
@@ -44,25 +51,48 @@ export class List_machine extends Component {
             
         }, 1000)
 
+        this.props.actionsdetailRole(localStorage.getItem('roles'))
+        
+        setTimeout(() => {
+            this.props.roledetails.role.map(rl => {
+                listeMachine = rl.listeMachine
+            })
+            this.setState({
+                roles: listeMachine
+            })
+            if(this.props.roledetails.role[0].ajouterMachine == '1'){
+                this.setState({
+                    visible: true
+                })
+            }
+        }, 1000)
+
         this.state = {
             open: false,
-            machines: listMachines
+            machines: listMachines,
+            roles: listeMachine
+            
         };
     }
+
     render() {
-        const {machines} =this.state
+        const {machines, visible, roles} =this.state
+        // console.log(this.renderingButtonHandle())
+        if(roles != 0){
         return (
             <Fragment>
                 <Breadcrumb title="Liste des machines" parent="Machines" />
                 <div className="container-fluid">
                     <div className="card">
-                        {/* <div className="card-header">
-                            <h5>User Details</h5>
-                        </div> */}
+                        {visible == true ?
+                            (
+                                <div className="btn-popup pull-left">
+                                    <Link to="/machines/create-machine" className="btn btn-primary">Ajout de Machine</Link>
+                                </div>
+                            )
+                            : null
+                        } 
                         <div className="card-body">
-                            <div className="btn-popup pull-left">
-                                <Link to="/machines/create-machine" className="btn btn-primary">Ajout de Machine</Link>
-                            </div>
                             <div className="clearfix"></div>
                             <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
                                 <Data_machines
@@ -78,17 +108,26 @@ export class List_machine extends Component {
                 </div>
             </Fragment>
         )
+        }else{
+            return (
+                <Fragment>
+                    
+                </Fragment>
+            )
+        }
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        machine: state.machine
+        machine: state.machine,
+        roledetails: state.roledetails
     }
 }
 const mapDispatchToProps = (dispatch) =>{
     return {
-        machines: () => {dispatch( machineActions.machines())}
+        machines: () => {dispatch( machineActions.machines())},
+        actionsdetailRole: (rolename) => {dispatch(roleActions.actionsdetailRole(rolename))},
     }
 }
 

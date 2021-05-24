@@ -6,15 +6,19 @@ import Datatable from '../common/datatable'
 import Data_users from '../common/dataTables/data_users';
 import * as userActions from "../../redux/actions/userActions";
 import {connect} from "react-redux";
+import * as roleActions  from "../../redux/actions/roleActions";
 
 export class List_user extends Component {
     constructor(props) {
         super(props);
         let listUsers = [];
+        let rol = null
 
         this.state = {
             open: false,
-            users: []
+            users: [],
+            roles: null,
+            visible: false
         };
 
         this.props.users();
@@ -45,53 +49,83 @@ export class List_user extends Component {
             
         }, 1000)
 
+        this.props.actionsdetailRole(localStorage.getItem('roles'))
+
+        setTimeout(() => {
+
+            this.props.roledetails.role.map(rl => {
+                rol = rl.listeUtilisateur;
+            })
+            this.setState({
+                roles: rol
+            })
+            if(this.props.roledetails.role[0].ajouterUtilisateur == '1'){
+                this.setState({
+                    visible: true
+                })
+            }
+        }, 1000)
+
         this.state = {
             open: false,
-            users: listUsers
+            users: listUsers,
+            roles: rol
         };
     }
     render() {
-        const {users} = this.state
+        const {users, visible, roles} = this.state
         // console.log(users)
-        return (
-            <Fragment>
-                <Breadcrumb title="Liste des Utilisateurs" parent="Utilisateurs" />
-                <div className="container-fluid">
-                    <div className="card">
-                        {/* <div className="card-header">
-                            <h5>User Details</h5>
-                        </div> */}
-                        <div className="card-body">
-                            <div className="btn-popup pull-right">
-                                <Link to="/users/create-user" className="btn btn-primary">Ajouter un utilisateur</Link>
-                            </div>
-                            <div className="clearfix"></div>
-                            <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
-                                <Data_users
-                                    multiSelectOption={true}
-                                    myData={users}
-                                    check={true}
-                                    pageSize={10}
-                                    pagination={true}
-                                    class="-striped -highlight"
-                                />
+       if(roles == '1'){
+            return (
+                <Fragment>
+                    <Breadcrumb title="Liste des Utilisateurs" parent="Utilisateurs" />
+                    <div className="container-fluid">
+                        <div className="card">
+                            <div className="card-body">
+                            {visible == true ?
+                                (
+                                    <div className="btn-popup pull-right">
+                                        <Link to="/users/create-user" className="btn btn-primary">Ajouter un utilisateur</Link>
+                                    </div>
+                                ):
+                                null
+                            }
+                                <div className="clearfix"></div>
+                                <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
+                                    <Data_users
+                                        multiSelectOption={true}
+                                        myData={users}
+                                        check={true}
+                                        pageSize={10}
+                                        pagination={true}
+                                        class="-striped -highlight"
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </Fragment>
-        )
+                </Fragment>
+            )
+       }else{
+           return(
+               <Fragment>
+
+               </Fragment>
+           )
+       }
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        user: state.user
+        user: state.user,
+        roledetails: state.roledetails
     }
 }
 const mapDispatchToProps = (dispatch) =>{
     return {
-        users: () => {dispatch( userActions.users())}
+        users: () => {dispatch( userActions.users())},
+        actionsdetailRole: (rolename) => {dispatch(roleActions.actionsdetailRole(rolename))},
     }
 }
 

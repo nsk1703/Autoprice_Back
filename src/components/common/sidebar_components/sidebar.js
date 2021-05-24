@@ -2,13 +2,26 @@ import React, { Component, Fragment } from 'react'
 import User_panel from './user-panel';
 import { Link } from 'react-router-dom';
 import { MENUITEMS } from '../../../constants/menu';
+import * as roleActions  from "../../../redux/actions/roleActions";
+import { connect } from 'react-redux';  
 
 // image import
 import logo from '../../../assets/images/dashboard/mini-autoprice.png'
 
+// const this.state.mainmenu = []
 export class sidebar extends Component {
+    
+    constructor(props){
+        super(props);
+        
+        this.state = {
+            selectedPath: "1", 
+            mainmenu: []
+        }
+        
+    }
 
-    state = { selectedPath: "1", mainmenu: [] };
+    // state = {  };
     onItemSelection = (arg, e) => {
         this.setState({ selectedPath: arg.path });
     };
@@ -18,18 +31,517 @@ export class sidebar extends Component {
             mainmenu: MENUITEMS
         })
     }
+
     componentDidMount() {
         var currentUrl = window.location.pathname;
+        this.props.actionsdetailRole(localStorage.getItem('roles'));
+
+        setTimeout(() =>{
+            // console.log(this.state.mainmenu)
+            // this.state.mainmenu[1].children
+            // console.log(this.state.mainmenu)
+            console.log(this.props.roledetails.role[0])
+            if(this.props.roledetails.role[0].dashboard != '1'){
+                // console.log(this.state.mainmenu);
+                this.state.mainmenu.splice(0,1);
+                
+                // Role du Menu Produits
+                if(this.props.roledetails.role[0].listeCategorie != '1'){
+                    this.state.mainmenu[0].children.splice(0,1);
+                    if(this.props.roledetails.role[0].listeProduit != '1'){
+                        this.state.mainmenu[0].children.splice(0,1)
+                        if(this.props.roledetails.role[0].ajouterProduit != '1'){
+                            this.state.mainmenu[0].children.splice(0,1)
+                        }
+                    }else{
+                        if(this.props.roledetails.role[0].ajouterProduit != '1'){
+                            this.state.mainmenu[0].children.splice(1,1)
+                        }
+                    }     
+                }else{
+                    if(this.props.roledetails.role[0].listeProduit != '1'){
+                        this.state.mainmenu[0].children.splice(1,1)
+                        if(this.props.roledetails.role[0].ajouterProduit != '1'){
+                            this.state.mainmenu[0].children.splice(1,1)
+                        }
+                    }else{
+                        if(this.props.roledetails.role[0].ajouterProduit != '1'){
+                            this.state.mainmenu[0].children.splice(2,1)
+                        }
+                    }
+                    
+                }
+           
+                // Role du Menu Ventes
+                if(this.props.roledetails.role[0].commandes != '1'){
+                    this.state.mainmenu[1].children.splice(0,1);
+                    if(this.props.roledetails.role[0].paiements != '1'){
+                        this.state.mainmenu[1].children.splice(0,1);
+                        if(this.props.roledetails.role[0].remboursements != '1'){
+                            this.state.mainmenu[1].children.splice(0,1);
+                            if(this.props.roledetails.role[0].mobileMoney != '1'){
+                                this.state.mainmenu[1].children.splice(0,1);
+                            }
+                        }else{
+                            if(this.props.roledetails.role[0].mobileMoney != '1'){
+                                this.state.mainmenu[1].children.splice(1,1);
+                            }
+                        }
+                    }else{
+                        if(this.props.roledetails.role[0].remboursements != '1'){
+                            this.state.mainmenu[1].children.splice(1,1);
+                            if(this.props.roledetails.role[0].mobileMoney != '1'){
+                                this.state.mainmenu[1].children.splice(1,1);
+                            }
+                        }else{
+                            if(this.props.roledetails.role[0].mobileMoney != '1'){
+                                this.state.mainmenu[1].children.splice(2,1);
+                            } 
+                        }
+                    }
+                }else{
+                    if(this.props.roledetails.role[0].paiements != '1'){
+                        this.state.mainmenu[1].children.splice(1,1);
+                        if(this.props.roledetails.role[0].remboursements != '1'){
+                            this.state.mainmenu[1].children.splice(1,1);
+                            if(this.props.roledetails.role[0].mobileMoney != '1'){
+                                this.state.mainmenu[1].children.splice(1,1);
+                            }
+                        }else{
+                            if(this.props.roledetails.role[0].mobileMoney != '1'){
+                                this.state.mainmenu[1].children.splice(2,1);
+                            }
+                        }
+                    }else{
+                        if(this.props.roledetails.role[0].remboursements != '1'){
+                            this.state.mainmenu[1].children.splice(2,1);
+                            if(this.props.roledetails.role[0].mobileMoney != '1'){
+                                this.state.mainmenu[1].children.splice(2,1);
+                            }
+                        }else{
+                            if(this.props.roledetails.role[0].mobileMoney != '1'){
+                                this.state.mainmenu[1].children.splice(3,1);
+                            } 
+                        }
+                    }
+                }
+
+                // Role du Menu Approvisionnements
+                if(this.props.roledetails.role[0].listeApproMonnaie != '1'){
+                    this.state.mainmenu[2].children[0].children.splice(0,1)
+                    if(this.props.roledetails.role[0].ajouterApproMonnaie != '1'){
+                        this.state.mainmenu[2].children[0].children.splice(0,1)
+                    }
+                }else{
+                    if(this.props.roledetails.role[0].ajouterApproMonnaie != '1'){
+                        this.state.mainmenu[2].children[0].children.splice(1,1)
+                    }
+                }
+                if(this.props.roledetails.role[0].listeApproProduit != '1'){
+                    this.state.mainmenu[2].children[1].children.splice(0,1);
+                    if(this.props.roledetails.role[0].ajouterApproProduit != '1'){
+                        this.state.mainmenu[2].children[1].children.splice(0,1);
+                    }
+                }else{
+                    if(this.props.roledetails.role[0].ajouterApproProduit != '1'){
+                        this.state.mainmenu[2].children[1].children.splice(1,1);
+                    }
+                }
+
+                // Role du Menu Machines
+                if(this.props.roledetails.role[0].listeMachine != '1'){
+                    this.state.mainmenu[3].children.splice(0,1)
+                    if(this.props.roledetails.role[0].ajouterMachine != '1'){
+                        this.state.mainmenu[3].children.splice(0,1)
+                    }
+                }else{
+                    if(this.props.roledetails.role[0].ajouterMachine != '1'){
+                        this.state.mainmenu[3].children.splice(1,1)
+                    }
+                }
+
+                // Role du Menumaintenances
+                if(this.props.roledetails.role[0].listeMaintenance != '1'){
+                    this.state.mainmenu[4].children.splice(0,1)
+                    if(this.props.roledetails.role[0].ajouterMaintenance != '1'){
+                        this.state.mainmenu[4].children.splice(0,1)
+                    }
+                }else{
+                    if(this.props.roledetails.role[0].ajouterMaintenance != '1'){
+                        this.state.mainmenu[4].children.splice(1,1)
+                    }
+                }
+                
+                // Role du Menu Slides
+                if(this.props.roledetails.role[0].listeSlide != '1'){
+                    this.state.mainmenu[5].children.splice(0,1)
+                    if(this.props.roledetails.role[0].ajouterSlide != '1'){
+                        this.state.mainmenu[5].children.splice(0,1)
+                    }
+                }else{
+                    if(this.props.roledetails.role[0].ajouterSlide != '1'){
+                        this.state.mainmenu[5].children.splice(1,1)
+                    }
+                }
+
+                // Roles des Menu Log, Statistiques, utilisateurs, roles
+                if(this.props.roledetails.role[0].log != '1'){
+                    this.state.mainmenu.splice(6,1);
+                    if(this.props.roledetails.role[0].statistique != '1'){
+                        this.state.mainmenu.splice(6,1);
+                        if(this.props.roledetails.role[0].listeUtilisateur != '1'){
+                            this.state.mainmenu[6].children.splice(0,1)
+                            if(this.props.roledetails.role[0].ajouterUtilisateur != '1'){
+                                this.state.mainmenu[6].children.splice(0,1)
+                            }
+                        }else{
+                            if(this.props.roledetails.role[0].ajouterUtilisateur != '1'){
+                                this.state.mainmenu[6].children.splice(1,1)
+                            }
+                        }
+
+                        if(this.props.roledetails.role[0].listeRole != '1'){
+                            this.state.mainmenu[7].children.splice(0,1)
+                            if(this.props.roledetails.role[0].ajouterRole != '1'){
+                                this.state.mainmenu[7].children.splice(0,1)
+                            }
+                        }else{
+                            if(this.props.roledetails.role[0].ajouterRole != '1'){
+                                this.state.mainmenu[7].children.splice(1,1)
+                            }
+                        }
+                    }else{
+                        if(this.props.roledetails.role[0].listeUtilisateur != '1'){
+                            this.state.mainmenu[7].children.splice(0,1)
+                            if(this.props.roledetails.role[0].ajouterUtilisateur != '1'){
+                                this.state.mainmenu[7].children.splice(0,1)
+                            }
+                        }else{
+                            if(this.props.roledetails.role[0].ajouterUtilisateur != '1'){
+                                this.state.mainmenu[7].children.splice(1,1)
+                            }
+                        }
+
+                        if(this.props.roledetails.role[0].listeRole != '1'){
+                            this.state.mainmenu[8].children.splice(0,1)
+                            if(this.props.roledetails.role[0].ajouterRole != '1'){
+                                this.state.mainmenu[8].children.splice(0,1)
+                            }
+                        }else{
+                            if(this.props.roledetails.role[0].ajouterRole != '1'){
+                                this.state.mainmenu[8].children.splice(1,1)
+                            }
+                        }
+                    }
+                }else{
+                    if(this.props.roledetails.role[0].statistique != '1'){
+                        this.state.mainmenu.splice(7,1);
+                        if(this.props.roledetails.role[0].listeUtilisateur != '1'){
+                            this.state.mainmenu[7].children.splice(0,1)
+                            if(this.props.roledetails.role[0].ajouterUtilisateur != '1'){
+                                this.state.mainmenu[7].children.splice(0,1)
+                            }
+                        }else{
+                            if(this.props.roledetails.role[0].ajouterUtilisateur != '1'){
+                                this.state.mainmenu[7].children.splice(1,1)
+                            }
+                        }
+
+                        if(this.props.roledetails.role[0].listeRole != '1'){
+                            this.state.mainmenu[8].children.splice(0,1)
+                            if(this.props.roledetails.role[0].ajouterRole != '1'){
+                                this.state.mainmenu[8].children.splice(0,1)
+                            }
+                        }else{
+                            if(this.props.roledetails.role[0].ajouterRole != '1'){
+                                this.state.mainmenu[8].children.splice(1,1)
+                            }
+                        }
+                    }else{
+                        if(this.props.roledetails.role[0].listeUtilisateur != '1'){
+                            this.state.mainmenu[8].children.splice(0,1)
+                            if(this.props.roledetails.role[0].ajouterUtilisateur != '1'){
+                                this.state.mainmenu[8].children.splice(0,1)
+                            }
+                        }else{
+                            if(this.props.roledetails.role[0].ajouterUtilisateur != '1'){
+                                this.state.mainmenu[8].children.splice(1,1)
+                            }
+                        }
+
+                        if(this.props.roledetails.role[0].listeRole != '1'){
+                            this.state.mainmenu[9].children.splice(0,1)
+                            if(this.props.roledetails.role[0].ajouterRole != '1'){
+                                this.state.mainmenu[9].children.splice(0,1)
+                            }
+                        }else{
+                            if(this.props.roledetails.role[0].ajouterRole != '1'){
+                                this.state.mainmenu[9].children.splice(1,1)
+                            }
+                        }
+                    }
+                }
+
+               
+            }else{
+                // console.log(this.state.mainmenu);
+                // Roles du Menu Produits
+                if(this.props.roledetails.role[0].listeCategorie != '1'){
+                    this.state.mainmenu[1].children.splice(0,1);
+                    if(this.props.roledetails.role[0].listeProduit != '1'){
+                        this.state.mainmenu[1].children.splice(0,1)
+                        if(this.props.roledetails.role[0].ajouterProduit != '1'){
+                            this.state.mainmenu[1].children.splice(0,1)
+                        }
+                    }else{
+                        if(this.props.roledetails.role[0].ajouterProduit != '1'){
+                            this.state.mainmenu[1].children.splice(1,1)
+                        }
+                    }     
+                }else{
+                    if(this.props.roledetails.role[0].listeProduit != '1'){
+                        this.state.mainmenu[1].children.splice(1,1)
+                        if(this.props.roledetails.role[0].ajouterProduit != '1'){
+                            this.state.mainmenu[1].children.splice(1,1)
+                        }
+                    }else{
+                        if(this.props.roledetails.role[0].ajouterProduit != '1'){
+                            this.state.mainmenu[1].children.splice(2,1)
+                        }
+                    }
+                    
+                }
+           
+                // Roles du Menu Ventes
+                if(this.props.roledetails.role[0].commandes != '1'){
+                    this.state.mainmenu[2].children.splice(0,1);
+                    if(this.props.roledetails.role[0].paiements != '1'){
+                        this.state.mainmenu[2].children.splice(0,1);
+                        if(this.props.roledetails.role[0].remboursements != '1'){
+                            this.state.mainmenu[2].children.splice(0,1);
+                            if(this.props.roledetails.role[0].mobileMoney != '1'){
+                                this.state.mainmenu[2].children.splice(0,1);
+                            }
+                        }else{
+                            if(this.props.roledetails.role[0].mobileMoney != '1'){
+                                this.state.mainmenu[2].children.splice(1,1);
+                            }
+                        }
+                    }else{
+                        if(this.props.roledetails.role[0].remboursements != '1'){
+                            this.state.mainmenu[2].children.splice(1,1);
+                            if(this.props.roledetails.role[0].mobileMoney != '1'){
+                                this.state.mainmenu[2].children.splice(1,1);
+                            }
+                        }else{
+                            if(this.props.roledetails.role[0].mobileMoney != '1'){
+                                this.state.mainmenu[2].children.splice(2,1);
+                            } 
+                        }
+                    }
+                }else{
+                    if(this.props.roledetails.role[0].paiements != '1'){
+                        this.state.mainmenu[2].children.splice(1,1);
+                        if(this.props.roledetails.role[0].remboursements != '1'){
+                            this.state.mainmenu[2].children.splice(1,1);
+                            if(this.props.roledetails.role[0].mobileMoney != '1'){
+                                this.state.mainmenu[2].children.splice(1,1);
+                            }
+                        }else{
+                            if(this.props.roledetails.role[0].mobileMoney != '1'){
+                                this.state.mainmenu[2].children.splice(2,1);
+                            }
+                        }
+                    }else{
+                        if(this.props.roledetails.role[0].remboursements != '1'){
+                            this.state.mainmenu[2].children.splice(2,1);
+                            if(this.props.roledetails.role[0].mobileMoney != '1'){
+                                this.state.mainmenu[2].children.splice(2,1);
+                            }
+                        }else{
+                            if(this.props.roledetails.role[0].mobileMoney != '1'){
+                                this.state.mainmenu[2].children.splice(3,1);
+                            } 
+                        }
+                    }
+                }
+
+                // Roles du Menu Approvisionnements
+                if(this.props.roledetails.role[0].listeApproMonnaie != '1'){
+                    this.state.mainmenu[3].children[0].children.splice(0,1)
+                    if(this.props.roledetails.role[0].ajouterApproMonnaie != '1'){
+                        this.state.mainmenu[3].children[0].children.splice(0,1)
+                    }
+                }else{
+                    if(this.props.roledetails.role[0].ajouterApproMonnaie != '1'){
+                        this.state.mainmenu[3].children[0].children.splice(1,1)
+                    }
+                }
+                if(this.props.roledetails.role[0].listeApproProduit != '1'){
+                    this.state.mainmenu[3].children[1].children.splice(0,1);
+                    if(this.props.roledetails.role[0].ajouterApproProduit != '1'){
+                        this.state.mainmenu[3].children[1].children.splice(0,1);
+                    }
+                }else{
+                    if(this.props.roledetails.role[0].ajouterApproProduit != '1'){
+                        this.state.mainmenu[3].children[1].children.splice(1,1);
+                    }
+                }
+
+                // Roles du Menu Machines
+                if(this.props.roledetails.role[0].listeMachine != '1'){
+                    this.state.mainmenu[4].children.splice(0,1)
+                    if(this.props.roledetails.role[0].ajouterMachine != '1'){
+                        this.state.mainmenu[4].children.splice(0,1)
+                    }
+                }else{
+                    if(this.props.roledetails.role[0].ajouterMachine != '1'){
+                        this.state.mainmenu[4].children.splice(1,1)
+                    }
+                }
+
+                // Roles du Menu Maintenances
+                if(this.props.roledetails.role[0].listeMaintenance != '1'){
+                    this.state.mainmenu[5].children.splice(0,1)
+                    if(this.props.roledetails.role[0].ajouterMaintenance != '1'){
+                        this.state.mainmenu[5].children.splice(0,1)
+                    }
+                }else{
+                    if(this.props.roledetails.role[0].ajouterMaintenance != '1'){
+                        this.state.mainmenu[5].children.splice(1,1)
+                    }
+                }
+                
+                // Roles du Menu Slides
+                if(this.props.roledetails.role[0].listeSlide != '1'){
+                    this.state.mainmenu[6].children.splice(0,1)
+                    if(this.props.roledetails.role[0].ajouterSlide != '1'){
+                        this.state.mainmenu[6].children.splice(0,1)
+                    }
+                }else{
+                    if(this.props.roledetails.role[0].ajouterSlide != '1'){
+                        this.state.mainmenu[6].children.splice(1,1)
+                    }
+                }
+
+                // Roles des Menu Log, Statistiques, utilisateurs, roles
+                if(this.props.roledetails.role[0].log != '1'){
+                    
+                    this.state.mainmenu.splice(7,1);
+                    if(this.props.roledetails.role[0].statistique != '1'){
+                        this.state.mainmenu.splice(7,1);
+                        if(this.props.roledetails.role[0].listeUtilisateur != '1'){
+                            this.state.mainmenu[7].children.splice(0,1)
+                            if(this.props.roledetails.role[0].ajouterUtilisateur != '1'){
+                                this.state.mainmenu[7].children.splice(0,1)
+                            }
+                        }else{
+                            if(this.props.roledetails.role[0].ajouterUtilisateur != '1'){
+                                this.state.mainmenu[7].children.splice(1,1)
+                            }
+                        }
+
+                        if(this.props.roledetails.role[0].listeRole != '1'){
+                            this.state.mainmenu[8].children.splice(0,1)
+                            if(this.props.roledetails.role[0].ajouterRole != '1'){
+                                this.state.mainmenu[8].children.splice(0,1)
+                            }
+                        }else{
+                            if(this.props.roledetails.role[0].ajouterRole != '1'){
+                                this.state.mainmenu[8].children.splice(1,1)
+                            }
+                        }
+                    }else{
+                        if(this.props.roledetails.role[0].listeUtilisateur != '1'){
+                            this.state.mainmenu[8].children.splice(0,1)
+                            if(this.props.roledetails.role[0].ajouterUtilisateur != '1'){
+                                this.state.mainmenu[8].children.splice(0,1)
+                            }
+                        }else{
+                            if(this.props.roledetails.role[0].ajouterUtilisateur != '1'){
+                                this.state.mainmenu[8].children.splice(1,1)
+                            }
+                        }
+
+                        if(this.props.roledetails.role[0].listeRole != '1'){
+                            this.state.mainmenu[9].children.splice(0,1)
+                            if(this.props.roledetails.role[0].ajouterRole != '1'){
+                                this.state.mainmenu[9].children.splice(0,1)
+                            }
+                        }else{
+                            if(this.props.roledetails.role[0].ajouterRole != '1'){
+                                this.state.mainmenu[9].children.splice(1,1)
+                            }
+                        }
+                    }
+                }else{
+                    // console.log(this.state.mainmenu);
+                    if(this.props.roledetails.role[0].statistique != '1'){
+                        this.state.mainmenu.splice(8,1);
+                        if(this.props.roledetails.role[0].listeUtilisateur != '1'){
+                            this.state.mainmenu[8].children.splice(0,1)
+                            if(this.props.roledetails.role[0].ajouterUtilisateur != '1'){
+                                this.state.mainmenu[8].children.splice(0,1)
+                            }
+                        }else{
+                            if(this.props.roledetails.role[0].ajouterUtilisateur != '1'){
+                                this.state.mainmenu[8].children.splice(1,1)
+                            }
+                        }
+
+                        if(this.props.roledetails.role[0].listeRole != '1'){
+                            this.state.mainmenu[9].children.splice(0,1)
+                            if(this.props.roledetails.role[0].ajouterRole != '1'){
+                                this.state.mainmenu[9].children.splice(0,1)
+                            }
+                        }else{
+                            if(this.props.roledetails.role[0].ajouterRole != '1'){
+                                this.state.mainmenu[9].children.splice(1,1)
+                            }
+                        }
+                    }else{
+                        if(this.props.roledetails.role[0].listeUtilisateur != '1'){
+                            this.state.mainmenu[9].children.splice(0,1)
+                            if(this.props.roledetails.role[0].ajouterUtilisateur != '1'){
+                                this.state.mainmenu[9].children.splice(0,1)
+                            }
+                        }else{
+                            if(this.props.roledetails.role[0].ajouterUtilisateur != '1'){
+                                this.state.mainmenu[9].children.splice(1,1)
+                            }
+                        }
+
+                        if(this.props.roledetails.role[0].listeRole != '1'){
+                            this.state.mainmenu[10].children.splice(0,1)
+                            if(this.props.roledetails.role[0].ajouterRole != '1'){
+                                this.state.mainmenu[10].children.splice(0,1)
+                            }
+                        }else{
+                            if(this.props.roledetails.role[0].ajouterRole != '1'){
+                                this.state.mainmenu[10].children.splice(1,1)
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            console.log(this.state.mainmenu);
+
+        },1000)
 
         this.state.mainmenu.filter(items => {
+
             if (!items.children) {
                 if (items.path === currentUrl)
                     this.setNavActive(items)
                 return false
             }
+
             items.children.filter(subItems => {
                 if (subItems.path === currentUrl)
                     this.setNavActive(subItems)
+
                 if (!subItems.children) return false
                 subItems.children.filter(subSubItems => {
                     if (subSubItems.path === currentUrl)
@@ -101,6 +613,7 @@ export class sidebar extends Component {
                             <i className="fa fa-angle-right pull-right"></i> : ''}
                     </Link>
                     : ''}
+               
                 {menuItem.children ?
                     <ul
                         className={`sidebar-submenu ${menuItem.active ? 'menu-open' : ''}`}
@@ -166,4 +679,16 @@ export class sidebar extends Component {
     }
 }
 
-export default sidebar
+const mapStateToProps = (state) =>{
+    return {
+        roledetails: state.roledetails
+    }
+}
+
+const mapDispatchToProps = (dispatch) =>{
+    return {
+        actionsdetailRole: (rolename) => {dispatch(roleActions.actionsdetailRole(rolename))},
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(sidebar)

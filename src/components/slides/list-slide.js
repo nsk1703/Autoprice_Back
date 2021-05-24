@@ -7,15 +7,19 @@ import Data_slides from '../common/dataTables/data_slides';
 import * as slideActions from "../../redux/actions/slideActions";
 import {connect} from "react-redux";
 import { ToastContainer, toast } from 'react-toastify';
+import * as roleActions  from "../../redux/actions/roleActions";
 
 export class List_slide extends Component {
     constructor(props) {
         super(props);
         let listSlides = [];
+        let rol = null
 
         this.state = {
             open: false,
-            slides: []
+            slides: [],
+            roles: null,
+            visible: false
         };
 
         this.props.slides();
@@ -36,51 +40,82 @@ export class List_slide extends Component {
                    slides: listSlides
                 })
         }, 1000)
+
+        this.props.actionsdetailRole(localStorage.getItem('roles'))
+
+        setTimeout(() => {
+
+            this.props.roledetails.role.map(rl => {
+                rol = rl.listeSlide;
+            })
+            this.setState({
+                roles: rol
+            })
+            if(this.props.roledetails.role[0].ajouterSlide == '1'){
+                this.setState({
+                    visible: true
+                })
+            }
+        }, 1000)
+        
         this.state = {
             open: false,
-            slides: listSlides
+            slides: listSlides,
+            roles: rol
         };
     }
     render() {
-        const {slides} = this.state
-        return (
-            <Fragment>
-                <Breadcrumb title="Liste des Slides" parent="Slides" />
-                <div className="container-fluid">
-                    <div className="card">
-                        {/* <div className="card-header">
-                            <h5>User Details</h5>
-                        </div> */}
-                        <div className="card-body">
-                            <div className="btn-popup pull-right">
-                                <Link to="/slides/create-slide" className="btn btn-primary">Ajouter un slide</Link>
-                            </div>
-                            <div className="clearfix"></div>
-                            <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
-                                <Data_slides
-                                    multiSelectOption={true}
-                                    myData={slides}
-                                    pageSize={10}
-                                    pagination={true}
-                                    class="-striped -highlight"
-                                />
+        const {slides, visible, roles} = this.state
+        if(roles == '1'){
+            return (
+                <Fragment>
+                    <Breadcrumb title="Liste des Slides" parent="Slides" />
+                    <div className="container-fluid">
+                        <div className="card">
+                            <div className="card-body">
+                                {visible == true ?
+                                    (
+                                        <div className="btn-popup pull-right">
+                                            <Link to="/slides/create-slide" className="btn btn-primary">Ajouter un slide</Link>
+                                        </div>
+                                    ):
+                                    null
+                                }
+                                <div className="clearfix"></div>
+                                <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
+                                    <Data_slides
+                                        multiSelectOption={true}
+                                        myData={slides}
+                                        pageSize={10}
+                                        pagination={true}
+                                        class="-striped -highlight"
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </Fragment>
-        )
+                </Fragment>
+            )
+        }else{
+            return (
+                <Fragment>
+                    
+                </Fragment>
+            )
+        }
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        slide: state.slide
+        slide: state.slide,
+        roledetails: state.roledetails
     }
 }
 const mapDispatchToProps = (dispatch) =>{
     return {
-        slides: () => {dispatch(slideActions.slides())}
+        slides: () => {dispatch(slideActions.slides())},
+        actionsdetailRole: (rolename) => {dispatch(roleActions.actionsdetailRole(rolename))},
     }
 }
 
