@@ -8,12 +8,12 @@ import {connect} from "react-redux";
 import { ToastContainer, toast } from 'react-toastify';
 import * as approproduitActions from '../../../redux/actions/approproduitActions';
 import Select from 'react-select';
+import * as roleActions from "../../../redux/actions/roleActions";
+import { Link } from 'react-router-dom'
 
 export class Tabset_product extends Component {
     constructor(props) {
         super(props); 
-        let options = []
-        let listProducts = []
 
         this.state = {
             isLoading: false,
@@ -23,19 +23,27 @@ export class Tabset_product extends Component {
             quantite: '',
             description: '',
             productId: '',
-            AllOptions: []
+            AllOptions: [],
+            visible: false,
+            roles: null,
             
         };
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmitChange = this.handleSubmitChange.bind(this)
 
+    }
+
+    componentDidMount = () => {
+        let options = [];
+        let listProducts = [];
+        let rol = null
+
         this.props.products();
 
         setTimeout(() => {
 
             this.props.product.products.map(product => {
-                // console.log('i',product.product_id)
                 let item = {
                     id: product.product_id,
                     Nom: product.name
@@ -43,29 +51,17 @@ export class Tabset_product extends Component {
                 listProducts.push(item);
             })
             
-            // console.log('maaa',listProducts)
-
             listProducts.map(listProduct => {
-                let option = 
-                    {value:listProduct.id, label: listProduct.Nom }
+                let option = {value:listProduct.id, label: listProduct.Nom }
                 
-                // console.log(option)
                 options.push(option)
             })
-            // console.log('11111',options)
           
             this.setState({
                 AllOptions: options
             })
         }, 1000)
-        this.state = {
-            open: false,
-            AllOptions: options
-        };
-    }
 
-    componentDidMount = () => {
-        // console.log(this.props.match.params.id)
         this.props.detailApproproduit(this.props.match.params.id)
 
         setTimeout(() => {
@@ -80,9 +76,22 @@ export class Tabset_product extends Component {
             })
         }, 1000)
 
-        
-        // console.log('product', product)
-        
+        this.props.actionsdetailRole(localStorage.getItem('roles'))
+
+        setTimeout(() => {
+            this.props.roledetails.role.map(rl => {
+                rol = rl.modifierApproProduit;
+            })
+            this.setState({
+                roles: rol
+            })
+            if(this.props.roledetails.role[0].listeApproProduit == '1'){
+                this.setState({
+                    visible: true
+                })
+            }
+        }, 1000)
+
     }
 
     handleInputChange = (e) => {
@@ -119,67 +128,79 @@ export class Tabset_product extends Component {
     }
 
     render() {
-        const {AllOptions, quantite, productId, description, isLoading} =this.state
-        // console.log("looo", AllOptions)
+        const {roles, visible, AllOptions, quantite, productId, description, isLoading} = this.state
         
-        return (
-            <Fragment>
-                <Breadcrumb title="Reajustement du Produit" parent="Approvisionnement / Produit Approvisionnés" />
-                <div className="container-fluid">
-                    <div className="row">
-                        <div className="col-sm-12">
-                            <div className="card">
-                                <div className="card-header">
-                                    <h5> Reajustement du Produit</h5>
-                                </div>
-                                <div className="card-body">
-                                    <form className="needs-validation product-edit" noValidate="">
-                                        <div className="form-group row">
-                                            <label className="col-xl-3 col-md-4"> Quantité</label>
-                                            <input className="form-control col-xl-8 col-md-7"
-                                                name="quantite" 
-                                                value={quantite}
-                                                onChange={this.handleInputChange}
-                                                id="validationCustom1" type="number" 
-                                                required="" 
-                                            />
-                                        </div>
-                                        <div className="form-group row">
-                                            <label className="col-xl-3 col-md-4" >Nom de produit :</label>
-                                            <Select className="form-control col-xl-8 col-md-7"
-                                                name="productId"
-                                                value={productId}
-                                                options={AllOptions}
-                                                onChange={this.handleChange}
-                                                required="" 
-                                            />
-                                        </div>
-                                        <div className="form">
-                                            <div className="form-group row">
-                                                <label className="col-xl-3 col-sm-4">Description :</label>
-                                                <textarea name="description" value={description} 
-                                                        onChange={this.handleInputChange}
-                                                        rows="5" cols="92"
-                                                />
-                                                {/* </div> */}
+        if(roles == '1'){
+            return (
+                <Fragment>
+                    <Breadcrumb title="Reajustement du Produit" parent="Approvisionnement / Produit Approvisionnés" />
+                    <div className="container-fluid">
+                        <div className="row">
+                            <div className="col-sm-12">
+                                <div className="card">
+                                    {visible == true ?
+                                        (
+                                            <div className="card-header">
+                                                <Link type="button" to="/supply/currency/list-product" className="btn btn-primary">Retour</Link>
                                             </div>
-                                        </div>
-                                        <ToastContainer />
-                                        <div className="offset-xl-3 offset-sm-4">
-                                            <button type="button" className="btn btn-primary"
-                                                    onClick={this.handleSubmitChange}
-                                                    disabled={isLoading}
-                                            >
-                                            Enregister</button>
-                                        </div>
-                                    </form>
+                                        ):
+                                        null
+                                    }
+                                    <div className="card-body">
+                                        <form className="needs-validation product-edit" noValidate="">
+                                            <div className="form-group row">
+                                                <label className="col-xl-3 col-md-4"> Quantité</label>
+                                                <input className="form-control col-xl-8 col-md-7"
+                                                    name="quantite" 
+                                                    value={quantite}
+                                                    onChange={this.handleInputChange}
+                                                    id="validationCustom1" type="number" 
+                                                    required="" 
+                                                />
+                                            </div>
+                                            <div className="form-group row">
+                                                <label className="col-xl-3 col-md-4" >Nom de produit :</label>
+                                                <Select className="form-control col-xl-8 col-md-7"
+                                                    name="productId"
+                                                    value={productId}
+                                                    options={AllOptions}
+                                                    onChange={this.handleChange}
+                                                    required="" 
+                                                />
+                                            </div>
+                                            <div className="form">
+                                                <div className="form-group row">
+                                                    <label className="col-xl-3 col-sm-4">Description :</label>
+                                                    <textarea name="description" value={description} 
+                                                            onChange={this.handleInputChange}
+                                                            rows="5" cols="92"
+                                                    />
+                                                    {/* </div> */}
+                                                </div>
+                                            </div>
+                                            <ToastContainer />
+                                            <div className="offset-xl-3 offset-sm-4">
+                                                <button type="button" className="btn btn-primary"
+                                                        onClick={this.handleSubmitChange}
+                                                        disabled={isLoading}
+                                                >
+                                                Enregister</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </Fragment>
-        )
+                </Fragment>
+            )
+        }else{
+            return(
+                <Fragment>
+
+                </Fragment>
+            )
+        }
     }
 }
 
@@ -187,14 +208,16 @@ const mapStateToProps = (state) => {
     return {
         product: state.product,
         editapproproduit: state.editapproproduit,
-        approprodetails: state.approprodetails
+        approprodetails: state.approprodetails,
+        roledetails: state.roledetails,
     }
 }
 const mapDispatchToProps = (dispatch) =>{
     return {
         products: () => {dispatch( produitActions.products())},
         editApproproduits: (approproduit) => {dispatch(approproduitActions.editApproproduits(approproduit))},
-        detailApproproduit: (productId) => {dispatch(approproduitActions.detailApproproduit(productId))}
+        detailApproproduit: (productId) => {dispatch(approproduitActions.detailApproproduit(productId))},
+        actionsdetailRole: (rolename) => {dispatch(roleActions.actionsdetailRole(rolename))}
     }
 }
 

@@ -7,17 +7,23 @@ import * as paiementsActions  from "../../redux/actions/paiementActions";
 import { connect } from 'react-redux';  
 import {withRouter} from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
+import * as roleActions from "../../redux/actions/roleActions";
 
 export class Transactions_sales extends Component {
     constructor(props) {
         super(props);
 
-        let listPaiements = [];
-
         this.state = {
-           paiements: []
+           paiements: [],
+           roles: null
         };
-    
+        
+    }
+
+    componentDidMount = () => {
+        let listPaiements = [];
+        let rol = null
+
         this.props.paiements();
 
         setTimeout(() => {
@@ -41,46 +47,61 @@ export class Transactions_sales extends Component {
                 paiements: listPaiements
             })
 
-        }, 2000)
+        }, 1000)
         
-        this.state = {
-            open: false,
-            paiements: listPaiements
-        };
+        this.props.actionsdetailRole(localStorage.getItem('roles'))
+
+        setTimeout(() => {
+
+            this.props.roledetails.role.map(rl => {
+                rol = rl.paiements;
+            })
+            this.setState({
+                roles: rol
+            })
+        }, 1000)
     }
 
     render() {
-        // const {paiements} = this.state
-        return (
-            <Fragment>
-                <Breadcrumb title="Paiements" parent="Ventes" />
-
-                <div className="container-fluid">
-                    <div className="row">
-                        <div className="col-sm-12">
-                            <div className="card">
-                                <div className="card-header">
-                                    <h5>Détails des Paiements</h5>
-                                </div>
-                                <ToastContainer />
-                                <div className="card-body">
-                                    <div id="batchDelete" className="transactions">
-                                        <Data_transactions
-                                            multiSelectOption={false}
-                                            myData={this.state.paiements}
-                                            check={false}
-                                            pageSize={10}
-                                            pagination={true}
-                                            class="-striped -highlight"
-                                        />
+        const {paiements, roles} = this.state
+        if(roles == '1'){
+            return (
+                <Fragment>
+                    <Breadcrumb title="Paiements" parent="Ventes" />
+    
+                    <div className="container-fluid">
+                        <div className="row">
+                            <div className="col-sm-12">
+                                <div className="card">
+                                    <div className="card-header">
+                                        <h5>Détails des Paiements</h5>
+                                    </div>
+                                    <ToastContainer />
+                                    <div className="card-body">
+                                        <div id="batchDelete" className="transactions">
+                                            <Data_transactions
+                                                multiSelectOption={false}
+                                                myData={paiements}
+                                                check={false}
+                                                pageSize={10}
+                                                pagination={true}
+                                                class="-striped -highlight"
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </Fragment>
-        )
+                </Fragment>
+            )
+        }else{
+            return(
+                <Fragment>
+
+                </Fragment>
+            )
+        }
     }
 }
 

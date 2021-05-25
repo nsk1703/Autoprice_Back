@@ -11,22 +11,23 @@ import { ToastContainer, toast } from 'react-toastify';
 
 export class List_currency extends Component {
     constructor(props) {
-        super(props)
-        let listCurrencies = []
-        let rol = null
+        super(props);
 
         this.state = {
             roles: null,
             currencies: [],
             visible: false
-        };
+        };        
+ 
+    }
 
-        // console.log(localStorage.getItem('roles'))
+    componentDidMount = () => {
+        let listCurrencies = [];
+        let rol = null;
+
         this.props.appromonnaies();
 
         setTimeout(() => {
-            // console.log(this.props.appromonnaie.appromonnaies)
-
             this.props.appromonnaie.appromonnaies.map(appromonnaie => {
                
                 let item = {
@@ -48,7 +49,6 @@ export class List_currency extends Component {
         this.props.actionsdetailRole(localStorage.getItem('roles'))
 
         setTimeout(() => {
-
             this.props.roledetails.role.map(rl => {
                 rol = rl.listeApproMonnaie;
             })
@@ -62,12 +62,8 @@ export class List_currency extends Component {
             }
         }, 1000)
 
-        this.state = {
-            currencies: listCurrencies,
-            roles: rol
-        }
- 
     }
+    
     render() {
         const { currencies, roles, visible } = this.state
 

@@ -1,6 +1,5 @@
 import React, { Component,Fragment } from 'react'
 import Breadcrumb from '../common/breadcrumb';
-import Tabset_maintain from './tabset-maintain';
 import CKEditors from 'react-ckeditor-component';
 import * as maintenanceActions from "../../redux/actions/maintenanceActions";
 import {connect} from "react-redux";
@@ -8,7 +7,7 @@ import * as machineActions from "../../redux/actions/machineActions";
 import Select from 'react-select';
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
-
+import * as roleActions  from "../../redux/actions/roleActions";
 
 const choices = [
     {value: 'type1', label:'Type 1'},
@@ -19,8 +18,6 @@ const choices = [
 export class Create_maintain extends Component {
         constructor(props) {
         super(props);
-        let options = []
-        let listMachines = []
 
         this.state = {
             open: false,
@@ -32,7 +29,8 @@ export class Create_maintain extends Component {
             machine_id: '',
             AllOptions: [],
             isLoading: false,
-
+            visible: false,
+            roles: null
         };
 
         
@@ -40,41 +38,7 @@ export class Create_maintain extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmitChange = this.handleSubmitChange.bind(this)
         this.handleSelect = this.handleSelect.bind(this)
-        // this.handleCkeditorChange = this.handleCkeditorChange.bind(this)
 
-        this.props.machines();
-
-        setTimeout(() => {
-            // console.log(this.props.machine.machines)
-
-            this.props.machine.machines.map(machine => {
-                // console.log('i',machine.id)
-                let item = {
-                    id: machine.id,
-                    Nom: machine.nom
-                }
-                listMachines.push(item);
-            })
-            
-            // console.log('maaa',listMachines)
-            // console.log(lis)
-            listMachines.map(listMachine => {
-                let option = 
-                    {value:listMachine.id, label: listMachine.Nom }
-                
-                // console.log(option)
-                options.push(option)
-            })
-            // console.log('11111',options)
-          
-            this.setState({
-                AllOptions: options
-            })
-        }, 1000)
-        this.state = {
-            open: false,
-            AllOptions: options
-        };
     }
 
     handleInputChange = (e) => {
@@ -113,113 +77,175 @@ export class Create_maintain extends Component {
        
 
     }
-    render() {
-        const {AllOptions, nom, type, montant, dateMaintenance, description, machine_id, isLoading} = this.state
 
-        return (
-            <Fragment>
-                <Breadcrumb title="Effectuer une maintenance" parent="Maintenance" />
-                <div className="container-fluid">
-                    <div className="row">
-                        <div className="col-sm-12">
-                            <div className="card">
-                                <div className="card-header">
-                                    <Link type="button" to="/maintains/list-maintain" 
-                                    className="btn btn-primary">Retour</Link>
-                                </div>
-                                <div className="card-body">
-                                    <form className="needs-validation user-add" noValidate="">
-                                        <div className="form-group row">
-                                            <label className="col-xl-3 col-md-4"><span>*</span> Nom</label>
-                                            <input className="form-control col-xl-8 col-md-7" 
-                                            id="validationCustom2" type="text" 
-                                            name='nom'
-                                            value={nom}
-                                            onChange={this.handleInputChange}
-                                            required="" />
-                                        </div>
-                                        <div className="form-group row">
-                                            <label className="col-xl-3 col-md-4"><span>*</span> Montant</label>
-                                            <input className="form-control col-xl-8 col-md-7" 
-                                            id="validationCustom0" type="number" 
-                                            name='montant'
-                                            value={montant}
-                                            onChange={this.handleInputChange}
-                                            required="" />
-                                        </div>
-                                        <div className="form-group row">
-                                            <label className="col-xl-3 col-md-4"><span>*</span> Date de Maintenance</label>
-                                            <input className="form-control col-xl-8 col-md-7" 
-                                            id="validationCustom1" type="date" 
-                                            name='dateMaintenance'
-                                            value={dateMaintenance}
-                                            onChange={this.handleInputChange}
-                                            required="" />
-                                        </div>
-                                        <div className="form-group row">
-                                            <label className="col-xl-3 col-md-4" >type :</label>
-                                            {/* <div className=""> */}
-                                                <Select className="col-xl-8 col-md-7"
-                                                    name="type"
-                                                    value={type}
-                                                    options={choices}
-                                                    onChange={this.handleSelect}
-                                                    required="" 
-                                                />
-                                            {/* </div> */}
-                                        </div>
-                                        <div className="form-group row">
-                                            <label className="col-xl-3 col-md-4" >Nom de machine :</label>
-                                            {/* <div className="col-xl-8 col-md-7"> */}
-                                                <Select className="col-xl-8 col-md-7"
-                                                    name="machine_id"
-                                                    value={machine_id}
-                                                    options={AllOptions}
-                                                    onChange={this.handleChange}
-                                                    required="" 
-                                                />
-                                            {/* </div> */}
-                                        </div>
-                                        <div className="form">
+    componentDidMount = () => {
+        let options = [];
+        let listMachines = [];
+        let rol = null;
+
+        this.props.machines();
+
+        setTimeout(() => {
+            this.props.machine.machines.map(machine => {
+                // console.log('i',machine.id)
+                let item = {
+                    id: machine.id,
+                    Nom: machine.nom
+                }
+                listMachines.push(item);
+            })
+            
+            listMachines.map(listMachine => {
+                let option = 
+                    {value:listMachine.id, label: listMachine.Nom }
+                
+                options.push(option)
+            })
+          
+            this.setState({
+                AllOptions: options
+            })
+        }, 1000)
+
+        this.props.actionsdetailRole(localStorage.getItem('roles'))
+
+        setTimeout(() => {
+            this.props.roledetails.role.map(rl => {
+                rol = rl.ajouterMaintenance;
+            })
+            this.setState({
+                roles: rol
+            })
+            if(this.props.roledetails.role[0].listeMaintenance == '1'){
+                this.setState({
+                    visible: true
+                })
+            }
+        }, 1000)
+    }
+
+    render() {
+        const {roles, visible ,AllOptions, nom, type, montant, dateMaintenance, description, machine_id, isLoading} = this.state
+
+        if(roles == '1'){
+            return (
+                <Fragment>
+                    <Breadcrumb title="Effectuer une maintenance" parent="Maintenance" />
+                    <div className="container-fluid">
+                        <div className="row">
+                            <div className="col-sm-12">
+                                <div className="card">
+                                    {visible == true ?
+                                        (
+                                            <div className="card-header">
+                                                <Link type="button" to="/maintains/list-maintain" 
+                                                className="btn btn-primary">Retour</Link>
+                                            </div>
+                                        ):
+                                        null
+                                    }
+                                    <div className="card-body">
+                                        <form className="needs-validation user-add" noValidate="">
                                             <div className="form-group row">
-                                                <label className="col-xl-3 col-md-4">Description :</label>
-                                                {/* <div className=" form-control col-xl-8 col-md-7"> */}
-                                                    <textarea className=" form-control col-xl-8 col-md-7" name="description" value={description} 
-                                                        onChange={this.handleInputChange}
-                                                        rows="10" cols="92"
+                                                <label className="col-xl-3 col-md-4"><span>*</span> Nom</label>
+                                                <input className="form-control col-xl-8 col-md-7" 
+                                                id="validationCustom2" type="text" 
+                                                name='nom'
+                                                value={nom}
+                                                onChange={this.handleInputChange}
+                                                required="" />
+                                            </div>
+                                            <div className="form-group row">
+                                                <label className="col-xl-3 col-md-4"><span>*</span> Montant</label>
+                                                <input className="form-control col-xl-8 col-md-7" 
+                                                id="validationCustom0" type="number" 
+                                                name='montant'
+                                                value={montant}
+                                                onChange={this.handleInputChange}
+                                                required="" />
+                                            </div>
+                                            <div className="form-group row">
+                                                <label className="col-xl-3 col-md-4"><span>*</span> Date de Maintenance</label>
+                                                <input className="form-control col-xl-8 col-md-7" 
+                                                id="validationCustom1" type="date" 
+                                                name='dateMaintenance'
+                                                value={dateMaintenance}
+                                                onChange={this.handleInputChange}
+                                                required="" />
+                                            </div>
+                                            <div className="form-group row">
+                                                <label className="col-xl-3 col-md-4" >type :</label>
+                                                {/* <div className=""> */}
+                                                    <Select className="col-xl-8 col-md-7"
+                                                        name="type"
+                                                        value={type}
+                                                        options={choices}
+                                                        onChange={this.handleSelect}
+                                                        required="" 
                                                     />
                                                 {/* </div> */}
                                             </div>
-                                        </div>
-                                        <ToastContainer />
-                                        <div className="offset-xl-3 offset-sm-4">
-                                            <button type="button" 
-                                            className="btn btn-primary"
-                                            onClick={this.handleSubmitChange}
-                                            disabled={isLoading}
-                                            >Enregister</button>
-                                        </div>
-                                    </form>
+                                            <div className="form-group row">
+                                                <label className="col-xl-3 col-md-4" >Nom de machine :</label>
+                                                {/* <div className="col-xl-8 col-md-7"> */}
+                                                    <Select className="col-xl-8 col-md-7"
+                                                        name="machine_id"
+                                                        value={machine_id}
+                                                        options={AllOptions}
+                                                        onChange={this.handleChange}
+                                                        required="" 
+                                                    />
+                                                {/* </div> */}
+                                            </div>
+                                            <div className="form">
+                                                <div className="form-group row">
+                                                    <label className="col-xl-3 col-md-4">Description :</label>
+                                                    {/* <div className=" form-control col-xl-8 col-md-7"> */}
+                                                        <textarea className=" form-control col-xl-8 col-md-7" name="description" value={description} 
+                                                            onChange={this.handleInputChange}
+                                                            rows="10" cols="92"
+                                                        />
+                                                    {/* </div> */}
+                                                </div>
+                                            </div>
+                                            <ToastContainer />
+                                            <div className="offset-xl-3 offset-sm-4">
+                                                <button type="button" 
+                                                className="btn btn-primary"
+                                                onClick={this.handleSubmitChange}
+                                                disabled={isLoading}
+                                                >Enregister</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </Fragment>
-        )
+                </Fragment>
+            )
+        }else{
+            return(
+                <Fragment>
+
+                </Fragment>
+            )
+        }
     }
 }
 
 const mapStateToProps = (state) => {
     return {
         addmaintenance: state.addmaintenance,
-        machine: state.machine
+        machine: state.machine,
+        roledetails: state.roledetails
     }
 }
 const mapDispatchToProps = (dispatch) =>{
     return {
         newMaintenance: (maintenance) => {dispatch( maintenanceActions.newMaintenance(maintenance))},
-        machines: () => {dispatch( machineActions.machines())}
+        machines: () => {dispatch( machineActions.machines())},
+        actionsdetailRole: (rolename) => {dispatch(roleActions.actionsdetailRole(rolename))}
     }
 }
 

@@ -12,8 +12,7 @@ import * as roleActions  from "../../redux/actions/roleActions";
 export class List_maintain extends Component {
     constructor(props) {
         super(props);
-        let listMaintenances = [];
-        let rol = null
+
 
         this.state = {
             open: false,
@@ -21,11 +20,15 @@ export class List_maintain extends Component {
             roles: null,
             visible: false
         };
+    }
+
+    componentDidMount = () => {
+        let listMaintenances = [];
+        let rol = null;
 
         this.props.maintenances();
 
         setTimeout(() => {
-            // console.log(this.props.maintenance.maintenances)
             this.props.maintenance.maintenances.map(maintenance => {
                 let item = {
                     ID: maintenance.id,
@@ -62,13 +65,8 @@ export class List_maintain extends Component {
                 })
             }
         }, 1000)
-
-        this.state = {
-            open: false,
-            maintenances: listMaintenances,
-            roles: rol
-        };
     }
+    
     render() {
         const {maintenances, roles, visible} = this.state
         if(roles == '1'){

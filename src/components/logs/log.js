@@ -6,16 +6,22 @@ import Datatable from '../common/datatable'
 import * as logActions from "../../redux/actions/logActions";
 import {connect} from "react-redux";
 import { ToastContainer, toast } from 'react-toastify';
+import * as roleActions from "../../redux/actions/roleActions";
 
 export class Log extends Component {
     constructor(props) {
         super(props);
-        let listLogs = [];
 
         this.state = {
             open: false,
-            logs: []
+            logs: [],
+            roles: null
         };
+    }
+
+    componentDidMount = () => {
+        let listLogs = [];
+        let rol = null
 
         this.props.logs();
 
@@ -38,51 +44,64 @@ export class Log extends Component {
                 logs: listLogs
             })
         }, 1000)
-        this.state = {
-            open: false,
-            logs: listLogs
-        };
+
+        this.props.actionsdetailRole(localStorage.getItem('roles'))
+
+        setTimeout(() => {
+
+            this.props.roledetails.role.map(rl => {
+                rol = rl.log;
+            })
+            this.setState({
+                roles: rol
+            })
+        }, 1000)
     }
+
     render() {
-        const {logs} = this.state
-        return (
-            <Fragment>
-                <Breadcrumb title="Liste des Logs" parent="Logs"/>
-                <div className="container-fluid">
-                    <div className="card">
-                        {/* <div className="card-header">
-                            <h5>User Details</h5>
-                        </div> */}
-                        <div className="card-body">
-                            {/* <div className="btn-popup pull-right">
-                                <Link to="/logs/create-log" className="btn btn-primary">Créer un journal</Link>
-                            </div> */}
-                            <div className="clearfix"></div>
-                            <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
-                                <Datatable
-                                    multiSelectOption={true}
-                                    myData={logs}
-                                    pageSize={10}
-                                    pagination={true}
-                                    class="-striped -highlight"
-                                />
+        const {logs, roles} = this.state
+        if(roles == '1'){
+            return (
+                <Fragment>
+                    <Breadcrumb title="Liste des Logs" parent="Logs"/>
+                    <div className="container-fluid">
+                        <div className="card">
+                            <div className="card-body">
+                                <div className="clearfix"></div>
+                                <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
+                                    <Datatable
+                                        multiSelectOption={true}
+                                        myData={logs}
+                                        pageSize={10}
+                                        pagination={true}
+                                        class="-striped -highlight"
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </Fragment>
-        )
+                </Fragment>
+            )
+        }else{
+            return(
+                <Fragment>
+
+                </Fragment>
+            )
+        }
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        log: state.log
+        log: state.log,
+        roledetails: state.roledetails,
     }
 }
 const mapDispatchToProps = (dispatch) =>{
     return {
-        logs: () => {dispatch( logActions.logs())}
+        logs: () => {dispatch( logActions.logs())},
+        actionsdetailRole: (rolename) => {dispatch(roleActions.actionsdetailRole(rolename))},
     }
 }
 

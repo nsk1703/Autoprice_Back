@@ -2,11 +2,11 @@ import React, { Component,Fragment } from 'react'
 import Breadcrumb from '../common/breadcrumb';
 import Select from 'react-select';
 import * as machineActions from "../../redux/actions/machineActions";
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import {CKEditor} from '@ckeditor/ckeditor5-react';
 import {connect} from "react-redux";
 import { ToastContainer, toast } from 'react-toastify';
 import { withRouter, Redirect, Router } from 'react-router-dom';
+import * as roleActions from "../../redux/actions/roleActions";
+import { Link } from "react-router-dom";
 
 const options = [
     {value: 'type1', label:'Type 1'},
@@ -16,7 +16,6 @@ const options = [
 export class Edit_machine extends Component {
     constructor(props) {
         super(props);
-        // console.log(this.props.machine.id)
        
         this.state = {
             open: false,
@@ -27,6 +26,8 @@ export class Edit_machine extends Component {
             montant: '',
             description: '',
             isLoading: false,
+            visible: false,
+            roles: null,
             
         };
 
@@ -48,7 +49,8 @@ export class Edit_machine extends Component {
 
     componentDidMount = () => {
         let param = this.props.match.params.id
-        
+        let rol = null
+
         this.props.machineDetail(param)
 
         setTimeout(() => {
@@ -65,7 +67,23 @@ export class Edit_machine extends Component {
                 montant: this.props.machdetails.machine.machine.montant,
                 description: this.props.machdetails.machine.machine.description
             })
-        }, 1000)        
+        }, 1000) 
+        
+        this.props.actionsdetailRole(localStorage.getItem('roles'))
+
+        setTimeout(() => {
+            this.props.roledetails.role.map(rl => {
+                rol = rl.modifierMachine;
+            })
+            this.setState({
+                roles: rol
+            })
+            if(this.props.roledetails.role[0].listeMachine == '1'){
+                this.setState({
+                    visible: true
+                })
+            }
+        }, 1000)
        
     }
     
@@ -90,97 +108,112 @@ export class Edit_machine extends Component {
         }, 1000)
     }
     render() {
-        const {isLoading, nom, type, lien, montant, description} =this.state
+        const {roles, visible, isLoading, nom, type, lien, montant, description} =this.state
         // console.log(options)
-        return (
-            <Fragment>
-                <Breadcrumb title="Modifier une machine " parent="Machines / Liste des Machines" />
-                <div className="container-fluid">
-                    <div className="row">
-                        <div className="col-sm-12">
-                            <div className="card">
-                                <div className="card-header">
-                                    <h5> Modifier une machine</h5>
-                                </div>
-                                <div className="card-body">
-                                    <form className="needs-validation" encType="multipart/form-data">
-                                        <div className="form-group row">
-                                            <label className="col-xl-3 col-md-4"><span>*</span> Nom de Machine</label>
-                                            <input className="form-control col-xl-8 col-md-7" 
-                                            id="validationCustom0" type="text" 
-                                            name="nom"
-                                            value={nom}
-                                            onChange={this.handleInputChange}
-                                            required="" />
-                                        </div>
-                                        <div className="form-group row">
-                                            <label className="col-xl-3 col-md-4" >type :</label>
-                                            {/* <div className=""> */}
-                                            <Select className="col-xl-8 col-md-7"
-                                                name="type"
-                                                value={type}
-                                                onChange={this.handleChange}
-                                                options={options}
-                                                required="" 
-                                            />
-                                            {/* </div> */}
-                                        </div>
-                                        <div className="form-group row">
-                                            <label className="col-xl-3 col-md-4"><span>*</span> Montant</label>
-                                            <input className="form-control col-xl-8 col-md-7" 
-                                            id="validationCustom0" type="text" 
-                                            name="montant"
-                                            value={montant}
-                                            onChange={this.handleInputChange}
-                                            required="" />
-                                        </div>
-                                        <div className="form-group row">
-                                            <label className="col-xl-3 col-md-4"><span>*</span> Lien</label>
-                                            <input className="form-control col-xl-8 col-md-7" 
-                                            name="lien"
-                                            value={lien}
-                                            id="validationCustom2" type="text" 
-                                            onChange={this.handleInputChange}
-                                            required="" />
-                                        </div>
-                                        <div className="form-group row">
-                                            <label className="col-xl-3 col-md-4">Description du produit :</label>
-                                            {/* <div className="form-control col-xl-8 col-md-7 description-sm"> */}
-                                                <textarea className=" form-control col-xl-8 col-md-7" 
-                                                name="description" value={description} 
-                                                    onChange={this.handleInputChange}
-                                                    rows="10" cols="92"
+        if(roles == '1'){
+            return (
+                <Fragment>
+                    <Breadcrumb title="Modifier une machine " parent="Machines / Liste des Machines" />
+                    <div className="container-fluid">
+                        <div className="row">
+                            <div className="col-sm-12">
+                                <div className="card">
+                                    {visible == true ?
+                                        (
+                                            <div className="card-header">
+                                                <Link type="button" to="/machines/edit-machine" className="btn btn-primary">Retour</Link>
+                                            </div>
+                                        ):
+                                        null
+                                    }
+                                    <div className="card-body">
+                                        <form className="needs-validation" encType="multipart/form-data">
+                                            <div className="form-group row">
+                                                <label className="col-xl-3 col-md-4"><span>*</span> Nom de Machine</label>
+                                                <input className="form-control col-xl-8 col-md-7" 
+                                                id="validationCustom0" type="text" 
+                                                name="nom"
+                                                value={nom}
+                                                onChange={this.handleInputChange}
+                                                required="" />
+                                            </div>
+                                            <div className="form-group row">
+                                                <label className="col-xl-3 col-md-4" >type :</label>
+                                                {/* <div className=""> */}
+                                                <Select className="col-xl-8 col-md-7"
+                                                    name="type"
+                                                    value={type}
+                                                    onChange={this.handleChange}
+                                                    options={options}
+                                                    required="" 
                                                 />
-                                            {/* </div> */}
-                                        </div>
-                                        <div className="offset-xl-3 offset-sm-4">
-                                            <button type="button" 
-                                            className="btn btn-primary"
-                                            disabled={isLoading}
-                                            onClick={this.handleSubmitChange}
-                                            >Modifier</button>
-                                        </div>
-                                    </form>
+                                                {/* </div> */}
+                                            </div>
+                                            <div className="form-group row">
+                                                <label className="col-xl-3 col-md-4"><span>*</span> Montant</label>
+                                                <input className="form-control col-xl-8 col-md-7" 
+                                                id="validationCustom0" type="text" 
+                                                name="montant"
+                                                value={montant}
+                                                onChange={this.handleInputChange}
+                                                required="" />
+                                            </div>
+                                            <div className="form-group row">
+                                                <label className="col-xl-3 col-md-4"><span>*</span> Lien</label>
+                                                <input className="form-control col-xl-8 col-md-7" 
+                                                name="lien"
+                                                value={lien}
+                                                id="validationCustom2" type="text" 
+                                                onChange={this.handleInputChange}
+                                                required="" />
+                                            </div>
+                                            <div className="form-group row">
+                                                <label className="col-xl-3 col-md-4">Description du produit :</label>
+                                                {/* <div className="form-control col-xl-8 col-md-7 description-sm"> */}
+                                                    <textarea className=" form-control col-xl-8 col-md-7" 
+                                                    name="description" value={description} 
+                                                        onChange={this.handleInputChange}
+                                                        rows="10" cols="92"
+                                                    />
+                                                {/* </div> */}
+                                            </div>
+                                            <div className="offset-xl-3 offset-sm-4">
+                                                <button type="button" 
+                                                className="btn btn-primary"
+                                                disabled={isLoading}
+                                                onClick={this.handleSubmitChange}
+                                                >Modifier</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </Fragment>
-        )
+                </Fragment>
+            )
+        }else{
+            return(
+                <Fragment>
+
+                </Fragment>
+            )
+        }
     }
 }
 
 const mapStateToProps = (state) => {
     return {
         editmachine: state.editmachine,
-        machdetails: state.machdetails
+        machdetails: state.machdetails,
+        roledetails: state.roledetails
     }
 }
 const mapDispatchToProps = (dispatch) =>{
     return {
         editMachine: (machine) => {dispatch( machineActions.editMachine(machine))},
         machineDetail: (paramID) => {dispatch( machineActions.machineDetail(paramID))},
+        actionsdetailRole: (rolename) => {dispatch(roleActions.actionsdetailRole(rolename))}
     }
 }
 

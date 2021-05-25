@@ -134,11 +134,42 @@ export const roleDetailsReducer = (state = { role: {} }, action) => {
         case roleConstants.ROLE_DETAILS_SUCCESS:
             return {
                 loading: false,
-                // success: action.payload.success,
                 role: action.payload.role
             }
 
         case roleConstants.ROLE_DETAILS_FAIL:
+            return {
+                ...state,
+                error: action.payload
+            }
+
+        case roleConstants.CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state
+    }
+}
+
+export const rolePrivateReducer = (state = { role: {} }, action) => {
+    switch (action.type) {
+
+        case roleConstants.ROLE_PRIVATE_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+
+        case roleConstants.ROLE_PRIVATE_SUCCESS:
+            return {
+                loading: false,
+                role: action.payload.role
+            }
+
+        case roleConstants.ROLE_PRIVATE_FAIL:
             return {
                 ...state,
                 error: action.payload

@@ -12,10 +12,6 @@ import * as roleActions  from "../../redux/actions/roleActions";
 export class List_machine extends Component {
     constructor(props) {
         super(props);
-        let listMachines = [];
-        let Roles = []
-        let listeMachine= null
-        let ajouterMachine= null
         
         this.state = {
             open: false,
@@ -24,6 +20,13 @@ export class List_machine extends Component {
             visible: false,
 
         };
+    }
+
+    componentDidMount = () => {
+        let listMachines = [];
+        let Roles = [];
+        let listeMachine= null;
+        let ajouterMachine= null;
 
         this.props.machines();
 
@@ -67,12 +70,6 @@ export class List_machine extends Component {
             }
         }, 1000)
 
-        this.state = {
-            open: false,
-            machines: listMachines,
-            roles: listeMachine
-            
-        };
     }
 
     render() {

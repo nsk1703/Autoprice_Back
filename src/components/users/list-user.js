@@ -11,8 +11,6 @@ import * as roleActions  from "../../redux/actions/roleActions";
 export class List_user extends Component {
     constructor(props) {
         super(props);
-        let listUsers = [];
-        let rol = null
 
         this.state = {
             open: false,
@@ -20,7 +18,12 @@ export class List_user extends Component {
             roles: null,
             visible: false
         };
+    }
 
+    componentDidMount = () => {
+        let listUsers = [];
+        let rol = null;
+        
         this.props.users();
 
         setTimeout(() => {
@@ -66,12 +69,8 @@ export class List_user extends Component {
             }
         }, 1000)
 
-        this.state = {
-            open: false,
-            users: listUsers,
-            roles: rol
-        };
     }
+    
     render() {
         const {users, visible, roles} = this.state
         // console.log(users)

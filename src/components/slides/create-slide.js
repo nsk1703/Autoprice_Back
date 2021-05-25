@@ -1,12 +1,11 @@
 import React, { Component,Fragment } from 'react'
 import Breadcrumb from '../common/breadcrumb';
-import Tabset_slide from './tabset-slide';
 import {connect} from "react-redux";
 import Select from 'react-select';
 import * as slideActions from "../../redux/actions/slideActions";
 import { withRouter } from 'react-router';
 import { Link } from "react-router-dom";
-
+import * as roleActions  from "../../redux/actions/roleActions";
 
 const typeChoices = [
     {value: 'home', label:'Home'},
@@ -27,13 +26,14 @@ export class Create_slide extends Component {
            format: '',
            images: null,
            isLoading: false, 
+           visible: false,
+           roles: null
         }
 
         this.handleTypeChange = this.handleTypeChange.bind(this)
         this.handleFormatChange = this.handleFormatChange.bind(this)
         this.handleFileChange = this.handleFileChange.bind(this)
         this.handleSubmitChange = this.handleSubmitChange.bind(this)
-
     }
   
     handleTypeChange = (type)=> {
@@ -57,7 +57,7 @@ export class Create_slide extends Component {
         })
         this.props.newSlide(this.state)
         setTimeout(() => {
-            // console.log(this.props.addmachine.success)
+            // console.log(this.props.addslide.success)
             if(this.props.addslide.success === true){
                 this.props.history.push('/slides/list-slide');
             }else{
@@ -70,75 +70,113 @@ export class Create_slide extends Component {
        
 
     }
+
+    componentDidMount = () => {
+        let rol = null;
+        
+        this.props.actionsdetailRole(localStorage.getItem('roles'))
+        
+        setTimeout(() => {
+            this.props.roledetails.role.map(rl => {
+                rol = rl.ajouterSlide;
+            })
+            this.setState({
+                roles: rol
+            })
+            if(this.props.roledetails.role[0].listeSlide == '1'){
+                this.setState({
+                    visible: true
+                })
+            }
+        }, 1000)
+
+    }
+
     render() {
-        const {type, format, isLoading} = this.state
-        return (
-            <Fragment>
-                <Breadcrumb title="Ajouter un slide" parent="Slides" />
-                <div className="container-fluid">
-                    <div className="row">
-                        <div className="col-sm-12">
-                            <div className="card">
-                                <div className="card-header">
-                                <Link type="button" to="/slides/list-slide" 
-                                    className="btn btn-primary">Retour</Link>
-                                </div>
-                                <div className="card-body">
-                                    <form className="needs-validation user-add">
-                                        <div className="form-group row">
-                                            <label className="col-xl-3 col-md-4"><span>*</span> Format</label>
-                                            <Select className="col-xl-8 col-md-7"
-                                                name="Format"
-                                                value={format}
-                                                onChange={this.handleFormatChange}
-                                                options={formatChoices}
-                                                required="" 
-                                            />
+        const {roles, visible, type, format, isLoading} = this.state
+       
+        if(roles == '1'){
+            return (
+                <Fragment>
+                    <Breadcrumb title="Ajouter un slide" parent="Slides" />
+                    <div className="container-fluid">
+                        <div className="row">
+                            <div className="col-sm-12">
+                                <div className="card">
+                                   {visible == true ?
+                                       (
+                                        <div className="card-header">
+                                            <Link type="button" to="/slides/list-slide" 
+                                                className="btn btn-primary">Retour</Link>
                                         </div>
-                                        <div className="form-group row">
-                                            <label className="col-xl-3 col-md-4" ><span>*</span> type :</label>
-                                            {/* <div className="col-xl-8 col-md-7"> */}
+                                       ):
+                                       null
+                                   }
+                                    <div className="card-body">
+                                        <form className="needs-validation user-add">
+                                            <div className="form-group row">
+                                                <label className="col-xl-3 col-md-4"><span>*</span> Format</label>
                                                 <Select className="col-xl-8 col-md-7"
-                                                    name="type"
-                                                    value={type}
-                                                    onChange={this.handleTypeChange}
-                                                    options={typeChoices}
+                                                    name="Format"
+                                                    value={format}
+                                                    onChange={this.handleFormatChange}
+                                                    options={formatChoices}
                                                     required="" 
                                                 />
-                                            {/* </div> */}
-                                        </div>
-                                        <div className="form-group row">
-                                            <label className="col-xl-3 col-md-4"><span>*</span>Image de Catégorie :</label>
-                                            <input className="form-control col-xl-8 col-md-7" 
-                                                type="file" 
-                                                onChange={this.handleFileChange}
-                                            />
-                                        </div>
-                                        <div className="offset-xl-3 offset-sm-4 mt-3">
-                                            <button type="button" 
-                                                className="btn btn-primary"
-                                                disabled={isLoading}
-                                                onClick={this.handleSubmitChange}
-                                            >Enregister</button>
-                                        </div>
-                                    </form>
+                                            </div>
+                                            <div className="form-group row">
+                                                <label className="col-xl-3 col-md-4" ><span>*</span> type :</label>
+                                                {/* <div className="col-xl-8 col-md-7"> */}
+                                                    <Select className="col-xl-8 col-md-7"
+                                                        name="type"
+                                                        value={type}
+                                                        onChange={this.handleTypeChange}
+                                                        options={typeChoices}
+                                                        required="" 
+                                                    />
+                                                {/* </div> */}
+                                            </div>
+                                            <div className="form-group row">
+                                                <label className="col-xl-3 col-md-4"><span>*</span>Image de Catégorie :</label>
+                                                <input className="form-control col-xl-8 col-md-7" 
+                                                    type="file" 
+                                                    onChange={this.handleFileChange}
+                                                />
+                                            </div>
+                                            <div className="offset-xl-3 offset-sm-4 mt-3">
+                                                <button type="button" 
+                                                    className="btn btn-primary"
+                                                    disabled={isLoading}
+                                                    onClick={this.handleSubmitChange}
+                                                >Enregister</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </Fragment>
-        )
+                </Fragment>
+            )
+        }else{
+            return (
+                <Fragment>
+
+                </Fragment>
+            )
+        }
     }
 }
 const mapStateToProps = (state) => {
     return {
         addslide: state.addslide,
+        roledetails: state.roledetails,
     }
 }
 const mapDispatchToProps = (dispatch) =>{
     return {
         newSlide: (slide) => {dispatch( slideActions.newSlide(slide))},
+        actionsdetailRole: (rolename) => {dispatch(roleActions.actionsdetailRole(rolename))},
     }
 }
 

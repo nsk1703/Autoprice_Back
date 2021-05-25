@@ -6,34 +6,39 @@ import {connect} from "react-redux";
 import { ToastContainer, toast } from 'react-toastify';
 import * as appromonnaieActions from '../../../redux/actions/appromonnaieActions';
 import Select from 'react-select';
+import * as roleActions from "../../../redux/actions/roleActions";
+import { Link } from 'react-router-dom'
 
 export class Edit_currency extends Component {
-    
     constructor(props) {
         super(props); 
 
-        let options = []
-        let listMachines = []
-        
-            this.state = {
-                isLoading: false,
-                open: false,
-                id: null,
-                quantite: '',
-                description: '',
-                machine_id:  '',
-                AllOptions: []
-            };
+        this.state = {
+            isLoading: false,
+            open: false,
+            id: null,
+            quantite: '',
+            description: '',
+            machine_id:  '',
+            AllOptions: [],
+            visible: false,
+            roles: null,
+        };
         
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmitChange = this.handleSubmitChange.bind(this)
 
+    }
+    
+    componentDidMount = () => {
+        let rol = null
+        let options = [];
+        let listMachines = [];
+
         this.props.machines();
 
         setTimeout(() => {
-            // console.log(this.props.machine.machines)
-
             this.props.machine.machines.map(machine => {
                 let item = {
                     id: machine.id,
@@ -42,11 +47,8 @@ export class Edit_currency extends Component {
                 listMachines.push(item);
             })
             
-            // console.log('maaa',listMachines)
             listMachines.map(listMachine => {
-                let option = 
-                    {value:listMachine.id, label: listMachine.Nom }
-                
+                let option = {value:listMachine.id, label: listMachine.Nom }
                 options.push(option)
             })
           
@@ -54,18 +56,8 @@ export class Edit_currency extends Component {
                 AllOptions: options
             })
         }, 1000)
-        this.state = {
-            open: false,
-            AllOptions: options
-        };
-        
-    }
-    
-    componentDidMount = () => {
-        // console.log(this.props.match.params.id)
         
         this.props.detailAppromonnaie(this.props.match.params.id)
-        // console.log('machine', machine)
 
         setTimeout(() => {
             let machine = {value: this.props.appromondetails.appromonnaie.appromonnaie.machine_id.id, 
@@ -78,6 +70,22 @@ export class Edit_currency extends Component {
                 description: this.props.appromondetails.appromonnaie.appromonnaie.description,
                 machine_id: machine
             })
+        }, 1000)
+
+        this.props.actionsdetailRole(localStorage.getItem('roles'))
+
+        setTimeout(() => {
+            this.props.roledetails.role.map(rl => {
+                rol = rl.modifierApproMonnaie;
+            })
+            this.setState({
+                roles: rol
+            })
+            if(this.props.roledetails.role[0].listeApproMonnaie == '1'){
+                this.setState({
+                    visible: true
+                })
+            }
         }, 1000)
 
     }
@@ -113,74 +121,88 @@ export class Edit_currency extends Component {
     }
 
     render() {
-        const {AllOptions, quantite, description, machine_id, isLoading} =this.state
-        return (
-            <Fragment>
-                <Breadcrumb title="Reajustement de Monnaie" parent="Monnaie" />
-                <div className="container-fluid">
-                    <div className="row">
-                        <div className="col-sm-12">
-                            <div className="card">
-                                <div className="card-header">
-                                    <h5> Reajustement de Monnaie</h5>
-                                </div>
-                                <div className="card-body">
-                                    <form className="needs-validation">
-                                        <div className="form-group row">
-                                            <label className="col-xl-3 col-md-4"> Montant (FCFA)</label>
-                                            <input className="form-control col-xl-8 col-md-7"
-                                            name="quantite" 
-                                            value={quantite}
-                                            onChange={this.handleInputChange}
-                                            id="validationCustom1" type="number" 
-                                            required="" />
-                                        </div>
-                                        <div className="form-group row">
-                                            <label className="col-xl-3 col-md-4" >Nom de machine :</label>
-                                            <Select className="col-xl-8 col-md-7"
-                                                name="machine_id"
-                                                value={machine_id}
-                                                options={AllOptions}
-                                                onChange={this.handleChange}
-                                                required="" 
-                                            />
-                                            
-                                        </div>
-                                        <div className="form">
-                                            <div className="form-group row">
-                                                <label className="col-xl-3 col-sm-4">Description :</label>
-                                                {/* <div className="form-control col-xl-8 col-sm-7"> */}
-                                                
-                                                    <textarea className="form-control" name="description" value={description} 
-                                                        onChange={this.handleInputChange}
-                                                        rows="5" cols="92"
-                                                />
-                                                {/* </div> */}
+        const {roles, visible, AllOptions, quantite, description, machine_id, isLoading} =this.state
+        if(roles == '1'){
+            return (
+                <Fragment>
+                    <Breadcrumb title="Reajustement de Monnaie" parent="Monnaie" />
+                    <div className="container-fluid">
+                        <div className="row">
+                            <div className="col-sm-12">
+                                <div className="card">
+                                    {visible == true ?
+                                        (
+                                            <div className="card-header">
+                                                <Link type="button" to="/supply/currency/list-currency" className="btn btn-primary">Retour</Link>
                                             </div>
-                                        </div>
-                                        <ToastContainer />
-                                        <div className="offset-xl-3 offset-sm-4">
-                                            <button type="button" className="btn btn-primary"
-                                                onClick={this.handleSubmitChange}
-                                                disabled={isLoading}
-                                            >
-                                            Enregister</button>
-                                        </div>
-                                    </form>
+                                        ):
+                                        null
+                                    }
+                                    <div className="card-body">
+                                        <form className="needs-validation">
+                                            <div className="form-group row">
+                                                <label className="col-xl-3 col-md-4"> Montant (FCFA)</label>
+                                                <input className="form-control col-xl-8 col-md-7"
+                                                name="quantite" 
+                                                value={quantite}
+                                                onChange={this.handleInputChange}
+                                                id="validationCustom1" type="number" 
+                                                required="" />
+                                            </div>
+                                            <div className="form-group row">
+                                                <label className="col-xl-3 col-md-4" >Nom de machine :</label>
+                                                <Select className="col-xl-8 col-md-7"
+                                                    name="machine_id"
+                                                    value={machine_id}
+                                                    options={AllOptions}
+                                                    onChange={this.handleChange}
+                                                    required="" 
+                                                />
+                                                
+                                            </div>
+                                            <div className="form">
+                                                <div className="form-group row">
+                                                    <label className="col-xl-3 col-sm-4">Description :</label>
+                                                    {/* <div className="form-control col-xl-8 col-sm-7"> */}
+                                                    
+                                                        <textarea className="form-control" name="description" value={description} 
+                                                            onChange={this.handleInputChange}
+                                                            rows="5" cols="92"
+                                                    />
+                                                    {/* </div> */}
+                                                </div>
+                                            </div>
+                                            <ToastContainer />
+                                            <div className="offset-xl-3 offset-sm-4">
+                                                <button type="button" className="btn btn-primary"
+                                                    onClick={this.handleSubmitChange}
+                                                    disabled={isLoading}
+                                                >
+                                                Enregister</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </Fragment>
-        )
+                </Fragment>
+            )
+        }else{
+            return(
+                <Fragment>
+
+                </Fragment>
+            )
+        }
     }
 }
 const mapStateToProps = (state) => {
     return{
         machine: state.machine,
         editappromonnaie: state.editappromonnaie,
-        appromondetails: state.appromondetails
+        appromondetails: state.appromondetails,
+        roledetails: state.roledetails,
     }
     
 }
@@ -188,7 +210,8 @@ const mapDispatchToProps = (dispatch) =>{
     return {
         machines: () => {dispatch( machineActions.machines())},
         editAppromonnaie: (appromonnaie) => {dispatch(appromonnaieActions.editAppromonnaie(appromonnaie))},
-        detailAppromonnaie: (moneyId) => {dispatch(appromonnaieActions.detailAppromonnaie(moneyId))}
+        detailAppromonnaie: (moneyId) => {dispatch(appromonnaieActions.detailAppromonnaie(moneyId))},
+        actionsdetailRole: (rolename) => {dispatch(roleActions.actionsdetailRole(rolename))}
     }
 }
 

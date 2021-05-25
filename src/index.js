@@ -15,7 +15,7 @@ import thunk from 'redux-thunk';
 // Import of reducers
 import {appromonnaiesReducer, newAppromonnaieReducer, appromonnaieReducer, appromonnaieDetailsReducer} from './redux/reducers/appromonnaieReducers'
 import {approproduitsReducer, newApproproduitReducer, approproduitReducer, approproduitDetailsReducer} from './redux/reducers/approproduitReducers';
-import {newRoleReducer, roleReducer, rolesReducer, roleDetailsReducer} from './redux/reducers/rolesReducer';
+import {newRoleReducer, roleReducer, rolesReducer, roleDetailsReducer, rolePrivateReducer} from './redux/reducers/rolesReducer';
 import {logssReducer, newLogsReducer, logsReducer, logsDetailsReducer} from './redux/reducers/logsReducers';
 import {categoryReducer, categoriesReducer, newCategoryReducer, categoryDetailsReducer} from './redux/reducers/categoryReducers';
 import {machinesReducer, newMachineReducer, machineReducer, machineDetailsReducer} from './redux/reducers/machineReducers';
@@ -151,6 +151,7 @@ const rootReducers = combineReducers({
     catdetails: categoryDetailsReducer,
     userdetails: userDetailsReducer,
     roledetails: roleDetailsReducer,
+    roleprivate: rolePrivateReducer,
     
     addappromonnaie: newAppromonnaieReducer, 
     addapproproduit: newApproproduitReducer,

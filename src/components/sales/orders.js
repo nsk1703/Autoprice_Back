@@ -7,20 +7,27 @@ import Data_orders from '../common/dataTables/data_orders';
 import * as orderActions  from "../../redux/actions/orderActions";
 import { connect } from 'react-redux';  
 import { ToastContainer, toast } from 'react-toastify';
+import * as roleActions from "../../redux/actions/roleActions";
 
 export class Orders extends Component {
     constructor(props) {
         super(props);
-        let listOrders = []
 
         this.state = {
-           orders: []
+           orders: [],
+           roles: null,
         };
+
+    }
+
+    componentDidMount = () =>{
+        let listOrders = []
+        let rol = null;
 
         this.props.orders()
 
         setTimeout(() => {
-            console.log(this.props.order.orders)
+            // console.log(this.props.order.orders)
 
             this.props.order.orders.map(order => {
                 let image = [];
@@ -44,62 +51,77 @@ export class Orders extends Component {
                 listOrders.push(item);
             })
 
-
             this.setState({
                     orders: listOrders
                 })
-        }, 2000)
+        }, 1000)
 
-        this.state = {
-            open: false,
-            orders: listOrders
-        };
+        this.props.actionsdetailRole(localStorage.getItem('roles'))
+
+        setTimeout(() => {
+
+            this.props.roledetails.role.map(rl => {
+                rol = rl.commandes;
+            })
+            this.setState({
+                roles: rol
+            })
+        }, 1000)
 
     }
 
-
     render() {
-        const {orders} = this.state
-        return (
-            <Fragment>
-                <Breadcrumb title="Commandes" parent="Ventes" />
+        const {orders, roles} = this.state
+        if(roles == '1'){
+            return (
+                <Fragment>
+                    <Breadcrumb title="Commandes" parent="Ventes" />
 
-                <div className="container-fluid">
-                    <div className="row">
-                        <div className="col-sm-12">
-                            <div className="card">
-                                <div className="card-header">
-                                    <h5>Gestionnaire de Commandes</h5>
-                                </div>
-                                <ToastContainer />
-                                <div className="card-body order-datatable">
-                                <Data_orders
-                                    multiSelectOption={false}
-                                    myData={orders}
-                                    check={false}
-                                    pageSize={10}
-                                    pagination={true}
-                                    class="-striped -highlight"
-                                />
+                    <div className="container-fluid">
+                        <div className="row">
+                            <div className="col-sm-12">
+                                <div className="card">
+                                    <div className="card-header">
+                                        <h5>Gestionnaire de Commandes</h5>
+                                    </div>
+                                    <ToastContainer />
+                                    <div className="card-body order-datatable">
+                                    <Data_orders
+                                        multiSelectOption={false}
+                                        myData={orders}
+                                        check={false}
+                                        pageSize={10}
+                                        pagination={true}
+                                        class="-striped -highlight"
+                                    />
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </Fragment>
-        )
+                </Fragment>
+            )
+        }else{
+           return(
+               <Fragment>
+
+               </Fragment>
+           )
+       }
     }
 }
 
 const mapStateToProps = (state) =>{
     return {
-        order: state.order
+        order: state.order,
+        roledetails: state.roledetails
     }
 }
 
 const mapDispatchToProps = (dispatch) =>{
     return {
-        orders: () => {dispatch(orderActions.orders())}
+        orders: () => {dispatch(orderActions.orders())},
+        actionsdetailRole: (rolename) => {dispatch(roleActions.actionsdetailRole(rolename))},
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Orders)

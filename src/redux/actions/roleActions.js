@@ -342,3 +342,52 @@ export const actionsdetailRole = (rolename) => {
 
     }
 }
+
+export const actionsprivateRole = (rolename) => {
+    // console.log()
+
+    return (dispatch) => {
+        dispatch({
+            type: roleConstants.ROLE_PRIVATE_REQUEST
+        });
+
+        let body = {
+            name: rolename
+        }
+
+        const token = localStorage.getItem('token');
+        let config = {
+            headers: {
+              'USER-KEY': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            }
+          }
+        //   rolename
+        console.log(rolename)
+        axios.get(`/role_name/${rolename}`, config)
+        .then((response) => {
+            // console.log(response.data)
+            if(response.data.success === true){
+                const {role} = response.data
+                    // console.log(role)
+                dispatch({
+                    type: roleConstants.ROLE_PRIVATE_SUCCESS,
+                    payload: {role: role}
+                })
+            }else{
+                if (response.data.success === false) {
+                    // console.log(response.data.full_messages[0])
+                    toast.error(response.data.full_messages[0]);
+                    dispatch({
+                        type: roleConstants.ROLE_PRIVATE_FAIL,
+                        payload: { error: response.data.full_messages[0] }
+                    });
+                }
+            }
+        })
+        .catch((error) => {
+            console.log("Oops, Request failed!");
+        });
+
+    }
+}

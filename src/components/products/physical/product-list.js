@@ -12,62 +12,12 @@ import * as roleActions  from "../../../redux/actions/roleActions";
 export class Product_list extends Component {
     constructor(props) {
         super(props);
-        let listProducts = [];
-        let rol = null
 
         this.state = {
             open: false,
             products: [],
             visible: false,
             roles: null
-        };
-
-        this.props.products();
-
-        setTimeout(() => {
-            console.log(this.props.product.products)
-
-            this.props.product.products.map(product => {
-                let item = {
-                    product_id: product.product_id,
-                    image: product.image_urls[0],
-                    Nom: product.name,
-                    Prix: product.price+" FCFA",
-                    machine:product.machineId,
-                    unit:product.unit,
-                    reference:product.reference,
-                    description:product.description,
-                    quantite:product.quantite,
-                    etat:product.etat,
-                    categories :product.categories[0]
-                }
-                listProducts.push(item);
-            })
-            this.setState({
-                    products: listProducts
-                })
-        }, 1000)
-
-        this.props.actionsdetailRole(localStorage.getItem('roles'))
-
-        setTimeout(() => {
-            this.props.roledetails.role.map(rl => {
-                rol = rl.listeProduit;
-            })
-            this.setState({
-                roles: rol
-            })
-            if(this.props.roledetails.role[0].ajouterProduit== '1'){
-                this.setState({
-                    visible: true
-                })
-            }
-        }, 1000)
-
-        this.state = {
-            open: false,
-            products: listProducts,
-            roles: rol
         };
 
         this.handleDeleteProduct = this.handleDeleteProduct.bind(this)
@@ -90,6 +40,55 @@ export class Product_list extends Component {
             //     })
         // },1000)
     }
+
+    componentDidMount = () =>{
+        let listProducts = [];
+        let rol = null;
+
+        this.props.products();
+
+        setTimeout(() => {
+            // console.log(this.props.product.products)
+
+            this.props.product.products.map(product => {
+                let item = {
+                    product_id: product.product_id,
+                    image: product.image_urls[0],
+                    Nom: product.name,
+                    Prix: product.price+" FCFA",
+                    machine:product.machineId,
+                    unit:product.unit,
+                    reference:product.reference,
+                    description:product.description,
+                    quantite:product.quantite,
+                    etat:product.etat,
+                    categories :product.categories[0]
+                }
+                listProducts.push(item);
+            })
+            this.setState({
+                products: listProducts
+            })
+        }, 1000)
+
+        this.props.actionsdetailRole(localStorage.getItem('roles'))
+
+        setTimeout(() => {
+            this.props.roledetails.role.map(rl => {
+                rol = rl.listeProduit;
+            })
+            this.setState({
+                roles: rol
+            })
+            if(this.props.roledetails.role[0].ajouterProduit== '1'){
+                this.setState({
+                    visible: true
+                })
+            }
+        }, 1000)
+
+    }
+
     render() {
         const { currencies, roles, visible } = this.state
 

@@ -7,16 +7,23 @@ import { ToastContainer, toast } from 'react-toastify';
 import {connect} from "react-redux";
 import * as remboursementActions from "../../redux/actions/remboursementActions";
 import {withRouter} from "react-router-dom";
+import * as roleActions from "../../redux/actions/roleActions";
 
 export class Repayment_sales extends Component {
     constructor(props) {
         super(props);
-        let listRemboursements = [];
 
         this.state = {
             open: false,
-            remboursements: []
+            remboursements: [],
+            roles: null
         };
+
+    }
+
+    componentDidMount = () => {
+        let listRemboursements = [];
+        let rol = null;
 
         this.props.remboursements();
 
@@ -36,60 +43,77 @@ export class Repayment_sales extends Component {
                 }
                 listRemboursements.push(item);
             })
-
-
             this.setState({
                 remboursements: listRemboursements
             })
-        }, 2000)
+        }, 1000)
 
-        this.state = {
-            open: false,
-            remboursements: listRemboursements
-        };
+        this.props.actionsdetailRole(localStorage.getItem('roles'))
+
+        setTimeout(() => {
+
+            this.props.roledetails.role.map(rl => {
+                rol = rl.remboursements;
+            })
+            this.setState({
+                roles: rol
+            })
+        }, 1000)
 
     }
     render() {
-        return (
-            <Fragment>
-                <Breadcrumb title="Remboursements" parent="Ventes" />
-
-                <div className="container-fluid">
-                    <div className="row">
-                        <div className="col-sm-12">
-                            <div className="card">
-                                <div className="card-header">
-                                    <h5>Détails des Remboursements</h5>
-                                </div>
-                                <ToastContainer />
-                                <div className="card-body">
-                                    <div id="batchDelete" className="transactions">
-                                        <Data_repayment
-                                            multiSelectOption={false}
-                                            myData={this.state.remboursements}
-                                            check={false}
-                                            pageSize={10}
-                                            pagination={true}
-                                            class="-striped -highlight"
-                                        />
+        const {roles, remboursements} = this.state
+        
+        if(roles == '1'){
+            return (
+                <Fragment>
+                    <Breadcrumb title="Remboursements" parent="Ventes" />
+    
+                    <div className="container-fluid">
+                        <div className="row">
+                            <div className="col-sm-12">
+                                <div className="card">
+                                    <div className="card-header">
+                                        <h5>Détails des Remboursements</h5>
+                                    </div>
+                                    <ToastContainer />
+                                    <div className="card-body">
+                                        <div id="batchDelete" className="transactions">
+                                            <Data_repayment
+                                                multiSelectOption={false}
+                                                myData={remboursements}
+                                                check={false}
+                                                pageSize={10}
+                                                pagination={true}
+                                                class="-striped -highlight"
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </Fragment>
-        )
+                </Fragment>
+            )
+        }else{
+            return(
+                <Fragment>
+
+                </Fragment>
+            )
+        }
     }
 }
 const mapStateToProps = (state) => {
     return {
-        remboursement: state.remboursement
+        remboursement: state.remboursement,
+        roledetails: state.roledetails
     }
 }
 const mapDispatchToProps = (dispatch) =>{
     return {
-        remboursements: () => {dispatch( remboursementActions.remboursements())}
+        remboursements: () => {dispatch( remboursementActions.remboursements())},
+        actionsdetailRole: (rolename) => {dispatch(roleActions.actionsdetailRole(rolename))},
     }
 }
 

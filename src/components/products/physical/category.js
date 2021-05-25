@@ -16,8 +16,6 @@ export class Category extends Component {
 
     constructor(props) {
         super(props);
-        let listCategories = []
-        let rol = null
 
         this.state = {
             isLoading: false,
@@ -33,6 +31,26 @@ export class Category extends Component {
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleFileChange = this.handleFileChange.bind(this)
         this.handleSubmitChange = this.handleSubmitChange.bind(this)
+
+    }
+
+    handleInputChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    onOpenModal = () => {
+        this.setState({ open: true });
+    };
+
+    onCloseModal = () => {
+        this.setState({ open: false });
+    };
+
+    componentDidMount = ()  => {
+        let listCategories = [];
+        let rol = null;
 
         this.props.categories()
 
@@ -69,32 +87,6 @@ export class Category extends Component {
                 })
             }
         }, 1000)
-
-        this.state = {
-            open: false,
-            categories: listCategories,
-            roles: rol
-        };
-
-    }
-
-    handleInputChange = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value
-        })
-    }
-
-    onOpenModal = () => {
-        this.setState({ open: true });
-    };
-
-    onCloseModal = () => {
-        this.setState({ open: false });
-    };
-
-    componentDidMount = ()  => {
-
-        // this.props.detailCategory()
     }
 
     handleFileChange = (e)=> {

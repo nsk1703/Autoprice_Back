@@ -9,24 +9,25 @@ import { connect } from 'react-redux';
 import * as roleActions  from "../../../redux/actions/roleActions";
 
 export class List_product extends Component {
+    
     constructor(props) {
         super(props);
-        let listProducts = []
-        let rol = null
 
         this.state = {
            products: [],
            roles: null,
            visible: false
         };
+    }
+
+    componentDidMount = () => {
+        let listProducts = [];
+        let rol = null;
 
         this.props.approproduits()
 
         setTimeout(() => {
-            // console.log(this.props.approproduit.approproduits)
-
             this.props.approproduit.approproduits.map(approproduit => {
-               
                 let item = {
                     ID: approproduit.id,
                     etat: approproduit.etat,
@@ -38,16 +39,14 @@ export class List_product extends Component {
                 }
                 listProducts.push(item);
             })
-            console.log(listProducts)
             this.setState({
                 products: listProducts
             })
-        }, 2000)
+        }, 1000)
 
         this.props.actionsdetailRole(localStorage.getItem('roles'))
 
         setTimeout(() => {
-
             this.props.roledetails.role.map(rl => {
                 rol = rl.listeApproProduit;
             })
@@ -61,12 +60,8 @@ export class List_product extends Component {
             }
         }, 1000)
 
-        this.state ={
-            products: listProducts,
-            roles: rol
-        }
-
     }
+
     render() {
         const {products, roles, visible} = this.state
         if(roles == 1) {
@@ -75,7 +70,7 @@ export class List_product extends Component {
                     <Breadcrumb title="Liste des produits" parent="Approvisionnement / Produits" />
                     <div className="container-fluid">
                         <div className="card">
-                           {visible == true ?
+                            {visible == true ?
                                 (
                                     <div className="card-header">
                                         <Link to="/supply/products/create-product" className="btn btn-primary">Ajout de Produit</Link>

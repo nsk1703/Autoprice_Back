@@ -12,8 +12,6 @@ import * as roleActions  from "../../redux/actions/roleActions";
 export class List_slide extends Component {
     constructor(props) {
         super(props);
-        let listSlides = [];
-        let rol = null
 
         this.state = {
             open: false,
@@ -21,6 +19,11 @@ export class List_slide extends Component {
             roles: null,
             visible: false
         };
+    }
+
+    componentDidMount = () => {
+        let listSlides = [];
+        let rol = null;
 
         this.props.slides();
 
@@ -57,13 +60,9 @@ export class List_slide extends Component {
                 })
             }
         }, 1000)
-        
-        this.state = {
-            open: false,
-            slides: listSlides,
-            roles: rol
-        };
+
     }
+
     render() {
         const {slides, visible, roles} = this.state
         if(roles == '1'){
