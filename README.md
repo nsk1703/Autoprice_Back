@@ -1,4 +1,4 @@
-<img src="https://labred237.com/wp-content/uploads/2021/01/Logo.png" alt="" width="400" />
+<img src="http://labredclub.com/images/Logo_autoprice.png" alt="" width="400" />
 
 # AutoPrice 
 
