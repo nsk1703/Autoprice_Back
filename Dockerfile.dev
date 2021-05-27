@@ -1,0 +1,16 @@
+FROM node:12.13.0
+
+LABEL version="1.0"
+LABEL description="BACK OFFICE de gestion d'une boutique pour vending machine"
+
+WORKDIR /app
+
+COPY ./package.json ./
+
+RUN npm install -g nodemon
+
+RUN npm install
+
+COPY . .
+EXPOSE 3001
+CMD [ "npm", "start" ]
