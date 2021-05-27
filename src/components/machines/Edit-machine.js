@@ -121,7 +121,7 @@ export class Edit_machine extends Component {
                                     {visible == true ?
                                         (
                                             <div className="card-header">
-                                                <Link type="button" to="/machines/edit-machine" className="btn btn-primary">Retour</Link>
+                                                <Link type="button" to="/machines/list-machine" className="btn btn-primary">Retour</Link>
                                             </div>
                                         ):
                                         null

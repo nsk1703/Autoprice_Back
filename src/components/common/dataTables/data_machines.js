@@ -5,13 +5,18 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
 import axios from "axios";
+import * as roleActions  from "../../../redux/actions/roleActions";
+import {connect} from "react-redux";
 
 export class Data_machines extends Component {
     constructor(props) {
         super(props)
+        // console.log(props)
         this.state = {
             checkedValues: [],
-            myData: this.props.myData
+            myData: this.props.myData,
+            deletable: false,
+            updatable: false
         }
     }
 
@@ -75,10 +80,27 @@ export class Data_machines extends Component {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
+    componentDidMount = () => {
+        this.props.actionsdetailRole(localStorage.getItem('roles'))
+        
+        setTimeout(() => {
+            if(this.props.roledetails.role[0].supprimerMachine == '1'){
+                this.setState({
+                    deletable: true
+                })
+            }
+            if(this.props.roledetails.role[0].modifierMachine == '1'){
+                this.setState({
+                   updatable: true
+                })
+            }
+        }, 1000)
+    }
+
     render() {
         const { pageSize, myClass, check, multiSelectOption, pagination } = this.props;
-        const { myData } = this.state
-
+        const { myData, deletable, updatable } = this.state
+        console.log(myData)
         const columns = [];
         for (var key in myData[0]) {
 
@@ -111,74 +133,131 @@ export class Data_machines extends Component {
         }
 
 
-        if (multiSelectOption == true) {
-        columns.push(
-            {
-                Header: <button className="btn btn-danger btn-sm btn-delete mb-0 b-r-4"
-                    onClick={
-                        (e) => {
-                            if (window.confirm('Are you sure you wish to delete this item?'))
-                                this.handleRemoveRow()
-                        }}>Delete</button>,
-                id: 'delete',
-                accessor: str => "delete",
-                sortable: false,
-                style: {
-                    textAlign: 'center'
-                },
-                Cell: (row) => (
-                    // console.log(row)
-                    <div>
-                        <span >
-                            <input type="checkbox" name={row.original.ID} 
-                            defaultChecked={this.state.checkedValues.includes(row.original.ID)}
-                                onChange={e => this.selectRow(e, row.original.ID)} />
-                        </span>
+        if(multiSelectOption == true){
+            if((deletable == true) && (updatable == true)){
+                console.log('del', deletable, 'up', updatable)
+                columns.push(
+                    {
+                        Header: <button className="btn btn-danger btn-sm btn-delete mb-0 b-r-4"
+                            onClick={
+                                (e) => {
+                                    if (window.confirm('Are you sure you wish to delete this item?'))
+                                        this.handleRemoveRow()
+                                }}>Delete</button>,
+                        id: 'delete',
+                        accessor: str => "delete",
+                        sortable: false,
+                        style: {
+                            textAlign: 'center'
+                        },
+                        Cell: (row) => (
+                            // console.log(row)
+                            <div>
+                                <span>
+                                    <input type="checkbox" name={row.original.ID} 
+                                    defaultChecked={this.state.checkedValues.includes(row.original.ID)}
+                                        onChange={e => this.selectRow(e, row.original.ID)} />
+                                </span>
+                                <span>
+                                    <Link to={`/machines/edit-machine/${row.original.ID}`}>
+                                        <i className="fa fa-pencil" style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }}></i>
+                                    </Link>
+                                </span>
+                            </div>
+                        ),
+                        accessor: key,
+                        style: {
+                            textAlign: 'center'
+                        }
+                    }
+                )
+               
+            }else if(deletable == true && updatable == false){
+                columns.push(
+                    {
+                        Header: <button className="btn btn-danger btn-sm btn-delete mb-0 b-r-4"
+                            onClick={
+                                (e) => {
+                                    if (window.confirm('Are you sure you wish to delete this item?'))
+                                        this.handleRemoveRow()
+                                }}>Delete</button>,
+                        id: 'delete',
+                        accessor: str => "delete",
+                        sortable: false,
+                        style: {
+                            textAlign: 'center'
+                        },
+                        Cell: (row) => (
+                            // console.log(row)
+                            <div>
+                                <span >
+                                    <input type="checkbox" name={row.original.ID} 
+                                    defaultChecked={this.state.checkedValues.includes(row.original.ID)}
+                                        onChange={e => this.selectRow(e, row.original.ID)} />
+                                </span>
+                            </div>
+                            
+                        ),
+                        accessor: key,
+                        style: {
+                            textAlign: 'center'
+                        }
+                    }
+                )
+            }else if(deletable ==  false && updatable == true){
+                columns.push(
+                    {
+            
+                        Cell: (row) => (
+                            // console.log(row)
+                            <div>
+                                <span>
+                                    <Link to={`/machines/edit-machine/${row.original.ID}`}>
+                                        <i className="fa fa-pencil" style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }}></i>
+                                    </Link>
+                                </span>
+                            </div>
+                            
+                        ),
+                        style: {
+                            textAlign: 'center'
+                        }
+                    }
+                )
+            }
+        }else{
+            columns.push(
+                {
+                    Header: <b>Action</b>,
+                    id: 'delete',
+                    accessor: str => "delete",
+                    Cell: (row) => (
+                        <div>
+                            <span onClick={() => {
+                                if (window.confirm('Are you sure you wish to delete this item?')) {
+                                    let data = myData;
+                                    data.splice(row.index, 1);
+                                    this.setState({ myData: data });
+                                }
+                                toast.success("Successfully Deleted !")
+
+                            }}>
+                                <i className="fa fa-trash" style={{ width: 35, fontSize: 20, padding: 11, color: '#e4566e' }}
+                                ></i>
+                            </span>
+
                         <span>
-                            <Link to={`/machines/edit-machine/${row.original.ID}`}>
-                                <i className="fa fa-pencil" style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }}></i>
-                            </Link>
+                            <i className="fa fa-pencil" style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }}></i>
                         </span>
                     </div>
-                    
-                ),
-                accessor: key,
-                style: {
-                    textAlign: 'center'
+                    ),
+                    style: {
+                        textAlign: 'center'
+                    },
+                    sortable: false
                 }
-            }
-        )
-    } else {
-        columns.push(
-            {
-                Header: <b>Action</b>,
-                id: 'delete',
-                accessor: str => "delete",
-                Cell: (row) => (
-                    <div>
-                        <span onClick={() => {
-                            if (window.confirm('Are you sure you wish to delete this item?')) {
-                                let data = myData;
-                                data.splice(row.index, 1);
-                                this.setState({ myData: data });
-                            }
-                            toast.success("Successfully Deleted !")
-
-                        }}>
-                            <i className="fa fa-trash" style={{ width: 35, fontSize: 20, padding: 11, color: '#e4566e' }}
-                            ></i>
-                        </span>
-
-                    <span><i className="fa fa-pencil" style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }}></i></span>
-                </div>
-                ),
-                style: {
-                    textAlign: 'center'
-                },
-                sortable: false
-            }
-        )
-    }
+            )
+        }
 
         return (
             <Fragment>
@@ -195,4 +274,15 @@ export class Data_machines extends Component {
     }
 }
 
-export default Data_machines
+const mapStateToProps = (state) => {
+    return {
+        roledetails: state.roledetails
+    }
+}
+const mapDispatchToProps = (dispatch) =>{
+    return {
+        actionsdetailRole: (rolename) => {dispatch(roleActions.actionsdetailRole(rolename))},
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Data_machines)

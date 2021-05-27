@@ -141,7 +141,7 @@ export class Tabset_product extends Component {
                                     {visible == true ?
                                         (
                                             <div className="card-header">
-                                                <Link type="button" to="/supply/currency/list-product" className="btn btn-primary">Retour</Link>
+                                                <Link type="button" to="/supply/products/list-product" className="btn btn-primary">Retour</Link>
                                             </div>
                                         ):
                                         null

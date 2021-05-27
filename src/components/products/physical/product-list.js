@@ -17,7 +17,9 @@ export class Product_list extends Component {
             open: false,
             products: [],
             visible: false,
-            roles: null
+            roles: null,
+            deletable: false,
+            updatable: false
         };
 
         this.handleDeleteProduct = this.handleDeleteProduct.bind(this)
@@ -85,14 +87,24 @@ export class Product_list extends Component {
                     visible: true
                 })
             }
+            if(this.props.roledetails.role[0].modifierProduit == '1'){
+                this.setState({
+                   updatable: true
+                })
+            }
+            if(this.props.roledetails.role[0].supprimerProduit == '1'){
+                this.setState({
+                    deletable: true
+                })
+            }
         }, 1000)
 
     }
 
     render() {
-        const { currencies, roles, visible } = this.state
+        const { currencies, roles, visible, deletable, updatable } = this.state
 
-        if(roles == 1) {
+        if(roles == '1') {
             return (
                 <Fragment>
                     <Breadcrumb title="Liste des Produits" parent="Produits" />
@@ -125,27 +137,59 @@ export class Product_list extends Component {
                                                             <div className="front">
                                                                 <a className="bg-size"><img className="img-fluid blur-up bg-img lazyloaded" src={myData.image} /></a>
                                                                 <div className="product-hover">
-                                                                    <ul>
-                                                                        <li>
-                                                                            <Link className="btn" type="button" 
-                                                                                to={`/products/physical/edit-products/${myData.product_id}`}>
-                                                                                <Edit className="editBtn" />
-                                                                            </Link>
-                                                                        </li>
-                                                                        <li>
-                                                                            <button className="btn" 
-                                                                                type="button"
-                                                                                onClick={(e) =>{
-                                                                                    if (window.confirm('Are you sure you wish to delete this item?'))
-                                                                                        this.handleDeleteProduct(myData.product_id)
-                                                                                        setTimeout(() => {
-                                                                                            window.location.reload()
-                                                                                        },1000)
-                                                                                }}
-                                                                                ><Trash2 className="deleteBtn" />
-                                                                            </button>
-                                                                        </li>
-                                                                    </ul>
+                                                                    {deletable == true && updatable == true ?
+                                                                       (
+                                                                        <ul>
+                                                                            <li>
+                                                                                <Link className="btn" type="button" 
+                                                                                    to={`/products/physical/edit-products/${myData.product_id}`}>
+                                                                                    <Edit className="editBtn" />
+                                                                                </Link>
+                                                                            </li>
+                                                                            <li>
+                                                                                <button className="btn" 
+                                                                                    type="button"
+                                                                                    onClick={(e) =>{
+                                                                                        if (window.confirm('Are you sure you wish to delete this item?'))
+                                                                                            this.handleDeleteProduct(myData.product_id)
+                                                                                            setTimeout(() => {
+                                                                                                window.location.reload()
+                                                                                            },1000)
+                                                                                    }}
+                                                                                    ><Trash2 className="deleteBtn" />
+                                                                                </button>
+                                                                            </li>
+                                                                        </ul>
+                                                                       ) : deletable == false && updatable == true ?
+                                                                       (
+                                                                        <ul>
+                                                                            <li>
+                                                                                <Link className="btn" type="button" 
+                                                                                    to={`/products/physical/edit-products/${myData.product_id}`}>
+                                                                                    <Edit className="editBtn" />
+                                                                                </Link>
+                                                                            </li>
+                                                                        </ul>
+                                                                       ): deletable == true && updatable == false ?
+                                                                       (
+                                                                        <ul>
+                                                                            <li>
+                                                                                <button className="btn" 
+                                                                                    type="button"
+                                                                                    onClick={(e) =>{
+                                                                                        if (window.confirm('Are you sure you wish to delete this item?'))
+                                                                                            this.handleDeleteProduct(myData.product_id)
+                                                                                            setTimeout(() => {
+                                                                                                window.location.reload()
+                                                                                            },1000)
+                                                                                    }}
+                                                                                    ><Trash2 className="deleteBtn" />
+                                                                                </button>
+                                                                            </li>
+                                                                        </ul>
+                                                                       ):
+                                                                       null
+                                                                    }
                                                                 </div>
                                                             </div>
                                                         </div>

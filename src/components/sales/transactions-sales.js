@@ -107,13 +107,15 @@ export class Transactions_sales extends Component {
 
 const mapStateToProps = (state) =>{
     return {
-        paiement: state.paiement
+        paiement: state.paiement,
+        roledetails: state.roledetails
     }
 }
 
 const mapDispatchToProps = (dispatch) =>{
     return {
-        paiements: () => {dispatch(paiementsActions.paiements())}
+        paiements: () => {dispatch(paiementsActions.paiements())},
+        actionsdetailRole: (rolename) => {dispatch(roleActions.actionsdetailRole(rolename))},
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Transactions_sales))

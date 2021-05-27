@@ -24,9 +24,7 @@ export class List_machine extends Component {
 
     componentDidMount = () => {
         let listMachines = [];
-        let Roles = [];
         let listeMachine= null;
-        let ajouterMachine= null;
 
         this.props.machines();
 
@@ -74,37 +72,37 @@ export class List_machine extends Component {
 
     render() {
         const {machines, visible, roles} =this.state
-        // console.log(this.renderingButtonHandle())
-        if(roles != 0){
-        return (
-            <Fragment>
-                <Breadcrumb title="Liste des machines" parent="Machines" />
-                <div className="container-fluid">
-                    <div className="card">
-                        {visible == true ?
-                            (
-                                <div className="btn-popup pull-left">
-                                    <Link to="/machines/create-machine" className="btn btn-primary">Ajout de Machine</Link>
+        // console.log('mach',machines)
+        if(roles == '1'){
+            return (
+                <Fragment>
+                    <Breadcrumb title="Liste des machines" parent="Machines" />
+                    <div className="container-fluid">
+                        <div className="card">
+                            {visible == true ?
+                                (
+                                    <div className="btn-popup pull-left">
+                                        <Link to="/machines/create-machine" className="btn btn-primary">Ajout de Machine</Link>
+                                    </div>
+                                )
+                                : null
+                            } 
+                            <div className="card-body">
+                                <div className="clearfix"></div>
+                                <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
+                                    <Data_machines
+                                        multiSelectOption={true}
+                                        myData={machines}
+                                        pageSize={10}
+                                        pagination={true}
+                                        class="-striped -highlight"
+                                    />
                                 </div>
-                            )
-                            : null
-                        } 
-                        <div className="card-body">
-                            <div className="clearfix"></div>
-                            <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
-                                <Data_machines
-                                    multiSelectOption={true}
-                                    myData={machines}
-                                    pageSize={10}
-                                    pagination={true}
-                                    class="-striped -highlight"
-                                />
                             </div>
                         </div>
                     </div>
-                </div>
-            </Fragment>
-        )
+                </Fragment>
+            )
         }else{
             return (
                 <Fragment>

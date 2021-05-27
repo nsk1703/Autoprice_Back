@@ -5,6 +5,8 @@ import 'react-table/react-table.css';
 import { ToastContainer, toast } from 'react-toastify';
 import CKEditors from 'react-ckeditor-component';
 import 'react-toastify/dist/ReactToastify.css';
+import * as roleActions  from "../../../redux/actions/roleActions";
+import {connect} from "react-redux";
 
 export class Data_categories extends Component {
     constructor(props) {
@@ -12,7 +14,9 @@ export class Data_categories extends Component {
         this.state = {
             checkedValues: [],
             myData: this.props.myData,
-            open: false
+            open: false,
+            deletable: false,
+            updatable: false
         }
     }
 
@@ -70,10 +74,27 @@ export class Data_categories extends Component {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
+    componentDidMount = () => {
+        this.props.actionsdetailRole(localStorage.getItem('roles'))
+        
+        setTimeout(() => {
+            if(this.props.roledetails.role[0].supprimerCategorie == '1'){
+                this.setState({
+                    deletable: true
+                })
+            }
+            if(this.props.roledetails.role[0].modifierCategorie == '1'){
+                this.setState({
+                   updatable: true
+                })
+            }
+        }, 1000)
+    }
+
     render() {
         const { open } = this.state;
         const { pageSize, myClass, check, multiSelectOption, pagination } = this.props;
-        const { myData } = this.state
+        const { myData, deletable, updatable } = this.state
 
         const columns = [];
         for (var key in myData[0]) {
@@ -108,104 +129,188 @@ export class Data_categories extends Component {
 
 
         if (multiSelectOption == true) {
-        columns.push(
-            {
-                Header: <button className="btn btn-danger btn-sm btn-delete mb-0 b-r-4"
-                    onClick={
-                        (e) => {
-                            if (window.confirm('Are you sure you wish to delete this item?'))
-                                this.handleRemoveRow()
-                        }}>Delete</button>,
-                id: 'delete',
-                accessor: str => "delete",
-                sortable: false,
-                style: {
-                    textAlign: 'center'
-                },
-                Cell: (row) => (
-                    <div>
-                        <span >
-                            <input type="checkbox" name={row.original.id} defaultChecked={this.state.checkedValues.includes(row.original.id)}
-                                onChange={e => this.selectRow(e, row.original.id)} />
-                        </span>
-                        <span>
-                            <i className="fa fa-pencil"  style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }} onClick={this.onOpenModal} data-toggle="modal" data-original-title="test" data-target="#exampleModal"></i>
-                        </span>
-                        <Modal open={open} onClose={this.onCloseModal} >
-                            <div className="modal-header">
-                                <h5 className="modal-title f-w-600" id="exampleModalLabel2">Ajout d'une catégorie</h5>
-                            </div>
-                            <div className="modal-body">
-                                <form>
-                                    <div className="form-group">
-                                        <label htmlFor="recipient-name" className="col-form-label" >Nom de catégorie :</label>
-                                        <input type="text" className="form-control" />
+            if((deletable == true) && (updatable == true)){
+                columns.push(
+                    {
+                        Header: <button className="btn btn-danger btn-sm btn-delete mb-0 b-r-4"
+                            onClick={
+                                (e) => {
+                                    if (window.confirm('Are you sure you wish to delete this item?'))
+                                        this.handleRemoveRow()
+                                }}>Delete</button>,
+                        id: 'delete',
+                        accessor: str => "delete",
+                        sortable: false,
+                        style: {
+                            textAlign: 'center'
+                        },
+                        Cell: (row) => (
+                            <div>
+                                <span >
+                                    <input type="checkbox" name={row.original.id} defaultChecked={this.state.checkedValues.includes(row.original.id)}
+                                        onChange={e => this.selectRow(e, row.original.id)} />
+                                </span>
+                                <span>
+                                    <i className="fa fa-pencil"  style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }} onClick={this.onOpenModal} data-toggle="modal" data-original-title="test" data-target="#exampleModal"></i>
+                                </span>
+                                <Modal open={open} onClose={this.onCloseModal} >
+                                    <div className="modal-header">
+                                        <h5 className="modal-title f-w-600" id="exampleModalLabel2">Ajout d'une catégorie</h5>
                                     </div>
-                                    <div className="form-group row">
-                                        <label className="col-xl-3 col-sm-4">Description :</label>
-                                        <div className="col-xl-8 col-sm-7 description-sm">
-                                            <CKEditors
-                                                activeclassName="p10"
-                                                content={this.state.content}
-                                                events={{
-                                                    "blur": this.onBlur,
-                                                    "afterPaste": this.afterPaste,
-                                                    "change": this.onChange
-                                                }}
-                                            />
-                                        </div>
+                                    <div className="modal-body">
+                                        <form>
+                                            <div className="form-group">
+                                                <label htmlFor="recipient-name" className="col-form-label" >Nom de catégorie :</label>
+                                                <input type="text" className="form-control" />
+                                            </div>
+                                            <div className="form-group row">
+                                                <label className="col-xl-3 col-sm-4">Description :</label>
+                                                <div className="col-xl-8 col-sm-7 description-sm">
+                                                    <CKEditors
+                                                        activeclassName="p10"
+                                                        content={this.state.content}
+                                                        events={{
+                                                            "blur": this.onBlur,
+                                                            "afterPaste": this.afterPaste,
+                                                            "change": this.onChange
+                                                        }}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="form-group">
+                                                <label htmlFor="message-text" className="col-form-label">Image de Catégorie :</label>
+                                                <input className="form-control" id="validationCustom02" type="file" />
+                                            </div>
+                                        </form>
                                     </div>
-                                    <div className="form-group">
-                                        <label htmlFor="message-text" className="col-form-label">Image de Catégorie :</label>
-                                        <input className="form-control" id="validationCustom02" type="file" />
+                                    <div className="modal-footer">
+                                        <button type="button" className="btn btn-primary" onClick={() => this.onCloseModal('VaryingMdo')}>Enregistrer</button>
+                                        <button type="button" className="btn btn-secondary" onClick={() => this.onCloseModal('VaryingMdo')}>Fermer</button>
                                     </div>
-                                </form>
+                                </Modal>
                             </div>
-                            <div className="modal-footer">
-                                <button type="button" className="btn btn-primary" onClick={() => this.onCloseModal('VaryingMdo')}>Enregistrer</button>
-                                <button type="button" className="btn btn-secondary" onClick={() => this.onCloseModal('VaryingMdo')}>Fermer</button>
+                            
+                        ),
+                        accessor: key,
+                        style: {
+                            textAlign: 'center'
+                        }
+                    }
+                )
+            }else if(deletable == true && updatable == false){
+                columns.push(
+                    {
+                        Header: <button className="btn btn-danger btn-sm btn-delete mb-0 b-r-4"
+                            onClick={
+                                (e) => {
+                                    if (window.confirm('Are you sure you wish to delete this item?'))
+                                        this.handleRemoveRow()
+                                }}>Delete</button>,
+                        id: 'delete',
+                        accessor: str => "delete",
+                        sortable: false,
+                        style: {
+                            textAlign: 'center'
+                        },
+                        Cell: (row) => (
+                            <div>
+                                <span >
+                                    <input type="checkbox" name={row.original.id} defaultChecked={this.state.checkedValues.includes(row.original.id)}
+                                        onChange={e => this.selectRow(e, row.original.id)} />
+                                </span>
                             </div>
-                        </Modal>
+                        ),
+                        accessor: key,
+                        style: {
+                            textAlign: 'center'
+                        }
+                    }
+                )
+            }else if(deletable ==  false && updatable == true){
+                columns.push(
+                    {
+                        Cell: (row) => (
+                            <div>
+                                <span>
+                                    <i className="fa fa-pencil"  style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }} onClick={this.onOpenModal} data-toggle="modal" data-original-title="test" data-target="#exampleModal"></i>
+                                </span>
+                                <Modal open={open} onClose={this.onCloseModal} >
+                                    <div className="modal-header">
+                                        <h5 className="modal-title f-w-600" id="exampleModalLabel2">Ajout d'une catégorie</h5>
+                                    </div>
+                                    <div className="modal-body">
+                                        <form>
+                                            <div className="form-group">
+                                                <label htmlFor="recipient-name" className="col-form-label" >Nom de catégorie :</label>
+                                                <input type="text" className="form-control" />
+                                            </div>
+                                            <div className="form-group row">
+                                                <label className="col-xl-3 col-sm-4">Description :</label>
+                                                <div className="col-xl-8 col-sm-7 description-sm">
+                                                    <CKEditors
+                                                        activeclassName="p10"
+                                                        content={this.state.content}
+                                                        events={{
+                                                            "blur": this.onBlur,
+                                                            "afterPaste": this.afterPaste,
+                                                            "change": this.onChange
+                                                        }}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="form-group">
+                                                <label htmlFor="message-text" className="col-form-label">Image de Catégorie :</label>
+                                                <input className="form-control" id="validationCustom02" type="file" />
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div className="modal-footer">
+                                        <button type="button" className="btn btn-primary" onClick={() => this.onCloseModal('VaryingMdo')}>Enregistrer</button>
+                                        <button type="button" className="btn btn-secondary" onClick={() => this.onCloseModal('VaryingMdo')}>Fermer</button>
+                                    </div>
+                                </Modal>
+                            </div>
+                            
+                        ),
+                        accessor: key,
+                        style: {
+                            textAlign: 'center'
+                        }
+                    }
+                )
+            }
+            
+        } else {
+            columns.push(
+                {
+                    Header: <b>Action</b>,
+                    id: 'delete',
+                    accessor: str => "delete",
+                    Cell: (row) => (
+                        <div>
+                            <span onClick={() => {
+                                if (window.confirm('Are you sure you wish to delete this item?')) {
+                                    let data = myData;
+                                    data.splice(row.index, 1);
+                                    this.setState({ myData: data });
+                                }
+                                toast.success("Successfully Deleted !")
+
+                            }}>
+                                <i className="fa fa-trash" style={{ width: 35, fontSize: 20, padding: 11, color: '#e4566e' }}
+                                ></i>
+                            </span>
+
+                        <span><i className="fa fa-pencil" style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }}></i></span>
                     </div>
-                    
-                ),
-                accessor: key,
-                style: {
-                    textAlign: 'center'
+                    ),
+                    style: {
+                        textAlign: 'center'
+                    },
+                    sortable: false
                 }
-            }
-        )
-    } else {
-        columns.push(
-            {
-                Header: <b>Action</b>,
-                id: 'delete',
-                accessor: str => "delete",
-                Cell: (row) => (
-                    <div>
-                        <span onClick={() => {
-                            if (window.confirm('Are you sure you wish to delete this item?')) {
-                                let data = myData;
-                                data.splice(row.index, 1);
-                                this.setState({ myData: data });
-                            }
-                            toast.success("Successfully Deleted !")
-
-                        }}>
-                            <i className="fa fa-trash" style={{ width: 35, fontSize: 20, padding: 11, color: '#e4566e' }}
-                            ></i>
-                        </span>
-
-                    <span><i className="fa fa-pencil" style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }}></i></span>
-                </div>
-                ),
-                style: {
-                    textAlign: 'center'
-                },
-                sortable: false
-            }
-        )
-    }
+            )
+        }
 
         return (
             <Fragment>
@@ -222,4 +327,15 @@ export class Data_categories extends Component {
     }
 }
 
-export default Data_categories
+const mapStateToProps = (state) => {
+    return {
+        roledetails: state.roledetails
+    }
+}
+const mapDispatchToProps = (dispatch) =>{
+    return {
+        actionsdetailRole: (rolename) => {dispatch(roleActions.actionsdetailRole(rolename))},
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Data_categories)

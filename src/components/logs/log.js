@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom'
 import Breadcrumb from '../common/breadcrumb';
-import data from '../../assets/data/listUser';
-import Datatable from '../common/datatable'
 import * as logActions from "../../redux/actions/logActions";
 import {connect} from "react-redux";
 import { ToastContainer, toast } from 'react-toastify';
 import * as roleActions from "../../redux/actions/roleActions";
+import { Data_logs } from '../common/dataTables/data_logs';
+import Datatable from '../common/datatable';
 
 export class Log extends Component {
     constructor(props) {
@@ -69,11 +69,12 @@ export class Log extends Component {
                             <div className="card-body">
                                 <div className="clearfix"></div>
                                 <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
-                                    <Datatable
+                                    <Data_logs
                                         multiSelectOption={true}
                                         myData={logs}
                                         pageSize={10}
                                         pagination={true}
+                                        check={false}
                                         class="-striped -highlight"
                                     />
                                 </div>

@@ -120,8 +120,7 @@ const rootReducers = combineReducers({
     appromonnaie: appromonnaiesReducer,
     
     approproduit: approproduitsReducer, 
-    // arduino: arduinoReducers,
-    log: logssReducer, newLogsReducer, logsReducer, logsDetailsReducer,
+    log: logssReducer,
     category: categoriesReducer,  
     machine: machinesReducer,
     maintenance: maintenancesReducer, 
@@ -141,6 +140,7 @@ const rootReducers = combineReducers({
     editcategory: categoryReducer,
     edituser: userReducer,
     editrole: roleReducer,
+    // editlog: logsReducer,
 
     maindetails: maintenanceDetailsReducer,
     machdetails: machineDetailsReducer,
@@ -152,6 +152,7 @@ const rootReducers = combineReducers({
     userdetails: userDetailsReducer,
     roledetails: roleDetailsReducer,
     roleprivate: rolePrivateReducer,
+    // logdetails: logsDetailsReducer,
     
     addappromonnaie: newAppromonnaieReducer, 
     addapproproduit: newApproproduitReducer,
@@ -162,6 +163,7 @@ const rootReducers = combineReducers({
     adduser: newUsersReducer,
     addrole: newRoleReducer,
     addproduct: newProductReducer,
+    // addlog: newLogsReducer,
 
     remboursement: remboursementsReducer, newRemboursementReducer, remboursementReducer, remboursementDetailsReducer,
     slide: slidesReducer, 
@@ -275,10 +277,12 @@ class Root extends Component {
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/slides/edit-slide/:id`} component={Edit_slide}/>
                                 
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/logs/Log`} component={Log}/>
+                                {/* <ProtectedRoute path={`${process.env.PUBLIC_URL}/logs/add-logs`} component={Add_logs}/>
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/logs/edit-log/:id`} component={Edit_log}/> */}
+
 
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/roles/add-roles`} component={Add_roles}/>
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/roles/roles-list`} component={Roles_list}/>
-                                {/* <ProtectedRoute path={`${process.env.PUBLIC_URL}/roles/change_roles`} component={Change_roles}/> */}
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/roles/edit-roles/:id`} component={Edit_roles}/>
 
                             </App>

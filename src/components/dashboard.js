@@ -44,7 +44,7 @@ export class Dashboard extends Component {
                 rol = rl.log;
             })
             this.setState({
-                role: rol
+                roles: rol
             })
         }, 1000)
     }
