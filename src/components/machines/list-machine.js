@@ -8,6 +8,7 @@ import * as machineActions from "../../redux/actions/machineActions";
 import {connect} from "react-redux";
 import { ToastContainer, toast } from 'react-toastify';
 import * as roleActions  from "../../redux/actions/roleActions";
+import BeatLoader from "react-spinners/BeatLoader";
 
 export class List_machine extends Component {
     constructor(props) {
@@ -18,7 +19,7 @@ export class List_machine extends Component {
             machines: [],
             roles: null,
             visible: false,
-
+            loading: false
         };
     }
 
@@ -26,11 +27,13 @@ export class List_machine extends Component {
         let listMachines = [];
         let listeMachine= null;
 
+        this.setState({
+            loading: true
+        })
         this.props.machines();
 
         setTimeout(() => {
             // console.log(this.props.machine.machines)
-
             this.props.machine.machines.map(machine => {
                 let item = {
                     ID: machine.id,
@@ -44,10 +47,10 @@ export class List_machine extends Component {
                 }
 
                 listMachines.push(item);
-            })
-            
+            }) 
             this.setState({
-                machines: listMachines
+                loading: false,
+                machines: listMachines,
             })
             
         }, 1000)
@@ -71,45 +74,56 @@ export class List_machine extends Component {
     }
 
     render() {
-        const {machines, visible, roles} =this.state
+        const {machines, visible, roles, loading} =this.state
+        const style = {}
         // console.log('mach',machines)
-        if(roles == '1'){
-            return (
-                <Fragment>
-                    <Breadcrumb title="Liste des machines" parent="Machines" />
-                    <div className="container-fluid">
-                        <div className="card">
-                            {visible == true ?
-                                (
-                                    <div className="btn-popup pull-left">
-                                        <Link to="/machines/create-machine" className="btn btn-primary">Ajout de Machine</Link>
+        if(loading){
+            return(
+                <div style={{display: "flex", justifyContent: "center", 
+                            alignItems: "center", width: "100%", height: "100vh"}}>
+                   <BeatLoader color={"#EC1C5B"} loading={loading} size={50} />
+                </div>
+            )
+        }else{
+            if(roles == '1'){
+                return (
+                    <Fragment>
+                        <Breadcrumb title="Liste des machines" parent="Machines" />
+                        <div className="container-fluid">
+                            <div className="card">
+                                {visible == true ?
+                                    (
+                                        <div className="card-header">
+                                            <Link to="/machines/create-machine" className="btn btn-primary">Ajout de Machine</Link>
+                                        </div>
+                                    )
+                                    : null
+                                } 
+                                <div className="card-body">
+                                    <div className="clearfix"></div>
+                                    <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
+                                        <Data_machines
+                                            multiSelectOption={true}
+                                            myData={machines}
+                                            pageSize={10}
+                                            pagination={true}
+                                            class="-striped -highlight"
+                                        />
                                     </div>
-                                )
-                                : null
-                            } 
-                            <div className="card-body">
-                                <div className="clearfix"></div>
-                                <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
-                                    <Data_machines
-                                        multiSelectOption={true}
-                                        myData={machines}
-                                        pageSize={10}
-                                        pagination={true}
-                                        class="-striped -highlight"
-                                    />
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </Fragment>
-            )
-        }else{
-            return (
-                <Fragment>
-                    
-                </Fragment>
-            )
+                    </Fragment>
+                )
+            }else{
+                return (
+                    <Fragment>
+                        
+                    </Fragment>
+                )
+            }
         }
+       
     }
 }
 

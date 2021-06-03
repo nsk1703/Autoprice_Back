@@ -41,7 +41,7 @@ export class Dashboard extends Component {
         setTimeout(() => {
 
             this.props.roledetails.role.map(rl => {
-                rol = rl.log;
+                rol = rl.dashboard;
             })
             this.setState({
                 roles: rol
