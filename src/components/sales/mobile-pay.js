@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import {withRouter} from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import * as roleActions from "../../redux/actions/roleActions";
+import BeatLoader from "react-spinners/BeatLoader";
 
 export class Mobile_pay extends Component {
     constructor(props) {
@@ -17,13 +18,18 @@ export class Mobile_pay extends Component {
             open: false,
             transactions: [],
             roles: null,
-            visible: false
+            visible: false,
+            loading: false
         };
     }
 
     componentDidMount = () => {
         let listTransactions = [];
         let rol = null;
+
+        this.setState({
+            loading: true
+        })
 
         this.props.transactions();
 
@@ -45,9 +51,8 @@ export class Mobile_pay extends Component {
                 listTransactions.push(item);
             })
 
-
             this.setState({
-                transactions: listTransactions
+                transactions: listTransactions,
             })
         }, 1000)
 
@@ -59,55 +64,60 @@ export class Mobile_pay extends Component {
                 rol = rl.mobileMoney;
             })
             this.setState({
-                roles: rol
+                roles: rol,
+                loading:false
             })
-            // if(this.props.roledetails.role[0].mobileMoney == '1'){
-            //     this.setState({
-            //         visible: true
-            //     })
-            // }
         }, 1000)
     }
 
     render() {
-        const {transactions, roles} = this.state
-        if(roles == '1'){
-            return (
-                <Fragment>
-                    <Breadcrumb title="Mobile Money" parent="Ventes" />
-    
-                    <div className="container-fluid">
-                        <div className="row">
-                            <div className="col-sm-12">
-                                <div className="card">
-                                    <div className="card-header">
-                                        <h5>Paiements mobile</h5>
-                                    </div>
-                                    <ToastContainer />
-                                    <div className="card-body">
-                                        <div id="batchDelete" className="transactions">
-                                            <Data_mobilePay
-                                                multiSelectOption={false}
-                                                myData={transactions}
-                                                check={false}
-                                                pageSize={10}
-                                                pagination={true}
-                                                class="-striped -highlight"
-                                            />
+        const {transactions, roles, loading} = this.state
+        if(loading){
+            return(
+                <div style={{display: "flex", justifyContent: "center", 
+                            alignItems: "center", width: "100%", height: "100vh"}}>
+                   <BeatLoader color={"#EC1C5B"} loading={loading} size={50} />
+                </div>
+            )
+        }else{
+            if(roles == '1'){
+                return (
+                    <Fragment>
+                        <Breadcrumb title="Mobile Money" parent="Ventes" />
+        
+                        <div className="container-fluid">
+                            <div className="row">
+                                <div className="col-sm-12">
+                                    <div className="card">
+                                        <div className="card-header">
+                                            <h5>Paiements mobile</h5>
+                                        </div>
+                                        <ToastContainer />
+                                        <div className="card-body">
+                                            <div id="batchDelete" className="transactions">
+                                                <Data_mobilePay
+                                                    multiSelectOption={false}
+                                                    myData={transactions}
+                                                    check={false}
+                                                    pageSize={10}
+                                                    pagination={true}
+                                                    class="-striped -highlight"
+                                                />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </Fragment>
-            )
-        }else{
-            return(
-                <Fragment>
+                    </Fragment>
+                )
+            }else{
+                return(
+                    <Fragment>
 
-                </Fragment>
-            )
+                    </Fragment>
+                )
+            }
         }
     }
 }

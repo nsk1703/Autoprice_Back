@@ -7,6 +7,7 @@ import Data_users from '../common/dataTables/data_users';
 import * as userActions from "../../redux/actions/userActions";
 import {connect} from "react-redux";
 import * as roleActions  from "../../redux/actions/roleActions";
+import BeatLoader from "react-spinners/BeatLoader";
 
 export class List_user extends Component {
     constructor(props) {
@@ -16,7 +17,8 @@ export class List_user extends Component {
             open: false,
             users: [],
             roles: null,
-            visible: false
+            visible: false,
+            loading: false
         };
     }
 
@@ -24,6 +26,10 @@ export class List_user extends Component {
         let listUsers = [];
         let rol = null;
         
+        this.setState({
+            loading: true
+        })
+
         this.props.users();
 
         setTimeout(() => {
@@ -59,59 +65,69 @@ export class List_user extends Component {
             this.props.roledetails.role.map(rl => {
                 rol = rl.listeUtilisateur;
             })
-            this.setState({
-                roles: rol
-            })
             if(this.props.roledetails.role[0].ajouterUtilisateur == '1'){
                 this.setState({
                     visible: true
                 })
             }
+            this.setState({
+                roles: rol,
+                loading: false
+            })
         }, 1000)
 
     }
     
     render() {
-        const {users, visible, roles} = this.state
+        const {loading, users, visible, roles} = this.state
         // console.log(users)
-       if(roles == '1'){
-            return (
-                <Fragment>
-                    <Breadcrumb title="Liste des Utilisateurs" parent="Utilisateurs" />
-                    <div className="container-fluid">
-                        <div className="card">
-                            <div className="card-body">
-                            {visible == true ?
-                                (
-                                    <div className="btn-popup pull-right">
-                                        <Link to="/users/create-user" className="btn btn-primary">Ajouter un utilisateur</Link>
+        if(loading){
+            return(
+                <div style={{display: "flex", justifyContent: "center", 
+                            alignItems: "center", width: "100%", height: "100vh"}}>
+                   <BeatLoader color={"#EC1C5B"} loading={loading} size={50} />
+                </div>
+            )
+        }else{
+            if(roles == '1'){
+                return (
+                    <Fragment>
+                        <Breadcrumb title="Liste des Utilisateurs" parent="Utilisateurs" />
+                        <div className="container-fluid">
+                            <div className="card">
+                                <div className="card-body">
+                                {visible == true ?
+                                    (
+                                        <div className="btn-popup pull-right">
+                                            <Link to="/users/create-user" className="btn btn-primary">Ajouter un utilisateur</Link>
+                                        </div>
+                                    ):
+                                    null
+                                }
+                                    <div className="clearfix"></div>
+                                    <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
+                                        <Data_users
+                                            multiSelectOption={true}
+                                            myData={users}
+                                            check={true}
+                                            pageSize={10}
+                                            pagination={true}
+                                            class="-striped -highlight"
+                                        />
                                     </div>
-                                ):
-                                null
-                            }
-                                <div className="clearfix"></div>
-                                <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
-                                    <Data_users
-                                        multiSelectOption={true}
-                                        myData={users}
-                                        check={true}
-                                        pageSize={10}
-                                        pagination={true}
-                                        class="-striped -highlight"
-                                    />
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </Fragment>
+                )
+            }else{
+            return(
+                <Fragment>
+
                 </Fragment>
             )
-       }else{
-           return(
-               <Fragment>
-
-               </Fragment>
-           )
-       }
+            }
+        }
     }
 }
 

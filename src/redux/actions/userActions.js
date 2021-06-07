@@ -27,16 +27,6 @@ export const login = (user) => {
                 localStorage.setItem('user', response.data.user.username);
                 localStorage.setItem('roles', response.data.user.roles);
                 
-                // let config = {
-                //     headers: {
-                //       'USER-KEY': `Bearer ${token}`,
-                //       'Content-Type': 'application/json'
-                //     }
-                // }
-                // axios.get(`/role_name`, {role: roles}, config)
-                //     .then((response) => {
-                //         console.log(response.data)
-                //     })
                 dispatch({
                     type: userConstants.LOGIN_SUCCESS,
                     payload: { token: token, user: user, roles: roles }

@@ -4,6 +4,7 @@ import Tabset_currency from './tabset-currency';
 import { Link } from "react-router-dom";
 import {connect} from "react-redux";
 import * as roleActions  from "../../../redux/actions/roleActions";
+import BeatLoader from "react-spinners/BeatLoader";
 
 export class Create_currency extends Component {
     constructor(props){
@@ -11,67 +12,91 @@ export class Create_currency extends Component {
 
         this.state = {
             visible: false,
-            roles: null
+            roles: null,
+            loading: false,
+            ajouter: null,
+            lister: null
         }
 
     }
 
     componentDidMount = () => {
-        let rol = null
+        let ajout = null;
+        let liste = null;
+
+        this.setState({
+            loading: true
+        })
+
         this.props.actionsdetailRole(localStorage.getItem('roles'))
 
         setTimeout(() => {
             this.props.roledetails.role.map(rl => {
-                rol = rl.ajouterApproMonnaie;
+                console.log('rl',rl)
+                ajout = rl.ajouterApproMonnaie
+                liste = rl.listeApproMonnaie
             })
             this.setState({
-                roles: rol
+                ajouter: ajout,
+                lister: liste
             })
-            if(this.props.roledetails.role[0].listeApproMonnaie == '1'){
+            console.log('rls', this.state.roles)
+            if(this.state.lister == '1'){
                 this.setState({
                     visible: true
                 })
             }
+            this.setState({
+                loading: false
+            })
         }, 1000)
     }
     
     render() {
-        const {roles, visible} = this.state
+        const {ajouter, loading, roles, visible} = this.state
 
-        if(roles == '1'){
-            return (
-                <Fragment>
-                    <Breadcrumb title="Approvisionnement de Monnaie" parent="Approvisionnement / Monnaie" />
-                    <div className="container-fluid">
-                        <div className="row">
-                            <div className="col-sm-12">
-                                <div className="card">
-                                   {visible == true ?
-                                       (
-                                        <div className="card-header">
-                                            <Link type="button" to="/supply/currency/list-currency" 
-                                            className="btn btn-primary">Retour</Link>
+        if(loading){
+            return(
+                <div style={{display: "flex", justifyContent: "center", 
+                            alignItems: "center", width: "100%", height: "100vh"}}>
+                   <BeatLoader color={"#EC1C5B"} loading={loading} size={50} />
+                </div>
+            )
+        }else{
+            if(ajouter == '1'){
+                return (
+                    <Fragment>
+                        <Breadcrumb title="Approvisionnement de Monnaie" parent="Approvisionnement / Monnaie" />
+                        <div className="container-fluid">
+                            <div className="row">
+                                <div className="col-sm-12">
+                                    <div className="card">
+                                    {visible == true ?
+                                        (
+                                            <div className="card-header">
+                                                <Link type="button" to="/supply/currency/list-currency" 
+                                                className="btn btn-primary">Retour</Link>
+                                            </div>
+                                        ):
+                                        null
+                                    }
+                                        <div className="card-body">
+                                            <Tabset_currency />
                                         </div>
-                                       ):
-                                       null
-                                   }
-                                    <div className="card-body">
-                                        <Tabset_currency />
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </Fragment>
-            )
-        }else{
-            return(
-                <Fragment>
+                    </Fragment>
+                )
+            }else{
+                return(
+                    <Fragment>
 
-                </Fragment>
-            )
+                    </Fragment>
+                )
+            }
         }
-      
     }
 }
 

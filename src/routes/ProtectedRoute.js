@@ -9,11 +9,11 @@ export const ProtectedRoute = ({component: Component, ...rest}) => {
                 render = {(props) => {
                     const token = localStorage.getItem('token');
                     
-                    if(!token) {
+                    if(token) {
+                        return <Component {...props} /> 
+                    }else{
                         return <Redirect to='/login' />
                     }
-
-                    return <Component {...props} />
 
                 }
             }

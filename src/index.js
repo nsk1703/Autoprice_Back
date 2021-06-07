@@ -174,11 +174,13 @@ const rootReducers = combineReducers({
 
 const store = createStore(rootReducers, applyMiddleware(thunk));
 window.store = store;
-const token = window.localStorage.getItem('token')
+
 
 class Root extends Component {
 
     componentDidMount = () => {
+    //    localStorage.removeItem('token')
+       const token = localStorage.getItem('token')
         console.log(token)
         // localStorage.
         // let token = localStorage.removeItem('token')

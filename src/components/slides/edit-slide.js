@@ -6,6 +6,7 @@ import * as slideActions from "../../redux/actions/slideActions";
 import { withRouter } from 'react-router';
 import { Link } from "react-router-dom";
 import * as roleActions from "../../redux/actions/roleActions";
+import BeatLoader from "react-spinners/BeatLoader";
 
 const typeChoices = [
     {value: 'Home', label:'Home'},
@@ -30,6 +31,7 @@ export class Edit_slide extends Component {
            isLoading: false, 
            visible: false,
            roles: null,
+           loading: false
         }
 
         this.handleTypeChange = this.handleTypeChange.bind(this)
@@ -41,6 +43,9 @@ export class Edit_slide extends Component {
   
     componentDidMount = () => {
         let rol = null;
+        this.setState({
+            loading: true
+        })
 
         this.props.detailslide(this.props.match.params.id)
 
@@ -81,6 +86,9 @@ export class Edit_slide extends Component {
                     visible: true
                 })
             }
+            this.setState({
+                loading: false
+            })
         }, 1000)
     }
 
@@ -122,76 +130,85 @@ export class Edit_slide extends Component {
     }
 
     render() {
-        const {roles, visible, type, format, actualFile, images, isLoading} = this.state
-        if(roles == '1'){
-            return (
-                <Fragment>
-                    <Breadcrumb title="Ajouter un slide" parent="Slides" />
-                    <div className="container-fluid">
-                        <div className="row">
-                            <div className="col-sm-12">
-                                <div className="card">
-                                    {visible == true ?
-                                        (
-                                            <div className="card-header">
-                                                <Link type="button" to="/slides/liste-slide" className="btn btn-primary">Retour</Link>
-                                            </div>
-                                        ):
-                                        null
-                                    }
-                                    <div className="card-body">
-                                        <form className="needs-validation">
-                                            <div className="form-group row">
-                                                <label className="col-xl-3 col-md-4"><span>*</span> Format</label>
-                                                <Select className="col-xl-8 col-md-7"
-                                                    name="Format"
-                                                    value={format}
-                                                    onChange={this.handleFormatChange}
-                                                    options={formatChoices}
-                                                    required="" 
-                                                />
-                                            </div>
-                                            <div className="form-group row">
-                                                <label className="col-xl-3 col-md-4" ><span>*</span> type :</label>
-                                                {/* <div className="col-xl-8 col-md-7"> */}
+        const {loading, roles, visible, type, format, actualFile, images, isLoading} = this.state
+        if(loading){
+            return(
+                <div style={{display: "flex", justifyContent: "center", 
+                            alignItems: "center", width: "100%", height: "100vh"}}>
+                   <BeatLoader color={"#EC1C5B"} loading={loading} size={50} />
+                </div>
+            )
+        }else{
+            if(roles == '1'){
+                return (
+                    <Fragment>
+                        <Breadcrumb title="Ajouter un slide" parent="Slides" />
+                        <div className="container-fluid">
+                            <div className="row">
+                                <div className="col-sm-12">
+                                    <div className="card">
+                                        {visible == true ?
+                                            (
+                                                <div className="card-header">
+                                                    <Link type="button" to="/slides/liste-slide" className="btn btn-primary">Retour</Link>
+                                                </div>
+                                            ):
+                                            null
+                                        }
+                                        <div className="card-body">
+                                            <form className="needs-validation">
+                                                <div className="form-group row">
+                                                    <label className="col-xl-3 col-md-4"><span>*</span> Format</label>
                                                     <Select className="col-xl-8 col-md-7"
-                                                        name="type"
-                                                        value={type}
-                                                        onChange={this.handleTypeChange}
-                                                        options={typeChoices}
+                                                        name="Format"
+                                                        value={format}
+                                                        onChange={this.handleFormatChange}
+                                                        options={formatChoices}
                                                         required="" 
                                                     />
-                                                {/* </div> */}
-                                            </div>
-                                            <div className="form-group row">
-                                                <label className="col-xl-3 col-md-4"><span>*</span>Image de Catégorie :</label>
-                                                <input className="form-control col-xl-8 col-md-7" 
-                                                    type="file" 
-                                                    onChange={this.handleFileChange}
-                                                /> 
-                                                <img className="offset-xl-3 offset-sm-4 mt-2" src={ images ? images : actualFile} style={{width: '100px', height: '100px'}} />
-                                            </div>
-                                            <div className="offset-xl-3 offset-sm-4 mt-3">
-                                                <button type="button" 
-                                                    className="btn btn-primary"
-                                                    onClick={this.handleSubmitChange}
-                                                    disabled={isLoading}
-                                                >Modifier</button>
-                                            </div>
-                                        </form>
+                                                </div>
+                                                <div className="form-group row">
+                                                    <label className="col-xl-3 col-md-4" ><span>*</span> type :</label>
+                                                    {/* <div className="col-xl-8 col-md-7"> */}
+                                                        <Select className="col-xl-8 col-md-7"
+                                                            name="type"
+                                                            value={type}
+                                                            onChange={this.handleTypeChange}
+                                                            options={typeChoices}
+                                                            required="" 
+                                                        />
+                                                    {/* </div> */}
+                                                </div>
+                                                <div className="form-group row">
+                                                    <label className="col-xl-3 col-md-4"><span>*</span>Image de Catégorie :</label>
+                                                    <input className="form-control col-xl-8 col-md-7" 
+                                                        type="file" 
+                                                        onChange={this.handleFileChange}
+                                                    /> 
+                                                    <img className="offset-xl-3 offset-sm-4 mt-2" src={ images ? images : actualFile} style={{width: '100px', height: '100px'}} />
+                                                </div>
+                                                <div className="offset-xl-3 offset-sm-4 mt-3">
+                                                    <button type="button" 
+                                                        className="btn btn-primary"
+                                                        onClick={this.handleSubmitChange}
+                                                        disabled={isLoading}
+                                                    >Modifier</button>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </Fragment>
-            )
-        }else{
-            return(
-                <Fragment>
+                    </Fragment>
+                )
+            }else{
+                return(
+                    <Fragment>
 
-                </Fragment>
-            )
+                    </Fragment>
+                )
+            }
         }
     }
 }

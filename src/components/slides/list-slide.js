@@ -8,6 +8,7 @@ import * as slideActions from "../../redux/actions/slideActions";
 import {connect} from "react-redux";
 import { ToastContainer, toast } from 'react-toastify';
 import * as roleActions  from "../../redux/actions/roleActions";
+import BeatLoader from "react-spinners/BeatLoader";
 
 export class List_slide extends Component {
     constructor(props) {
@@ -17,7 +18,8 @@ export class List_slide extends Component {
             open: false,
             slides: [],
             roles: null,
-            visible: false
+            visible: false,
+            loading: false
         };
     }
 
@@ -25,6 +27,9 @@ export class List_slide extends Component {
         let listSlides = [];
         let rol = null;
 
+        this.setState({
+            loading: true
+        })
         this.props.slides();
 
         setTimeout(() => {
@@ -59,48 +64,60 @@ export class List_slide extends Component {
                     visible: true
                 })
             }
+            this.setState({
+                loading: false
+            })
         }, 1000)
 
     }
 
     render() {
-        const {slides, visible, roles} = this.state
-        if(roles == '1'){
-            return (
-                <Fragment>
-                    <Breadcrumb title="Liste des Slides" parent="Slides" />
-                    <div className="container-fluid">
-                        <div className="card">
-                            <div className="card-body">
-                                {visible == true ?
-                                    (
-                                        <div className="btn-popup pull-right">
-                                            <Link to="/slides/create-slide" className="btn btn-primary">Ajouter un slide</Link>
-                                        </div>
-                                    ):
-                                    null
-                                }
-                                <div className="clearfix"></div>
-                                <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
-                                    <Data_slides
-                                        multiSelectOption={true}
-                                        myData={slides}
-                                        pageSize={10}
-                                        pagination={true}
-                                        class="-striped -highlight"
-                                    />
+        const {loading, slides, visible, roles} = this.state
+        if(loading){
+            return(
+                <div style={{display: "flex", justifyContent: "center", 
+                            alignItems: "center", width: "100%", height: "100vh"}}>
+                   <BeatLoader color={"#EC1C5B"} loading={loading} size={50} />
+                </div>
+            )
+        }else{
+            if(roles == '1'){
+                return (
+                    <Fragment>
+                        <Breadcrumb title="Liste des Slides" parent="Slides" />
+                        <div className="container-fluid">
+                            <div className="card">
+                                <div className="card-body">
+                                    {visible == true ?
+                                        (
+                                            <div className="btn-popup pull-right">
+                                                <Link to="/slides/create-slide" className="btn btn-primary">Ajouter un slide</Link>
+                                            </div>
+                                        ):
+                                        null
+                                    }
+                                    <div className="clearfix"></div>
+                                    <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
+                                        <Data_slides
+                                            multiSelectOption={true}
+                                            myData={slides}
+                                            pageSize={10}
+                                            pagination={true}
+                                            class="-striped -highlight"
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </Fragment>
-            )
-        }else{
-            return (
-                <Fragment>
-                    
-                </Fragment>
-            )
+                    </Fragment>
+                )
+            }else{
+                return (
+                    <Fragment>
+                        
+                    </Fragment>
+                )
+            }
         }
     }
 }

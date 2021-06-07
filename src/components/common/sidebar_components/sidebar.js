@@ -35,11 +35,12 @@ export class sidebar extends Component {
     componentDidMount() {
         var currentUrl = window.location.pathname;
         this.props.actionsdetailRole(localStorage.getItem('roles'));
-        let menu = [];
+
         setTimeout(() =>{
             
             console.log(this.props.roledetails.role[0])
             console.log(this.state.mainmenu)
+            
             if(this.props.roledetails.role[0].dashboard != '1'){
                 // console.log(this.state.mainmenu);
                 this.state.mainmenu.splice(0,1);
@@ -145,6 +146,16 @@ export class sidebar extends Component {
                     if(this.props.roledetails.role[0].ajouterApproProduit != '1'){
                         this.state.mainmenu[2].children[1].children.splice(1,1);
                     }
+                }
+                if(this.state.mainmenu[2].children[0].children.length === 0){
+                    this.state.mainmenu[2].children.splice(0,1)
+                    if(this.state.mainmenu[2].children[0].children.length === 0){
+                        this.state.mainmenu[2].children.splice(0,1)
+                    }
+                }else{
+                    if(this.state.mainmenu[2].children[1].children.length === 0){
+                        this.state.mainmenu[2].children.splice(1,1)
+                    } 
                 }
 
                 // Role du Menu Machines
@@ -287,7 +298,7 @@ export class sidebar extends Component {
                     if(this.state.mainmenu[0].children.length === 0){
                         this.state.mainmenu.splice(0,1)
                         // Approvisionnements
-                        if(this.state.mainmenu[0].children[0].children.length === 0 && this.state.mainmenu[0].children[1].children.length === 0){
+                        if(this.state.mainmenu[0].children.length === 0){
                             this.state.mainmenu.splice(0,1)
                             // Machines
                             if(this.state.mainmenu[0].children.length === 0){
@@ -1156,7 +1167,7 @@ export class sidebar extends Component {
                         }
                     }else{
                         // Approvisionnements
-                        if(this.state.mainmenu[1].children[0].children.length === 0 && this.state.mainmenu[1].children[1].children.length === 0){
+                        if(this.state.mainmenu[1].children.length === 0){
                             this.state.mainmenu.splice(1,1)
                             // Machines
                             if(this.state.mainmenu[1].children.length === 0){
@@ -2037,7 +2048,7 @@ export class sidebar extends Component {
                     if(this.state.mainmenu[1].children.length === 0){
                         this.state.mainmenu.splice(1,1)
                         // Approvisionnements
-                        if(this.state.mainmenu[1].children[0].children.length === 0 && this.state.mainmenu[1].children[1].children.length === 0){
+                        if(this.state.mainmenu[1].children.length === 0){
                             this.state.mainmenu.splice(1,1)
                             // Machines
                             if(this.state.mainmenu[1].children.length === 0){
@@ -2908,7 +2919,7 @@ export class sidebar extends Component {
                         }
                     }else{
                         // Approvisionnements // Arret pour demain
-                        if(this.state.mainmenu[2].children[0].children.length === 0 && this.state.mainmenu[2].children[1].children.length === 0){
+                        if(this.state.mainmenu[2].children.length === 0){
                             this.state.mainmenu.splice(2,1)
                             // Machines
                             if(this.state.mainmenu[2].children.length === 0){
@@ -3892,6 +3903,16 @@ export class sidebar extends Component {
                         this.state.mainmenu[3].children[1].children.splice(1,1);
                     }
                 }
+                if(this.state.mainmenu[3].children[0].children.length === 0){
+                    this.state.mainmenu[3].children.splice(0,1)
+                    if(this.state.mainmenu[3].children[0].children.length === 0){
+                        this.state.mainmenu[3].children.splice(0,1)
+                    }
+                }else{
+                    if(this.state.mainmenu[3].children[1].children.length === 0){
+                        this.state.mainmenu[3].children.splice(1,1)
+                    } 
+                }
 
                 // Roles du Menu Machines
                 if(this.props.roledetails.role[0].listeMachine != '1'){
@@ -4035,7 +4056,8 @@ export class sidebar extends Component {
                     if(this.state.mainmenu[1].children.length === 0){
                         this.state.mainmenu.splice(1,1)
                         // Approvisionnements
-                        if(this.state.mainmenu[1].children[0].children.length === 0 && this.state.mainmenu[1].children[1].children.length === 0){
+                        if(this.state.mainmenu[1].children.length === 0){
+                            
                             this.state.mainmenu.splice(1,1)
                             // Machines
                             if(this.state.mainmenu[1].children.length === 0){
@@ -4904,7 +4926,7 @@ export class sidebar extends Component {
                         }
                     }else{
                         // Approvisionnements
-                        if(this.state.mainmenu[2].children[0].children.length === 0 && this.state.mainmenu[1].children[1].children.length === 0){
+                        if(this.state.mainmenu[2].children.length === 0 ){
                             this.state.mainmenu.splice(2,1)
                             // Machines
                             if(this.state.mainmenu[2].children.length === 0){
@@ -5785,7 +5807,7 @@ export class sidebar extends Component {
                     if(this.state.mainmenu[2].children.length === 0){
                         this.state.mainmenu.splice(2,1)
                         // Approvisionnements
-                        if(this.state.mainmenu[2].children[0].children.length === 0 && this.state.mainmenu[2].children[1].children.length === 0){
+                        if(this.state.mainmenu[2].children.length === 0){
                             this.state.mainmenu.splice(2,1)
                             // Machines
                             if(this.state.mainmenu[2].children.length === 0){
@@ -6656,7 +6678,7 @@ export class sidebar extends Component {
                         }
                     }else{
                         // Approvisionnements // Arret pour demain
-                        if(this.state.mainmenu[3].children[0].children.length === 0 && this.state.mainmenu[3].children[1].children.length === 0){
+                        if(this.state.mainmenu[3].children.length === 0){
                             this.state.mainmenu.splice(3,1)
                             // Machines
                             if(this.state.mainmenu[3].children.length === 0){
@@ -7539,8 +7561,7 @@ export class sidebar extends Component {
 
             }
 
-
-        },3000)
+        },1000)
 
         this.state.mainmenu.filter(items => {
 

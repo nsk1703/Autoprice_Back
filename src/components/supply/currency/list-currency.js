@@ -8,6 +8,7 @@ import * as appromonnaieActions  from "../../../redux/actions/appromonnaieAction
 import * as roleActions  from "../../../redux/actions/roleActions";
 import { connect } from 'react-redux';  
 import { ToastContainer, toast } from 'react-toastify';
+import BeatLoader from "react-spinners/BeatLoader";
 
 export class List_currency extends Component {
     constructor(props) {
@@ -16,7 +17,8 @@ export class List_currency extends Component {
         this.state = {
             roles: null,
             currencies: [],
-            visible: false
+            visible: false,
+            loading: false
         };        
  
     }
@@ -24,6 +26,10 @@ export class List_currency extends Component {
     componentDidMount = () => {
         let listCurrencies = [];
         let rol = null;
+
+        this.setState({
+            loading: true
+        })
 
         this.props.appromonnaies();
 
@@ -60,52 +66,63 @@ export class List_currency extends Component {
                     visible: true
                 })
             }
+            this.setState({
+                loading: false
+            })
         }, 1000)
 
     }
     
     render() {
-        const { currencies, roles, visible } = this.state
+        const { loading, currencies, roles, visible } = this.state
 
-        if(roles != 0) {
-            return (
-                <Fragment>
-                    <Breadcrumb title="Liste des monnaies" parent="Approvisionnement / Monnaies" />
-                    <div className="container-fluid">
-                        <div className="card">
-                           {visible == true ?
-                            (
-                                <div className="card-header">
-                                    <Link to="/supply/currency/create-currency" className="btn btn-primary">Ajout de Monnaie</Link>
-                                </div>
-                            ):
-                            null
-                        }
-                            <div className="card-body">
-                                <ToastContainer />
-                                <div className="clearfix"></div>
-                                <div id="batchDelete" className="category-table user-list appromonnaie-table coupon-list-delete">
-                                    <Data_currencies
-                                        multiSelectOption={true}
-                                        myData={currencies}
-                                        pageSize={10}
-                                        pagination={true}
-                                        class="-striped -highlight"
-                                    />
+        if(loading){
+            return(
+                <div style={{display: "flex", justifyContent: "center", 
+                            alignItems: "center", width: "100%", height: "100vh"}}>
+                   <BeatLoader color={"#EC1C5B"} loading={loading} size={50} />
+                </div>
+            )
+        }else{
+            if(roles != 0) {
+                return (
+                    <Fragment>
+                        <Breadcrumb title="Liste des monnaies" parent="Approvisionnement / Monnaies" />
+                        <div className="container-fluid">
+                            <div className="card">
+                            {visible == true ?
+                                (
+                                    <div className="card-header">
+                                        <Link to="/supply/currency/create-currency" className="btn btn-primary">Ajout de Monnaie</Link>
+                                    </div>
+                                ):
+                                null
+                            }
+                                <div className="card-body">
+                                    <ToastContainer />
+                                    <div className="clearfix"></div>
+                                    <div id="batchDelete" className="category-table user-list appromonnaie-table coupon-list-delete">
+                                        <Data_currencies
+                                            multiSelectOption={true}
+                                            myData={currencies}
+                                            pageSize={10}
+                                            pagination={true}
+                                            class="-striped -highlight"
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </Fragment>
-            )
-        }else{ 
-            return (
-                <Fragment>
+                    </Fragment>
+                )
+            }else{ 
+                return (
+                    <Fragment>
 
-                </Fragment>
-            )
+                    </Fragment>
+                )
+            }
         }
-       
     }
 }
 
