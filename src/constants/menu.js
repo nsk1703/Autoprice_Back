@@ -135,8 +135,8 @@ export const MENUITEMS = [
     },
     {
         title: 'Paramètres', icon: Settings, type: 'sub', children: [
-            { path: '/settings/profile', title: 'Profil', type: 'link' },
-            { path: '/settings/change-profile', title: 'Modifier le Profil', type: 'link' },
+            // { path: '/settings/profile', title: 'Profil', type: 'link' },
+            // { path: '/settings/change-profile', title: 'Modifier le Profil', type: 'link' },
             { path: '/settings/change-password', title: 'Modifier le Mot de Passe', type: 'link' },
         ]
     },

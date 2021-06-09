@@ -13,13 +13,13 @@ import * as productActions from '../../../redux/actions/productActions';
 import Select from 'react-select';
 import { withRouter, Redirect, Router } from 'react-router-dom';
 import * as roleActions from "../../../redux/actions/roleActions";
+import BeatLoader from "react-spinners/BeatLoader";
 
 // const dummyimgs= [
 //     { img: user }
 // ]
 
 export class Edit_product extends Component {
-
     constructor(props) {
         super(props)
          
@@ -39,6 +39,8 @@ export class Edit_product extends Component {
             isLoading: false,
             visible: false,
             roles: null,
+            loading: false,
+            actualFile: null,
             dummyimgs: [
                 { img: user }
             ]
@@ -98,15 +100,20 @@ export class Edit_product extends Component {
         e.preventDefault();
 
         // let reader = new FileReader();
-        let file = e.target.files[0];
+        // let file = e.target.files[0];
         // const { dummyimgs } = this.state;
         // console.log('state', dummyimgs)
         // reader.onloadend = () => {
             // dummyimgs[i].img = reader.result;
-            this.setState({
-                images: file,
-                // dummyimgs,
-            });
+            // this.setState({
+            //     images: file,
+            //     dummyimgs,
+            // });
+            if(!this.state.images){
+                this.setState({
+                    images: e.target.files[0]
+                });
+            }
         // }
         // reader.readAsDataURL(file)
     }
@@ -118,6 +125,10 @@ export class Edit_product extends Component {
         let macoptions = []
         let listMachines = []
         let rol = null;
+
+        this.setState({
+            loading: true
+        })
 
         this.props.actionsdetailRole(localStorage.getItem('roles'))
 
@@ -138,25 +149,26 @@ export class Edit_product extends Component {
         this.props.detailProduct(this.props.match.params.id)
 
         setTimeout(() => {
-            // console.log(this.props.prodetails)
+            console.log(this.props.prodetails)
 
-            let category = {value: this.props.prodetails.product.product.categories[0].category_id, 
-                            label: this.props.prodetails.product.product.categories[0].name}
+            let category = {value: this.props.prodetails.product.categories[0].category_id, 
+                            label: this.props.prodetails.product.categories[0].name}
 
-            let machine =  {value: this.props.prodetails.product.product.machineId.id, 
-                            label: this.props.prodetails.product.product.machineId.nom}
+            let machine =  {value: this.props.prodetails.product.machineId.id, 
+                            label: this.props.prodetails.product.machineId.nom}
             // console.log(category)
             this.setState({
-                id: this.props.prodetails.product.product.product_id,
-                nom: this.props.prodetails.product.product.name,
-                unite: this.props.prodetails.product.product.unit, 
-                quantite: this.props.prodetails.product.product.quantite,
-                reference: this.props.prodetails.product.product.reference,
-                price: this.props.prodetails.product.product.price,
+                id: this.props.prodetails.product.product_id,
+                nom: this.props.prodetails.product.name,
+                unite: this.props.prodetails.product.unit, 
+                quantite: this.props.prodetails.product.quantite,
+                reference: this.props.prodetails.product.reference,
+                price: this.props.prodetails.product.price,
                 machine_id: machine,
                 category: category,
-                description: this.props.prodetails.product.product.description,
-                images: this.props.prodetails.product.product ? this.props.prodetails.product.product.image_urls[0] : e.target.files[0]
+                description: this.props.prodetails.product.description,
+                actualFile: this.props.prodetails.product.image_urls[0],
+                // images: this.props.prodetails.product.image_urls[0]
             })
 
         }, 1000)
@@ -210,7 +222,8 @@ export class Edit_product extends Component {
             })
             // console.log('aaaa', macoptions)
             this.setState({
-                MacOptions: macoptions
+                MacOptions: macoptions,
+                loading: false
             })
         }, 1000)
         
@@ -225,211 +238,220 @@ export class Edit_product extends Component {
         this.props.editProduct(this.state);
        
         setTimeout(()=> {
-            console.log(this.props.productaction)
-            // if(this.props.editproduct.isUpdated.isUpdated === true){
-            //     this.props.history.push('/products/physical/product-list');
-            // }else{
-            //     this.props.history.push('/products/physical/edit-product/'+this.state.id);
-            //     this.setState({
-            //         isLoading: false
-            //     })
-            // }
+            console.log(this.props.editproduct)
+            if(this.props.editproduct.isUpdated === true){
+                this.props.history.push('/products/physical/product-list');
+            }else{
+                this.props.history.push('/products/physical/edit-product/'+this.state.id);
+                this.setState({
+                    isLoading: false
+                })
+            }
         }, 1000)
        
     }
 
     render() {
-        const {roles, visible, isLoading, CatOptions, images, MacOptions, nom , price, quantite, unite, reference, description, machine_id, category} = this.state
+        const {actualFile, loading, roles, visible, isLoading, CatOptions, images, MacOptions, nom , price, quantite, unite, reference, description, machine_id, category} = this.state
         // console.log('dum', dummyimgs)
-        if(roles == '1'){
-            return (
-                <Fragment>
-                    <Breadcrumb title="Modifier un produit" parent="Produits / Liste des Produits" />
-    
-                    <div className="container-fluid">
-                        <div className="row">
-                            <div className="col-sm-12">
-                                <div className="card">
-                                    {visible == true ?
-                                        (
-                                            <div className="card-header">
-                                                <Link type="button" to="/products/physical/product-list" className="btn btn-primary">Retour</Link>
-                                            </div>
-                                        ):
-                                        null
-                                    }
-                                    <div className="card-body">
-                                        <div className="row product-adding">
-                                            <div className="col-xl-5">
-                                                <div className="add-product">
-                                                    <div className="row">
-                                                        <div className="col-xl-9 xl-50 col-sm-6 col-9">
-                                                            <img src={images} alt="" className="img-fluid image_zoom_1 blur-up lazyloaded" />
-                                                        </div>
-                                                        <div className="col-xl-3 xl-50 col-sm-6 col-3">
-                                                            <ul className="file-upload-product">
-                                                                {
-                                                                    // this.state.dummyimgs.map((res, i) => {
-                                                                    //     return (
-                                                                    //         <li key={i}>
-                                                                                <div className="box-input-file">
-                                                                                    <input className="upload" type="file" 
-                                                                                    onChange={(e) => this._handleImgChange(e)} 
-                                                                                    required
-                                                                                    />
-                                                                                    <img src={images} style={{ width: 50, height: 50 }} />
-                                                                                    <a id="result1" onClick={(e) => this._handleSubmit(e.target.id)}></a>
-                                                                                </div>
-                                                                            // </li>
-                                                                //         )
-                                                                //     })
-                                                                }
-                                                            </ul>
+        if(loading){
+            return(
+                <div style={{display: "flex", justifyContent: "center", 
+                            alignItems: "center", width: "100%", height: "100vh"}}>
+                   <BeatLoader color={"#EC1C5B"} loading={loading} size={50} />
+                </div>
+            )
+        }else{
+            if(roles == '1'){
+                return (
+                    <Fragment>
+                        <Breadcrumb title="Modifier un produit" parent="Produits / Liste des Produits" />
+        
+                        <div className="container-fluid">
+                            <div className="row">
+                                <div className="col-sm-12">
+                                    <div className="card">
+                                        {visible == true ?
+                                            (
+                                                <div className="card-header">
+                                                    <Link type="button" to="/products/physical/product-list" className="btn btn-primary">Retour</Link>
+                                                </div>
+                                            ):
+                                            null
+                                        }
+                                        <div className="card-body">
+                                            <div className="row product-adding">
+                                                <div className="col-xl-5">
+                                                    <div className="add-product">
+                                                        <div className="row">
+                                                            <div className="col-xl-9 xl-50 col-sm-6 col-9">
+                                                                <img src={actualFile} alt="" className="img-fluid image_zoom_1 blur-up lazyloaded" />
+                                                            </div>
+                                                            <div className="col-xl-3 xl-50 col-sm-6 col-3">
+                                                                <ul className="file-upload-product">
+                                                                    {
+                                                                        // this.state.dummyimgs.map((res, i) => {
+                                                                        //     return (
+                                                                        //         <li key={i}>
+                                                                                    <div className="box-input-file">
+                                                                                        <input className="upload" type="file" 
+                                                                                        onChange={(e) => this._handleImgChange(e)} 
+                                                                                        required
+                                                                                        />
+                                                                                        <img src={actualFile} style={{ width: 50, height: 50 }} />
+                                                                                        <a id="result1" onClick={(e) => this._handleSubmit(e.target.id)}></a>
+                                                                                    </div>
+                                                                                // </li>
+                                                                    //         )
+                                                                    //     })
+                                                                    }
+                                                                </ul>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div className="col-xl-7">
-                                                <AvForm className="needs-validation add-product-form" onValidSubmit={this.handleValidSubmit} onInvalidSubmit={this.handleInvalidSubmit}>
-                                                    <div className="form form-label-center">
-                                                        <div className="form-group mb-3 row">
-                                                            <label className="col-xl-3 col-sm-4 mb-0">Nom du Produit :</label>
-                                                            <div className="col-xl-8 col-sm-7">
-                                                                <AvField className="form-control" 
-                                                                 name="nom"
-                                                                 id="validationCustom01" type="text" 
-                                                                 value={nom}
-                                                                 onChange={this.handleInputChange}
-                                                                 required />
-                                                            </div>
-                                                            <div className="valid-feedback">Acceptable!</div>
-                                                        </div>
-                                                        <div className="form-group mb-3 row">
-                                                            <label className="col-xl-3 col-sm-4 mb-0">Prix :</label>
-                                                            <div className="col-xl-8 col-sm-7">
-                                                                <AvField className="form-control mb-0" 
-                                                                name="price" id="validationCustom02"
-                                                                value={price}
-                                                                onChange={this.handleInputChange} 
-                                                                type="number" 
-                                                                required />
-                                                            </div>
-                                                            <div className="valid-feedback">Acceptable!</div>
-                                                        </div>
-                                                        <div className="form-group mb-3 row">
-                                                            <label className="col-xl-3 col-sm-4 mb-0">Unité :</label>
-                                                            <div className="col-xl-8 col-sm-7">
-                                                                <AvField className="form-control " 
-                                                                name="unite"
-                                                                value={unite} 
-                                                                id="validationCustom03"
-                                                                onChange={this.handleInputChange}
-                                                                type="text" required />
-                                                            </div>
-                                                            <div className="invalid-feedback offset-sm-4 offset-xl-3">Veuillez choisir un code valide.</div>
-                                                        </div>
-                                                        <div className="form-group row">
-                                                            <label className="col-xl-3 col-sm-4 mb-0">Quantité d'articles :</label>
-                                                            <fieldset className="qty-box ml-0">
-                                                                <div className="input-group bootstrap-touchspin">
-                                                                    <div className="input-group-prepend">
-                                                                        <button className="btn btn-primary btn-square bootstrap-touchspin-down" type="button" onClick={this.DecreaseItem} >
-                                                                            <i className="fa fa-minus"></i>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div className="input-group-prepend">
-                                                                        <span className="input-group-text bootstrap-touchspin-prefix" ></span>
-                                                                    </div>
-                                                                    <input className="touchspin form-control" 
-                                                                        type="number"
-                                                                        name='quantite'
-                                                                        value={quantite} 
-                                                                        onChange={this.handleInputChange} 
-                                                                    />
-                                                                    <div className="input-group-append">
-                                                                        <span className="input-group-text bootstrap-touchspin-postfix"></span>
-                                                                    </div>
-                                                                    <div className="input-group-append ml-0">
-                                                                        <button className="btn btn-primary btn-square bootstrap-touchspin-up" type="button" onClick={this.IncrementItem}>
-                                                                            <i className="fa fa-plus"></i>
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </fieldset>
-                                                        </div>
-                                                        <div className="form-group mb-3 row">
-                                                            <label className="col-xl-3 col-sm-4 mb-0">Reférence du Produit :</label>
-                                                            <div className="col-xl-8 col-sm-7">
-                                                                <AvField className="form-control " 
-                                                                name="reference" 
-                                                                value={reference} 
-                                                                onChange={this.handleInputChange} 
-                                                                id="validationCustomUsername" 
-                                                                type="text" required />
-                                                            </div>
-                                                            <div className="invalid-feedback offset-sm-4 offset-xl-3">Veuillez choisir un code valide.</div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="form-group row">
-                                                        <label className="col-xl-3 col-sm-4 mb-0" >Nom de machine :</label>
-                                                        <div className="col-xl-8 col-sm-7">
-                                                            <Select className="col-xl-8 col-md-7"
-                                                                name="machine_id"
-                                                                value={machine_id}
-                                                                options={MacOptions}
-                                                                onChange={this.machineHandleChange}
-                                                                required="" 
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                    <div className="form-group row">
-                                                        <label className="col-xl-3 col-sm-4 mb-0" >Categorie du Produit :</label>
-                                                        <div className="col-xl-8 col-sm-7">
-                                                            <Select className="col-xl-8 col-md-7"
-                                                                name="category_id"
-                                                                value={category}
-                                                                options={CatOptions}
-                                                                onChange={this.categoryHandleChange}
-                                                                required="" 
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                    <div className="form">
-                                                        <div className="form-group row">
-                                                            <label className="col-xl-3 col-sm-4">Description du produit :</label>
-                                                            <div className="col-xl-8 col-sm-7">
-                                                                <textarea name="description" 
-                                                                    value={description} 
+                                                <div className="col-xl-7">
+                                                    <AvForm className="needs-validation add-product-form" onValidSubmit={this.handleValidSubmit} onInvalidSubmit={this.handleInvalidSubmit}>
+                                                        <div className="form form-label-center">
+                                                            <div className="form-group mb-3 row">
+                                                                <label className="col-xl-3 col-sm-4 mb-0">Nom du Produit :</label>
+                                                                <div className="col-xl-8 col-sm-7">
+                                                                    <AvField className="form-control" 
+                                                                    name="nom"
+                                                                    id="validationCustom01" type="text" 
+                                                                    value={nom}
                                                                     onChange={this.handleInputChange}
-                                                                    rows="5" cols="88"
+                                                                    required />
+                                                                </div>
+                                                                <div className="valid-feedback">Acceptable!</div>
+                                                            </div>
+                                                            <div className="form-group mb-3 row">
+                                                                <label className="col-xl-3 col-sm-4 mb-0">Prix :</label>
+                                                                <div className="col-xl-8 col-sm-7">
+                                                                    <AvField className="form-control mb-0" 
+                                                                    name="price" id="validationCustom02"
+                                                                    value={price}
+                                                                    onChange={this.handleInputChange} 
+                                                                    type="number" 
+                                                                    required />
+                                                                </div>
+                                                                <div className="valid-feedback">Acceptable!</div>
+                                                            </div>
+                                                            <div className="form-group mb-3 row">
+                                                                <label className="col-xl-3 col-sm-4 mb-0">Unité :</label>
+                                                                <div className="col-xl-8 col-sm-7">
+                                                                    <AvField className="form-control " 
+                                                                    name="unite"
+                                                                    value={unite} 
+                                                                    id="validationCustom03"
+                                                                    onChange={this.handleInputChange}
+                                                                    type="text" required />
+                                                                </div>
+                                                                <div className="invalid-feedback offset-sm-4 offset-xl-3">Veuillez choisir un code valide.</div>
+                                                            </div>
+                                                            <div className="form-group row">
+                                                                <label className="col-xl-3 col-sm-4 mb-0">Quantité d'articles :</label>
+                                                                <fieldset className="qty-box ml-0">
+                                                                    <div className="input-group bootstrap-touchspin">
+                                                                        <div className="input-group-prepend">
+                                                                            <button className="btn btn-primary btn-square bootstrap-touchspin-down" type="button" onClick={this.DecreaseItem} >
+                                                                                <i className="fa fa-minus"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div className="input-group-prepend">
+                                                                            <span className="input-group-text bootstrap-touchspin-prefix" ></span>
+                                                                        </div>
+                                                                        <input className="touchspin form-control" 
+                                                                            type="number"
+                                                                            name='quantite'
+                                                                            value={quantite} 
+                                                                            onChange={this.handleInputChange} 
+                                                                        />
+                                                                        <div className="input-group-append">
+                                                                            <span className="input-group-text bootstrap-touchspin-postfix"></span>
+                                                                        </div>
+                                                                        <div className="input-group-append ml-0">
+                                                                            <button className="btn btn-primary btn-square bootstrap-touchspin-up" type="button" onClick={this.IncrementItem}>
+                                                                                <i className="fa fa-plus"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </fieldset>
+                                                            </div>
+                                                            <div className="form-group mb-3 row">
+                                                                <label className="col-xl-3 col-sm-4 mb-0">Reférence du Produit :</label>
+                                                                <div className="col-xl-8 col-sm-7">
+                                                                    <AvField className="form-control " 
+                                                                    name="reference" 
+                                                                    value={reference} 
+                                                                    onChange={this.handleInputChange} 
+                                                                    id="validationCustomUsername" 
+                                                                    type="text" required />
+                                                                </div>
+                                                                <div className="invalid-feedback offset-sm-4 offset-xl-3">Veuillez choisir un code valide.</div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="form-group row">
+                                                            <label className="col-xl-3 col-sm-4 mb-0" >Nom de machine :</label>
+                                                            <div className="col-xl-8 col-sm-7">
+                                                                <Select className="col-xl-8 col-md-7"
+                                                                    name="machine_id"
+                                                                    value={machine_id}
+                                                                    options={MacOptions}
+                                                                    onChange={this.machineHandleChange}
+                                                                    required="" 
                                                                 />
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <ToastContainer />
-                                                    <div className="offset-xl-3 offset-sm-4">
-                                                        <button type="submit" className="btn btn-primary mr-2"
-                                                        disabled={isLoading}
-                                                        onClick={this.handleSubmitChange}
-                                                        >Ajouter</button>
-                                                        <Link to="/products/physical/product-list" type="button" className="btn btn-secondary">Annuler</Link>
-                                                    </div>
-                                                </AvForm>
+                                                        <div className="form-group row">
+                                                            <label className="col-xl-3 col-sm-4 mb-0" >Categorie du Produit :</label>
+                                                            <div className="col-xl-8 col-sm-7">
+                                                                <Select className="col-xl-8 col-md-7"
+                                                                    name="category_id"
+                                                                    value={category}
+                                                                    options={CatOptions}
+                                                                    onChange={this.categoryHandleChange}
+                                                                    required="" 
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                        <div className="form">
+                                                            <div className="form-group row">
+                                                                <label className="col-xl-3 col-sm-4">Description du produit :</label>
+                                                                <div className="col-xl-8 col-sm-7">
+                                                                    <textarea name="description" 
+                                                                        value={description} 
+                                                                        onChange={this.handleInputChange}
+                                                                        rows="5" cols="88"
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <ToastContainer />
+                                                        <div className="offset-xl-3 offset-sm-4">
+                                                            <button type="submit" className="btn btn-primary mr-2"
+                                                            disabled={isLoading}
+                                                            onClick={this.handleSubmitChange}
+                                                            >Ajouter</button>
+                                                            <Link to="/products/physical/product-list" type="button" className="btn btn-secondary">Annuler</Link>
+                                                        </div>
+                                                    </AvForm>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </Fragment>
-            )
-        }else{
-            return(
-                <Fragment>
+                    </Fragment>
+                )
+            }else{
+                return(
+                    <Fragment>
 
-                </Fragment>
-            )
+                    </Fragment>
+                )
+            }
         }
     }
     
@@ -439,7 +461,7 @@ const mapStateToProps = (state, props) => {
     return {
         machine: state.machine,
         category: state.category,
-        productaction: state.productaction,
+        editproduct: state.editproduct,
         prodetails: state.prodetails,
         roledetails: state.roledetails
     }

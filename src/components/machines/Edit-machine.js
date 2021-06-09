@@ -193,6 +193,7 @@ export class Edit_machine extends Component {
                                                         />
                                                     {/* </div> */}
                                                 </div>
+                                                <ToastContainer />
                                                 <div className="offset-xl-3 offset-sm-4">
                                                     <button type="button" 
                                                     className="btn btn-primary"

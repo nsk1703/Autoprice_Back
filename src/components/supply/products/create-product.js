@@ -4,17 +4,24 @@ import Tabset_product from './tabset-product';
 import { Link } from 'react-router-dom'
 import {connect} from "react-redux";
 import * as roleActions  from "../../../redux/actions/roleActions";
+import BeatLoader from "react-spinners/BeatLoader";
 
 export class Create_product extends Component {
     constructor(props){
         super(props)
-        let rol = null
 
         this.state = {
             visible: false,
-            roles: null
+            roles: null,
+            loading: false,
         }
+    }
 
+    componentDidMount = () => {
+        let rol = null
+        this.setState({
+            loading: true
+        })
         this.props.actionsdetailRole(localStorage.getItem('roles'))
 
         setTimeout(() => {
@@ -29,47 +36,54 @@ export class Create_product extends Component {
                     visible: true
                 })
             }
+            this.setState({
+                loading: false
+            })
         }, 1000)
-
-        this.state = {
-            roles: rol
-        };
-
     }
-    render() {
-        const {roles, visible} = this.state
 
-        if(roles == '1'){
-            return (
-                <Fragment>
-                    <Breadcrumb title="Approvisionnement de Produit" parent="Approvisionnement / Produits" />
-                    <div className="container-fluid">
-                        <div className="row">
-                            <div className="col-sm-12">
-                                <div className="card">
-                                    {visible == true ?
-                                        (
-                                            <div className="card-header">
-                                                <Link to="/supply/products/list-product" className="btn btn-primary">Retour</Link>
-                                            </div>
-                                        ):
-                                        null
-                                    }
-                                    <div className="card-body">
-                                        <Tabset_product />
+    render() {
+        const {loading, roles, visible} = this.state
+        if(loading){
+            return(
+                <div style={{display: "flex", justifyContent: "center", 
+                            alignItems: "center", width: "100%", height: "100vh"}}>
+                   <BeatLoader color={"#EC1C5B"} loading={loading} size={50} />
+                </div>
+            )
+        }else{
+            if(roles == '1'){
+                return (
+                    <Fragment>
+                        <Breadcrumb title="Approvisionnement de Produit" parent="Approvisionnement / Produits" />
+                        <div className="container-fluid">
+                            <div className="row">
+                                <div className="col-sm-12">
+                                    <div className="card">
+                                        {visible == true ?
+                                            (
+                                                <div className="card-header">
+                                                    <Link to="/supply/products/list-product" className="btn btn-primary">Retour</Link>
+                                                </div>
+                                            ):
+                                            null
+                                        }
+                                        <div className="card-body">
+                                            <Tabset_product />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </Fragment>
-            )
-        }else{
-            return (
-                <Fragment>
+                    </Fragment>
+                )
+            }else{
+                return (
+                    <Fragment>
 
-                </Fragment>
-            )
+                    </Fragment>
+                )
+            }
         }
     }
 }

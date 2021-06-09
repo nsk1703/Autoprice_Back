@@ -7,6 +7,7 @@ import * as machineActions from "../../redux/actions/machineActions";
 import Select from 'react-select';
 import * as roleActions from "../../redux/actions/roleActions";
 import { Link } from "react-router-dom";
+import BeatLoader from "react-spinners/BeatLoader";
 
 const choices = [
     {value: 'type1', label:'Type 1'},
@@ -31,6 +32,7 @@ export class Edit_maintain extends Component {
             isLoading: false,
             visible: false,
             roles: null,
+            loading: false
         };
 
         this.handleInputChange = this.handleInputChange.bind(this)
@@ -57,6 +59,10 @@ export class Edit_maintain extends Component {
         let options = [];
         let listMachines = [];
         let rol = null;
+
+        this.setState({
+            loading: true
+        })
 
         this.props.machines();
 
@@ -126,6 +132,9 @@ export class Edit_maintain extends Component {
                     visible: true
                 })
             }
+            this.setState({
+                loading: false
+            })
         }, 1000)
     }
 
@@ -152,111 +161,120 @@ export class Edit_maintain extends Component {
     }
     
     render() {
-        const {roles, visible, AllOptions, nom, type, montant, dateMaintenance, description, machine_id, isLoading} = this.state
+        const {loading, roles, visible, AllOptions, nom, type, montant, dateMaintenance, description, machine_id, isLoading} = this.state
 
-        if(roles == '1'){
-            return (
-                <Fragment>
-                    <Breadcrumb title="Modifier une maintenance" parent="Maintenance" />
-                    <div className="container-fluid">
-                        <div className="row">
-                            <div className="col-sm-12">
-                                <div className="card">
-                                    {visible == true ?
-                                        (
-                                            <div className="card-header">
-                                                <Link type="button" to="/maintains/list-maintain" className="btn btn-primary">Retour</Link>
-                                            </div>
-                                        ):
-                                        null
-                                    }
-                                    <div className="card-body">
-                                        <form className="needs-validation">
-                                            <div className="form-group row">
-                                                <label className="col-xl-3 col-md-4"><span>*</span> Nom</label>
-                                                <input className="form-control col-xl-8 col-md-7" 
-                                                id="validationCustom2" type="text" 
-                                                name='nom'
-                                                value={nom}
-                                                onChange={this.handleInputChange}
-                                                required="" />
-                                            </div>
-                                            <div className="form-group row">
-                                                <label className="col-xl-3 col-md-4"><span>*</span> Montant</label>
-                                                <input className="form-control col-xl-8 col-md-7" 
-                                                id="validationCustom0" type="number" 
-                                                name='montant'
-                                                value={montant}
-                                                onChange={this.handleInputChange}
-                                                required="" />
-                                            </div>
-                                            <div className="form-group row">
-                                                <label className="col-xl-3 col-md-4"><span>*</span> Date de Maintenance</label>
-                                                <input className="form-control col-xl-8 col-md-7" 
-                                                id="validationCustom1" 
-                                                type="date" 
-                                                name='dateMaintenance'
-                                                value={moment(dateMaintenance).format("YYYY-MM-DD")}
-                                                onChange={this.handleInputChange}
-                                                required="" />
-                                            </div>
-                                            <div className="form-group row">
-                                                <label className="col-xl-3 col-md-4" >type :</label>
-                                                {/* <div className=""> */}
-                                                    <Select className="col-xl-8 col-md-7"
-                                                        name="type"
-                                                        value={type}
-                                                        options={choices}
-                                                        onChange={this.handleSelect}
-                                                        required="" 
-                                                    />
-                                                {/* </div> */}
-                                            </div>
-                                            <div className="form-group row">
-                                                <label className="col-xl-3 col-md-4" >Nom de machine :</label>
-                                                {/* <div className="col-xl-8 col-md-7"> */}
-                                                    <Select className="col-xl-8 col-md-7"
-                                                        name="machine_id"
-                                                        value={machine_id}
-                                                        options={AllOptions}
-                                                        onChange={this.handleChange}
-                                                        required="" 
-                                                    />
-                                                {/* </div> */}
-                                            </div>
-                                            <div className="form">
+        if(loading){
+            return(
+                <div style={{display: "flex", justifyContent: "center", 
+                            alignItems: "center", width: "100%", height: "100vh"}}>
+                   <BeatLoader color={"#EC1C5B"} loading={loading} size={50} />
+                </div>
+            )
+        }else{
+            if(roles == '1'){
+                return (
+                    <Fragment>
+                        <Breadcrumb title="Modifier une maintenance" parent="Maintenance" />
+                        <div className="container-fluid">
+                            <div className="row">
+                                <div className="col-sm-12">
+                                    <div className="card">
+                                        {visible == true ?
+                                            (
+                                                <div className="card-header">
+                                                    <Link type="button" to="/maintains/list-maintain" className="btn btn-primary">Retour</Link>
+                                                </div>
+                                            ):
+                                            null
+                                        }
+                                        <div className="card-body">
+                                            <form className="needs-validation">
                                                 <div className="form-group row">
-                                                    <label className="col-xl-3 col-md-4">Description :</label>
-                                                    {/* <div className=" form-control col-xl-8 col-md-7"> */}
-                                                        <textarea className=" form-control col-xl-8 col-md-7" 
-                                                        name="description" value={description} 
-                                                            onChange={this.handleInputChange}
-                                                            rows="10" cols="92"
+                                                    <label className="col-xl-3 col-md-4"><span>*</span> Nom</label>
+                                                    <input className="form-control col-xl-8 col-md-7" 
+                                                    id="validationCustom2" type="text" 
+                                                    name='nom'
+                                                    value={nom}
+                                                    onChange={this.handleInputChange}
+                                                    required="" />
+                                                </div>
+                                                <div className="form-group row">
+                                                    <label className="col-xl-3 col-md-4"><span>*</span> Montant</label>
+                                                    <input className="form-control col-xl-8 col-md-7" 
+                                                    id="validationCustom0" type="number" 
+                                                    name='montant'
+                                                    value={montant}
+                                                    onChange={this.handleInputChange}
+                                                    required="" />
+                                                </div>
+                                                <div className="form-group row">
+                                                    <label className="col-xl-3 col-md-4"><span>*</span> Date de Maintenance</label>
+                                                    <input className="form-control col-xl-8 col-md-7" 
+                                                    id="validationCustom1" 
+                                                    type="date" 
+                                                    name='dateMaintenance'
+                                                    value={moment(dateMaintenance).format("YYYY-MM-DD")}
+                                                    onChange={this.handleInputChange}
+                                                    required="" />
+                                                </div>
+                                                <div className="form-group row">
+                                                    <label className="col-xl-3 col-md-4" >type :</label>
+                                                    {/* <div className=""> */}
+                                                        <Select className="col-xl-8 col-md-7"
+                                                            name="type"
+                                                            value={type}
+                                                            options={choices}
+                                                            onChange={this.handleSelect}
+                                                            required="" 
                                                         />
                                                     {/* </div> */}
                                                 </div>
-                                            </div>
-                                            <div className="offset-xl-3 offset-sm-4">
-                                                <button type="button" 
-                                                className="btn btn-primary"
-                                                onClick={this.handleSubmitChange}
-                                                disabled={isLoading}
-                                                >Modifier</button>
-                                            </div>
-                                        </form>
+                                                <div className="form-group row">
+                                                    <label className="col-xl-3 col-md-4" >Nom de machine :</label>
+                                                    {/* <div className="col-xl-8 col-md-7"> */}
+                                                        <Select className="col-xl-8 col-md-7"
+                                                            name="machine_id"
+                                                            value={machine_id}
+                                                            options={AllOptions}
+                                                            onChange={this.handleChange}
+                                                            required="" 
+                                                        />
+                                                    {/* </div> */}
+                                                </div>
+                                                <div className="form">
+                                                    <div className="form-group row">
+                                                        <label className="col-xl-3 col-md-4">Description :</label>
+                                                        {/* <div className=" form-control col-xl-8 col-md-7"> */}
+                                                            <textarea className=" form-control col-xl-8 col-md-7" 
+                                                            name="description" value={description} 
+                                                                onChange={this.handleInputChange}
+                                                                rows="10" cols="92"
+                                                            />
+                                                        {/* </div> */}
+                                                    </div>
+                                                </div>
+                                                <div className="offset-xl-3 offset-sm-4">
+                                                    <button type="button" 
+                                                    className="btn btn-primary"
+                                                    onClick={this.handleSubmitChange}
+                                                    disabled={isLoading}
+                                                    >Modifier</button>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </Fragment>
-            )
-        }else{
-            return(
-                <Fragment>
+                    </Fragment>
+                )
+            }else{
+                return(
+                    <Fragment>
 
-                </Fragment>
-            )
+                    </Fragment>
+                )
+            }
         }
     }
 }

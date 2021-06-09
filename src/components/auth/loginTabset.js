@@ -53,10 +53,6 @@ export class LoginTabset extends Component {
         this.setState({
             loading: true
         })
-        // console.log(this.props.auth.isAuthenticated)
-        // console.log(this.props.auth.token)
-        // console.log(this.props.auth.user)
-        // console.log(this.props.auth.roles)
 
         this.props.login(this.state)
         setTimeout(() =>{

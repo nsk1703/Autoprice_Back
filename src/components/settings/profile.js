@@ -4,13 +4,14 @@ import designer from '../../assets/images/dashboard/designer.jpg';
 import Tabset_profile from './tabset-profile';
 import Breadcrumb from '../common/breadcrumb';
 
-
 export class Profile extends Component {
+    
     render() {
+
         return (
             <Fragment>
                 <Breadcrumb title="Profil" parent="Paramètres" />
-                 <div className="container-fluid">
+                <div className="container-fluid">
                 <div className="row">
                     <div className="col-xl-4">
                         <div className="card">
@@ -73,6 +74,7 @@ export class Profile extends Component {
             </div>
             </Fragment>
         )
+    
     }
 }
 

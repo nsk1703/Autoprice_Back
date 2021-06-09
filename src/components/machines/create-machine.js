@@ -11,7 +11,6 @@ import { Link } from "react-router-dom";
 import * as roleActions  from "../../redux/actions/roleActions";
 import BeatLoader from "react-spinners/BeatLoader";
 
-
 const options = [
     {value: 'type1', label:'Type 1'},
     {value: 'type2', label:'Type 2'},
@@ -87,15 +86,13 @@ export class Create_machine extends Component {
             this.props.roledetails.role.map(rl => {
                 rol = rl.ajouterMachine;
             })
-            this.setState({
-                roles: rol
-            })
             if(this.props.roledetails.role[0].listeMachine == '1'){
                 this.setState({
                     visible: true
                 })
             }
             this.setState({
+                roles: rol,
                 loading: false
             })
         }, 1000)

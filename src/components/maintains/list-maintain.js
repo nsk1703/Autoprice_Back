@@ -8,23 +8,28 @@ import * as maintenanceActions from "../../redux/actions/maintenanceActions";
 import {connect} from "react-redux";
 import { ToastContainer, toast } from 'react-toastify';
 import * as roleActions  from "../../redux/actions/roleActions";
+import BeatLoader from "react-spinners/BeatLoader";
 
 export class List_maintain extends Component {
     constructor(props) {
         super(props);
 
-
         this.state = {
             open: false,
             maintenances: [],
             roles: null,
-            visible: false
+            visible: false,
+            loading: false
         };
     }
 
     componentDidMount = () => {
         let listMaintenances = [];
         let rol = null;
+
+        this.setState({
+            loading: true
+        })
 
         this.props.maintenances();
 
@@ -64,47 +69,61 @@ export class List_maintain extends Component {
                     visible: true
                 })
             }
+            this.setState({
+                loading: false
+            })
         }, 1000)
     }
     
     render() {
-        const {maintenances, roles, visible} = this.state
-        if(roles == '1'){
-            return (
-                <Fragment>
-                    <Breadcrumb title="Liste des maintenances" parent="Maintenance" />
-                    <div className="container-fluid">
-                        <div className="card">
-                            <div className="card-body">
-                                {visible == true ?
-                                    (
-                                        <div className="btn-popup pull-right">
-                                            <Link to="/maintains/create-maintain" className="btn btn-primary">Effectuer une maintenance</Link>
-                                        </div>
-                                    ):
-                                    null
-                                }
-                                <div className="clearfix"></div>
-                                <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
-                                    <Data_maintains
-                                        multiSelectOption={true}
-                                        myData={maintenances}
-                                        pageSize={10}
-                                        pagination={true}
-                                        class="-striped -highlight"
-                                    />
+        const {maintenances, roles, visible, loading} = this.state
+
+        if(loading){
+            return(
+                <div style={{display: "flex", justifyContent: "center", 
+                            alignItems: "center", width: "100%", height: "100vh"}}>
+                   <BeatLoader color={"#EC1C5B"} loading={loading} size={50} />
+                </div>
+            )
+        }else{
+
+            if(roles == '1'){
+                return (
+                    <Fragment>
+                        <Breadcrumb title="Liste des maintenances" parent="Maintenance" />
+                        <div className="container-fluid">
+                            <div className="card">
+                                <div className="card-body">
+                                    {visible == true ?
+                                        (
+                                            <div className="btn-popup pull-right">
+                                                <Link to="/maintains/create-maintain" className="btn btn-primary">Effectuer une maintenance</Link>
+                                            </div>
+                                        ):
+                                        null
+                                    }
+                                    <div className="clearfix"></div>
+                                    <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
+                                        <Data_maintains
+                                            multiSelectOption={true}
+                                            myData={maintenances}
+                                            pageSize={10}
+                                            pagination={true}
+                                            class="-striped -highlight"
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </Fragment>
-            )
-        }else{
-            return (
-                <Fragment>
+                    </Fragment>
+                )
+            }else{
+                return (
+                    <Fragment>
 
-                </Fragment>
-            )
+                    </Fragment>
+                )
+            }
         }
     }
 }

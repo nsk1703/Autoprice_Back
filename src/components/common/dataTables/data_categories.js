@@ -6,7 +6,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import CKEditors from 'react-ckeditor-component';
 import 'react-toastify/dist/ReactToastify.css';
 import * as roleActions  from "../../../redux/actions/roleActions";
+import * as categoryActions  from "../../../redux/actions/categoryActions";
 import {connect} from "react-redux";
+import { Link } from 'react-router-dom';
+import axios from "axios";
 
 export class Data_categories extends Component {
     constructor(props) {
@@ -16,9 +19,12 @@ export class Data_categories extends Component {
             myData: this.props.myData,
             open: false,
             deletable: false,
-            updatable: false
+            updatable: false,
+            isLoading: false,
+
         }
     }
+
 
     onOpenModal = () => {
         this.setState({ open: true });
@@ -43,16 +49,32 @@ export class Data_categories extends Component {
 
     handleRemoveRow = () => {
         const selectedValues = this.state.checkedValues;
-        const updatedData = this.state.myData.filter(function (el) {
-            return selectedValues.indexOf(el.id) < 0;
-        });
-        this.setState({
-            myData: updatedData
+
+        const token = localStorage.getItem('token');
+        let config = {
+            headers: {
+              'USER-KEY': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            }
+          }
+          
+        axios.delete(`category/${selectedValues}`, config)
+        .then(() => {
+            axios.get('/categories')
+                .then((response) => {
+                    const {categories} = response.data
+                    this.setState({
+                        myData: categories
+                    })
+                })
         })
+        window.location.reload()
         toast.success("Successfully Deleted !")
+       
     };
 
     renderEditable = (cellInfo) => {
+        // console.log('cell',cellInfo)
         return (
             <div
                 style={{ backgroundColor: "#fafafa" }}
@@ -73,8 +95,8 @@ export class Data_categories extends Component {
     Capitalize(str) {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
-
-    componentDidMount = () => {
+ 
+    componentDidMount = (row) => {
         this.props.actionsdetailRole(localStorage.getItem('roles'))
         
         setTimeout(() => {
@@ -89,12 +111,42 @@ export class Data_categories extends Component {
                 })
             }
         }, 1000)
+
+    }
+    
+    handleFileChange = (e)=> {
+        this.setState({
+            files: e.target.files[0]
+        });
+    }
+
+    handleSubmitChange = (e) => {
+        e.preventDefault();
+        this.setState({
+            isLoading: true
+        })
+        // console.log(this.state.AllOptions)
+        this.props.editCategory(this.state)
+        setTimeout(() => {
+            // console.log(this.props.editcategory.isUpdated)
+            if(this.props.editcategory.isUpdated === true){
+                this.onCloseModal();
+                this.props.history.push('/products/physical/category');
+                window.location.reload()
+            }else{
+                // this.props.history.push('/products/physical/category');
+                this.onOpenModal();
+                this.setState({
+                    isLoading: false
+                })
+            }
+        }, 1000)
     }
 
     render() {
         const { open } = this.state;
         const { pageSize, myClass, check, multiSelectOption, pagination } = this.props;
-        const { myData, deletable, updatable } = this.state
+        const { myData, deletable, updatable, name, description, isLoading } = this.state
 
         const columns = [];
         for (var key in myData[0]) {
@@ -145,49 +197,18 @@ export class Data_categories extends Component {
                             textAlign: 'center'
                         },
                         Cell: (row) => (
+                            // console.log('row',row)
                             <div>
                                 <span >
                                     <input type="checkbox" name={row.original.id} defaultChecked={this.state.checkedValues.includes(row.original.id)}
                                         onChange={e => this.selectRow(e, row.original.id)} />
                                 </span>
                                 <span>
-                                    <i className="fa fa-pencil"  style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }} onClick={this.onOpenModal} data-toggle="modal" data-original-title="test" data-target="#exampleModal"></i>
+                                    <Link to={`/products/physical/edit-category/${row.original.id}`}>
+                                        <i className="fa fa-pencil"  style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }}>
+                                        </i>
+                                    </Link>
                                 </span>
-                                <Modal open={open} onClose={this.onCloseModal} >
-                                    <div className="modal-header">
-                                        <h5 className="modal-title f-w-600" id="exampleModalLabel2">Ajout d'une catégorie</h5>
-                                    </div>
-                                    <div className="modal-body">
-                                        <form>
-                                            <div className="form-group">
-                                                <label htmlFor="recipient-name" className="col-form-label" >Nom de catégorie :</label>
-                                                <input type="text" className="form-control" />
-                                            </div>
-                                            <div className="form-group row">
-                                                <label className="col-xl-3 col-sm-4">Description :</label>
-                                                <div className="col-xl-8 col-sm-7 description-sm">
-                                                    <CKEditors
-                                                        activeclassName="p10"
-                                                        content={this.state.content}
-                                                        events={{
-                                                            "blur": this.onBlur,
-                                                            "afterPaste": this.afterPaste,
-                                                            "change": this.onChange
-                                                        }}
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="form-group">
-                                                <label htmlFor="message-text" className="col-form-label">Image de Catégorie :</label>
-                                                <input className="form-control" id="validationCustom02" type="file" />
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div className="modal-footer">
-                                        <button type="button" className="btn btn-primary" onClick={() => this.onCloseModal('VaryingMdo')}>Enregistrer</button>
-                                        <button type="button" className="btn btn-secondary" onClick={() => this.onCloseModal('VaryingMdo')}>Fermer</button>
-                                    </div>
-                                </Modal>
                             </div>
                             
                         ),
@@ -232,43 +253,11 @@ export class Data_categories extends Component {
                         Cell: (row) => (
                             <div>
                                 <span>
-                                    <i className="fa fa-pencil"  style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }} onClick={this.onOpenModal} data-toggle="modal" data-original-title="test" data-target="#exampleModal"></i>
+                                <Link to={`/products/physical/edit-category/${row.original.id}`}>
+                                    <i className="fa fa-pencil"  style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }}>
+                                    </i>
+                                </Link>
                                 </span>
-                                <Modal open={open} onClose={this.onCloseModal} >
-                                    <div className="modal-header">
-                                        <h5 className="modal-title f-w-600" id="exampleModalLabel2">Ajout d'une catégorie</h5>
-                                    </div>
-                                    <div className="modal-body">
-                                        <form>
-                                            <div className="form-group">
-                                                <label htmlFor="recipient-name" className="col-form-label" >Nom de catégorie :</label>
-                                                <input type="text" className="form-control" />
-                                            </div>
-                                            <div className="form-group row">
-                                                <label className="col-xl-3 col-sm-4">Description :</label>
-                                                <div className="col-xl-8 col-sm-7 description-sm">
-                                                    <CKEditors
-                                                        activeclassName="p10"
-                                                        content={this.state.content}
-                                                        events={{
-                                                            "blur": this.onBlur,
-                                                            "afterPaste": this.afterPaste,
-                                                            "change": this.onChange
-                                                        }}
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="form-group">
-                                                <label htmlFor="message-text" className="col-form-label">Image de Catégorie :</label>
-                                                <input className="form-control" id="validationCustom02" type="file" />
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div className="modal-footer">
-                                        <button type="button" className="btn btn-primary" onClick={() => this.onCloseModal('VaryingMdo')}>Enregistrer</button>
-                                        <button type="button" className="btn btn-secondary" onClick={() => this.onCloseModal('VaryingMdo')}>Fermer</button>
-                                    </div>
-                                </Modal>
                             </div>
                             
                         ),
@@ -329,12 +318,16 @@ export class Data_categories extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        roledetails: state.roledetails
+        roledetails: state.roledetails,
+        editcategory: state.editcategory,
+        catdetails: state.catdetails
     }
 }
 const mapDispatchToProps = (dispatch) =>{
     return {
         actionsdetailRole: (rolename) => {dispatch(roleActions.actionsdetailRole(rolename))},
+        editCategory: (categoryID) => {dispatch(categoryActions.editCategory(categoryID))},
+        detailCategory: (categoryid) => {dispatch(categoryActions.detailCategory(categoryid))},
     }
 }
 

@@ -49,7 +49,6 @@ export class List_machine extends Component {
                 listMachines.push(item);
             }) 
             this.setState({
-                loading: false,
                 machines: listMachines,
             })
             
@@ -69,13 +68,15 @@ export class List_machine extends Component {
                     visible: true
                 })
             }
+            this.setState({
+                loading: false,
+            })
         }, 1000)
 
     }
 
     render() {
         const {machines, visible, roles, loading} =this.state
-        const style = {}
         // console.log('mach',machines)
         if(loading){
             return(

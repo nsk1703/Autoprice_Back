@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import {withRouter} from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import * as roleActions from "../../redux/actions/roleActions";
+import BeatLoader from "react-spinners/BeatLoader";
 
 export class Transactions_sales extends Component {
     constructor(props) {
@@ -15,7 +16,8 @@ export class Transactions_sales extends Component {
 
         this.state = {
            paiements: [],
-           roles: null
+           roles: null,
+           loading: false
         };
         
     }
@@ -23,6 +25,10 @@ export class Transactions_sales extends Component {
     componentDidMount = () => {
         let listPaiements = [];
         let rol = null
+
+        this.setState({
+            loading: true
+        })
 
         this.props.paiements();
 
@@ -57,50 +63,60 @@ export class Transactions_sales extends Component {
                 rol = rl.paiements;
             })
             this.setState({
-                roles: rol
+                roles: rol,
+                loading: false
             })
         }, 1000)
     }
 
     render() {
-        const {paiements, roles} = this.state
-        if(roles == '1'){
-            return (
-                <Fragment>
-                    <Breadcrumb title="Paiements" parent="Ventes" />
-    
-                    <div className="container-fluid">
-                        <div className="row">
-                            <div className="col-sm-12">
-                                <div className="card">
-                                    <div className="card-header">
-                                        <h5>Détails des Paiements</h5>
-                                    </div>
-                                    <ToastContainer />
-                                    <div className="card-body">
-                                        <div id="batchDelete" className="transactions">
-                                            <Data_transactions
-                                                multiSelectOption={false}
-                                                myData={paiements}
-                                                check={false}
-                                                pageSize={10}
-                                                pagination={true}
-                                                class="-striped -highlight"
-                                            />
+        const {paiements, roles, loading} = this.state
+        if(loading){
+            return(
+                <div style={{display: "flex", justifyContent: "center", 
+                            alignItems: "center", width: "100%", height: "100vh"}}>
+                   <BeatLoader color={"#EC1C5B"} loading={loading} size={50} />
+                </div>
+            )
+        }else{
+            if(roles == '1'){
+                return (
+                    <Fragment>
+                        <Breadcrumb title="Paiements" parent="Ventes" />
+        
+                        <div className="container-fluid">
+                            <div className="row">
+                                <div className="col-sm-12">
+                                    <div className="card">
+                                        <div className="card-header">
+                                            <h5>Détails des Paiements</h5>
+                                        </div>
+                                        <ToastContainer />
+                                        <div className="card-body">
+                                            <div id="batchDelete" className="transactions">
+                                                <Data_transactions
+                                                    multiSelectOption={false}
+                                                    myData={paiements}
+                                                    check={false}
+                                                    pageSize={10}
+                                                    pagination={true}
+                                                    class="-striped -highlight"
+                                                />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </Fragment>
-            )
-        }else{
-            return(
-                <Fragment>
+                    </Fragment>
+                )
+            }else{
+                return(
+                    <Fragment>
 
-                </Fragment>
-            )
+                    </Fragment>
+                )
+            }
         }
     }
 }

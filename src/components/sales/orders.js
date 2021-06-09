@@ -8,6 +8,7 @@ import * as orderActions  from "../../redux/actions/orderActions";
 import { connect } from 'react-redux';  
 import { ToastContainer, toast } from 'react-toastify';
 import * as roleActions from "../../redux/actions/roleActions";
+import BeatLoader from "react-spinners/BeatLoader";
 
 export class Orders extends Component {
     constructor(props) {
@@ -16,6 +17,7 @@ export class Orders extends Component {
         this.state = {
            orders: [],
            roles: null,
+           loading: false
         };
 
     }
@@ -24,6 +26,9 @@ export class Orders extends Component {
         let listOrders = []
         let rol = null;
 
+        this.setState({
+            loading: true
+        })
         this.props.orders()
 
         setTimeout(() => {
@@ -64,50 +69,60 @@ export class Orders extends Component {
                 rol = rl.commandes;
             })
             this.setState({
-                roles: rol
+                roles: rol,
+                loading: false
             })
         }, 1000)
 
     }
 
     render() {
-        const {orders, roles} = this.state
-        if(roles == '1'){
-            return (
-                <Fragment>
-                    <Breadcrumb title="Commandes" parent="Ventes" />
+        const {orders, roles, loading} = this.state
+        if(loading){
+            return(
+                <div style={{display: "flex", justifyContent: "center", 
+                            alignItems: "center", width: "100%", height: "100vh"}}>
+                   <BeatLoader color={"#EC1C5B"} loading={loading} size={50} />
+                </div>
+            )
+        }else{
+            if(roles == '1'){
+                return (
+                    <Fragment>
+                        <Breadcrumb title="Commandes" parent="Ventes" />
 
-                    <div className="container-fluid">
-                        <div className="row">
-                            <div className="col-sm-12">
-                                <div className="card">
-                                    <div className="card-header">
-                                        <h5>Gestionnaire de Commandes</h5>
-                                    </div>
-                                    <ToastContainer />
-                                    <div className="card-body order-datatable">
-                                    <Data_orders
-                                        multiSelectOption={false}
-                                        myData={orders}
-                                        check={false}
-                                        pageSize={10}
-                                        pagination={true}
-                                        class="-striped -highlight"
-                                    />
+                        <div className="container-fluid">
+                            <div className="row">
+                                <div className="col-sm-12">
+                                    <div className="card">
+                                        <div className="card-header">
+                                            <h5>Gestionnaire de Commandes</h5>
+                                        </div>
+                                        <ToastContainer />
+                                        <div className="card-body order-datatable">
+                                        <Data_orders
+                                            multiSelectOption={false}
+                                            myData={orders}
+                                            check={false}
+                                            pageSize={10}
+                                            pagination={true}
+                                            class="-striped -highlight"
+                                        />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </Fragment>
-            )
-        }else{
+                    </Fragment>
+                )
+            }else{
            return(
                <Fragment>
 
                </Fragment>
            )
-       }
+            }
+        }
     }
 }
 

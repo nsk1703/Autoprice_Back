@@ -7,6 +7,7 @@ import * as userActions from "../../redux/actions/userActions";
 import * as roleActions from "../../redux/actions/roleActions";
 import Select from 'react-select';
 import { ToastContainer, toast } from 'react-toastify';
+import BeatLoader from "react-spinners/BeatLoader";
 
 export class Edit_user extends Component {
 
@@ -16,6 +17,7 @@ export class Edit_user extends Component {
         this.state = {
             active: '1',
             desactive:'0',
+            loading: false,
 
             id: '',
             etat: '0',
@@ -74,6 +76,10 @@ export class Edit_user extends Component {
         let listRoles= [];
         let rol = null;
 
+        this.setState({
+            loading: true
+        })
+
         this.props.roles();
 
         setTimeout(() => {
@@ -102,14 +108,15 @@ export class Edit_user extends Component {
             this.props.roledetails.role.map(rl => {
                 rol = rl.modifierUtilisateur;
             })
-            this.setState({
-                roles: rol
-            })
             if(this.props.roledetails.role[0].listeUtilisateur == '1'){
                 this.setState({
                     visible: true
                 })
             }
+            this.setState({
+                roles: rol,
+                loading: false
+            })
         }, 1000)
 
         this.props.detailUser(this.props.match.params.id)
@@ -129,135 +136,143 @@ export class Edit_user extends Component {
     }
 
     render() {
-        const {roles, visible, AllOptions, lastName, username, email, role_id, isLoading, password, confirm_password} = this.state
-
-        if(roles == '1'){
-            return (
-                <Fragment>
-                    <Breadcrumb title="Ajout d'un Utilisateur" parent="Utilisateurs" />
-                    <div className="container-fluid">
-                        <div className="row">
-                            <div className="col-sm-12">
-                                <div className="card">
-                                    {visible == true ?
-                                            (
-                                                <div className="card-header">
-                                                    <Link type="button" to="/users/list-user" className="btn btn-primary">Retour</Link>
-                                                </div>
-                                            ):
-                                            null
-                                        }
-                                    <div className="card-body">
-                                        <form className="needs-validation user-edit" noValidate="">
-                                            <div className="attribute-blocks">
-                                                <div className="row">
-                                                    <div className="col-xl-3 col-sm-4">
-                                                        <label>Etat</label>
+        const {loading, roles, visible, AllOptions, lastName, username, email, role_id, isLoading, password, confirm_password} = this.state
+        if(loading){
+            return(
+                <div style={{display: "flex", justifyContent: "center", 
+                            alignItems: "center", width: "100%", height: "100vh"}}>
+                   <BeatLoader color={"#EC1C5B"} loading={loading} size={50} />
+                </div>
+            )
+        }else{
+            if(roles == '1'){
+                return (
+                    <Fragment>
+                        <Breadcrumb title="Ajout d'un Utilisateur" parent="Utilisateurs" />
+                        <div className="container-fluid">
+                            <div className="row">
+                                <div className="col-sm-12">
+                                    <div className="card">
+                                        {visible == true ?
+                                                (
+                                                    <div className="card-header">
+                                                        <Link type="button" to="/users/list-user" className="btn btn-primary">Retour</Link>
                                                     </div>
-                                                    <div className="col-xl-9 col-sm-8">
-                                                        <div className="form-group m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated">
-                                                            <label className="d-block">
-                                                                <input className="radio_animated" id="edo-ani1" 
-                                                                    type="radio" name="etat"
-                                                                    value={this.state.active}
+                                                ):
+                                                null
+                                            }
+                                        <div className="card-body">
+                                            <form className="needs-validation user-edit" noValidate="">
+                                                <div className="attribute-blocks">
+                                                    <div className="row">
+                                                        <div className="col-xl-3 col-sm-4">
+                                                            <label>Etat</label>
+                                                        </div>
+                                                        <div className="col-xl-9 col-sm-8">
+                                                            <div className="form-group m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated">
+                                                                <label className="d-block">
+                                                                    <input className="radio_animated" id="edo-ani1" 
+                                                                        type="radio" name="etat"
+                                                                        value={this.state.active}
+                                                                        onChange={this.handleInputChange}
+                                                                        checked={this.state.etat === this.state.active} 
+                                                                    />
+                                                                    Activé
+                                                                </label>
+                                                                <label className="d-block" >
+                                                                    <input className="radio_animated" id="edo-ani2" 
+                                                                    type="radio" name="etat" 
+                                                                    value={this.state.desactive}
                                                                     onChange={this.handleInputChange}
-                                                                    checked={this.state.etat === this.state.active} 
-                                                                />
-                                                                Activé
-                                                            </label>
-                                                            <label className="d-block" >
-                                                                <input className="radio_animated" id="edo-ani2" 
-                                                                type="radio" name="etat" 
-                                                                value={this.state.desactive}
-                                                                onChange={this.handleInputChange}
-                                                                checked={this.state.etat === this.state.desactive}
-                                                                />
-                                                                Désactivé
-                                                            </label>
+                                                                    checked={this.state.etat === this.state.desactive}
+                                                                    />
+                                                                    Désactivé
+                                                                </label>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div className="form-group row">
-                                                <label className="col-xl-3 col-md-4"><span>*</span> Last Name</label>
-                                                <input className="form-control col-xl-8 col-md-7" 
-                                                id="validationCustom0" type="text"
-                                                name='lastname'
-                                                value={lastName}
-                                                onChange={this.handleInputChange} 
-                                                required="" />
-                                            </div>
-                                            <div className="form-group row">
-                                                <label className="col-xl-3 col-md-4"><span>*</span> username</label>
-                                                <input className="form-control col-xl-8 col-md-7" 
-                                                id="validationCustom1" type="text" 
-                                                name='username'
-                                                value={username}
-                                                onChange={this.handleInputChange}
-                                                required="" />
-                                            </div>
-                                            <div className="form-group row">
-                                                <label className="col-xl-3 col-md-4"><span>*</span> Email</label>
-                                                <input className="form-control col-xl-8 col-md-7" 
-                                                id="validationCustom2" type="email" 
-                                                name='email'
-                                                value={email}
-                                                onChange={this.handleInputChange}
-                                                required="" />
-                                            </div>
-                                            <div className="form-group row">
-                                                <label className="col-xl-3 col-md-4" ><span>*</span> Role</label>
-                                                {/* <div className="col-xl-8 col-md-7"> */}
-                                                    <Select className="col-xl-8 col-md-7"
-                                                        name="role_id"
-                                                        value={role_id}
-                                                        options={AllOptions}
-                                                        onChange={this.handleSelect}
-                                                        required="" 
-                                                    />
-                                                {/* </div> */}
-                                            </div>
-                                            <div className="form-group row">
-                                                <label className="col-xl-3 col-md-4"><span>*</span> Password</label>
-                                                <input className="form-control col-xl-8 col-md-7" 
-                                                id="validationCustom3" type="password" 
-                                                name='password'
-                                                value={password}
-                                                onChange={this.handleInputChange}
-                                                required="" />
-                                            </div>
-                                            <div className="form-group row">
-                                                <label className="col-xl-3 col-md-4"><span>*</span> Confirm Password</label>
-                                                <input className="form-control col-xl-8 col-md-7" 
-                                                id="validationCustom4" type="password" 
-                                                name='confirm_password'
-                                                value={confirm_password}
-                                                onChange={this.handleInputChange}
-                                                required="" />
-                                            </div>
-                                            <ToastContainer />
-                                            <div className="offset-xl-3 offset-sm-4 mt-3">
-                                                <button type="button" 
-                                                    className="btn btn-primary"
-                                                    onClick={this.handleSubmitChange}
-                                                    disabled={isLoading}
-                                                >Save
-                                                </button>
-                                            </div>
-                                        </form>
+                                                <div className="form-group row">
+                                                    <label className="col-xl-3 col-md-4"><span>*</span> Last Name</label>
+                                                    <input className="form-control col-xl-8 col-md-7" 
+                                                    id="validationCustom0" type="text"
+                                                    name='lastname'
+                                                    value={lastName}
+                                                    onChange={this.handleInputChange} 
+                                                    required="" />
+                                                </div>
+                                                <div className="form-group row">
+                                                    <label className="col-xl-3 col-md-4"><span>*</span> username</label>
+                                                    <input className="form-control col-xl-8 col-md-7" 
+                                                    id="validationCustom1" type="text" 
+                                                    name='username'
+                                                    value={username}
+                                                    onChange={this.handleInputChange}
+                                                    required="" />
+                                                </div>
+                                                <div className="form-group row">
+                                                    <label className="col-xl-3 col-md-4"><span>*</span> Email</label>
+                                                    <input className="form-control col-xl-8 col-md-7" 
+                                                    id="validationCustom2" type="email" 
+                                                    name='email'
+                                                    value={email}
+                                                    onChange={this.handleInputChange}
+                                                    required="" />
+                                                </div>
+                                                <div className="form-group row">
+                                                    <label className="col-xl-3 col-md-4" ><span>*</span> Role</label>
+                                                    {/* <div className="col-xl-8 col-md-7"> */}
+                                                        <Select className="col-xl-8 col-md-7"
+                                                            name="role_id"
+                                                            value={role_id}
+                                                            options={AllOptions}
+                                                            onChange={this.handleSelect}
+                                                            required="" 
+                                                        />
+                                                    {/* </div> */}
+                                                </div>
+                                                <div className="form-group row">
+                                                    <label className="col-xl-3 col-md-4"><span>*</span> Password</label>
+                                                    <input className="form-control col-xl-8 col-md-7" 
+                                                    id="validationCustom3" type="password" 
+                                                    name='password'
+                                                    value={password}
+                                                    onChange={this.handleInputChange}
+                                                    required="" />
+                                                </div>
+                                                <div className="form-group row">
+                                                    <label className="col-xl-3 col-md-4"><span>*</span> Confirm Password</label>
+                                                    <input className="form-control col-xl-8 col-md-7" 
+                                                    id="validationCustom4" type="password" 
+                                                    name='confirm_password'
+                                                    value={confirm_password}
+                                                    onChange={this.handleInputChange}
+                                                    required="" />
+                                                </div>
+                                                <ToastContainer />
+                                                <div className="offset-xl-3 offset-sm-4 mt-3">
+                                                    <button type="button" 
+                                                        className="btn btn-primary"
+                                                        onClick={this.handleSubmitChange}
+                                                        disabled={isLoading}
+                                                    >Save
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </Fragment>
-            )
-        }else{
-            return(
-                <Fragment>
+                    </Fragment>
+                )
+            }else{
+                return(
+                    <Fragment>
 
-                </Fragment>
-            )
+                    </Fragment>
+                )
+            }
         }
     }
 }

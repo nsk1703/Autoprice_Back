@@ -7,6 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import * as roleActions from "../../redux/actions/roleActions";
 import { Data_logs } from '../common/dataTables/data_logs';
 import Datatable from '../common/datatable';
+import BeatLoader from "react-spinners/BeatLoader";
 
 export class Log extends Component {
     constructor(props) {
@@ -15,13 +16,18 @@ export class Log extends Component {
         this.state = {
             open: false,
             logs: [],
-            roles: null
+            roles: null,
+            loading: false
         };
     }
 
     componentDidMount = () => {
         let listLogs = [];
         let rol = null
+        
+        this.setState({
+            loading: true
+        })
 
         this.props.logs();
 
@@ -53,42 +59,52 @@ export class Log extends Component {
                 rol = rl.log;
             })
             this.setState({
-                roles: rol
+                roles: rol,
+                loading: false
             })
         }, 1000)
     }
 
     render() {
-        const {logs, roles} = this.state
-        if(roles == '1'){
-            return (
-                <Fragment>
-                    <Breadcrumb title="Liste des Logs" parent="Logs"/>
-                    <div className="container-fluid">
-                        <div className="card">
-                            <div className="card-body">
-                                <div className="clearfix"></div>
-                                <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
-                                    <Data_logs
-                                        multiSelectOption={true}
-                                        myData={logs}
-                                        pageSize={10}
-                                        pagination={true}
-                                        check={false}
-                                        class="-striped -highlight"
-                                    />
+        const {logs, roles,loading} = this.state
+        if(loading){
+            return(
+                <div style={{display: "flex", justifyContent: "center", 
+                            alignItems: "center", width: "100%", height: "100vh"}}>
+                   <BeatLoader color={"#EC1C5B"} loading={loading} size={50} />
+                </div>
+            )
+        }else{
+            if(roles == '1'){
+                return (
+                    <Fragment>
+                        <Breadcrumb title="Liste des Logs" parent="Logs"/>
+                        <div className="container-fluid">
+                            <div className="card">
+                                <div className="card-body">
+                                    <div className="clearfix"></div>
+                                    <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
+                                        <Data_logs
+                                            multiSelectOption={true}
+                                            myData={logs}
+                                            pageSize={10}
+                                            pagination={true}
+                                            check={false}
+                                            class="-striped -highlight"
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </Fragment>
-            )
-        }else{
-            return(
-                <Fragment>
+                    </Fragment>
+                )
+            }else{
+                return(
+                    <Fragment>
 
-                </Fragment>
-            )
+                    </Fragment>
+                )
+            }
         }
     }
 }

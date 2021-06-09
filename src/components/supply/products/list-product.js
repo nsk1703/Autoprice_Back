@@ -7,6 +7,7 @@ import Data_products from '../../common/dataTables/data_products';
 import * as approproduitActions  from "../../../redux/actions/approproduitActions";
 import { connect } from 'react-redux'; 
 import * as roleActions  from "../../../redux/actions/roleActions";
+import BeatLoader from "react-spinners/BeatLoader";
 
 export class List_product extends Component {
     
@@ -16,13 +17,18 @@ export class List_product extends Component {
         this.state = {
            products: [],
            roles: null,
-           visible: false
+           visible: false,
+           loading: false
         };
     }
 
     componentDidMount = () => {
         let listProducts = [];
         let rol = null;
+
+        this.setState({
+            loading: true
+        })
 
         this.props.approproduits()
 
@@ -58,48 +64,60 @@ export class List_product extends Component {
                     visible: true
                 })
             }
+            this.setState({
+                loading: false
+            })
         }, 1000)
 
     }
 
     render() {
-        const {products, roles, visible} = this.state
-        if(roles == 1) {
-            return (
-                <Fragment>
-                    <Breadcrumb title="Liste des produits" parent="Approvisionnement / Produits" />
-                    <div className="container-fluid">
-                        <div className="card">
-                            {visible == true ?
-                                (
-                                    <div className="card-header">
-                                        <Link to="/supply/products/create-product" className="btn btn-primary">Ajout de Produit</Link>
+        const {loading, products, roles, visible} = this.state
+        if(loading){
+            return(
+                <div style={{display: "flex", justifyContent: "center", 
+                            alignItems: "center", width: "100%", height: "100vh"}}>
+                   <BeatLoader color={"#EC1C5B"} loading={loading} size={50} />
+                </div>
+            )
+        }else{
+            if(roles == 1) {
+                return (
+                    <Fragment>
+                        <Breadcrumb title="Liste des produits" parent="Approvisionnement / Produits" />
+                        <div className="container-fluid">
+                            <div className="card">
+                                {visible == true ?
+                                    (
+                                        <div className="card-header">
+                                            <Link to="/supply/products/create-product" className="btn btn-primary">Ajout de Produit</Link>
+                                        </div>
+                                    ):
+                                    null
+                                }
+                                <div className="card-body">
+                                    <div className="clearfix"></div>
+                                    <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
+                                        <Data_products
+                                            multiSelectOption={true}
+                                            myData={products}
+                                            pageSize={10}
+                                            pagination={true}
+                                            class="-striped -highlight"
+                                        />
                                     </div>
-                                ):
-                                null
-                            }
-                            <div className="card-body">
-                                <div className="clearfix"></div>
-                                <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
-                                    <Data_products
-                                        multiSelectOption={true}
-                                        myData={products}
-                                        pageSize={10}
-                                        pagination={true}
-                                        class="-striped -highlight"
-                                    />
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </Fragment>
-            )
-        }else{
-            return (
-                <Fragment>
+                    </Fragment>
+                )
+            }else{
+                return (
+                    <Fragment>
 
-                </Fragment>
-            )
+                    </Fragment>
+                )
+            }
         }
     }
 }

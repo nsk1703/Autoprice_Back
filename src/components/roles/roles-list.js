@@ -4,6 +4,7 @@ import Breadcrumb from '../common/breadcrumb';
 import Data_roles from '../common/dataTables/data_roles';
 import * as roleActions from "../../redux/actions/roleActions";
 import {connect} from "react-redux";
+import BeatLoader from "react-spinners/BeatLoader";
 
 export class Roles_list extends Component {
     constructor(props) {
@@ -13,12 +14,17 @@ export class Roles_list extends Component {
             open: false,
             roles: [],
             role: null,
+            loading: false
         };
     }
 
     componentDidMount = () => {
         let listRoles = []
         let rol = null
+
+        this.setState({
+            loading: true
+        })
 
         this.props.roles();
 
@@ -43,7 +49,8 @@ export class Roles_list extends Component {
             })
             
             this.setState({
-                roles: listRoles
+                roles: listRoles,
+                loading: false
             })
             
         }, 1000)
@@ -67,44 +74,54 @@ export class Roles_list extends Component {
         }, 1000)
     }
     render() {
-        const {visible, role, roles} = this.state
+        const {loading, visible, role, roles} = this.state
         
-        if(role == '1'){
-            return (
-                <Fragment>
-                    <Breadcrumb title="Liste des rôles" parent="Rôles" />
-                    <div className="container-fluid">
-                        <div className="card">
-                            <div className="card-body">
-                                {visible == true ?
-                                    (
-                                        <div className="btn-popup pull-right">
-                                            <Link to="/roles/add-roles" className="btn btn-primary">Ajout de Rôle</Link>
-                                        </div>
-                                    ):
-                                    null
-                                }
-                                <div className="clearfix"></div>
-                                <div id="batchDelete" className="category-table role-list order-table coupon-list-delete">
-                                    <Data_roles
-                                        multiSelectOption={true}
-                                        myData={roles}
-                                        pageSize={10}
-                                        pagination={true}
-                                        class="-striped -highlight"
-                                    />
+        
+        if(loading){
+            return(
+                <div style={{display: "flex", justifyContent: "center", 
+                            alignItems: "center", width: "100%", height: "100vh"}}>
+                   <BeatLoader color={"#EC1C5B"} loading={loading} size={50} />
+                </div>
+            )
+        }else{
+            if(role == '1'){
+                return (
+                    <Fragment>
+                        <Breadcrumb title="Liste des rôles" parent="Rôles" />
+                        <div className="container-fluid">
+                            <div className="card">
+                                <div className="card-body">
+                                    {visible == true ?
+                                        (
+                                            <div className="btn-popup pull-right">
+                                                <Link to="/roles/add-roles" className="btn btn-primary">Ajout de Rôle</Link>
+                                            </div>
+                                        ):
+                                        null
+                                    }
+                                    <div className="clearfix"></div>
+                                    <div id="batchDelete" className="category-table role-list order-table coupon-list-delete">
+                                        <Data_roles
+                                            multiSelectOption={true}
+                                            myData={roles}
+                                            pageSize={10}
+                                            pagination={true}
+                                            class="-striped -highlight"
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </Fragment>
-            )
-        }else{
-            return(
-                <Fragment>
+                    </Fragment>
+                )
+            }else{
+                return(
+                    <Fragment>
 
-                </Fragment>
-            )
+                    </Fragment>
+                )
+            }
         }
     }
 }

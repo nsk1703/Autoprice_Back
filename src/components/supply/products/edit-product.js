@@ -10,6 +10,7 @@ import * as approproduitActions from '../../../redux/actions/approproduitActions
 import Select from 'react-select';
 import * as roleActions from "../../../redux/actions/roleActions";
 import { Link } from 'react-router-dom'
+import BeatLoader from "react-spinners/BeatLoader";
 
 export class Tabset_product extends Component {
     constructor(props) {
@@ -26,6 +27,7 @@ export class Tabset_product extends Component {
             AllOptions: [],
             visible: false,
             roles: null,
+            loading: false
             
         };
         this.handleInputChange = this.handleInputChange.bind(this)
@@ -38,6 +40,10 @@ export class Tabset_product extends Component {
         let options = [];
         let listProducts = [];
         let rol = null
+
+        this.setState({
+            loading: true
+        })
 
         this.props.products();
 
@@ -90,6 +96,9 @@ export class Tabset_product extends Component {
                     visible: true
                 })
             }
+            this.setState({
+                loading: false
+            })
         }, 1000)
 
     }
@@ -128,78 +137,86 @@ export class Tabset_product extends Component {
     }
 
     render() {
-        const {roles, visible, AllOptions, quantite, productId, description, isLoading} = this.state
-        
-        if(roles == '1'){
-            return (
-                <Fragment>
-                    <Breadcrumb title="Reajustement du Produit" parent="Approvisionnement / Produit Approvisionnés" />
-                    <div className="container-fluid">
-                        <div className="row">
-                            <div className="col-sm-12">
-                                <div className="card">
-                                    {visible == true ?
-                                        (
-                                            <div className="card-header">
-                                                <Link type="button" to="/supply/products/list-product" className="btn btn-primary">Retour</Link>
-                                            </div>
-                                        ):
-                                        null
-                                    }
-                                    <div className="card-body">
-                                        <form className="needs-validation product-edit" noValidate="">
-                                            <div className="form-group row">
-                                                <label className="col-xl-3 col-md-4"> Quantité</label>
-                                                <input className="form-control col-xl-8 col-md-7"
-                                                    name="quantite" 
-                                                    value={quantite}
-                                                    onChange={this.handleInputChange}
-                                                    id="validationCustom1" type="number" 
-                                                    required="" 
-                                                />
-                                            </div>
-                                            <div className="form-group row">
-                                                <label className="col-xl-3 col-md-4" >Nom de produit :</label>
-                                                <Select className="form-control col-xl-8 col-md-7"
-                                                    name="productId"
-                                                    value={productId}
-                                                    options={AllOptions}
-                                                    onChange={this.handleChange}
-                                                    required="" 
-                                                />
-                                            </div>
-                                            <div className="form">
-                                                <div className="form-group row">
-                                                    <label className="col-xl-3 col-sm-4">Description :</label>
-                                                    <textarea name="description" value={description} 
-                                                            onChange={this.handleInputChange}
-                                                            rows="5" cols="92"
-                                                    />
-                                                    {/* </div> */}
+        const {loading, roles, visible, AllOptions, quantite, productId, description, isLoading} = this.state
+        if(loading){
+            return(
+                <div style={{display: "flex", justifyContent: "center", 
+                            alignItems: "center", width: "100%", height: "100vh"}}>
+                   <BeatLoader color={"#EC1C5B"} loading={loading} size={50} />
+                </div>
+            )
+        }else{
+            if(roles == '1'){
+                return (
+                    <Fragment>
+                        <Breadcrumb title="Reajustement du Produit" parent="Approvisionnement / Produit Approvisionnés" />
+                        <div className="container-fluid">
+                            <div className="row">
+                                <div className="col-sm-12">
+                                    <div className="card">
+                                        {visible == true ?
+                                            (
+                                                <div className="card-header">
+                                                    <Link type="button" to="/supply/products/list-product" className="btn btn-primary">Retour</Link>
                                                 </div>
-                                            </div>
-                                            <ToastContainer />
-                                            <div className="offset-xl-3 offset-sm-4">
-                                                <button type="button" className="btn btn-primary"
-                                                        onClick={this.handleSubmitChange}
-                                                        disabled={isLoading}
-                                                >
-                                                Enregister</button>
-                                            </div>
-                                        </form>
+                                            ):
+                                            null
+                                        }
+                                        <div className="card-body">
+                                            <form className="needs-validation product-edit" noValidate="">
+                                                <div className="form-group row">
+                                                    <label className="col-xl-3 col-md-4"> Quantité</label>
+                                                    <input className="form-control col-xl-8 col-md-7"
+                                                        name="quantite" 
+                                                        value={quantite}
+                                                        onChange={this.handleInputChange}
+                                                        id="validationCustom1" type="number" 
+                                                        required="" 
+                                                    />
+                                                </div>
+                                                <div className="form-group row">
+                                                    <label className="col-xl-3 col-md-4" >Nom de produit :</label>
+                                                    <Select className="form-control col-xl-8 col-md-7"
+                                                        name="productId"
+                                                        value={productId}
+                                                        options={AllOptions}
+                                                        onChange={this.handleChange}
+                                                        required="" 
+                                                    />
+                                                </div>
+                                                <div className="form">
+                                                    <div className="form-group row">
+                                                        <label className="col-xl-3 col-sm-4">Description :</label>
+                                                        <textarea name="description" value={description} 
+                                                                onChange={this.handleInputChange}
+                                                                rows="5" cols="92"
+                                                        />
+                                                        {/* </div> */}
+                                                    </div>
+                                                </div>
+                                                <ToastContainer />
+                                                <div className="offset-xl-3 offset-sm-4">
+                                                    <button type="button" className="btn btn-primary"
+                                                            onClick={this.handleSubmitChange}
+                                                            disabled={isLoading}
+                                                    >
+                                                    Enregister</button>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </Fragment>
-            )
-        }else{
-            return(
-                <Fragment>
+                    </Fragment>
+                )
+            }else{
+                return(
+                    <Fragment>
 
-                </Fragment>
-            )
+                    </Fragment>
+                )
+            }
         }
     }
 }

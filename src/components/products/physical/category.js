@@ -11,6 +11,7 @@ import * as roleActions  from "../../../redux/actions/roleActions";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
+import BeatLoader from "react-spinners/BeatLoader";
 
 export class Category extends Component {
 
@@ -21,11 +22,12 @@ export class Category extends Component {
             isLoading: false,
             open: false,
             categories: [],
-            nom: '',
+            name: '',
             description: '',
             files: null,
             visible: false,
-            roles: null
+            roles: null,
+            loading: false
         }
 
         this.handleInputChange = this.handleInputChange.bind(this)
@@ -51,7 +53,9 @@ export class Category extends Component {
     componentDidMount = ()  => {
         let listCategories = [];
         let rol = null;
-
+        this.setState({
+            loading: true
+        })
         this.props.categories()
 
         setTimeout(() => {
@@ -59,6 +63,7 @@ export class Category extends Component {
 
             this.props.category.categories.map(category => {
                 let item = {
+                    id: category.category_id,
                     image: <img src={category.image_urls} style={{width:50,height:50}}/>,
                     Nom: category.name,
                     Description: category.description
@@ -86,6 +91,9 @@ export class Category extends Component {
                     visible: true
                 })
             }
+            this.setState({
+                loading: false
+            })
         }, 1000)
     }
 
@@ -106,7 +114,8 @@ export class Category extends Component {
             // console.log(this.props.addcategory.success)
             if(this.props.addcategory.success === true){
                 this.onCloseModal();
-                this.props.history.push('/products/physical/category');
+                // this.props.history.push('/products/physical/category');
+                window.location.reload()
             }else{
                 // this.props.history.push('/products/physical/category');
                 this.onOpenModal();
@@ -118,98 +127,109 @@ export class Category extends Component {
     }
 
     render() {
-        const { open, categories, name, description, isLoading, roles, visible } = this.state;
-        if(roles == '1'){
-            return (
-                <Fragment>
-                    <Breadcrumb title="Categories" parent="Produits" />
-                    {/* <!-- Container-fluid starts--> */}
-                    <div className="container-fluid">
-                        <div className="row">
-                            <div className="col-sm-12">
-                                <div className="card">
-                                    {visible == true ?
-                                        (
-                                            <div className="card-header">
-                                                <button type="button" className="btn btn-primary" onClick={this.onOpenModal} data-toggle="modal" data-original-title="test" data-target="#exampleModal">Ajouter une catégorie</button>
-                                            </div>
-                                        ):
-                                        null
-                                    }
-                                    <div className="card-body">
-                                    <ToastContainer />
-                                        <div className="btn-popup pull-right">
-                                            <Modal open={open} onClose={this.onCloseModal} >
-                                                <div className="modal-header">
-                                                    <h5 className="modal-title f-w-600" id="exampleModalLabel2">Ajout d'une catégorie</h5>
+        const { loading, open, categories, name, description, isLoading, roles, visible } = this.state;
+        if(loading){
+            return(
+                <div style={{display: "flex", justifyContent: "center", 
+                            alignItems: "center", width: "100%", height: "100vh"}}>
+                   <BeatLoader color={"#EC1C5B"} loading={loading} size={50} />
+                </div>
+            )
+        }else{
+            if(roles == '1'){
+                return (
+                    <Fragment>
+                        <Breadcrumb title="Categories" parent="Produits" />
+                        {/* <!-- Container-fluid starts--> */}
+                        <div className="container-fluid">
+                            <div className="row">
+                                <div className="col-sm-12">
+                                    <div className="card">
+                                        {visible == true ?
+                                            (
+                                                <div className="card-header">
+                                                    <button type="button" className="btn btn-primary" onClick={this.onOpenModal} data-toggle="modal" data-original-title="test" data-target="#exampleModal">Ajouter une catégorie</button>
                                                 </div>
-                                                <div className="modal-body">
-                                                    <form>
-                                                        <div className="form-group">
-                                                            <label className="col-form-label" >Nom de catégorie :</label>
-                                                            <input type="text" className="form-control"
-                                                                id="validationCustom0" 
-                                                                name='nom'
-                                                                value={name}
-                                                                onChange={this.handleInputChange}
-                                                                required=""
-                                                            />
-                                                        </div>
-                                                        <div className="form-group">
-                                                            <label className="col-form-label">Description :</label>
-                                                            <div className="col-xl-8 col-sm-7">
-                                                                <textarea className=" form-control " 
-                                                                    name="description" 
-                                                                    value={description} 
+                                            ):
+                                            null
+                                        }
+                                        <div className="card-body">
+                                        <ToastContainer />
+                                            <div className="btn-popup pull-right">
+                                                <Modal open={open} onClose={this.onCloseModal} >
+                                                    <div className="modal-header">
+                                                        <h5 className="modal-title f-w-600" id="exampleModalLabel2">Ajout d'une catégorie</h5>
+                                                    </div>
+                                                    <div className="modal-body">
+                                                        <form>
+                                                            <div className="form-group">
+                                                                <label className="col-form-label" >Nom de catégorie :</label>
+                                                                <input type="text" className="form-control"
+                                                                    id="validationCustom0" 
+                                                                    name='name'
+                                                                    value={name}
                                                                     onChange={this.handleInputChange}
-                                                                    rows="5" cols="60"
                                                                     required=""
                                                                 />
                                                             </div>
-                                                        </div>
-                                                        <div className="form-group">
-                                                            <label htmlFor="message-text" className="col-form-label">Image de Catégorie :</label>
-                                                            <input className="form-control col-xl-8 col-md-7" 
-                                                                type="file" 
-                                                                onChange={this.handleFileChange}
-                                                            />
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <div className="modal-footer">
-                                                {/* this.onCloseModal('VaryingMdo') */}
-                                                    <button type="button" className="btn btn-primary"
-                                                    disabled={isLoading}
-                                                    onClick={this.handleSubmitChange}
-                                                    >Enregistrer</button>
-                                                    <button type="button" className="btn btn-secondary" onClick={() => this.onCloseModal('VaryingMdo')}>Fermer</button>
-                                                </div>
-                                            </Modal>
-                                        </div>
-                                        <div className="clearfix"></div>
-                                        <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
-                                            <Data_categories
-                                                multiSelectOption={true}
-                                                myData={categories}  
-                                                pageSize={10} 
-                                                pagination={true}
-                                                class="-striped -highlight" 
-                                            />
+                                                            <div className="form-group">
+                                                                <label className="col-form-label">Description :</label>
+                                                                <div className="col-xl-8 col-sm-7">
+                                                                    <textarea className=" form-control " 
+                                                                        name="description" 
+                                                                        value={description} 
+                                                                        onChange={this.handleInputChange}
+                                                                        rows="5" cols="60"
+                                                                        required=""
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                            <div className="form-group">
+                                                                <label htmlFor="message-text" className="col-form-label">Image de Catégorie :</label>
+                                                                <input className="form-control col-xl-8 col-md-7" 
+                                                                    type="file" 
+                                                                    onChange={this.handleFileChange}
+                                                                />
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <div className="modal-footer">
+                                                    {/* this.onCloseModal('VaryingMdo') */}
+                                                        <button type="button" className="btn btn-primary"
+                                                        disabled={isLoading}
+                                                        onClick={this.handleSubmitChange}
+                                                        >Enregistrer</button>
+                                                        <button type="button" className="btn btn-secondary" 
+                                                            onClick={() => this.onCloseModal('VaryingMdo')}
+                                                        >Fermer</button>
+                                                    </div>
+                                                </Modal>
+                                            </div>
+                                            <div className="clearfix"></div>
+                                            <div id="batchDelete" className="category-table user-list order-table coupon-list-delete">
+                                                <Data_categories
+                                                    multiSelectOption={true}
+                                                    myData={categories}  
+                                                    pageSize={10} 
+                                                    pagination={true}
+                                                    class="-striped -highlight" 
+                                                />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    {/* <!-- Container-fluid Ends--> */}
-                </Fragment>
-            )
-        }else{
-            return(
-                <Fragment>
-                    
-                </Fragment>
-            )
+                        {/* <!-- Container-fluid Ends--> */}
+                    </Fragment>
+                )
+            }else{
+                return(
+                    <Fragment>
+                        
+                    </Fragment>
+                )
+            }
         }
     }
 }
