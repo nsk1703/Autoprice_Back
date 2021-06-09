@@ -119,36 +119,36 @@ export const editSlide = (slide) => {
                 'USER-KEY': `Bearer ${token}`
             }
         }
-        // axios.put(`/slide/${slide}`, formData, config)
-        // .then((response) => {
-        //     console.log(response.data)
-        //     if(response.data.success === true){
-        //         const { success } = response.data
+        axios.put(`/slide/${slide.id}`, formData, config)
+        .then((response) => {
+            console.log(response.data)
+            if(response.data.success === true){
+                const { success } = response.data
                 
-        //         dispatch({
-        //             type: slideConstants.UPDATE_SLIDE_SUCCESS,
-        //             payload: {isUpdated: success }
-        //         })
-        //         toast.success(response.data.full_messages[0])
-        //     }
-        //     else{
-        //         if (response.data.success === false) {
-        //             // console.log(response.data.full_messages[0])
-        //             // const {success} = response.data
-        //             // toast.error(response.data.full_messages[0]);
-        //             dispatch({
-        //                 type: slideConstants.UPDATE_SLIDE_FAIL,
-        //                 // payload: { success: success }
-        //             });
-        //             for(var i=0; i<response.data.full_messages[i]; i++){
-        //                 toast.error(response.data.full_messages[i])
-        //             }
-        //         }
-        //     }
-        // })
-        // .catch((error) => {
-        //     console.log("Oops, Request failed!");
-        // });
+                dispatch({
+                    type: slideConstants.UPDATE_SLIDE_SUCCESS,
+                    payload: {isUpdated: success }
+                })
+                toast.success(response.data.full_messages[0])
+            }
+            else{
+                if (response.data.success === false) {
+                    // console.log(response.data.full_messages[0])
+                    // const {success} = response.data
+                    // toast.error(response.data.full_messages[0]);
+                    dispatch({
+                        type: slideConstants.UPDATE_SLIDE_FAIL,
+                        // payload: { success: success }
+                    });
+                    for(var i=0; i<response.data.full_messages[i]; i++){
+                        toast.error(response.data.full_messages[i])
+                    }
+                }
+            }
+        })
+        .catch((error) => {
+            console.log("Oops, Request failed!");
+        });
 
     }
 }

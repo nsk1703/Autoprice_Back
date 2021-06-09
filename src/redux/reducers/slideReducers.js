@@ -102,7 +102,7 @@ export const slideReducer = (state = {}, action) => {
             return {
                 ...state,
                 loading: false,
-                isUpdated: action.payload
+                isUpdated: action.payload.isUpdated
             }
 
 
@@ -148,7 +148,7 @@ export const slideDetailsReducer = (state = { slide: {} }, action) => {
         case slideConstants.SLIDE_DETAILS_SUCCESS:
             return {
                 loading: false,
-                slide: action.payload
+                slide: action.payload.slide
             }
 
         case slideConstants.SLIDE_DETAILS_FAIL:

@@ -85,14 +85,14 @@ export const categoryReducer = (state = {}, action) => {
             return {
                 ...state,
                 loading: false,
-                isDeleted: action.payload
+                isDeleted: action.payload.isDeleted
             }
 
         case categoriesConstants.UPDATE_CATEGORY_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                isUpdated: action.payload
+                isUpdated: action.payload.isUpdated
             }
 
 
@@ -138,13 +138,13 @@ export const categoryDetailsReducer = (state = { category: {} }, action) => {
         case categoriesConstants.CATEGORY_DETAILS_SUCCESS:
             return {
                 loading: false,
-                category: action.payload
+                category: action.payload.category
             }
 
         case categoriesConstants.CATEGORY_DETAILS_FAIL:
             return {
                 ...state,
-                error: action.payload
+                error: action.payload.category
             }
 
         case categoriesConstants.CLEAR_ERRORS:

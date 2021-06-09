@@ -20,7 +20,6 @@ import BeatLoader from "react-spinners/BeatLoader";
 // ]
 
 export class Edit_product extends Component {
-
     constructor(props) {
         super(props)
          
@@ -41,6 +40,7 @@ export class Edit_product extends Component {
             visible: false,
             roles: null,
             loading: false,
+            actualFile: null,
             dummyimgs: [
                 { img: user }
             ]
@@ -100,15 +100,20 @@ export class Edit_product extends Component {
         e.preventDefault();
 
         // let reader = new FileReader();
-        let file = e.target.files[0];
+        // let file = e.target.files[0];
         // const { dummyimgs } = this.state;
         // console.log('state', dummyimgs)
         // reader.onloadend = () => {
             // dummyimgs[i].img = reader.result;
-            this.setState({
-                images: file,
-                // dummyimgs,
-            });
+            // this.setState({
+            //     images: file,
+            //     dummyimgs,
+            // });
+            if(!this.state.images){
+                this.setState({
+                    images: e.target.files[0]
+                });
+            }
         // }
         // reader.readAsDataURL(file)
     }
@@ -144,25 +149,26 @@ export class Edit_product extends Component {
         this.props.detailProduct(this.props.match.params.id)
 
         setTimeout(() => {
-            // console.log(this.props.prodetails)
+            console.log(this.props.prodetails)
 
-            let category = {value: this.props.prodetails.product.product.categories[0].category_id, 
-                            label: this.props.prodetails.product.product.categories[0].name}
+            let category = {value: this.props.prodetails.product.categories[0].category_id, 
+                            label: this.props.prodetails.product.categories[0].name}
 
-            let machine =  {value: this.props.prodetails.product.product.machineId.id, 
-                            label: this.props.prodetails.product.product.machineId.nom}
+            let machine =  {value: this.props.prodetails.product.machineId.id, 
+                            label: this.props.prodetails.product.machineId.nom}
             // console.log(category)
             this.setState({
-                id: this.props.prodetails.product.product.product_id,
-                nom: this.props.prodetails.product.product.name,
-                unite: this.props.prodetails.product.product.unit, 
-                quantite: this.props.prodetails.product.product.quantite,
-                reference: this.props.prodetails.product.product.reference,
-                price: this.props.prodetails.product.product.price,
+                id: this.props.prodetails.product.product_id,
+                nom: this.props.prodetails.product.name,
+                unite: this.props.prodetails.product.unit, 
+                quantite: this.props.prodetails.product.quantite,
+                reference: this.props.prodetails.product.reference,
+                price: this.props.prodetails.product.price,
                 machine_id: machine,
                 category: category,
-                description: this.props.prodetails.product.product.description,
-                images: this.props.prodetails.product.product ? this.props.prodetails.product.product.image_urls[0] : e.target.files[0]
+                description: this.props.prodetails.product.description,
+                actualFile: this.props.prodetails.product.image_urls[0],
+                // images: this.props.prodetails.product.image_urls[0]
             })
 
         }, 1000)
@@ -232,21 +238,21 @@ export class Edit_product extends Component {
         this.props.editProduct(this.state);
        
         setTimeout(()=> {
-            console.log(this.props.productaction)
-            // if(this.props.editproduct.isUpdated.isUpdated === true){
-            //     this.props.history.push('/products/physical/product-list');
-            // }else{
-            //     this.props.history.push('/products/physical/edit-product/'+this.state.id);
-            //     this.setState({
-            //         isLoading: false
-            //     })
-            // }
+            console.log(this.props.editproduct)
+            if(this.props.editproduct.isUpdated === true){
+                this.props.history.push('/products/physical/product-list');
+            }else{
+                this.props.history.push('/products/physical/edit-product/'+this.state.id);
+                this.setState({
+                    isLoading: false
+                })
+            }
         }, 1000)
        
     }
 
     render() {
-        const {loading, roles, visible, isLoading, CatOptions, images, MacOptions, nom , price, quantite, unite, reference, description, machine_id, category} = this.state
+        const {actualFile, loading, roles, visible, isLoading, CatOptions, images, MacOptions, nom , price, quantite, unite, reference, description, machine_id, category} = this.state
         // console.log('dum', dummyimgs)
         if(loading){
             return(
@@ -279,7 +285,7 @@ export class Edit_product extends Component {
                                                     <div className="add-product">
                                                         <div className="row">
                                                             <div className="col-xl-9 xl-50 col-sm-6 col-9">
-                                                                <img src={images} alt="" className="img-fluid image_zoom_1 blur-up lazyloaded" />
+                                                                <img src={actualFile} alt="" className="img-fluid image_zoom_1 blur-up lazyloaded" />
                                                             </div>
                                                             <div className="col-xl-3 xl-50 col-sm-6 col-3">
                                                                 <ul className="file-upload-product">
@@ -292,7 +298,7 @@ export class Edit_product extends Component {
                                                                                         onChange={(e) => this._handleImgChange(e)} 
                                                                                         required
                                                                                         />
-                                                                                        <img src={images} style={{ width: 50, height: 50 }} />
+                                                                                        <img src={actualFile} style={{ width: 50, height: 50 }} />
                                                                                         <a id="result1" onClick={(e) => this._handleSubmit(e.target.id)}></a>
                                                                                     </div>
                                                                                 // </li>
@@ -455,7 +461,7 @@ const mapStateToProps = (state, props) => {
     return {
         machine: state.machine,
         category: state.category,
-        productaction: state.productaction,
+        editproduct: state.editproduct,
         prodetails: state.prodetails,
         roledetails: state.roledetails
     }

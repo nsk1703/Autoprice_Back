@@ -132,7 +132,7 @@ export const editProduct = (product) => {
         formData.append('quantite', parseInt(product.quantite));
         formData.append('description', product.description);
         formData.append('machineId', product.machine_id.value);
-        formData.append('category', product.category.value);
+        formData.append('category', product.category.label);
         formData.append('images', product.images);
 
         console.log(formData)
@@ -147,38 +147,38 @@ export const editProduct = (product) => {
           }
 
           // // console.log( 'asss', token)
-        // axios.put(`/product/${product.id}`, formData, config)
-        // .then((response) => {
-        //     console.log(response)
-        //     if(response.data.success === true){
-        //         const {success} = response.data
+        axios.put(`/product/${product.id}`, formData, config)
+        .then((response) => {
+            console.log(response)
+            if(response.data.success === true){
+                const {success} = response.data
 
-        //         dispatch({
-        //             type: productConstants.UPDATE_PRODUCT_SUCCESS,
-        //             payload: { isUpdated: success }
-        //         })
-        //         toast.success('Modifier avec succes!!')
-        //     }
-        //     else{
-        //         if (response.data.success === false) {
-        //             // console.log(response.data.full_messages[0])
-        //             // const {success} = response.data
-        //             // toast.error(response.data.full_messages[0]);
-        //             dispatch({
-        //                 type: productConstants.UPDATE_PRODUCT_FAIL,
-        //                 payload: { error: response.data.errors[0].message }
-        //             });
-        //             toast.error(response.data.errors[0].messager)
+                dispatch({
+                    type: productConstants.UPDATE_PRODUCT_SUCCESS,
+                    payload: { isUpdated: success }
+                })
+                toast.success('Modifier avec succes!!')
+            }
+            else{
+                if (response.data.success === false) {
+                    // console.log(response.data.full_messages[0])
+                    // const {success} = response.data
+                    // toast.error(response.data.full_messages[0]);
+                    dispatch({
+                        type: productConstants.UPDATE_PRODUCT_FAIL,
+                        payload: { error: response.data.errors[0].message }
+                    });
+                    toast.error(response.data.errors[0].messager)
 
-        //             // for(var i=0; i<response.data.full_messages[i]; i++){
-        //             //     toast.error(response.data.full_messages[i])
-        //             // }
-        //         }
-        //     }
-        // })
-        // .catch((error) => {
-        //     console.log("Oops, Request failed!");
-        // });
+                    // for(var i=0; i<response.data.full_messages[i]; i++){
+                    //     toast.error(response.data.full_messages[i])
+                    // }
+                }
+            }
+        })
+        .catch((error) => {
+            console.log("Oops, Request failed!");
+        });
 
     }
 }

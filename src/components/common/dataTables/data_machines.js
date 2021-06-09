@@ -160,7 +160,9 @@ export class Data_machines extends Component {
                                 </span>
                                 <span>
                                     <Link to={`/machines/edit-machine/${row.original.ID}`}>
-                                        <i className="fa fa-pencil" style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }}></i>
+                                        <i className="fa fa-pencil" style={{ width: 35, fontSize: 20, padding: 11,color:'rgb(40, 167, 69)' }}>
+                                            
+                                        </i>
                                     </Link>
                                 </span>
                             </div>

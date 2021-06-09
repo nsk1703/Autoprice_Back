@@ -22,7 +22,7 @@ export class Category extends Component {
             isLoading: false,
             open: false,
             categories: [],
-            nom: '',
+            name: '',
             description: '',
             files: null,
             visible: false,
@@ -63,6 +63,7 @@ export class Category extends Component {
 
             this.props.category.categories.map(category => {
                 let item = {
+                    id: category.category_id,
                     image: <img src={category.image_urls} style={{width:50,height:50}}/>,
                     Nom: category.name,
                     Description: category.description
@@ -113,7 +114,8 @@ export class Category extends Component {
             // console.log(this.props.addcategory.success)
             if(this.props.addcategory.success === true){
                 this.onCloseModal();
-                this.props.history.push('/products/physical/category');
+                // this.props.history.push('/products/physical/category');
+                window.location.reload()
             }else{
                 // this.props.history.push('/products/physical/category');
                 this.onOpenModal();
@@ -164,7 +166,7 @@ export class Category extends Component {
                                                                 <label className="col-form-label" >Nom de catégorie :</label>
                                                                 <input type="text" className="form-control"
                                                                     id="validationCustom0" 
-                                                                    name='nom'
+                                                                    name='name'
                                                                     value={name}
                                                                     onChange={this.handleInputChange}
                                                                     required=""
@@ -197,7 +199,9 @@ export class Category extends Component {
                                                         disabled={isLoading}
                                                         onClick={this.handleSubmitChange}
                                                         >Enregistrer</button>
-                                                        <button type="button" className="btn btn-secondary" onClick={() => this.onCloseModal('VaryingMdo')}>Fermer</button>
+                                                        <button type="button" className="btn btn-secondary" 
+                                                            onClick={() => this.onCloseModal('VaryingMdo')}
+                                                        >Fermer</button>
                                                     </div>
                                                 </Modal>
                                             </div>

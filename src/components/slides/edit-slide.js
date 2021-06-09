@@ -7,6 +7,7 @@ import { withRouter } from 'react-router';
 import { Link } from "react-router-dom";
 import * as roleActions from "../../redux/actions/roleActions";
 import BeatLoader from "react-spinners/BeatLoader";
+import { ToastContainer, toast } from 'react-toastify';
 
 const typeChoices = [
     {value: 'Home', label:'Home'},
@@ -50,25 +51,22 @@ export class Edit_slide extends Component {
         this.props.detailslide(this.props.match.params.id)
 
         setTimeout(() => {
-            console.log(this.props.slidetails)
+            let type = {value: this.props.slidetails.slide.type, 
+                        label: this.props.slidetails.slide.type}
 
-            let type = {value: this.props.slidetails.slide.slide.type, 
-                        label: this.props.slidetails.slide.slide.type}
+            let format = {value: this.props.slidetails.slide.format, 
+                          label: this.props.slidetails.slide.format}
 
-            let format = {value: this.props.slidetails.slide.slide.format, 
-                          label: this.props.slidetails.slide.slide.format}
-
-            // console.log('slide',this.props.slide)
-            // console.log('images',this.props.slide.filePath)
-            // console.log(' type ', type);
-            // console.log(this.state.images)
+            console.log('slide',this.props.slidetails)
+            console.log('images',this.props.slidetails.slide.filePath)
+            console.log(' type ', type);
 
             this.setState({
-                id: this.props.slidetails.slide.slide.id,
+                id: this.props.slidetails.slide.id,
                 type: type ? type : '',
                 format: format ? format : '',
-                actualFile: this.props.slidetails.slide.slide.filePath,
-                // images: this.state.images ? this.state.images : this.props.slide.fileName 
+                actualFile: this.props.slidetails.slide.filePath,
+                // images: this.props.slidetails.slide.fileName 
             })
         },1000)
 
@@ -78,15 +76,13 @@ export class Edit_slide extends Component {
             this.props.roledetails.role.map(rl => {
                 rol = rl.modifierSlide;
             })
-            this.setState({
-                roles: rol
-            })
             if(this.props.roledetails.role[0].listeSlide == '1'){
                 this.setState({
                     visible: true
                 })
             }
             this.setState({
+                roles: rol,
                 loading: false
             })
         }, 1000)
@@ -116,7 +112,7 @@ export class Edit_slide extends Component {
         this.props.editSlide(this.state)
         setTimeout(() => {
             // console.log(this.props.editslidecess)
-            if(this.props.editslide.isUpdated.isUpdated === true){
+            if(this.props.editslide.isUpdated === true){
                 this.props.history.push('/slides/list-slide');
             }else{
                 this.props.history.push('/slides/edit-slide/'+this.state.id);
@@ -130,7 +126,7 @@ export class Edit_slide extends Component {
     }
 
     render() {
-        const {loading, roles, visible, type, format, actualFile, images, isLoading} = this.state
+        const {loading, roles, visible, type, format, actualFile, isLoading} = this.state
         if(loading){
             return(
                 <div style={{display: "flex", justifyContent: "center", 
@@ -185,8 +181,9 @@ export class Edit_slide extends Component {
                                                         type="file" 
                                                         onChange={this.handleFileChange}
                                                     /> 
-                                                    <img className="offset-xl-3 offset-sm-4 mt-2" src={ images ? images : actualFile} style={{width: '100px', height: '100px'}} />
+                                                    <img className="offset-xl-3 offset-sm-4 mt-2" src={actualFile} style={{width: '100px', height: '100px'}} />
                                                 </div>
+                                                <ToastContainer />
                                                 <div className="offset-xl-3 offset-sm-4 mt-3">
                                                     <button type="button" 
                                                         className="btn btn-primary"
@@ -215,7 +212,7 @@ export class Edit_slide extends Component {
 const mapStateToProps = (state, props) => {
 
     return {
-        slide: state.slide.slides.find(sly => sly.id == props.match.params.id),
+        // slide: state.slide.slides.find(sly => sly.id == props.match.params.id),
         editslide: state.editslide,
         slidetails: state.slidetails,
         roledetails: state.roledetails

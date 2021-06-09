@@ -7,6 +7,7 @@ import { withRouter } from 'react-router';
 import { Link } from "react-router-dom";
 import * as roleActions  from "../../redux/actions/roleActions";
 import BeatLoader from "react-spinners/BeatLoader";
+import { ToastContainer, toast } from 'react-toastify';
 
 const typeChoices = [
     {value: 'home', label:'Home'},
@@ -155,6 +156,7 @@ export class Create_slide extends Component {
                                                         onChange={this.handleFileChange}
                                                     />
                                                 </div>
+                                                <ToastContainer />
                                                 <div className="offset-xl-3 offset-sm-4 mt-3">
                                                     <button type="button" 
                                                         className="btn btn-primary"

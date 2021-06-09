@@ -314,10 +314,10 @@ export const actionsdetailRole = (rolename) => {
             }
           }
         //   rolename
-        console.log(rolename)
+        console.log('rolename',rolename)
         axios.get(`/role_name/${rolename}`, config)
         .then((response) => {
-            // console.log('roledetail', response.data)
+            console.log('response', response.data)
             if(response.data.success === true){
                 const { role } = response.data
                     // console.log('response', role)

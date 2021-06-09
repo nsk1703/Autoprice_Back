@@ -38,7 +38,7 @@ import Product_list from './components/products/physical/product-list';
 import Add_product from './components/products/physical/add-product';
 import Edit_products from './components/products/physical/edit-products';
 import Product_detail from './components/products/physical/product-detail';
-
+import Edit_category from './components/products/physical/edit-category';
 //Product Digital
 import Digital_category from './components/products/digital/digital-category';
 import Digital_sub_category from './components/products/digital/digital-sub-category';
@@ -129,9 +129,9 @@ const rootReducers = combineReducers({
     product: productsReducer,
     role: rolesReducer,
 
-    productaction: productReducer,
+    // productaction: productReducer,
 
-    // editproduct: productReducer,
+    editproduct: productReducer,
     editappromonnaie: appromonnaieReducer,
     editapproproduit: approproduitReducer,
     editmachine: machineReducer,
@@ -140,6 +140,7 @@ const rootReducers = combineReducers({
     editcategory: categoryReducer,
     edituser: userReducer,
     editrole: roleReducer,
+    editcategory: categoryReducer,
     // editlog: logsReducer,
 
     maindetails: maintenanceDetailsReducer,
@@ -210,6 +211,7 @@ class Root extends Component {
                                 <ProtectedRoute exact path='/' component={Dashboard} />
                                     
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/products/physical/category`} component={Category} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/products/physical/edit-category/:id`} component={Edit_category} />
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/products/physical/sub-category`} component={Sub_category} />
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/products/physical/product-list`} component={Product_list} />
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/products/physical/product-detail`} component={Product_detail} />
