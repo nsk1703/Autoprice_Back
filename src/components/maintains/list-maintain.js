@@ -61,15 +61,13 @@ export class List_maintain extends Component {
             this.props.roledetails.role.map(rl => {
                 rol = rl.listeMaintenance;
             })
-            this.setState({
-                roles: rol
-            })
             if(this.props.roledetails.role[0].ajouterMaintenance == '1'){
                 this.setState({
                     visible: true
                 })
             }
             this.setState({
+                roles: rol,
                 loading: false
             })
         }, 1000)

@@ -23,6 +23,7 @@ export class Edit_machine extends Component {
             id: null,
             nom: '',
             type: '',
+            localisation: '',
             lien: '',
             montant: '',
             description: '',
@@ -68,6 +69,7 @@ export class Edit_machine extends Component {
                 id: this.props.machdetails.machine.machine.id,
                 nom: this.props.machdetails.machine.machine.nom,
                 type: type,
+                localisation: this.props.machdetails.machine.machine.localisation,
                 lien: this.props.machdetails.machine.machine.lien,
                 montant: this.props.machdetails.machine.machine.montant,
                 description: this.props.machdetails.machine.machine.description
@@ -115,9 +117,17 @@ export class Edit_machine extends Component {
             }
         }, 1000)
     }
+
     render() {
-        const {loading, roles, visible, isLoading, nom, type, lien, montant, description} =this.state
+        const {loading, roles, visible, isLoading, nom, type, localisation, lien, montant, description} = this.state
         // console.log(options)
+        const customStyles = {
+            input: (provided, state) => ({
+                ...provided,
+                margin: '0px',
+                width: '715px'
+            }),
+        }
         if(loading){
             return(
                 <div style={{display: "flex", justifyContent: "center", 
@@ -156,11 +166,25 @@ export class Edit_machine extends Component {
                                                 <div className="form-group row">
                                                     <label className="col-xl-3 col-md-4" >type :</label>
                                                     {/* <div className=""> */}
-                                                    <Select className="col-xl-8 col-md-7"
+                                                    <Select
+                                                        styles={customStyles} 
                                                         name="type"
                                                         value={type}
                                                         onChange={this.handleChange}
                                                         options={options}
+                                                        required="" 
+                                                    />
+                                                    {/* </div> */}
+                                                </div>
+                                                <div className="form-group row">
+                                                    <label className="col-xl-3 col-md-4" >Localisation :</label>
+                                                    {/* <div className=""> */}
+                                                    <input className="form-control col-xl-8 col-md-7"
+                                                        id="validationCustom0"
+                                                        type="text" 
+                                                        name="localisation"
+                                                        value={localisation}
+                                                        onChange={this.handleInputChange}
                                                         required="" 
                                                     />
                                                     {/* </div> */}

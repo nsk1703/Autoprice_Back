@@ -137,6 +137,13 @@ export class Edit_user extends Component {
 
     render() {
         const {loading, roles, visible, AllOptions, lastName, username, email, role_id, isLoading, password, confirm_password} = this.state
+        const customStyles = {
+            input: (provided, state) => ({
+                ...provided,
+                margin: '0px',
+                width: '715px'
+            }),
+        }
         if(loading){
             return(
                 <div style={{display: "flex", justifyContent: "center", 
@@ -148,7 +155,7 @@ export class Edit_user extends Component {
             if(roles == '1'){
                 return (
                     <Fragment>
-                        <Breadcrumb title="Ajout d'un Utilisateur" parent="Utilisateurs" />
+                        <Breadcrumb title="Modification d'un Utilisateur" parent="Utilisateurs" />
                         <div className="container-fluid">
                             <div className="row">
                                 <div className="col-sm-12">
@@ -193,36 +200,10 @@ export class Edit_user extends Component {
                                                     </div>
                                                 </div>
                                                 <div className="form-group row">
-                                                    <label className="col-xl-3 col-md-4"><span>*</span> Last Name</label>
-                                                    <input className="form-control col-xl-8 col-md-7" 
-                                                    id="validationCustom0" type="text"
-                                                    name='lastname'
-                                                    value={lastName}
-                                                    onChange={this.handleInputChange} 
-                                                    required="" />
-                                                </div>
-                                                <div className="form-group row">
-                                                    <label className="col-xl-3 col-md-4"><span>*</span> username</label>
-                                                    <input className="form-control col-xl-8 col-md-7" 
-                                                    id="validationCustom1" type="text" 
-                                                    name='username'
-                                                    value={username}
-                                                    onChange={this.handleInputChange}
-                                                    required="" />
-                                                </div>
-                                                <div className="form-group row">
-                                                    <label className="col-xl-3 col-md-4"><span>*</span> Email</label>
-                                                    <input className="form-control col-xl-8 col-md-7" 
-                                                    id="validationCustom2" type="email" 
-                                                    name='email'
-                                                    value={email}
-                                                    onChange={this.handleInputChange}
-                                                    required="" />
-                                                </div>
-                                                <div className="form-group row">
-                                                    <label className="col-xl-3 col-md-4" ><span>*</span> Role</label>
+                                                    <label className="col-xl-3 col-md-4" > Role</label>
                                                     {/* <div className="col-xl-8 col-md-7"> */}
-                                                        <Select className="col-xl-8 col-md-7"
+                                                        <Select
+                                                            styles={customStyles}
                                                             name="role_id"
                                                             value={role_id}
                                                             options={AllOptions}
@@ -230,24 +211,6 @@ export class Edit_user extends Component {
                                                             required="" 
                                                         />
                                                     {/* </div> */}
-                                                </div>
-                                                <div className="form-group row">
-                                                    <label className="col-xl-3 col-md-4"><span>*</span> Password</label>
-                                                    <input className="form-control col-xl-8 col-md-7" 
-                                                    id="validationCustom3" type="password" 
-                                                    name='password'
-                                                    value={password}
-                                                    onChange={this.handleInputChange}
-                                                    required="" />
-                                                </div>
-                                                <div className="form-group row">
-                                                    <label className="col-xl-3 col-md-4"><span>*</span> Confirm Password</label>
-                                                    <input className="form-control col-xl-8 col-md-7" 
-                                                    id="validationCustom4" type="password" 
-                                                    name='confirm_password'
-                                                    value={confirm_password}
-                                                    onChange={this.handleInputChange}
-                                                    required="" />
                                                 </div>
                                                 <ToastContainer />
                                                 <div className="offset-xl-3 offset-sm-4 mt-3">

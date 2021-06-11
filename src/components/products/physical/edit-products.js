@@ -254,6 +254,13 @@ export class Edit_product extends Component {
     render() {
         const {actualFile, loading, roles, visible, isLoading, CatOptions, images, MacOptions, nom , price, quantite, unite, reference, description, machine_id, category} = this.state
         // console.log('dum', dummyimgs)
+        const customStyles = {
+            input: (provided, state) => ({
+                ...provided,
+                margin: '0px',
+                width: '715px'
+            }),
+        }
         if(loading){
             return(
                 <div style={{display: "flex", justifyContent: "center", 
@@ -287,32 +294,20 @@ export class Edit_product extends Component {
                                                             <div className="col-xl-9 xl-50 col-sm-6 col-9">
                                                                 <img src={actualFile} alt="" className="img-fluid image_zoom_1 blur-up lazyloaded" />
                                                             </div>
-                                                            <div className="col-xl-3 xl-50 col-sm-6 col-3">
-                                                                <ul className="file-upload-product">
-                                                                    {
-                                                                        // this.state.dummyimgs.map((res, i) => {
-                                                                        //     return (
-                                                                        //         <li key={i}>
-                                                                                    <div className="box-input-file">
-                                                                                        <input className="upload" type="file" 
-                                                                                        onChange={(e) => this._handleImgChange(e)} 
-                                                                                        required
-                                                                                        />
-                                                                                        <img src={actualFile} style={{ width: 50, height: 50 }} />
-                                                                                        <a id="result1" onClick={(e) => this._handleSubmit(e.target.id)}></a>
-                                                                                    </div>
-                                                                                // </li>
-                                                                    //         )
-                                                                    //     })
-                                                                    }
-                                                                </ul>
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className="col-xl-7">
                                                     <AvForm className="needs-validation add-product-form" onValidSubmit={this.handleValidSubmit} onInvalidSubmit={this.handleInvalidSubmit}>
                                                         <div className="form form-label-center">
+                                                            <div className="form-group row">
+                                                                <label htmlFor="message-text" className="col-xl-3 col-md-4">Image du Produit :</label>
+                                                                <input className="form-control col-xl-8 col-md-7"
+                                                                    type="file" 
+                                                                    onChange={(e) => this._handleImgChange(e)} 
+                                                                    required
+                                                                />
+                                                            </div>
                                                             <div className="form-group mb-3 row">
                                                                 <label className="col-xl-3 col-sm-4 mb-0">Nom du Produit :</label>
                                                                 <div className="col-xl-8 col-sm-7">
@@ -394,7 +389,8 @@ export class Edit_product extends Component {
                                                         <div className="form-group row">
                                                             <label className="col-xl-3 col-sm-4 mb-0" >Nom de machine :</label>
                                                             <div className="col-xl-8 col-sm-7">
-                                                                <Select className="col-xl-8 col-md-7"
+                                                                <Select
+                                                                    styles={customStyles}
                                                                     name="machine_id"
                                                                     value={machine_id}
                                                                     options={MacOptions}
@@ -406,7 +402,8 @@ export class Edit_product extends Component {
                                                         <div className="form-group row">
                                                             <label className="col-xl-3 col-sm-4 mb-0" >Categorie du Produit :</label>
                                                             <div className="col-xl-8 col-sm-7">
-                                                                <Select className="col-xl-8 col-md-7"
+                                                                <Select
+                                                                    styles={customStyles}
                                                                     name="category_id"
                                                                     value={category}
                                                                     options={CatOptions}
@@ -422,7 +419,7 @@ export class Edit_product extends Component {
                                                                     <textarea name="description" 
                                                                         value={description} 
                                                                         onChange={this.handleInputChange}
-                                                                        rows="5" cols="88"
+                                                                        rows="8" cols="107"
                                                                     />
                                                                 </div>
                                                             </div>

@@ -138,6 +138,13 @@ export class Tabset_product extends Component {
 
     render() {
         const {loading, roles, visible, AllOptions, quantite, productId, description, isLoading} = this.state
+        const customStyles = {
+            input: (provided, state) => ({
+                ...provided,
+                margin: '0px',
+                width: '715px'
+              }),
+        }
         if(loading){
             return(
                 <div style={{display: "flex", justifyContent: "center", 
@@ -176,9 +183,12 @@ export class Tabset_product extends Component {
                                                 </div>
                                                 <div className="form-group row">
                                                     <label className="col-xl-3 col-md-4" >Nom de produit :</label>
-                                                    <Select className="form-control col-xl-8 col-md-7"
+                                                    <Select
+                                                        styles={customStyles} 
+                                                        menuColor='red'
                                                         name="productId"
                                                         value={productId}
+                                                        // width="500px"
                                                         options={AllOptions}
                                                         onChange={this.handleChange}
                                                         required="" 
@@ -187,11 +197,12 @@ export class Tabset_product extends Component {
                                                 <div className="form">
                                                     <div className="form-group row">
                                                         <label className="col-xl-3 col-sm-4">Description :</label>
-                                                        <textarea name="description" value={description} 
-                                                                onChange={this.handleInputChange}
-                                                                rows="5" cols="92"
+                                                        <textarea className="form-control col-xl-8 col-md-7"
+                                                            name="description" 
+                                                            value={description} 
+                                                            onChange={this.handleInputChange}
+                                                            rows="8" cols="92"
                                                         />
-                                                        {/* </div> */}
                                                     </div>
                                                 </div>
                                                 <ToastContainer />

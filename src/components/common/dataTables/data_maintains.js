@@ -83,15 +83,17 @@ export class Data_maintains extends Component {
         this.props.actionsdetailRole(localStorage.getItem('roles'))
         
         setTimeout(() => {
-            if(this.props.roledetails.role[0].supprimerMaintenance == '1'){
-                this.setState({
-                    deletable: true
-                })
-            }
-            if(this.props.roledetails.role[0].modifierMaintenance == '1'){
-                this.setState({
-                   updatable: true
-                })
+            if(this.props.roledetails.role[0]){
+                if(this.props.roledetails.role[0].supprimerMaintenance == '1'){
+                    this.setState({
+                        deletable: true
+                    })
+                }
+                if(this.props.roledetails.role[0].modifierMaintenance == '1'){
+                    this.setState({
+                    updatable: true
+                    })
+                }
             }
         }, 1000)
     }

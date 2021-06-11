@@ -155,8 +155,8 @@ export class Edit_category extends Component {
                                                         />
                                                     {/* </div> */}
                                                 </div>
-                                                <div className="form-group">
-                                                    <label htmlFor="message-text" className="col-form-label">Image de Catégorie :</label>
+                                                <div className="form-group row">
+                                                    <label htmlFor="message-text" className="col-xl-3 col-md-4">Image de Catégorie :</label>
                                                     <input className="form-control col-xl-8 col-md-7" 
                                                         type="file" 
                                                         onChange={this.handleFileChange}

@@ -24,6 +24,7 @@ export class Create_machine extends Component {
             open: false,
             nom: '',
             type: null,
+            localisation: '',
             lien: '',
             montant: '',
             description: '',
@@ -100,8 +101,15 @@ export class Create_machine extends Component {
     }
 
     render() {
-        const {loading, roles, visible, isLoading, nom, type, lien, montant, description} = this.state
+        const {loading, roles, visible, isLoading, nom, type, localisation, lien, montant, description} = this.state
         // console.log(options)
+        const customStyles = {
+            input: (provided, state) => ({
+                ...provided,
+                margin: '0px',
+                width: '715px'
+            }),
+        }
         if(loading){
             return(
                 <div style={{display: "flex", justifyContent: "center", 
@@ -141,7 +149,8 @@ export class Create_machine extends Component {
                                                 <div className="form-group row">
                                                     <label className="col-xl-3 col-md-4" >type :</label>
                                                     {/* <div className=""> */}
-                                                    <Select className="col-xl-8 col-md-7"
+                                                    <Select
+                                                        styles={customStyles} 
                                                         name="type"
                                                         value={type}
                                                         onChange={this.handleChange}
@@ -151,22 +160,35 @@ export class Create_machine extends Component {
                                                     {/* </div> */}
                                                 </div>
                                                 <div className="form-group row">
+                                                    <label className="col-xl-3 col-md-4"><span>*</span> Localisation</label>
+                                                    <input className="form-control col-xl-8 col-md-7" 
+                                                        id="validationCustom0" 
+                                                        type="text" 
+                                                        name="localisation"
+                                                        value={localisation}
+                                                        onChange={this.handleInputChange}
+                                                        required="" 
+                                                    />
+                                                </div>
+                                                <div className="form-group row">
                                                     <label className="col-xl-3 col-md-4"><span>*</span> Montant</label>
                                                     <input className="form-control col-xl-8 col-md-7" 
-                                                    id="validationCustom0" type="text" 
-                                                    name="montant"
-                                                    value={montant}
-                                                    onChange={this.handleInputChange}
-                                                    required="" />
+                                                        id="validationCustom0" type="text" 
+                                                        name="montant"
+                                                        value={montant}
+                                                        onChange={this.handleInputChange}
+                                                        required="" 
+                                                    />
                                                 </div>
                                                 <div className="form-group row">
                                                     <label className="col-xl-3 col-md-4"><span>*</span> Lien</label>
                                                     <input className="form-control col-xl-8 col-md-7" 
-                                                    name="lien"
-                                                    value={lien}
-                                                    id="validationCustom2" type="text" 
-                                                    onChange={this.handleInputChange}
-                                                    required="" />
+                                                        name="lien"
+                                                        value={lien}
+                                                        id="validationCustom2" type="text" 
+                                                        onChange={this.handleInputChange}
+                                                        required="" 
+                                                    />
                                                 </div>
                                                 <div className="form-group row">
                                                     <label className="col-xl-3 col-md-4">Description du produit :</label>

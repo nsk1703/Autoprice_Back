@@ -11,7 +11,7 @@ export const machines = () => {
 
         axios.get('/machines')
             .then((response) => {
-                // console.log(response);
+                console.log(response);
                 if (response.data.success === true) {
                     const { machines } = response.data
                     const machinesCount = response.data.page_meta.total_items_count
@@ -50,6 +50,7 @@ export const newMachine = (machine) => {
             status: "1",
             nom: machine.nom,
             type: machine.type['value'],
+            localisation: machine.localisation,
             lien: machine.lien,
             montant: parseInt(machine.montant,10),
             description: machine.description,
@@ -103,12 +104,13 @@ export const editMachine = (machine) => {
         dispatch({
             type: machineConstants.UPDATE_MACHINE_REQUEST
         });
-        console.log(machine)
+        console.log('upmac',machine)
         let body = {
             etat: "1",
             status: "1",
             nom: machine.nom,
             type: machine.type['value'],
+            localisation: machine.localisation,
             lien: machine.lien,
             montant: parseInt(machine.montant,10),
             description: machine.description,

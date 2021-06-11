@@ -33,12 +33,13 @@ export class List_machine extends Component {
         this.props.machines();
 
         setTimeout(() => {
-            // console.log(this.props.machine.machines)
+            console.log(this.props.machine.machines)
             this.props.machine.machines.map(machine => {
                 let item = {
                     ID: machine.id,
                     Nom: machine.nom,
                     Type: machine.type,
+                    Localisation: machine.localisation,
                     Montant: machine.montant,
                     lien: machine.lien,
                     statut: machine.status,
