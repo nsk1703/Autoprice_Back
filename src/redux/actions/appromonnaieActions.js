@@ -51,7 +51,8 @@ export const newAppromonnaies = (monnaie) => {
             etat: "1",
             machine_id: monnaie.machine_id.value,
             description: monnaie.description,
-            quantite: parseInt(monnaie.quantite, 10)
+            quantite: parseInt(monnaie.quantite, 10),
+            utilisateurid: localStorage.getItem('userid')
         }
         const token = localStorage.getItem('token');
         let config = {
@@ -110,7 +111,9 @@ export const editAppromonnaie = (money) => {
             etat: "1",
             machine_id: money.machine_id.value,
             description: money.description,
-            quantite: parseInt(money.quantite, 10)
+            quantite: parseInt(money.quantite, 10),
+            utilisateurid: localStorage.getItem('userid')
+
         }
         const token = localStorage.getItem('token');
         let config = {

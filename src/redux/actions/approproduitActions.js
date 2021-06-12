@@ -51,7 +51,8 @@ export const newApproproduits = (produit) => {
             etat: "1",
             productId: produit.product_id.value,
             description: produit.description,
-            quantite: parseInt(produit.quantite, 10)
+            quantite: parseInt(produit.quantite, 10),
+            utilisateurid: localStorage.getItem('userid')
         }
         
         console.log(body)
@@ -109,7 +110,8 @@ export const editApproproduits = (produit) => {
             etat: "1",
             productId: produit.productId.value,
             description: produit.description,
-            quantite: parseInt(produit.quantite, 10)
+            quantite: parseInt(produit.quantite, 10),
+            utilisateurid: localStorage.getItem('userid')
         }
         
         console.log(body)

@@ -54,6 +54,7 @@ export const newMachine = (machine) => {
             lien: machine.lien,
             montant: parseInt(machine.montant,10),
             description: machine.description,
+            utilisateurid: localStorage.getItem('userid')
         }
         console.log(body)
         const token = localStorage.getItem('token');
@@ -114,6 +115,7 @@ export const editMachine = (machine) => {
             lien: machine.lien,
             montant: parseInt(machine.montant,10),
             description: machine.description,
+            utilisateurid: localStorage.getItem('userid')
         }
         console.log(body)
         const token = localStorage.getItem('token');

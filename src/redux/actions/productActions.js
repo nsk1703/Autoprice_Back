@@ -61,6 +61,7 @@ export const newProduct = (product) => {
         formData.append('machineId', product.machine_id.value);
         formData.append('category', product.category_id.label);
         formData.append('images', product.images);
+        formData.append('utilisateurid', localStorage.getItem('userid'))
 
         console.log(formData)
 
@@ -134,6 +135,7 @@ export const editProduct = (product) => {
         formData.append('machineId', product.machine_id.value);
         formData.append('category', product.category.label);
         formData.append('images', product.images);
+        formData.append('utilisateurid', localStorage.getItem('userid'))
 
         console.log(formData)
 
