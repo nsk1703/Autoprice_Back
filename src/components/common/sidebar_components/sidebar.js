@@ -43,7 +43,7 @@ export class sidebar extends Component {
             console.log(this.state.mainmenu)
             
             if(this.props.roledetails.role[0]){
-                if(this.props.roledetails.role[0].dashboard != '1'){
+                if(this.props.roledetails.role[0].dashboard !== '1'){
                     // console.log(this.state.mainmenu);
                     this.state.mainmenu.splice(0,1);
                     
@@ -183,69 +183,35 @@ export class sidebar extends Component {
                             this.state.mainmenu[4].children.splice(1,1)
                         }
                     }
-                    
-                    // Role du Menu Slides
-                    if(this.props.roledetails.role[0].listeSlide != '1'){
+
+                     // Role du Menu pieces
+                    if(this.props.roledetails.role[0].listePiece != '1'){
                         this.state.mainmenu[5].children.splice(0,1)
-                        if(this.props.roledetails.role[0].ajouterSlide != '1'){
+                        if(this.props.roledetails.role[0].ajouterPiece != '1'){
                             this.state.mainmenu[5].children.splice(0,1)
                         }
                     }else{
-                        if(this.props.roledetails.role[0].ajouterSlide != '1'){
+                        if(this.props.roledetails.role[0].ajouterPiece != '1'){
                             this.state.mainmenu[5].children.splice(1,1)
+                        }
+                    }
+
+                    
+                    // Role du Menu Slides
+                    if(this.props.roledetails.role[0].listeSlide != '1'){
+                        this.state.mainmenu[6].children.splice(0,1)
+                        if(this.props.roledetails.role[0].ajouterSlide != '1'){
+                            this.state.mainmenu[6].children.splice(0,1)
+                        }
+                    }else{
+                        if(this.props.roledetails.role[0].ajouterSlide != '1'){
+                            this.state.mainmenu[6].children.splice(1,1)
                         }
                     }
 
                     // Roles des Menu Log, Statistiques, utilisateurs, roles
                     if(this.props.roledetails.role[0].log != '1'){
-                        this.state.mainmenu.splice(6,1);
-                        if(this.props.roledetails.role[0].statistique != '1'){
-                            this.state.mainmenu.splice(6,1);
-                            if(this.props.roledetails.role[0].listeUtilisateur != '1'){
-                                this.state.mainmenu[6].children.splice(0,1)
-                                if(this.props.roledetails.role[0].ajouterUtilisateur != '1'){
-                                    this.state.mainmenu[6].children.splice(0,1)
-                                }
-                            }else{
-                                if(this.props.roledetails.role[0].ajouterUtilisateur != '1'){
-                                    this.state.mainmenu[6].children.splice(1,1)
-                                }
-                            }
-
-                            if(this.props.roledetails.role[0].listeRole != '1'){
-                                this.state.mainmenu[7].children.splice(0,1)
-                                if(this.props.roledetails.role[0].ajouterRole != '1'){
-                                    this.state.mainmenu[7].children.splice(0,1)
-                                }
-                            }else{
-                                if(this.props.roledetails.role[0].ajouterRole != '1'){
-                                    this.state.mainmenu[7].children.splice(1,1)
-                                }
-                            }
-                        }else{
-                            if(this.props.roledetails.role[0].listeUtilisateur != '1'){
-                                this.state.mainmenu[7].children.splice(0,1)
-                                if(this.props.roledetails.role[0].ajouterUtilisateur != '1'){
-                                    this.state.mainmenu[7].children.splice(0,1)
-                                }
-                            }else{
-                                if(this.props.roledetails.role[0].ajouterUtilisateur != '1'){
-                                    this.state.mainmenu[7].children.splice(1,1)
-                                }
-                            }
-
-                            if(this.props.roledetails.role[0].listeRole != '1'){
-                                this.state.mainmenu[8].children.splice(0,1)
-                                if(this.props.roledetails.role[0].ajouterRole != '1'){
-                                    this.state.mainmenu[8].children.splice(0,1)
-                                }
-                            }else{
-                                if(this.props.roledetails.role[0].ajouterRole != '1'){
-                                    this.state.mainmenu[8].children.splice(1,1)
-                                }
-                            }
-                        }
-                    }else{
+                        this.state.mainmenu.splice(7,1);
                         if(this.props.roledetails.role[0].statistique != '1'){
                             this.state.mainmenu.splice(7,1);
                             if(this.props.roledetails.role[0].listeUtilisateur != '1'){
@@ -292,6 +258,53 @@ export class sidebar extends Component {
                                 }
                             }
                         }
+                    }else{
+                        if(this.props.roledetails.role[0].statistique != '1'){
+                            this.state.mainmenu.splice(8,1);
+                            if(this.props.roledetails.role[0].listeUtilisateur != '1'){
+                                this.state.mainmenu[8].children.splice(0,1)
+                                if(this.props.roledetails.role[0].ajouterUtilisateur != '1'){
+                                    this.state.mainmenu[8].children.splice(0,1)
+                                }
+                            }else{
+                                if(this.props.roledetails.role[0].ajouterUtilisateur != '1'){
+                                    this.state.mainmenu[8].children.splice(1,1)
+                                }
+                            }
+
+                            if(this.props.roledetails.role[0].listeRole != '1'){
+                                this.state.mainmenu[9].children.splice(0,1)
+                                if(this.props.roledetails.role[0].ajouterRole != '1'){
+                                    this.state.mainmenu[9].children.splice(0,1)
+                                }
+                            }else{
+                                if(this.props.roledetails.role[0].ajouterRole != '1'){
+                                    this.state.mainmenu[9].children.splice(1,1)
+                                }
+                            }
+                        }else{
+                            if(this.props.roledetails.role[0].listeUtilisateur != '1'){
+                                this.state.mainmenu[9].children.splice(0,1)
+                                if(this.props.roledetails.role[0].ajouterUtilisateur != '1'){
+                                    this.state.mainmenu[9].children.splice(0,1)
+                                }
+                            }else{
+                                if(this.props.roledetails.role[0].ajouterUtilisateur != '1'){
+                                    this.state.mainmenu[9].children.splice(1,1)
+                                }
+                            }
+
+                            if(this.props.roledetails.role[0].listeRole != '1'){
+                                this.state.mainmenu[10].children.splice(0,1)
+                                if(this.props.roledetails.role[0].ajouterRole != '1'){
+                                    this.state.mainmenu[10].children.splice(0,1)
+                                }
+                            }else{
+                                if(this.props.roledetails.role[0].ajouterRole != '1'){
+                                    this.state.mainmenu[10].children.splice(1,1)
+                                }
+                            }
+                        }
                     }
 
                     if(this.state.mainmenu[0].children.length === 0){
@@ -308,221 +321,447 @@ export class sidebar extends Component {
                                     // Maintenances
                                     if(this.state.mainmenu[0].children.length === 0){
                                         this.state.mainmenu.splice(0,1)
-                                        // Slides
+                                        // Pieces
                                         if(this.state.mainmenu[0].children.length === 0){
                                             this.state.mainmenu.splice(0,1)
-                                            // Log, statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[2].children.length === 0){
-                                                        this.state.mainmenu.splice(2,1)
+                                            // Slides
+                                            if(this.state.mainmenu[0].children.length === 0){
+                                                this.state.mainmenu.splice(0,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log == '1'){
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
                                                         if(this.state.mainmenu[2].children.length === 0){
                                                             this.state.mainmenu.splice(2,1)
+                                                            if(this.state.mainmenu[2].children.length === 0){
+                                                                this.state.mainmenu.splice(2,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[3].children.length === 0){
-                                                            this.state.mainmenu.splice(3,1)
+                                                        if(this.state.mainmenu[1].children.length === 0){
+                                                            this.state.mainmenu.splice(1,1)
+                                                            if(this.state.mainmenu[1].children.length === 0){
+                                                                this.state.mainmenu.splice(1,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[2].children.length === 0){
+                                                                this.state.mainmenu.splice(2,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[1].children.length === 0){
-                                                        this.state.mainmenu.splice(1,1)
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
                                                         if(this.state.mainmenu[1].children.length === 0){
                                                             this.state.mainmenu.splice(1,1)
+                                                            if(this.state.mainmenu[1].children.length === 0){
+                                                                this.state.mainmenu.splice(1,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[2].children.length === 0){
+                                                                this.state.mainmenu.splice(2,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[2].children.length === 0){
-                                                            this.state.mainmenu.splice(2,1)
-                                                        }
-                                                    }
-                                                }
-                                            }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[1].children.length === 0){
-                                                        this.state.mainmenu.splice(1,1)
-                                                        if(this.state.mainmenu[1].children.length === 0){
-                                                            this.state.mainmenu.splice(1,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[2].children.length === 0){
-                                                            this.state.mainmenu.splice(2,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[0].children.length === 0){
-                                                        this.state.mainmenu.splice(0,1)
                                                         if(this.state.mainmenu[0].children.length === 0){
                                                             this.state.mainmenu.splice(0,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[1].children.length === 0){
-                                                            this.state.mainmenu.splice(1,1)
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }else{
-                                            // Log, Statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[3].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
-                                                        if(this.state.mainmenu[3].children.length === 0){
-                                                            this.state.mainmenu.splice(3,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[2].children.length === 0){
-                                                        this.state.mainmenu.splice(2,1)
-                                                        if(this.state.mainmenu[2].children.length === 0){
-                                                            this.state.mainmenu.splice(2,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[3].children.length === 0){
-                                                            this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[0].children.length === 0){
+                                                                this.state.mainmenu.splice(0,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[1].children.length === 0){
+                                                                this.state.mainmenu.splice(1,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[2].children.length === 0){
-                                                        this.state.mainmenu.splice(2,1)
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log == '1'){
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
+                                                        if(this.state.mainmenu[3].children.length === 0){
+                                                            this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }
+                                                    }else{
                                                         if(this.state.mainmenu[2].children.length === 0){
                                                             this.state.mainmenu.splice(2,1)
+                                                            if(this.state.mainmenu[2].children.length === 0){
+                                                                this.state.mainmenu.splice(2,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
+                                                        if(this.state.mainmenu[2].children.length === 0){
+                                                            this.state.mainmenu.splice(2,1)
+                                                            if(this.state.mainmenu[2].children.length === 0){
+                                                                this.state.mainmenu.splice(2,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[1].children.length === 0){
+                                                            this.state.mainmenu.splice(1,1)
+                                                            if(this.state.mainmenu[1].children.length === 0){
+                                                                this.state.mainmenu.splice(1,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[2].children.length === 0){
+                                                                this.state.mainmenu.splice(2,1)
+                                                            }
+                                                        }
+                                                    }
+                                                } 
+                                            }
+                                        }else{
+                                            // Slides
+                                            if(this.state.mainmenu[1].children.length === 0){
+                                                this.state.mainmenu.splice(1,1)
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
+                                                        if(this.state.mainmenu[3].children.length === 0){
+                                                            this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[2].children.length === 0){
+                                                            this.state.mainmenu.splice(2,1)
+                                                            if(this.state.mainmenu[2].children.length === 0){
+                                                                this.state.mainmenu.splice(2,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
+                                                        if(this.state.mainmenu[2].children.length === 0){
+                                                            this.state.mainmenu.splice(2,1)
+                                                            if(this.state.mainmenu[2].children.length === 0){
+                                                                this.state.mainmenu.splice(2,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[1].children.length === 0){
+                                                            this.state.mainmenu.splice(1,1)
+                                                            if(this.state.mainmenu[1].children.length === 0){
+                                                                this.state.mainmenu.splice(1,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[2].children.length === 0){
+                                                                this.state.mainmenu.splice(2,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }else{
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[3].children.length === 0){
                                                             this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[1].children.length === 0){
-                                                        this.state.mainmenu.splice(1,1)
-                                                        if(this.state.mainmenu[1].children.length === 0){
-                                                            this.state.mainmenu.splice(1,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[3].children.length === 0){
+                                                            this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[2].children.length === 0){
                                                             this.state.mainmenu.splice(2,1)
+                                                            if(this.state.mainmenu[2].children.length === 0){
+                                                                this.state.mainmenu.splice(2,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
                                                         }
                                                     }
-                                                }
-                                            } 
+                                                } 
+                                            }  
                                         }
                                     }else{
-                                        // Slides
+                                        // Pieces
                                         if(this.state.mainmenu[1].children.length === 0){
                                             this.state.mainmenu.splice(1,1)
-                                            // Log, Statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[3].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
+                                            // Slides
+                                            if(this.state.mainmenu[1].children.length === 0){
+                                                this.state.mainmenu.splice(1,1)
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log == '1'){
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
                                                         if(this.state.mainmenu[3].children.length === 0){
                                                             this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
+                                                        if(this.state.mainmenu[2].children.length === 0){
+                                                            this.state.mainmenu.splice(2,1)
+                                                            if(this.state.mainmenu[2].children.length === 0){
+                                                                this.state.mainmenu.splice(2,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[2].children.length === 0){
-                                                        this.state.mainmenu.splice(2,1)
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
                                                         if(this.state.mainmenu[2].children.length === 0){
                                                             this.state.mainmenu.splice(2,1)
+                                                            if(this.state.mainmenu[2].children.length === 0){
+                                                                this.state.mainmenu.splice(2,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[3].children.length === 0){
-                                                            this.state.mainmenu.splice(3,1)
+                                                        if(this.state.mainmenu[1].children.length === 0){
+                                                            this.state.mainmenu.splice(1,1)
+                                                            if(this.state.mainmenu[1].children.length === 0){
+                                                                this.state.mainmenu.splice(1,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[2].children.length === 0){
+                                                                this.state.mainmenu.splice(2,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[2].children.length === 0){
-                                                        this.state.mainmenu.splice(2,1)
-                                                        if(this.state.mainmenu[2].children.length === 0){
-                                                            this.state.mainmenu.splice(2,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log == '1'){
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[3].children.length === 0){
                                                             this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[1].children.length === 0){
-                                                        this.state.mainmenu.splice(1,1)
-                                                        if(this.state.mainmenu[1].children.length === 0){
-                                                            this.state.mainmenu.splice(1,1)
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
+                                                        if(this.state.mainmenu[3].children.length === 0){
+                                                            this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[2].children.length === 0){
                                                             this.state.mainmenu.splice(2,1)
+                                                            if(this.state.mainmenu[2].children.length === 0){
+                                                                this.state.mainmenu.splice(2,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }
+                                                    }
+                                                } 
+                                            }
+                                        }else{
+                                            // SLides
+                                            if(this.state.mainmenu[2].children.length === 0){
+                                                this.state.mainmenu.splice(2,1)
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[3].children.length === 0){
+                                                            this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[3].children.length === 0){
+                                                            this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[2].children.length === 0){
+                                                            this.state.mainmenu.splice(2,1)
+                                                            if(this.state.mainmenu[2].children.length === 0){
+                                                                this.state.mainmenu.splice(2,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }else{
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[3].children.length === 0){
+                                                            this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }
-                                        }else{
-                                            // log, statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[3].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
-                                                        if(this.state.mainmenu[3].children.length === 0){
-                                                            this.state.mainmenu.splice(3,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }
-                                                }
-                                            }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[3].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
-                                                        if(this.state.mainmenu[3].children.length === 0){
-                                                            this.state.mainmenu.splice(3,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[2].children.length === 0){
-                                                        this.state.mainmenu.splice(2,1)
-                                                        if(this.state.mainmenu[2].children.length === 0){
-                                                            this.state.mainmenu.splice(2,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[3].children.length === 0){
-                                                            this.state.mainmenu.splice(3,1)
-                                                        }
-                                                    }
-                                                }
-                                            } 
                                         }
                                     }
                                 }else{
+                                    // Maintenances
                                     if(this.state.mainmenu[1].children.length === 0){
                                         this.state.mainmenu.splice(1,1)
+                                        // Pieces
+                                        if(this.state.mainmenu[1].children.length === 0){
+
+                                        }
+                                        // Slides
                                         if(this.state.mainmenu[1].children.length === 0){
                                             this.state.mainmenu.splice(1,1)
                                             // Log, Statistiques, utilisateurs, roles
@@ -627,6 +866,7 @@ export class sidebar extends Component {
                                             }
                                         }
                                     }else{
+                                        // SLides
                                         if(this.state.mainmenu[2].children.length === 0){
                                             this.state.mainmenu.splice(2,1)
                                             // Log, Statistiques, utilisateurs, roles
@@ -3940,70 +4180,33 @@ export class sidebar extends Component {
                         }
                     }
                     
-                    // Roles du Menu Slides
-                    if(this.props.roledetails.role[0].listeSlide != '1'){
+                    // Role du Menu Pieces
+                    if(this.props.roledetails.role[0].listePiece != '1'){
                         this.state.mainmenu[6].children.splice(0,1)
-                        if(this.props.roledetails.role[0].ajouterSlide != '1'){
+                        if(this.props.roledetails.role[0].ajouterPiece != '1'){
                             this.state.mainmenu[6].children.splice(0,1)
                         }
                     }else{
-                        if(this.props.roledetails.role[0].ajouterSlide != '1'){
+                        if(this.props.roledetails.role[0].ajouterPiece != '1'){
                             this.state.mainmenu[6].children.splice(1,1)
+                        }
+                    }
+
+                    // Roles du Menu Slides
+                    if(this.props.roledetails.role[0].listeSlide != '1'){
+                        this.state.mainmenu[7].children.splice(0,1)
+                        if(this.props.roledetails.role[0].ajouterSlide != '1'){
+                            this.state.mainmenu[7].children.splice(0,1)
+                        }
+                    }else{
+                        if(this.props.roledetails.role[0].ajouterSlide != '1'){
+                            this.state.mainmenu[7].children.splice(1,1)
                         }
                     }
 
                     // Roles des Menu Log, Statistiques, utilisateurs, roles
                     if(this.props.roledetails.role[0].log != '1'){
-                        
-                        this.state.mainmenu.splice(7,1);
-                        if(this.props.roledetails.role[0].statistique != '1'){
-                            this.state.mainmenu.splice(7,1);
-                            if(this.props.roledetails.role[0].listeUtilisateur != '1'){
-                                this.state.mainmenu[7].children.splice(0,1)
-                                if(this.props.roledetails.role[0].ajouterUtilisateur != '1'){
-                                    this.state.mainmenu[7].children.splice(0,1)
-                                }
-                            }else{
-                                if(this.props.roledetails.role[0].ajouterUtilisateur != '1'){
-                                    this.state.mainmenu[7].children.splice(1,1)
-                                }
-                            }
-
-                            if(this.props.roledetails.role[0].listeRole != '1'){
-                                this.state.mainmenu[8].children.splice(0,1)
-                                if(this.props.roledetails.role[0].ajouterRole != '1'){
-                                    this.state.mainmenu[8].children.splice(0,1)
-                                }
-                            }else{
-                                if(this.props.roledetails.role[0].ajouterRole != '1'){
-                                    this.state.mainmenu[8].children.splice(1,1)
-                                }
-                            }
-                        }else{
-                            if(this.props.roledetails.role[0].listeUtilisateur != '1'){
-                                this.state.mainmenu[8].children.splice(0,1)
-                                if(this.props.roledetails.role[0].ajouterUtilisateur != '1'){
-                                    this.state.mainmenu[8].children.splice(0,1)
-                                }
-                            }else{
-                                if(this.props.roledetails.role[0].ajouterUtilisateur != '1'){
-                                    this.state.mainmenu[8].children.splice(1,1)
-                                }
-                            }
-
-                            if(this.props.roledetails.role[0].listeRole != '1'){
-                                this.state.mainmenu[9].children.splice(0,1)
-                                if(this.props.roledetails.role[0].ajouterRole != '1'){
-                                    this.state.mainmenu[9].children.splice(0,1)
-                                }
-                            }else{
-                                if(this.props.roledetails.role[0].ajouterRole != '1'){
-                                    this.state.mainmenu[9].children.splice(1,1)
-                                }
-                            }
-                        }
-                    }else{
-                        // console.log(this.state.mainmenu);
+                        this.state.mainmenu.splice(8,1);
                         if(this.props.roledetails.role[0].statistique != '1'){
                             this.state.mainmenu.splice(8,1);
                             if(this.props.roledetails.role[0].listeUtilisateur != '1'){
@@ -4050,6 +4253,54 @@ export class sidebar extends Component {
                                 }
                             }
                         }
+                    }else{
+                        // console.log(this.state.mainmenu);
+                        if(this.props.roledetails.role[0].statistique != '1'){
+                            this.state.mainmenu.splice(8,1);
+                            if(this.props.roledetails.role[0].listeUtilisateur != '1'){
+                                this.state.mainmenu[9].children.splice(0,1)
+                                if(this.props.roledetails.role[0].ajouterUtilisateur != '1'){
+                                    this.state.mainmenu[9].children.splice(0,1)
+                                }
+                            }else{
+                                if(this.props.roledetails.role[0].ajouterUtilisateur != '1'){
+                                    this.state.mainmenu[9].children.splice(1,1)
+                                }
+                            }
+
+                            if(this.props.roledetails.role[0].listeRole != '1'){
+                                this.state.mainmenu[10].children.splice(0,1)
+                                if(this.props.roledetails.role[0].ajouterRole != '1'){
+                                    this.state.mainmenu[10].children.splice(0,1)
+                                }
+                            }else{
+                                if(this.props.roledetails.role[0].ajouterRole != '1'){
+                                    this.state.mainmenu[10].children.splice(1,1)
+                                }
+                            }
+                        }else{
+                            if(this.props.roledetails.role[0].listeUtilisateur != '1'){
+                                this.state.mainmenu[10].children.splice(0,1)
+                                if(this.props.roledetails.role[0].ajouterUtilisateur != '1'){
+                                    this.state.mainmenu[10].children.splice(0,1)
+                                }
+                            }else{
+                                if(this.props.roledetails.role[0].ajouterUtilisateur != '1'){
+                                    this.state.mainmenu[10].children.splice(1,1)
+                                }
+                            }
+
+                            if(this.props.roledetails.role[0].listeRole != '1'){
+                                this.state.mainmenu[11].children.splice(0,1)
+                                if(this.props.roledetails.role[0].ajouterRole != '1'){
+                                    this.state.mainmenu[11].children.splice(0,1)
+                                }
+                            }else{
+                                if(this.props.roledetails.role[0].ajouterRole != '1'){
+                                    this.state.mainmenu[11].children.splice(1,1)
+                                }
+                            }
+                        }
                     }
 
                     if(this.state.mainmenu[1].children.length === 0){
@@ -4059,7 +4310,6 @@ export class sidebar extends Component {
                             this.state.mainmenu.splice(1,1)
                             // Approvisionnements
                             if(this.state.mainmenu[1].children.length === 0){
-                                
                                 this.state.mainmenu.splice(1,1)
                                 // Machines
                                 if(this.state.mainmenu[1].children.length === 0){
@@ -4067,426 +4317,873 @@ export class sidebar extends Component {
                                     // Maintenances
                                     if(this.state.mainmenu[1].children.length === 0){
                                         this.state.mainmenu.splice(1,1)
-                                        // Slides
+                                        // Pieces
                                         if(this.state.mainmenu[1].children.length === 0){
                                             this.state.mainmenu.splice(1,1)
-                                            // Log, statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[3].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
+                                            // Slides
+                                            if(this.state.mainmenu[1].children.length === 0){
+                                                this.state.mainmenu.splice(1,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log == '1'){
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
                                                         if(this.state.mainmenu[3].children.length === 0){
                                                             this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
+                                                        if(this.state.mainmenu[2].children.length === 0){
+                                                            this.state.mainmenu.splice(2,1)
+                                                            if(this.state.mainmenu[2].children.length === 0){
+                                                                this.state.mainmenu.splice(2,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[2].children.length === 0){
-                                                        this.state.mainmenu.splice(2,1)
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
                                                         if(this.state.mainmenu[2].children.length === 0){
                                                             this.state.mainmenu.splice(2,1)
+                                                            if(this.state.mainmenu[2].children.length === 0){
+                                                                this.state.mainmenu.splice(2,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[3].children.length === 0){
-                                                            this.state.mainmenu.splice(3,1)
-                                                        }
-                                                    }
-                                                }
-                                            }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[2].children.length === 0){
-                                                        this.state.mainmenu.splice(1,1)
-                                                        if(this.state.mainmenu[2].children.length === 0){
-                                                            this.state.mainmenu.splice(2,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[3].children.length === 0){
-                                                            this.state.mainmenu.splice(3,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[1].children.length === 0){
-                                                        this.state.mainmenu.splice(1,1)
                                                         if(this.state.mainmenu[1].children.length === 0){
                                                             this.state.mainmenu.splice(1,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[2].children.length === 0){
-                                                            this.state.mainmenu.splice(2,1)
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }else{
-                                            // Log, Statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[3].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
-                                                        if(this.state.mainmenu[3].children.length === 0){
-                                                            this.state.mainmenu.splice(3,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[1].children.length === 0){
+                                                                this.state.mainmenu.splice(1,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[2].children.length === 0){
+                                                                this.state.mainmenu.splice(2,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[3].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log == '1'){
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }else{
                                                         if(this.state.mainmenu[3].children.length === 0){
                                                             this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
+                                                        if(this.state.mainmenu[3].children.length === 0){
+                                                            this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[2].children.length === 0){
+                                                            this.state.mainmenu.splice(2,1)
+                                                            if(this.state.mainmenu[2].children.length === 0){
+                                                                this.state.mainmenu.splice(2,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }
+                                                    }
+                                                } 
+                                            }
+                                        }else{
+                                            // Slides
+                                            if(this.state.mainmenu[2].children.length === 0){
+                                                this.state.mainmenu.splice(2,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log == '1'){
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[3].children.length === 0){
+                                                            this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
+                                                        if(this.state.mainmenu[3].children.length === 0){
+                                                            this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[2].children.length === 0){
+                                                            this.state.mainmenu.splice(2,1)
+                                                            if(this.state.mainmenu[2].children.length === 0){
+                                                                this.state.mainmenu.splice(2,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }else{
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log == '1'){
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[2].children.length === 0){
-                                                        this.state.mainmenu.splice(2,1)
-                                                        if(this.state.mainmenu[2].children.length === 0){
-                                                            this.state.mainmenu.splice(2,1)
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[3].children.length === 0){
                                                             this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
                                                         }
                                                     }
-                                                }
-                                            } 
+                                                } 
+                                            }
                                         }
+                                       
                                     }else{
-                                        // Slides
+                                        // Pieces
                                         if(this.state.mainmenu[2].children.length === 0){
                                             this.state.mainmenu.splice(2,1)
-                                            // Log, Statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
+                                            // Slides
+                                            if(this.state.mainmenu[2].children.length === 0){
+                                                this.state.mainmenu.splice(2,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
+                                                        if(this.state.mainmenu[3].children.length === 0){
+                                                            this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[3].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
                                                         if(this.state.mainmenu[3].children.length === 0){
                                                             this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }
-                                                }
-                                            }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[3].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
-                                                        if(this.state.mainmenu[3].children.length === 0){
-                                                            this.state.mainmenu.splice(3,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[2].children.length === 0){
-                                                        this.state.mainmenu.splice(2,1)
                                                         if(this.state.mainmenu[2].children.length === 0){
                                                             this.state.mainmenu.splice(2,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[3].children.length === 0){
-                                                            this.state.mainmenu.splice(3,1)
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }else{
-                                            // log, statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[2].children.length === 0){
+                                                                this.state.mainmenu.splice(2,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log == '1'){
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }else{
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[3].children.length === 0){
+                                                            this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }
+                                                    }
+                                                } 
+                                            }
+                                        }else{
+                                            // Slides
+                                            if(this.state.mainmenu[3].children.length === 0){
+                                                this.state.mainmenu.splice(3,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[3].children.length === 0){
+                                                            this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }else{
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log == '1'){
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[3].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
-                                                        if(this.state.mainmenu[3].children.length === 0){
-                                                            this.state.mainmenu.splice(3,1)
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }
-                                                }
-                                            } 
+                                                } 
+                                            }
                                         }
                                     }
                                 }else{
+                                    // Maintenances
                                     if(this.state.mainmenu[2].children.length === 0){
                                         this.state.mainmenu.splice(2,1)
+                                        // Pieces
                                         if(this.state.mainmenu[2].children.length === 0){
                                             this.state.mainmenu.splice(2,1)
-                                            // Log, Statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
+                                            // Slides
+                                            if(this.state.mainmenu[2].children.length === 0){
+                                                this.state.mainmenu.splice(2,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
+                                                        if(this.state.mainmenu[3].children.length === 0){
+                                                            this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[3].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
                                                         if(this.state.mainmenu[3].children.length === 0){
                                                             this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }
-                                                }
-                                            }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[3].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
-                                                        if(this.state.mainmenu[3].children.length === 0){
-                                                            this.state.mainmenu.splice(3,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[2].children.length === 0){
-                                                        this.state.mainmenu.splice(2,1)
                                                         if(this.state.mainmenu[2].children.length === 0){
                                                             this.state.mainmenu.splice(2,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[3].children.length === 0){
-                                                            this.state.mainmenu.splice(3,1)
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }else{
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[2].children.length === 0){
+                                                                this.state.mainmenu.splice(2,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log == '1'){
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }else{
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[3].children.length === 0){
+                                                            this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }
+                                                    }
+                                                } 
+                                            }
+                                        }else{
+                                            // Slides
+                                            if(this.state.mainmenu[3].children.length === 0){
+                                                this.state.mainmenu.splice(3,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[3].children.length === 0){
+                                                            this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }else{
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[3].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
-                                                        if(this.state.mainmenu[3].children.length === 0){
-                                                            this.state.mainmenu.splice(3,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }
-                                                }
+                                                } 
                                             }
                                         }
+                                       
                                     }else{
+                                        // Pieces
                                         if(this.state.mainmenu[3].children.length === 0){
                                             this.state.mainmenu.splice(3,1)
-                                            // Log, Statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
+                                            // Slides
+                                            if(this.state.mainmenu[3].children.length === 0){
+                                                this.state.mainmenu.splice(3,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }
-                                                }
-                                            }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[3].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
                                                         if(this.state.mainmenu[3].children.length === 0){
                                                             this.state.mainmenu.splice(3,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }else{
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }
+                                                } 
+                                            }
+                                        }else{
+                                            // Slides
+                                            if(this.state.mainmenu[4].children.length === 0){
+                                                this.state.mainmenu.splice(4,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }else{
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }
-                                                }
+                                                } 
                                             }
                                         }
                                     }
@@ -4498,431 +5195,873 @@ export class sidebar extends Component {
                                     // Maintenances
                                     if(this.state.mainmenu[2].children.length === 0){
                                         this.state.mainmenu.splice(2,1)
-                                        // Slides
+                                        // Pieces
                                         if(this.state.mainmenu[2].children.length === 0){
                                             this.state.mainmenu.splice(2,1)
-                                            // Log, Statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
+                                            // Slides
+                                            if(this.state.mainmenu[2].children.length === 0){
+                                                this.state.mainmenu.splice(2,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
+                                                        if(this.state.mainmenu[3].children.length === 0){
+                                                            this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[3].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[3].children.length === 0){
                                                             this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }
-                                                }
-                                            }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[3].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
-                                                        if(this.state.mainmenu[3].children.length === 0){
-                                                            this.state.mainmenu.splice(3,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[2].children.length === 0){
-                                                        this.state.mainmenu.splice(2,1)
                                                         if(this.state.mainmenu[2].children.length === 0){
                                                             this.state.mainmenu.splice(2,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[3].children.length === 0){
-                                                            this.state.mainmenu.splice(3,1)
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }else{
-                                        // Log, Statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[2].children.length === 0){
+                                                                this.state.mainmenu.splice(2,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }else{
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[3].children.length === 0){
+                                                            this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }
+                                                    }
+                                                } 
+                                            }
+                                        }else{
+                                            // Slides
+                                            if(this.state.mainmenu[3].children.length === 0){
+                                                this.state.mainmenu.splice(3,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[3].children.length === 0){
+                                                            this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }else{
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[3].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
-                                                        if(this.state.mainmenu[3].children.length === 0){
-                                                            this.state.mainmenu.splice(3,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }
-                                                }
-                                            } 
+                                                } 
+                                            }
                                         }
                                     }else{
-                                    // Slides
+                                        // Pieces
                                         if(this.state.mainmenu[3].children.length === 0){
                                             this.state.mainmenu.splice(3,1)
-                                            // Log, Statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
+                                            // Slides
+                                            if(this.state.mainmenu[3].children.length === 0){
+                                                this.state.mainmenu.splice(3,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }
-                                                }
-                                            }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[3].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
                                                         if(this.state.mainmenu[3].children.length === 0){
                                                             this.state.mainmenu.splice(3,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }else{
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }
+                                                } 
+                                            }
+                                        }else{
+                                            // Slides
+                                            if(this.state.mainmenu[4].children.length === 0){
+                                                this.state.mainmenu.splice(4,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }else{
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }
-                                                }
-                                            } 
-                                        } 
+                                                } 
+                                            }
+                                        }
                                     }
                                 }else{
                                     // Maintenances
                                     if(this.state.mainmenu[3].children.length === 0){
                                         this.state.mainmenu.splice(3,1)
-                                        // Slides
+                                        // Pieces
                                         if(this.state.mainmenu[3].children.length === 0){
                                             this.state.mainmenu.splice(3,1)
-                                            // Log, Statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
+                                            // Slides
+                                            if(this.state.mainmenu[3].children.length === 0){
+                                                this.state.mainmenu.splice(3,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
+                                                        if(this.state.mainmenu[3].children.length === 0){
+                                                            this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[3].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
-                                                        if(this.state.mainmenu[3].children.length === 0){
-                                                            this.state.mainmenu.splice(3,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }
+                                                } 
+                                            }
+                                        }else{
+                                            // Slides
+                                            if(this.state.mainmenu[4].children.length === 0){
+                                                this.state.mainmenu.splice(4,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }
                                                 }
-                                            }
-                                        }else{
-                                        // Log, Statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
+                                            }else{
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }
+                                                    }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                } 
+                                            }
+                                        }
+                                    }else{
+                                        // Pieces
+                                        if(this.state.mainmenu[4].children.length === 0){
+                                            this.state.mainmenu.splice(4,1)
+                                            // Slides
+                                            if(this.state.mainmenu[4].children.length === 0){
+                                                this.state.mainmenu.splice(4,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }else{
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                } 
+                                            }
+                                        }else{
+                                           // Slides
+                                            if(this.state.mainmenu[5].children.length === 0){
+                                                this.state.mainmenu.splice(5,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }else{
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[8].children.length === 0){
+                                                            this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[7].children.length === 0){
                                                             this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }
-                                                }
-                                            }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             } 
                                         }
-                                    }else{
-                                    // Slides
-                                        if(this.state.mainmenu[4].children.length === 0){
-                                            this.state.mainmenu.splice(4,1)
-                                            // Log, Statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }
-                                                }
-                                            }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }else{
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[7].children.length === 0){
-                                                        this.state.mainmenu.splice(7,1)
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[8].children.length === 0){
-                                                            this.state.mainmenu.splice(8,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
-                                                        }
-                                                    }
-                                                }
-                                            }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }
-                                                }
-                                            } 
-                                        } 
                                     } 
                                 }
                             }
@@ -4936,432 +6075,872 @@ export class sidebar extends Component {
                                     // Maintenances
                                     if(this.state.mainmenu[2].children.length === 0){
                                         this.state.mainmenu.splice(2,1)
-                                        // Slides
+                                        // Pieces
                                         if(this.state.mainmenu[2].children.length === 0){
                                             this.state.mainmenu.splice(2,1)
-                                            // log, statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
+                                            // Slides
+                                            if(this.state.mainmenu[2].children.length === 0){
+                                                this.state.mainmenu.splice(2,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
+                                                        if(this.state.mainmenu[3].children.length === 0){
+                                                            this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[3].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
                                                         if(this.state.mainmenu[3].children.length === 0){
                                                             this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }
-                                                }
-                                            }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[3].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
-                                                        if(this.state.mainmenu[3].children.length === 0){
-                                                            this.state.mainmenu.splice(3,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[2].children.length === 0){
-                                                        this.state.mainmenu.splice(2,1)
                                                         if(this.state.mainmenu[2].children.length === 0){
                                                             this.state.mainmenu.splice(2,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[3].children.length === 0){
-                                                            this.state.mainmenu.splice(3,1)
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }else{
-                                            // Log, Statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[2].children.length === 0){
+                                                                this.state.mainmenu.splice(2,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log == '1'){
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }else{
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[3].children.length === 0){
+                                                            this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }
+                                                    }
+                                                } 
+                                            }
+                                        }else{
+                                            // Slides
+                                            if(this.state.mainmenu[3].children.length === 0){
+                                                this.state.mainmenu.splice(3,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[3].children.length === 0){
+                                                            this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }else{
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[3].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
-                                                        if(this.state.mainmenu[3].children.length === 0){
-                                                            this.state.mainmenu.splice(3,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[3].children.length === 0){
+                                                        if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }
-                                                }
+                                                } 
                                             }
                                         }
                                     }else{
-                                        // Slides
+                                        // Pieces
                                         if(this.state.mainmenu[3].children.length === 0){
                                             this.state.mainmenu.splice(3,1)
-                                            // log, statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
+                                            // Slides
+                                            if(this.state.mainmenu[3].children.length === 0){
+                                                this.state.mainmenu.splice(3,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }
-                                                }
-                                            }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[3].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
                                                         if(this.state.mainmenu[3].children.length === 0){
                                                             this.state.mainmenu.splice(3,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }else{
-                                            // Log, Statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }
+                                                } 
+                                            }
+                                        }else{
+                                            // Slides
+                                            if(this.state.mainmenu[4].children.length === 0){
+                                                this.state.mainmenu.splice(4,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }else{
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }
-                                                }
+                                                } 
                                             }
-                                        }
+                                        }   
                                     }
                                 }else{
-                                // Maintenances
+                                    // Maintenances
                                     if(this.state.mainmenu[3].children.length === 0){
                                         this.state.mainmenu.splice(3,1)
-                                        // Slides
+                                        // Pieces
                                         if(this.state.mainmenu[3].children.length === 0){
                                             this.state.mainmenu.splice(3,1)
-                                            // log, statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
+                                            // Slides
+                                            if(this.state.mainmenu[3].children.length === 0){
+                                                this.state.mainmenu.splice(3,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }
-                                                }
-                                            }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[3].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
                                                         if(this.state.mainmenu[3].children.length === 0){
                                                             this.state.mainmenu.splice(3,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }else{
-                                            // Log, Statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }
+                                                } 
+                                            }
+                                        }else{
+                                            // Slides
+                                            if(this.state.mainmenu[4].children.length === 0){
+                                                this.state.mainmenu.splice(4,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }else{
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }
-                                                }
+                                                } 
                                             }
                                         }
                                     }else{
-                                        // Slides
+                                        // Pieces
                                         if(this.state.mainmenu[4].children.length === 0){
                                             this.state.mainmenu.splice(4,1)
-                                            // log, statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
+                                            // Slides
+                                            if(this.state.mainmenu[4].children.length === 0){
+                                                this.state.mainmenu.splice(4,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }
-                                                }
-                                            }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }else{
-                                            // Log, Statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[7].children.length === 0){
-                                                        this.state.mainmenu.splice(7,1)
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[8].children.length === 0){
-                                                            this.state.mainmenu.splice(8,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }
+                                                    }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                } 
+                                            }
+                                        }else{
+                                           // Slides
+                                            if(this.state.mainmenu[5].children.length === 0){
+                                                this.state.mainmenu.splice(5,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }else{
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[8].children.length === 0){
+                                                            this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[7].children.length === 0){
                                                             this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }
-                                            }
+                                            } 
                                         }
                                     }
                                 }
@@ -5373,428 +6952,868 @@ export class sidebar extends Component {
                                     // Maintenances
                                     if(this.state.mainmenu[3].children.length === 0){
                                         this.state.mainmenu.splice(3,1)
-                                        // Slides
+                                        // Pieces
                                         if(this.state.mainmenu[3].children.length === 0){
                                             this.state.mainmenu.splice(3,1)
-                                            // log, statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
+                                            // Slides
+                                            if(this.state.mainmenu[3].children.length === 0){
+                                                this.state.mainmenu.splice(3,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }
-                                                }
-                                            }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[3].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
                                                         if(this.state.mainmenu[3].children.length === 0){
                                                             this.state.mainmenu.splice(3,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }else{
-                                            // Log, Statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }
+                                                } 
+                                            }
+                                        }else{
+                                            // Slides
+                                            if(this.state.mainmenu[4].children.length === 0){
+                                                this.state.mainmenu.splice(4,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }else{
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }
-                                                }
+                                                } 
                                             }
                                         }
                                     }else{
-                                        // Slides
+                                        // Pieces
                                         if(this.state.mainmenu[4].children.length === 0){
                                             this.state.mainmenu.splice(4,1)
-                                            // log, statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
+                                            // Slides
+                                            if(this.state.mainmenu[4].children.length === 0){
+                                                this.state.mainmenu.splice(4,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }
-                                                }
-                                            }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }else{
-                                            // Log, Statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[7].children.length === 0){
-                                                        this.state.mainmenu.splice(7,1)
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[8].children.length === 0){
-                                                            this.state.mainmenu.splice(8,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }
+                                                    }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                } 
+                                            }
+                                        }else{
+                                            // Slides
+                                            if(this.state.mainmenu[5].children.length === 0){
+                                                this.state.mainmenu.splice(5,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }else{
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[8].children.length === 0){
+                                                            this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[7].children.length === 0){
                                                             this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }
-                                            }
+                                            } 
                                         }
                                     }
                                 }else{
                                 // Maintenances
                                     if(this.state.mainmenu[4].children.length === 0){
                                         this.state.mainmenu.splice(4,1)
-                                        // Slides
+                                        // Pieces
                                         if(this.state.mainmenu[4].children.length === 0){
                                             this.state.mainmenu.splice(4,1)
-                                            // log, statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
+                                            // Slides
+                                            if(this.state.mainmenu[4].children.length === 0){
+                                                this.state.mainmenu.splice(4,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }
-                                                }
-                                            }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }else{
-                                            // Log, Statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[7].children.length === 0){
-                                                        this.state.mainmenu.splice(7,1)
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[8].children.length === 0){
-                                                            this.state.mainmenu.splice(8,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }
+                                                    }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                } 
+                                            }
+                                        }else{
+                                            // Slides
+                                            if(this.state.mainmenu[5].children.length === 0){
+                                                this.state.mainmenu.splice(5,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }else{
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[8].children.length === 0){
+                                                            this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[7].children.length === 0){
                                                             this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }
-                                            }
+                                            } 
                                         }
                                     }else{
-                                        // Slides
+                                        // Pieces
                                         if(this.state.mainmenu[5].children.length === 0){
                                             this.state.mainmenu.splice(5,1)
-                                            // log, statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[7].children.length === 0){
-                                                        this.state.mainmenu.splice(7,1)
+                                            // Slides
+                                            if(this.state.mainmenu[5].children.length === 0){
+                                                this.state.mainmenu.splice(5,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[7].children.length === 0){
                                                             this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[8].children.length === 0){
-                                                            this.state.mainmenu.splice(8,1)
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[8].children.length === 0){
+                                                            this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[7].children.length === 0){
                                                             this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }
                                         }else{
-                                            // Log, Statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[8].children.length === 0){
-                                                        this.state.mainmenu.splice(8,1)
+                                            // Slides
+                                            if(this.state.mainmenu[6].children.length === 0){
+                                                this.state.mainmenu.splice(6,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[8].children.length === 0){
                                                             this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[9].children.length === 0){
-                                                            this.state.mainmenu.splice(9,1)
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[7].children.length === 0){
-                                                        this.state.mainmenu.splice(7,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[7].children.length === 0){
                                                             this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[8].children.length === 0){
-                                                            this.state.mainmenu.splice(8,1)
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[7].children.length === 0){
-                                                        this.state.mainmenu.splice(7,1)
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[9].children.length === 0){
+                                                            this.state.mainmenu.splice(9,1)
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[10].children.length === 0){
+                                                                this.state.mainmenu.splice(10,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[8].children.length === 0){
                                                             this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[8].children.length === 0){
+                                                            this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[7].children.length === 0){
                                                             this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -5817,429 +7836,873 @@ export class sidebar extends Component {
                                     // Maintenances
                                     if(this.state.mainmenu[2].children.length === 0){
                                         this.state.mainmenu.splice(2,1)
-                                        // Slides
+                                        // Pieces
                                         if(this.state.mainmenu[2].children.length === 0){
                                             this.state.mainmenu.splice(2,1)
-                                            // Log, statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
+                                            // Slides
+                                            if(this.state.mainmenu[2].children.length === 0){
+                                                this.state.mainmenu.splice(2,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
+                                                        if(this.state.mainmenu[3].children.length === 0){
+                                                            this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[3].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
                                                         if(this.state.mainmenu[3].children.length === 0){
                                                             this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }
-                                                }
-                                            }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[3].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
-                                                        if(this.state.mainmenu[3].children.length === 0){
-                                                            this.state.mainmenu.splice(3,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[2].children.length === 0){
-                                                        this.state.mainmenu.splice(2,1)
                                                         if(this.state.mainmenu[2].children.length === 0){
                                                             this.state.mainmenu.splice(2,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[3].children.length === 0){
-                                                            this.state.mainmenu.splice(3,1)
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }else{
-                                            // Log, Statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[2].children.length === 0){
+                                                                this.state.mainmenu.splice(2,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }else{
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[3].children.length === 0){
+                                                            this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }
+                                                    }
+                                                } 
+                                            }
+                                        }else{
+                                            // Slides
+                                            if(this.state.mainmenu[3].children.length === 0){
+                                                this.state.mainmenu.splice(3,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[3].children.length === 0){
+                                                            this.state.mainmenu.splice(3,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }else{
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[3].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
-                                                        if(this.state.mainmenu[3].children.length === 0){
-                                                            this.state.mainmenu.splice(3,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }
-                                                }
-                                            } 
+                                                } 
+                                            }
                                         }
                                     }else{
-                                        // Slides
+                                        // Pieces
                                         if(this.state.mainmenu[3].children.length === 0){
                                             this.state.mainmenu.splice(3,1)
-                                            // Log, Statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
+                                            // Slides
+                                            if(this.state.mainmenu[3].children.length === 0){
+                                                this.state.mainmenu.splice(3,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }
-                                                }
-                                            }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[3].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
                                                         if(this.state.mainmenu[3].children.length === 0){
                                                             this.state.mainmenu.splice(3,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }else{
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }
+                                                } 
+                                            }
+                                        }else{
+                                            // Slides
+                                            if(this.state.mainmenu[4].children.length === 0){
+                                                this.state.mainmenu.splice(4,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }else{
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }
-                                                }
-                                            } 
-                                        }
+                                                } 
+                                            }
+                                        }   
                                     }
                                 }else{
                                     // Maintenances
                                     if(this.state.mainmenu[3].children.length === 0){
                                         this.state.mainmenu.splice(3,1)
+                                        // Pieces
                                         if(this.state.mainmenu[3].children.length === 0){
                                             this.state.mainmenu.splice(3,1)
-                                            // Log, Statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
+                                            // Slides
+                                            if(this.state.mainmenu[3].children.length === 0){
+                                                this.state.mainmenu.splice(3,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }
-                                                }
-                                            }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[3].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
                                                         if(this.state.mainmenu[3].children.length === 0){
                                                             this.state.mainmenu.splice(3,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }else{
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }
+                                                } 
+                                            }
+                                        }else{
+                                            // Slides
+                                            if(this.state.mainmenu[4].children.length === 0){
+                                                this.state.mainmenu.splice(4,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }else{
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }
-                                                }
+                                                } 
                                             }
                                         }
                                     }else{
-                                        // Slides
+                                        // Pieces
                                         if(this.state.mainmenu[4].children.length === 0){
                                             this.state.mainmenu.splice(4,1)
-                                            // Log, Statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
+                                            // Slides
+                                            if(this.state.mainmenu[4].children.length === 0){
+                                                this.state.mainmenu.splice(4,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }
-                                                }
-                                            }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }else{
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[7].children.length === 0){
-                                                        this.state.mainmenu.splice(7,1)
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[8].children.length === 0){
-                                                            this.state.mainmenu.splice(8,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }
+                                                    }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                } 
+                                            }
+                                        }else{
+                                            // Slides
+                                            if(this.state.mainmenu[5].children.length === 0){
+                                                this.state.mainmenu.splice(5,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }else{
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[8].children.length === 0){
+                                                            this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[7].children.length === 0){
                                                             this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }
-                                            }
-                                        }
+                                            } 
+                                        }  
                                     }
                                 }
                             }else{
@@ -6250,211 +8713,432 @@ export class sidebar extends Component {
                                     // Maintenances
                                     if(this.state.mainmenu[3].children.length === 0){
                                         this.state.mainmenu.splice(3,1)
-                                        // Slides
+                                        // Pieces
                                         if(this.state.mainmenu[3].children.length === 0){
                                             this.state.mainmenu.splice(3,1)
-                                            // Log, Statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
+                                            // Slides
+                                            if(this.state.mainmenu[3].children.length === 0){
+                                                this.state.mainmenu.splice(3,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }
-                                                }
-                                            }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[3].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
                                                         if(this.state.mainmenu[3].children.length === 0){
                                                             this.state.mainmenu.splice(3,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }else{
-                                        // Log, Statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }
+                                                } 
+                                            }
+                                        }else{
+                                            // Slides
+                                            if(this.state.mainmenu[4].children.length === 0){
+                                                this.state.mainmenu.splice(4,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }else{
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }
-                                                }
-                                            } 
+                                                } 
+                                            }
                                         }
                                     }else{
-                                    // Slides
+                                        // Pieces
                                         if(this.state.mainmenu[4].children.length === 0){
                                             this.state.mainmenu.splice(4,1)
-                                            // Log, Statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
+                                            // Slides
+                                            if(this.state.mainmenu[4].children.length === 0){
+                                                this.state.mainmenu.splice(4,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }
-                                                }
-                                            }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }else{
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[7].children.length === 0){
-                                                        this.state.mainmenu.splice(7,1)
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[8].children.length === 0){
-                                                            this.state.mainmenu.splice(8,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }
+                                                    }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                } 
+                                            }
+                                        }else{
+                                            // Slides
+                                            if(this.state.mainmenu[5].children.length === 0){
+                                                this.state.mainmenu.splice(5,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }else{
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[8].children.length === 0){
+                                                            this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[7].children.length === 0){
                                                             this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -6465,216 +9149,437 @@ export class sidebar extends Component {
                                     // Maintenances
                                     if(this.state.mainmenu[4].children.length === 0){
                                         this.state.mainmenu.splice(4,1)
-                                        // Slides
+                                        // Pieces
                                         if(this.state.mainmenu[4].children.length === 0){
                                             this.state.mainmenu.splice(4,1)
-                                            // Log, Statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
+                                            // Slides
+                                            if(this.state.mainmenu[4].children.length === 0){
+                                                this.state.mainmenu.splice(4,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }
-                                                }
-                                            }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }else{
-                                        // Log, Statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[7].children.length === 0){
-                                                        this.state.mainmenu.splice(7,1)
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[8].children.length === 0){
-                                                            this.state.mainmenu.splice(8,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }
+                                                    }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                } 
+                                            }
+                                        }else{
+                                            // Slides
+                                            if(this.state.mainmenu[5].children.length === 0){
+                                                this.state.mainmenu.splice(5,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }else{
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[8].children.length === 0){
+                                                            this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[7].children.length === 0){
                                                             this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             } 
                                         }
                                     }else{
-                                    // Slides
+                                        // Pieces
                                         if(this.state.mainmenu[5].children.length === 0){
                                             this.state.mainmenu.splice(5,1)
-                                            // Log, Statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[7].children.length === 0){
-                                                        this.state.mainmenu.splice(7,1)
+                                            // Slides
+                                            if(this.state.mainmenu[5].children.length === 0){
+                                                this.state.mainmenu.splice(5,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[7].children.length === 0){
                                                             this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[8].children.length === 0){
-                                                            this.state.mainmenu.splice(8,1)
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[8].children.length === 0){
+                                                            this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[7].children.length === 0){
                                                             this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }
                                         }else{
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[8].children.length === 0){
-                                                        this.state.mainmenu.splice(8,1)
+                                            // Slides
+                                            if(this.state.mainmenu[6].children.length === 0){
+                                                this.state.mainmenu.splice(6,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[8].children.length === 0){
                                                             this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[9].children.length === 0){
-                                                            this.state.mainmenu.splice(9,1)
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[7].children.length === 0){
-                                                        this.state.mainmenu.splice(7,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[7].children.length === 0){
                                                             this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[8].children.length === 0){
-                                                            this.state.mainmenu.splice(8,1)
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[7].children.length === 0){
-                                                        this.state.mainmenu.splice(7,1)
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[9].children.length === 0){
+                                                            this.state.mainmenu.splice(9,1)
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[10].children.length === 0){
+                                                                this.state.mainmenu.splice(10,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[8].children.length === 0){
                                                             this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[8].children.length === 0){
+                                                            this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[7].children.length === 0){
                                                             this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }
                                                 }
-                                            } 
-                                        } 
+                                            }
+                                        }  
                                     } 
                                 }
                             }
@@ -6688,652 +9593,1309 @@ export class sidebar extends Component {
                                     // Maintenances
                                     if(this.state.mainmenu[3].children.length === 0){
                                         this.state.mainmenu.splice(3,1)
-                                        // Slides
+                                        // Pieces
                                         if(this.state.mainmenu[3].children.length === 0){
                                             this.state.mainmenu.splice(3,1)
-                                            // log, statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
+                                            // Slides
+                                            if(this.state.mainmenu[3].children.length === 0){
+                                                this.state.mainmenu.splice(3,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }
-                                                }
-                                            }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[3].children.length === 0){
-                                                        this.state.mainmenu.splice(3,1)
                                                         if(this.state.mainmenu[3].children.length === 0){
                                                             this.state.mainmenu.splice(3,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }else{
-                                            // log, statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[3].children.length === 0){
+                                                                this.state.mainmenu.splice(3,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }
+                                                } 
+                                            }
+                                        }else{
+                                            // Slides
+                                            if(this.state.mainmenu[4].children.length === 0){
+                                                this.state.mainmenu.splice(4,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[4].children.length === 0){
+                                                            this.state.mainmenu.splice(4,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }else{
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
-                                                        if(this.state.mainmenu[4].children.length === 0){
-                                                            this.state.mainmenu.splice(4,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }
-                                                }
+                                                } 
                                             }
                                         }
                                     }else{
-                                        // Slides
+                                        // Pieces
                                         if(this.state.mainmenu[4].children.length === 0){
                                             this.state.mainmenu.splice(4,1)
-                                            // log, statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
+                                            // Slides
+                                            if(this.state.mainmenu[4].children.length === 0){
+                                                this.state.mainmenu.splice(4,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }
-                                                }
-                                            }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }else{
-                                            // log, statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[7].children.length === 0){
-                                                        this.state.mainmenu.splice(7,1)
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[8].children.length === 0){
-                                                            this.state.mainmenu.splice(8,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }
+                                                    }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                } 
+                                            }
+                                        }else{
+                                            // Slides
+                                            if(this.state.mainmenu[5].children.length === 0){
+                                                this.state.mainmenu.splice(5,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }else{
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[8].children.length === 0){
+                                                            this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[7].children.length === 0){
                                                             this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }
-                                            }
-                                        }
+                                            } 
+                                        } 
                                     }
                                 }else{
-                                // Maintenances
+                                    // Maintenances
                                     if(this.state.mainmenu[4].children.length === 0){
                                         this.state.mainmenu.splice(4,1)
-                                        // Slides
+                                        // Pieces
                                         if(this.state.mainmenu[4].children.length === 0){
                                             this.state.mainmenu.splice(4,1)
-                                            // log, statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
+                                            // Slides
+                                            if(this.state.mainmenu[4].children.length === 0){
+                                                this.state.mainmenu.splice(4,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }
-                                                }
-                                            }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }else{
-                                            // log, statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[7].children.length === 0){
-                                                        this.state.mainmenu.splice(7,1)
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[8].children.length === 0){
-                                                            this.state.mainmenu.splice(8,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }
+                                                    }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                } 
+                                            }
+                                        }else{
+                                            // Slides
+                                            if(this.state.mainmenu[5].children.length === 0){
+                                                this.state.mainmenu.splice(5,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }else{
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[8].children.length === 0){
+                                                            this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[7].children.length === 0){
                                                             this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }
-                                            }
-                                        }
+                                            } 
+                                        } 
                                     }else{
-                                        // Slides
+                                        // Pieces
                                         if(this.state.mainmenu[5].children.length === 0){
                                             this.state.mainmenu.splice(5,1)
-                                            // log, statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[7].children.length === 0){
-                                                        this.state.mainmenu.splice(7,1)
+                                            // Slides
+                                            if(this.state.mainmenu[5].children.length === 0){
+                                                this.state.mainmenu.splice(5,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[7].children.length === 0){
                                                             this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[8].children.length === 0){
-                                                            this.state.mainmenu.splice(8,1)
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[8].children.length === 0){
+                                                            this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[7].children.length === 0){
                                                             this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }
                                         }else{
-                                            // log, statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[8].children.length === 0){
-                                                        this.state.mainmenu.splice(8,1)
+                                            // Slides
+                                            if(this.state.mainmenu[6].children.length === 0){
+                                                this.state.mainmenu.splice(6,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[8].children.length === 0){
                                                             this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[9].children.length === 0){
-                                                            this.state.mainmenu.splice(9,1)
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[7].children.length === 0){
-                                                        this.state.mainmenu.splice(7,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[7].children.length === 0){
                                                             this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[8].children.length === 0){
-                                                            this.state.mainmenu.splice(8,1)
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[7].children.length === 0){
-                                                        this.state.mainmenu.splice(7,1)
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[9].children.length === 0){
+                                                            this.state.mainmenu.splice(9,1)
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[10].children.length === 0){
+                                                                this.state.mainmenu.splice(10,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[8].children.length === 0){
                                                             this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[8].children.length === 0){
+                                                            this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[7].children.length === 0){
                                                             this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }
-                                        }
+                                        } 
                                     } 
                                 }
                                 
                             }else{
-                            // Machines // Arret pour demain
+                                // Machines // Arret pour demain
                                 if(this.state.mainmenu[4].children.length === 0){
                                     this.state.mainmenu.splice(4,1)
                                     // Maintenances // Arret pour demain
                                     if(this.state.mainmenu[4].children.length === 0){
                                         this.state.mainmenu.splice(4,1)
-                                        // Slides Arret pour demain else
+                                         // Pieces
                                         if(this.state.mainmenu[4].children.length === 0){
                                             this.state.mainmenu.splice(4,1)
-                                            // log, statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
+                                            // Slides
+                                            if(this.state.mainmenu[4].children.length === 0){
+                                                this.state.mainmenu.splice(4,1)
+                                                // Log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[5].children.length === 0){
                                                             this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }
-                                                }
-                                            }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    if(this.state.mainmenu[4].children.length === 0){
-                                                        this.state.mainmenu.splice(4,1)
                                                         if(this.state.mainmenu[4].children.length === 0){
                                                             this.state.mainmenu.splice(4,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }else{
-                                            // Arret pour demain
-                                            // log, statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[7].children.length === 0){
-                                                        this.state.mainmenu.splice(7,1)
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[8].children.length === 0){
-                                                            this.state.mainmenu.splice(8,1)
-                                                        }
-                                                    }
-                                                }else{
-                                                    // Arret pour demain
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
-                                                        }
-                                                    }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[4].children.length === 0){
+                                                                this.state.mainmenu.splice(4,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
+                                                // Log, Statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }
+                                                    }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                } 
+                                            }
+                                        }else{
+                                            // Slides
+                                            if(this.state.mainmenu[5].children.length === 0){
+                                                this.state.mainmenu.splice(5,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(this.props.roledetails.role[0].statistique == '1'){
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }else{
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[8].children.length === 0){
+                                                            this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[7].children.length === 0){
                                                             this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }
-                                            }
+                                            } 
                                         }
                                     }else{
-                                        // Slides
+                                        // Pieces
                                         if(this.state.mainmenu[5].children.length === 0){
                                             this.state.mainmenu.splice(5,1)
-                                            // log, statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[7].children.length === 0){
-                                                        this.state.mainmenu.splice(7,1)
+                                            // Slides
+                                            if(this.state.mainmenu[5].children.length === 0){
+                                                this.state.mainmenu.splice(5,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[7].children.length === 0){
                                                             this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[8].children.length === 0){
-                                                            this.state.mainmenu.splice(8,1)
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    // aRRET a continuer
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[8].children.length === 0){
+                                                            this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[7].children.length === 0){
                                                             this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }
                                         }else{
-                                            // log, statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[8].children.length === 0){
-                                                        this.state.mainmenu.splice(8,1)
+                                            // Slides
+                                            if(this.state.mainmenu[6].children.length === 0){
+                                                this.state.mainmenu.splice(6,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[8].children.length === 0){
                                                             this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[9].children.length === 0){
-                                                            this.state.mainmenu.splice(9,1)
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[7].children.length === 0){
-                                                        this.state.mainmenu.splice(7,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[7].children.length === 0){
                                                             this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[8].children.length === 0){
-                                                            this.state.mainmenu.splice(8,1)
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[7].children.length === 0){
-                                                        this.state.mainmenu.splice(7,1)
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[9].children.length === 0){
+                                                            this.state.mainmenu.splice(9,1)
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[10].children.length === 0){
+                                                                this.state.mainmenu.splice(10,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[8].children.length === 0){
                                                             this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[8].children.length === 0){
+                                                            this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[7].children.length === 0){
                                                             this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -7341,215 +10903,435 @@ export class sidebar extends Component {
                                         }
                                     }
                                 }else{
-                                // Maintenances
+                                    // Maintenances
                                     if(this.state.mainmenu[5].children.length === 0){
                                         this.state.mainmenu.splice(5,1)
-                                        // Slides
+                                        // Pieces
                                         if(this.state.mainmenu[5].children.length === 0){
                                             this.state.mainmenu.splice(5,1)
-                                            // log, statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[7].children.length === 0){
-                                                        this.state.mainmenu.splice(7,1)
+                                            // Slides
+                                            if(this.state.mainmenu[5].children.length === 0){
+                                                this.state.mainmenu.splice(5,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[7].children.length === 0){
                                                             this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[8].children.length === 0){
-                                                            this.state.mainmenu.splice(8,1)
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
+                                                        if(this.state.mainmenu[5].children.length === 0){
+                                                            this.state.mainmenu.splice(5,1)
+                                                            if(this.state.mainmenu[5].children.length === 0){
+                                                                this.state.mainmenu.splice(5,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[8].children.length === 0){
+                                                            this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[7].children.length === 0){
                                                             this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[5].children.length === 0){
-                                                        this.state.mainmenu.splice(5,1)
-                                                        if(this.state.mainmenu[5].children.length === 0){
-                                                            this.state.mainmenu.splice(5,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[6].children.length === 0){
                                                             this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }
                                         }else{
-                                            // log, statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[8].children.length === 0){
-                                                        this.state.mainmenu.splice(8,1)
+                                            // Slides
+                                            if(this.state.mainmenu[6].children.length === 0){
+                                                this.state.mainmenu.splice(6,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[8].children.length === 0){
                                                             this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[9].children.length === 0){
-                                                            this.state.mainmenu.splice(9,1)
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[7].children.length === 0){
-                                                        this.state.mainmenu.splice(7,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[7].children.length === 0){
                                                             this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[8].children.length === 0){
-                                                            this.state.mainmenu.splice(8,1)
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[7].children.length === 0){
-                                                        this.state.mainmenu.splice(7,1)
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[9].children.length === 0){
+                                                            this.state.mainmenu.splice(9,1)
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[10].children.length === 0){
+                                                                this.state.mainmenu.splice(10,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[8].children.length === 0){
                                                             this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[8].children.length === 0){
+                                                            this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[7].children.length === 0){
                                                             this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }
                                         }
                                     }else{
-                                        // Slides
+                                        // Pieces
                                         if(this.state.mainmenu[6].children.length === 0){
                                             this.state.mainmenu.splice(6,1)
-                                            // log, statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[8].children.length === 0){
-                                                        this.state.mainmenu.splice(8,1)
+                                            // Slides
+                                            if(this.state.mainmenu[6].children.length === 0){
+                                                this.state.mainmenu.splice(6,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[8].children.length === 0){
                                                             this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[9].children.length === 0){
-                                                            this.state.mainmenu.splice(9,1)
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[7].children.length === 0){
-                                                        this.state.mainmenu.splice(7,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[7].children.length === 0){
                                                             this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[8].children.length === 0){
-                                                            this.state.mainmenu.splice(8,1)
+                                                        if(this.state.mainmenu[6].children.length === 0){
+                                                            this.state.mainmenu.splice(6,1)
+                                                            if(this.state.mainmenu[6].children.length === 0){
+                                                                this.state.mainmenu.splice(6,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[7].children.length === 0){
-                                                        this.state.mainmenu.splice(7,1)
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[9].children.length === 0){
+                                                            this.state.mainmenu.splice(9,1)
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[10].children.length === 0){
+                                                                this.state.mainmenu.splice(10,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[8].children.length === 0){
                                                             this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[6].children.length === 0){
-                                                        this.state.mainmenu.splice(6,1)
-                                                        if(this.state.mainmenu[6].children.length === 0){
-                                                            this.state.mainmenu.splice(6,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[8].children.length === 0){
+                                                            this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[7].children.length === 0){
                                                             this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }
                                         }else{
-                                            // log, statistiques, utilisateurs, roles
-                                            if(this.props.roledetails.role[0].log == '1'){
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[9].children.length === 0){
-                                                        this.state.mainmenu.splice(9,1)
+                                            // Slides
+                                            if(this.state.mainmenu[7].children.length === 0){
+                                                this.state.mainmenu.splice(7,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[9].children.length === 0){
                                                             this.state.mainmenu.splice(9,1)
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[10].children.length === 0){
+                                                                this.state.mainmenu.splice(10,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[10].children.length === 0){
-                                                            this.state.mainmenu.splice(10,1)
+                                                        if(this.state.mainmenu[8].children.length === 0){
+                                                            this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[8].children.length === 0){
-                                                        this.state.mainmenu.splice(8,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
                                                         if(this.state.mainmenu[8].children.length === 0){
                                                             this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }else{
-                                                        if(this.state.mainmenu[9].children.length === 0){
-                                                            this.state.mainmenu.splice(9,1)
+                                                        if(this.state.mainmenu[7].children.length === 0){
+                                                            this.state.mainmenu.splice(7,1)
+                                                            if(this.state.mainmenu[7].children.length === 0){
+                                                                this.state.mainmenu.splice(7,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }else{
-                                                if(this.props.roledetails.role[0].statistique == '1'){
-                                                    if(this.state.mainmenu[8].children.length === 0){
-                                                        this.state.mainmenu.splice(8,1)
-                                                        if(this.state.mainmenu[8].children.length === 0){
-                                                            this.state.mainmenu.splice(8,1)
+                                                // log, statistiques, utilisateurs, roles
+                                                if(this.props.roledetails.role[0].log === '1'){
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[10].children.length === 0){
+                                                            this.state.mainmenu.splice(10,1)
+                                                            if(this.state.mainmenu[10].children.length === 0){
+                                                                this.state.mainmenu.splice(10,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[11].children.length === 0){
+                                                                this.state.mainmenu.splice(11,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[9].children.length === 0){
                                                             this.state.mainmenu.splice(9,1)
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[10].children.length === 0){
+                                                                this.state.mainmenu.splice(10,1)
+                                                            }
                                                         }
                                                     }
                                                 }else{
-                                                    if(this.state.mainmenu[7].children.length === 0){
-                                                        this.state.mainmenu.splice(7,1)
-                                                        if(this.state.mainmenu[7].children.length === 0){
-                                                            this.state.mainmenu.splice(7,1)
+                                                    if(this.props.roledetails.role[0].statistique === '1'){
+                                                        if(this.state.mainmenu[9].children.length === 0){
+                                                            this.state.mainmenu.splice(9,1)
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[10].children.length === 0){
+                                                                this.state.mainmenu.splice(10,1)
+                                                            }
                                                         }
                                                     }else{
                                                         if(this.state.mainmenu[8].children.length === 0){
                                                             this.state.mainmenu.splice(8,1)
+                                                            if(this.state.mainmenu[8].children.length === 0){
+                                                                this.state.mainmenu.splice(8,1)
+                                                            }
+                                                        }else{
+                                                            if(this.state.mainmenu[9].children.length === 0){
+                                                                this.state.mainmenu.splice(9,1)
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -7565,7 +11347,7 @@ export class sidebar extends Component {
             }
         },1000)
 
-        this.state.mainmenu.filter(items => {
+        this.state.mainmenu.filter((items) => {
 
             if (!items.children) {
                 if (items.path === currentUrl)

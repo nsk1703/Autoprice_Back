@@ -95,6 +95,12 @@ export const MENUITEMS = [
         ]
     },
     {
+        title: 'Pieces', icon: Server, type: 'sub', active: false, children: [
+            { path: '/pieces/list-piece', id:"listePiece", title: 'Liste des Pieces', type: 'link' },
+            { path: '/pieces/add-piece', id:"ajouterPiece", title: 'Créer une piece', type: 'link' },
+        ]
+    },
+    {
         title: 'Slides', icon: Sliders, type: 'sub', active: false, children: [
             { path: '/slides/list-slide', id:"listeSlide", title: 'Liste des Slides', type: 'link' },
             { path: '/slides/create-slide', id:"ajouterSlide", title: 'Créer un Slide', type: 'link' },

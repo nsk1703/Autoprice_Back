@@ -7,7 +7,7 @@ import * as roleActions from "../../redux/actions/roleActions";
 import {connect} from "react-redux";
 import BeatLoader from "react-spinners/BeatLoader";
 
-export class edit_roles extends Component {
+export class Edit_roles extends Component {
     constructor(props) {
         super(props);
 
@@ -60,6 +60,11 @@ export class edit_roles extends Component {
             ajouterMaintenance: '0',
             modifierMaintenance: '0',
             supprimerMaintenance: '0',
+
+            listePiece: '0',
+            ajouterPiece: '0',
+            modifierPiece: '0',
+            supprimerPiece: '0',
 
             listeSlide:'0',
             ajouterSlide:'0',
@@ -139,6 +144,11 @@ export class edit_roles extends Component {
                 ajouterMaintenance: this.props.roledetails.role.ajouterMaintenance,
                 modifierMaintenance: this.props.roledetails.role.modifierMaintenance,
                 supprimerMaintenance: this.props.roledetails.role.supprimerMaintenance,
+
+                listePiece: this.props.roledetails.role.listePiece,
+                ajouterPiece: this.props.roledetails.role.ajouterPiece,
+                modifierPiece: this.props.roledetails.role.modifierPiece,
+                supprimerPiece: this.props.roledetails.role.supprimerPiece,
 
                 listeSlide:this.props.roledetails.role.listeSlide,
                 ajouterSlide:this.props.roledetails.role.ajouterSlide,
@@ -925,6 +935,117 @@ export class edit_roles extends Component {
                                                     </div>
                                                 </div>
                                                 <div className="attribute-blocks">
+                                                    <h5 className="f-w-600 mt-2 mb-1">Permissions relatives aux Pieces </h5>
+                                                    <div className="row">
+                                                        <div className="col-xl-3 col-sm-4">
+                                                            <label>Liste des Pieces</label>
+                                                        </div>
+                                                        <div className="col-xl-9 col-sm-8">
+                                                            <div className="form-group m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated">
+                                                                <label className="d-block" >
+                                                                    <input className="radio_animated" id="edo-ani33" 
+                                                                        type="radio" name="listePiece"
+                                                                        value={this.state.active} 
+                                                                        onChange={this.handleInputChange}
+                                                                        checked={this.state.listePiece === this.state.active}
+                                                                    />
+                                                                    Activé
+                                                                </label>
+                                                                <label className="d-block" >
+                                                                    <input className="radio_animated" id="edo-ani34" 
+                                                                        type="radio" name="listePiece"
+                                                                        value={this.state.desactive} 
+                                                                        onChange={this.handleInputChange}
+                                                                        checked={this.state.listePiece === this.state.desactive}
+                                                                    />
+                                                                    Désactivé
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="row">
+                                                        <div className="col-xl-3 col-sm-4">
+                                                            <label>Ajout d'une Piece</label>
+                                                        </div>
+                                                        <div className="col-xl-9 col-sm-8">
+                                                            <div className="form-group m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated">
+                                                                <label className="d-block" >
+                                                                    <input className="radio_animated" id="edo-ani35" 
+                                                                        type="radio" name="ajouterPiece"
+                                                                        value={this.state.active} 
+                                                                        onChange={this.handleInputChange}
+                                                                        checked={this.state.ajouterPiece === this.state.active}
+                                                                    />
+                                                                    Activé
+                                                                    </label>
+                                                                <label className="d-block" >
+                                                                    <input className="radio_animated" id="edo-ani36" 
+                                                                        type="radio" name="ajouterPiece"
+                                                                        value={this.state.desactive}
+                                                                        onChange={this.handleInputChange} 
+                                                                        checked={this.state.ajouterPiece === this.state.desactive}
+                                                                    />
+                                                                    Désactivé
+                                                                    </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="row">
+                                                        <div className="col-xl-3 col-sm-4">
+                                                            <label>Modification de Pieces</label>
+                                                        </div>
+                                                        <div className="col-xl-9 col-sm-8">
+                                                            <div className="form-group m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated">
+                                                                <label className="d-block" >
+                                                                    <input className="radio_animated" id="edo-ani37" 
+                                                                        type="radio" name="modifierPiece"
+                                                                        value={this.state.active}
+                                                                        onChange={this.handleInputChange}
+                                                                        checked={this.state.modifierPiece === this.state.active}
+                                                                    />
+                                                                    Activé
+                                                                    </label>
+                                                                <label className="d-block" >
+                                                                    <input className="radio_animated" id="edo-ani38" 
+                                                                        type="radio" name="modifierPiece"
+                                                                        value={this.state.desactive}
+                                                                        onChange={this.handleInputChange}
+                                                                        checked={this.state.modifierPiece === this.state.desactive}
+                                                                    />
+                                                                    Désactivé
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="row">
+                                                        <div className="col-xl-3 col-sm-4">
+                                                            <label className="mb-0 sm-label-radio">Suppression de Pieces</label>
+                                                        </div>
+                                                        <div className="col-xl-9 col-sm-8">
+                                                            <div className="form-group m-checkbox-inline custom-radio-ml d-flex radio-animated pb-0">
+                                                                <label className="d-block mb-0" >
+                                                                    <input className="radio_animated" id="edo-ani19" 
+                                                                        type="radio" name="supprimerPiece"
+                                                                        value={this.state.active}
+                                                                        onChange={this.handleInputChange}
+                                                                        checked={this.state.supprimerPiece === this.state.active}
+                                                                    />
+                                                                    Activé
+                                                                </label>
+                                                                <label className="d-block mb-0" >
+                                                                    <input className="radio_animated" id="edo-ani40" 
+                                                                        type="radio" name="supprimerPiece" 
+                                                                        value={this.state.desactive}
+                                                                        onChange={this.handleInputChange}
+                                                                        checked={this.state.supprimerPiece === this.state.desactive}
+                                                                    />
+                                                                    Désactivé
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="attribute-blocks">
                                                     <h5 className="f-w-600 mt-2 mb-1">Permissions relatives aux Roles </h5>
                                                     <div className="row">
                                                         <div className="col-xl-3 col-sm-4">
@@ -1466,4 +1587,4 @@ const mapDispatchToProps = (dispatch) =>{
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(edit_roles)
+export default connect(mapStateToProps, mapDispatchToProps)(Edit_roles)

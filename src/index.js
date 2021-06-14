@@ -22,6 +22,7 @@ import {machinesReducer, newMachineReducer, machineReducer, machineDetailsReduce
 import {maintenancesReducer, newMaintenanceReducer, maintenanceReducer, maintenanceDetailsReducer} from './redux/reducers/maintenanceReducers';
 import {newOrderReducer, myOrdersReducer, orderDetailsReducer, allOrdersReducer, orderReducer} from './redux/reducers/orderReducers';
 import {paiementsReducer, newPaiementReducer, paiementReducer, paiementDetailsReducer} from './redux/reducers/paiementReducers';
+import {piecesReducer, newPieceReducer, pieceReducer, pieceDetailsReducer} from './redux/reducers/pieceReducers';
 import {productsReducer, newProductReducer, productReducer, productDetailsReducer} from './redux/reducers/productReducers';
 import {remboursementsReducer, newRemboursementReducer, remboursementReducer, remboursementDetailsReducer} from './redux/reducers/remboursementReducers';
 import {slidesReducer, newSlideReducer, slideReducer, slideDetailsReducer} from './redux/reducers/slideReducers';
@@ -77,6 +78,10 @@ import Create_currency from './components/supply/currency/create_currency';
 import List_currency from './components/supply/currency/list-currency';
 import Edit_currency from './components/supply/currency/edit-currency';
 
+import Add_piece from './components/pieces/add-piece';
+import List_piece from './components/pieces/list-piece';
+import Edit_piece from './components/pieces/edit-piece';
+
 import Create_product from './components/supply/products/create-product';
 import List_product from './components/supply/products/list-product';
 import Edit_product from './components/supply/products/edit-product';
@@ -117,19 +122,22 @@ import ProtectedRoute from './routes/ProtectedRoute';
 axios.defaults.baseURL = process.env.REACT_APP_NEXT_PUBLIC_REST_API;
 
 const rootReducers = combineReducers({
+
+    auth: authReducer, 
+
     appromonnaie: appromonnaiesReducer,
-    
     approproduit: approproduitsReducer, 
     log: logssReducer,
     category: categoriesReducer,  
     machine: machinesReducer,
     maintenance: maintenancesReducer, 
     order: allOrdersReducer,
-    paiement: paiementsReducer, newPaiementReducer, paiementReducer, paiementDetailsReducer,
+    paiement: paiementsReducer, 
+    slide: slidesReducer, 
     product: productsReducer,
+    user: allUsersReducer,
     role: rolesReducer,
-
-    // productaction: productReducer,
+    piece: piecesReducer,
 
     editproduct: productReducer,
     editappromonnaie: appromonnaieReducer,
@@ -141,7 +149,7 @@ const rootReducers = combineReducers({
     edituser: userReducer,
     editrole: roleReducer,
     editcategory: categoryReducer,
-    // editlog: logsReducer,
+    editpiece: pieceReducer,
 
     maindetails: maintenanceDetailsReducer,
     machdetails: machineDetailsReducer,
@@ -153,7 +161,7 @@ const rootReducers = combineReducers({
     userdetails: userDetailsReducer,
     roledetails: roleDetailsReducer,
     roleprivate: rolePrivateReducer,
-    // logdetails: logsDetailsReducer,
+    piecedetail: pieceDetailsReducer,
     
     addappromonnaie: newAppromonnaieReducer, 
     addapproproduit: newApproproduitReducer,
@@ -164,13 +172,11 @@ const rootReducers = combineReducers({
     adduser: newUsersReducer,
     addrole: newRoleReducer,
     addproduct: newProductReducer,
-    // addlog: newLogsReducer,
+    addpiece: newPieceReducer,
 
-    remboursement: remboursementsReducer, newRemboursementReducer, remboursementReducer, remboursementDetailsReducer,
-    slide: slidesReducer, 
-    transactionom: transactionomsReducer, newTransactionomReducer, transactionomReducer, transactionomDetailsReducer,
-    auth: authReducer, 
-    user: allUsersReducer, userDetailsReducer,  userReducer, forgotPasswordReducer,
+    remboursement: remboursementsReducer, 
+    transactionom: transactionomsReducer, 
+    //   userReducer, forgotPasswordReducer,
 });
 
 const store = createStore(rootReducers, applyMiddleware(thunk));
@@ -267,10 +273,14 @@ class Root extends Component {
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/supply/products/create-product`} component={Create_product}/>
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/supply/products/list-product`} component={List_product}/>
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/supply/products/edit-product/:id`} component={Edit_product}/>
-                                
+{/*                                 
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/pieces/add-piece`} component={Add_piece}/>
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/pieces/list-piece`} component={List_piece}/> */}
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/pieces/edit-piece/:id`} component={Edit_piece}/>
+
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/machines/create-machine`} component={Create_machine}/>
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/machines/list-machine`} component={List_machine}/>
-                                <Route path={`${process.env.PUBLIC_URL}/machines/edit-machine/:id`} component={Edit_machine}/>
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/machines/edit-machine/:id`} component={Edit_machine}/>
 
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/maintains/create-maintain`} component={Create_maintain}/>
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/maintains/list-maintain`} component={List_maintain}/>

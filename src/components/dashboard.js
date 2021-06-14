@@ -47,11 +47,17 @@ export class Dashboard extends Component {
         console.log('dash-role',localStorage.getItem('roles'))
         setTimeout(() => {
             console.log('role', this.props.roledetails.role)
-            this.props.roledetails.role.map(rl => {
-                rol = rl.dashboard;
-            })
+            if(this.props.roledetails.role){
+                this.props.roledetails.role.map(rl => {
+                    rol = rl.dashboard;
+                })
+                this.setState({
+                    roles: rol,
+                    loading:false
+                })
+            }
+            
             this.setState({
-                roles: rol,
                 loading:false
             })
         }, 1000)
