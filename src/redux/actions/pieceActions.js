@@ -11,7 +11,7 @@ export const pieces = () => {
 
         axios.get('/pieces')
             .then((response) => {
-                console.log(response);
+                // console.log(response);
                 if (response.data.success === true) {
                     const { pieces } = response.data
                     const piecesCount = response.data.page_meta.total_items_count
@@ -47,13 +47,9 @@ export const newPiece = (piece) => {
         });
         let body = {
             etat: "1",
-            status: "1",
             nom: piece.nom,
             type: piece.type['value'],
-            localisation: piece.localisation,
-            lien: piece.lien,
             montant: parseInt(piece.montant,10),
-            description: piece.description,
             utilisateurid: localStorage.getItem('userid')
         }
         console.log(body)
@@ -111,10 +107,7 @@ export const editPiece = (piece) => {
             status: "1",
             nom: piece.nom,
             type: piece.type['value'],
-            localisation: piece.localisation,
-            lien: piece.lien,
             montant: parseInt(piece.montant,10),
-            description: piece.description,
             utilisateurid: localStorage.getItem('userid')
         }
         console.log(body)
@@ -169,7 +162,7 @@ export const pieceDetail = (paramID) => {
         // console.log(paramID)
         axios.get(`/piece/${paramID}`)
             .then((response) => {
-                // console.log(response);
+                console.log('edit',response);
                 if (response.data.success === true) {
                     const piece  = response.data
 

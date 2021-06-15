@@ -30,12 +30,13 @@ export class Data_pieces extends Component {
             this.setState({
                 checkedValues: this.state.checkedValues
             })
+            console.log('selected',this.state.checkedValues)
         }
     }
 
     handleRemoveRow = () => {
         const selectedValues = this.state.checkedValues;
-        console.log(selectedValues);
+        
 
         const token = localStorage.getItem('token');
         let config = {
@@ -44,8 +45,8 @@ export class Data_pieces extends Component {
               'Content-Type': 'application/json'
             }
           }
-
-        axios.delete(`piece/${selectedValues}`, config)
+        for(var i=0; i<selectedValues.length;i++){
+            axios.delete(`piece/${selectedValues[i]}`, config)
             .then(() => {
                 axios.get('/pieces')
                     .then((response) => {
@@ -55,7 +56,10 @@ export class Data_pieces extends Component {
                         })
                     })
             })
+        }
+        window.location.reload()
         toast.success("Successfully Deleted !")
+        
     };
 
     renderEditable = (cellInfo) => {
@@ -85,14 +89,14 @@ export class Data_pieces extends Component {
         
         setTimeout(() => {
             if(this.props.roledetails.role[0]){
-                if(this.props.roledetails.role[0].supprimer_piece == '1'){
+                if(this.props.roledetails.role[0].supprimerPiece === '1'){
                     this.setState({
                         deletable: true
                     })
                 }
-                if(this.props.roledetails.role[0].modifier_piece == '1'){
+                if(this.props.roledetails.role[0].modifierPiece === '1'){
                     this.setState({
-                    updatable: true
+                        updatable: true
                     })
                 }
             }
@@ -102,7 +106,7 @@ export class Data_pieces extends Component {
     render() {
         const { pageSize, myClass, check, multiSelectOption, pagination } = this.props;
         const { myData, deletable, updatable } = this.state
-        console.log(myData)
+        // console.log('piecesMydata',myData)
         const columns = [];
         for (var key in myData[0]) {
 
@@ -135,8 +139,8 @@ export class Data_pieces extends Component {
         }
 
 
-        if(multiSelectOption == true){
-            if((deletable == true) && (updatable == true)){
+        if(multiSelectOption === true){
+            if((deletable === true) && (updatable === true)){
                 console.log('del', deletable, 'up', updatable)
                 columns.push(
                     {
@@ -176,7 +180,7 @@ export class Data_pieces extends Component {
                     }
                 )
                
-            }else if(deletable == true && updatable == false){
+            }else if(deletable === true && updatable === false){
                 columns.push(
                     {
                         Header: <button className="btn btn-danger btn-sm btn-delete mb-0 b-r-4"
@@ -208,10 +212,9 @@ export class Data_pieces extends Component {
                         }
                     }
                 )
-            }else if(deletable ==  false && updatable == true){
+            }else if(deletable ===  false && updatable === true){
                 columns.push(
                     {
-            
                         Cell: (row) => (
                             // console.log(row)
                             <div>

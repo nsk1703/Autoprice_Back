@@ -43,9 +43,10 @@ export class Data_roles extends Component {
               'Content-Type': 'application/json'
             }
           }
-          axios.delete(`role/${selectedValues}`, config)
+          for(var i=0; i<selectedValues.length;i++){
+            axios.delete(`role/${selectedValues[i]}`, config)
             .then(() => {
-                axios.get('/roles', config)
+                axios.get('/roles')
                     .then((response) => {
                         const {roles} = response.data
                         this.setState({
@@ -53,7 +54,8 @@ export class Data_roles extends Component {
                         })
                     })
             })
-        
+        }
+        window.location.reload()
         toast.success("Successfully Deleted !")
     };
 

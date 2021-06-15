@@ -46,7 +46,8 @@ class Data_currencies extends Component {
             }
           }
 
-        axios.delete(`appromonnaie/${selectedValues}`, config)
+        for(var i=0; i<selectedValues.length;i++){
+            axios.delete(`appromonnaie/${selectedValues[i]}`, config)
             .then(() => {
                 axios.get('/appromonnaies')
                     .then((response) => {
@@ -56,7 +57,8 @@ class Data_currencies extends Component {
                         })
                     })
             })
-        
+        }
+        window.location.reload()
         toast.success("Successfully Deleted !")        
     };
 
@@ -87,12 +89,12 @@ class Data_currencies extends Component {
         
         setTimeout(() => {
             if(this.props.roledetails.role[0]){
-                if(this.props.roledetails.role[0].supprimerApproMonnaie == '1'){
+                if(this.props.roledetails.role[0].supprimerApproMonnaie === '1'){
                     this.setState({
                         deletable: true
                     })
                 }
-                if(this.props.roledetails.role[0].modifierApproMonnaie == '1'){
+                if(this.props.roledetails.role[0].modifierApproMonnaie === '1'){
                     this.setState({
                        updatable: true
                     })

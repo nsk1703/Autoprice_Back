@@ -42,16 +42,19 @@ export class Data_users extends Component {
               'Content-Type': 'application/json'
             }
         }
-          axios.delete(`utilisateur/${selectedValues}`, config)
+        for(var i=0; i<selectedValues.length; i++){
+            axios.delete(`utilisateur/${selectedValues[i]}`, config)
             .then(() => {
-                axios.get('/users', config)
+                axios.get('/utilisateurs')
                     .then((response) => {
-                        const {users} = response.data
+                        const {utilisateurs} = response.data
                         this.setState({
-                            myData: users
+                            myData: utilisateurs
                         })
                     })
             })
+        }
+        window.location.reload()
         toast.success("Successfully Deleted !")
         
     };
@@ -83,12 +86,12 @@ export class Data_users extends Component {
         
         setTimeout(() => {
             if(this.props.roledetails.role[0]){
-                if(this.props.roledetails.role[0].supprimerUtilisateur == '1'){
+                if(this.props.roledetails.role[0].supprimerUtilisateur === '1'){
                     this.setState({
                         deletable: true
                     })
                 }
-                if(this.props.roledetails.role[0].modifierUtilisateur == '1'){
+                if(this.props.roledetails.role[0].modifierUtilisateur === '1'){
                     this.setState({
                     updatable: true
                     })

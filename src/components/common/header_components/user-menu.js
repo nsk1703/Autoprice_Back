@@ -25,8 +25,8 @@ export class User_menu extends Component {
                         <div className="dotted-animation"><span className="animate-circle"></span><span className="main-circle"></span></div>
                     </div>
                     <ul className="profile-dropdown onhover-show-div p-20 profile-dropdown-hover">
-                        <li><Link to={`${process.env.PUBLIC_URL}/settings/profile`} ><i data-feather="user"></i>Profil</Link></li>
-                        <li><Link to={`${process.env.PUBLIC_URL}/settings/change-profile`} ><i data-feather="change-profile"></i>Modifier le Profil</Link></li>
+                        {/* <li><Link to={`${process.env.PUBLIC_URL}/settings/profile`} ><i data-feather="user"></i>Profil</Link></li> */}
+                        {/* <li><Link to={`${process.env.PUBLIC_URL}/settings/change-profile`} ><i data-feather="change-profile"></i>Modifier le Profil</Link></li> */}
                         {/* <li><a href="javascript:void(0)"><i data-feather="mail"></i>Inbox</a></li> */}
                         {/* <li><a href="javascript:void(0)"><i data-feather="lock"></i>Lock Screen</a></li> */}
                         {/* <li><a href="javascript:void(0)"><i data-feather="settings"></i>Settings</a></li> */}

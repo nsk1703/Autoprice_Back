@@ -107,7 +107,7 @@ export class Create_machine extends Component {
             input: (provided, state) => ({
                 ...provided,
                 margin: '0px',
-                width: '715px'
+                width: '617px'
             }),
         }
         if(loading){
@@ -140,15 +140,15 @@ export class Create_machine extends Component {
                                                 <div className="form-group row">
                                                     <label className="col-xl-3 col-md-4"><span>*</span> Nom de Machine</label>
                                                     <input className="form-control col-xl-8 col-md-7" 
-                                                    id="validationCustom0" type="text" 
-                                                    name="nom"
-                                                    value={nom}
-                                                    onChange={this.handleInputChange}
-                                                    required="" />
+                                                        id="validationCustom0" type="text" 
+                                                        name="nom"
+                                                        value={nom}
+                                                        onChange={this.handleInputChange}
+                                                        required="" 
+                                                    />
                                                 </div>
                                                 <div className="form-group row">
-                                                    <label className="col-xl-3 col-md-4" >type :</label>
-                                                    {/* <div className=""> */}
+                                                    <label className="col-xl-3 col-md-4" ><span>*</span>type :</label>
                                                     <Select
                                                         styles={customStyles} 
                                                         name="type"
@@ -157,7 +157,6 @@ export class Create_machine extends Component {
                                                         options={options}
                                                         required="" 
                                                     />
-                                                    {/* </div> */}
                                                 </div>
                                                 <div className="form-group row">
                                                     <label className="col-xl-3 col-md-4"><span>*</span> Localisation</label>

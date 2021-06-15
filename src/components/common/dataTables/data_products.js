@@ -44,7 +44,8 @@ export class Data_products extends Component {
             }
           }
 
-        axios.delete(`approproduit/${selectedValues}`, config)
+        for(var i=0; i<selectedValues.length; i++){
+            axios.delete(`approproduit/${selectedValues[i]}`, config)
             .then(() => {
                 axios.get('/approproduits')
                     .then((response) => {
@@ -54,6 +55,8 @@ export class Data_products extends Component {
                         })
                     })
             })
+        }
+        window.location.reload()
         toast.success("Successfully Deleted !")
     };
 

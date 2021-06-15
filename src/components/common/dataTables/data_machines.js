@@ -45,7 +45,8 @@ export class Data_machines extends Component {
             }
           }
 
-        axios.delete(`machine/${selectedValues}`, config)
+        for(var i=0; i<selectedValues.length; i++){
+            axios.delete(`machine/${selectedValues[i]}`, config)
             .then(() => {
                 axios.get('/machines')
                     .then((response) => {
@@ -55,6 +56,8 @@ export class Data_machines extends Component {
                         })
                     })
             })
+        }
+        window.location.reload()
         toast.success("Successfully Deleted !")
     };
 

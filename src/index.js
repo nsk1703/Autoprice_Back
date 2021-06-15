@@ -148,7 +148,6 @@ const rootReducers = combineReducers({
     editcategory: categoryReducer,
     edituser: userReducer,
     editrole: roleReducer,
-    editcategory: categoryReducer,
     editpiece: pieceReducer,
 
     maindetails: maintenanceDetailsReducer,
@@ -218,39 +217,39 @@ class Root extends Component {
                                     
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/products/physical/category`} component={Category} />
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/products/physical/edit-category/:id`} component={Edit_category} />
-                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/products/physical/sub-category`} component={Sub_category} />
+                                {/* <ProtectedRoute path={`${process.env.PUBLIC_URL}/products/physical/sub-category`} component={Sub_category} /> */}
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/products/physical/product-list`} component={Product_list} />
-                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/products/physical/product-detail`} component={Product_detail} />
+                                {/* <ProtectedRoute path={`${process.env.PUBLIC_URL}/products/physical/product-detail`} component={Product_detail} /> */}
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/products/physical/add-product`} component={Add_product} />
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/products/physical/edit-products/:id`} component={Edit_products} />
 
-                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/products/digital/digital-category`} component={Digital_category} />
-                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/products/digital/digital-sub-category`} component={Digital_sub_category} />
-                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/products/digital/digital-product-list`} component={Digital_pro_list} />
-                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/products/digital/digital-add-product`} component={Digital_add_pro} />
+                                {/* <ProtectedRoute path={`${process.env.PUBLIC_URL}/products/digital/digital-category`} component={Digital_category} /> */}
+                                {/* <ProtectedRoute path={`${process.env.PUBLIC_URL}/products/digital/digital-sub-category`} component={Digital_sub_category} /> */}
+                                {/* <ProtectedRoute path={`${process.env.PUBLIC_URL}/products/digital/digital-product-list`} component={Digital_pro_list} /> */}
+                                {/* <ProtectedRoute path={`${process.env.PUBLIC_URL}/products/digital/digital-add-product`} component={Digital_add_pro} /> */}
 
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/sales/orders`} component={Orders} />
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/sales/transactions`} component={Transactions_sales} />
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/sales/repayment`} component={Repayment_sales} />
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/sales/mobile-pay`} component={Mobile_pay} />
 
-                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/coupons/list-coupons`} component={ListCoupons} />
-                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/coupons/create-coupons`} component={Create_coupons} />
+                                {/* <ProtectedRoute path={`${process.env.PUBLIC_URL}/coupons/list-coupons`} component={ListCoupons} /> */}
+                                {/* <ProtectedRoute path={`${process.env.PUBLIC_URL}/coupons/create-coupons`} component={Create_coupons} /> */}
 
                                 {/* <ProtectedRoute path={`${process.env.PUBLIC_URL}/pages/list-page`} component={ListPages} /> */}
                                 {/* <ProtectedRoute path={`${process.env.PUBLIC_URL}/pages/create-page`} component={Create_page} /> */}
 
                                 {/* <ProtectedRoute path={`${process.env.PUBLIC_URL}/media`} component={Media} /> */}
 
-                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/menus/list-menu`} component={List_menu} />
-                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/menus/create-menu`} component={Create_menu} />
+                                {/* <ProtectedRoute path={`${process.env.PUBLIC_URL}/menus/list-menu`} component={List_menu} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/menus/create-menu`} component={Create_menu} /> */}
 
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/users/list-user`} component={List_user} />
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/users/create-user`} component={Create_user} />
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/users/edit-user/:id`} component={Edit_user} />
 
-                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/vendors/list_vendors`} component={List_vendors} />
-                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/vendors/create-vendors`} component={Create_vendors} />
+                                {/* <ProtectedRoute path={`${process.env.PUBLIC_URL}/vendors/list_vendors`} component={List_vendors} />
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/vendors/create-vendors`} component={Create_vendors} /> */}
 
                                 {/* <Route path={`${process.env.PUBLIC_URL}/localization/transactions`} component={Translations} />
                                 <Route path={`${process.env.PUBLIC_URL}/localization/currency-rates`} component={Rates} />
@@ -258,8 +257,8 @@ class Root extends Component {
 
                                 {/* <Route path={`${process.env.PUBLIC_URL}/reports/report`} component={Reports} /> */}
 
-                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/settings/profile`} component={Profile} />
-                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/settings/change-profile`} component={Change_profile} />
+                                {/* <ProtectedRoute path={`${process.env.PUBLIC_URL}/settings/profile`} component={Profile} /> */}
+                                {/* <ProtectedRoute path={`${process.env.PUBLIC_URL}/settings/change-profile`} component={Change_profile} /> */}
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/settings/change-password`} component={Change_password} />
 
                                 {/* <ProtectedRoute path={`${process.env.PUBLIC_URL}/invoice`} component={Invoice} /> */}
@@ -273,9 +272,9 @@ class Root extends Component {
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/supply/products/create-product`} component={Create_product}/>
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/supply/products/list-product`} component={List_product}/>
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/supply/products/edit-product/:id`} component={Edit_product}/>
-{/*                                 
+                                
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/pieces/add-piece`} component={Add_piece}/>
-                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/pieces/list-piece`} component={List_piece}/> */}
+                                <ProtectedRoute path={`${process.env.PUBLIC_URL}/pieces/list-piece`} component={List_piece}/>
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/pieces/edit-piece/:id`} component={Edit_piece}/>
 
                                 <ProtectedRoute path={`${process.env.PUBLIC_URL}/machines/create-machine`} component={Create_machine}/>

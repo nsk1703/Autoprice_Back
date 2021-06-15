@@ -58,16 +58,18 @@ export class Data_categories extends Component {
             }
           }
           
-        axios.delete(`category/${selectedValues}`, config)
-        .then(() => {
-            axios.get('/categories')
-                .then((response) => {
-                    const {categories} = response.data
-                    this.setState({
-                        myData: categories
+        for(var i=0; i<selectedValues.length; i++){
+            axios.delete(`category/${selectedValues[i]}`, config)
+            .then(() => {
+                axios.get('/categories')
+                    .then((response) => {
+                        const {categories} = response.data
+                        this.setState({
+                            myData: categories
+                        })
                     })
-                })
-        })
+            })
+        }
         window.location.reload()
         toast.success("Successfully Deleted !")
        

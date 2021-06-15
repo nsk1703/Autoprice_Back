@@ -96,14 +96,14 @@ export const pieceReducer = (state = {}, action) => {
             return {
                 ...state,
                 loading: false,
-                isDeleted: action.payload
+                isDeleted: action.payload.isDeleted
             }
 
         case pieceConstants.UPDATE_PIECE_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                isUpdated: action.payload
+                isUpdated: action.payload.isUpdated
             }
 
 
@@ -149,13 +149,13 @@ export const pieceDetailsReducer = (state = { piece: {} }, action) => {
         case pieceConstants.PIECE_DETAILS_SUCCESS:
             return {
                 loading: false,
-                piece: action.payload
+                piece: action.payload.piece
             }
 
         case pieceConstants.PIECE_DETAILS_FAIL:
             return {
                 ...state,
-                error: action.payload
+                error: action.payload.error
             }
 
         case pieceConstants.CLEAR_ERRORS:

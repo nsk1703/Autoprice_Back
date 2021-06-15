@@ -125,7 +125,7 @@ export class Edit_machine extends Component {
             input: (provided, state) => ({
                 ...provided,
                 margin: '0px',
-                width: '715px'
+                width: '618px'
             }),
         }
         if(loading){
@@ -164,7 +164,7 @@ export class Edit_machine extends Component {
                                                     required="" />
                                                 </div>
                                                 <div className="form-group row">
-                                                    <label className="col-xl-3 col-md-4" >type :</label>
+                                                    <label className="col-xl-3 col-md-4" ><span>*</span>type :</label>
                                                     {/* <div className=""> */}
                                                     <Select
                                                         styles={customStyles} 

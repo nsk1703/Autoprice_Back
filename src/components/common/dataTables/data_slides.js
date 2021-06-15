@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
 import * as roleActions  from "../../../redux/actions/roleActions";
 import {connect} from "react-redux";
+import axios from "axios";
 
 export class Data_slides extends Component {
     constructor(props) {
@@ -33,12 +34,26 @@ export class Data_slides extends Component {
 
     handleRemoveRow = () => {
         const selectedValues = this.state.checkedValues;
-        const updatedData = this.state.myData.filter(function (el) {
-            return selectedValues.indexOf(el.id) < 0;
-        });
-        this.setState({
-            myData: updatedData
-        })
+        const token = localStorage.getItem('token');
+        let config = {
+            headers: {
+              'USER-KEY': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            }
+          }
+        for(var i=0; i<selectedValues.length;i++){
+            axios.delete(`slide/${selectedValues[i]}`, config)
+            .then(() => {
+                axios.get('/slides')
+                    .then((response) => {
+                        const {slides} = response.data
+                        this.setState({
+                            myData: slides
+                        })
+                    })
+            })
+        }
+        window.location.reload()
         toast.success("Successfully Deleted !")
     };
 

@@ -44,7 +44,8 @@ export class Data_maintains extends Component {
             }
           }
 
-        axios.delete(`maintenance/${selectedValues}`, config)
+        for(var i=0; i<selectedValues.length;i++){
+            axios.delete(`maintenance/${selectedValues[i]}`, config)
             .then(() => {
                 axios.get('/maintenances')
                     .then((response) => {
@@ -54,6 +55,8 @@ export class Data_maintains extends Component {
                         })
                     })
             })
+        }
+        window.location.reload()
         toast.success("Successfully Deleted !")
     };
 

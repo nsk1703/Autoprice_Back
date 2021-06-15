@@ -9,7 +9,7 @@ import {
     UserPlus,
     Users,
     Chrome,
-    BarChart,Settings,Archive, LogIn, Download, Loader, Bookmark, Book, Sliders, Server
+    BarChart,Settings,Archive, LogIn, Download, Loader, Bookmark, Book, Sliders, Server, Key
 } from 'react-feather';
 
 export const MENUITEMS = [
@@ -95,7 +95,7 @@ export const MENUITEMS = [
         ]
     },
     {
-        title: 'Pieces', icon: Server, type: 'sub', active: false, children: [
+        title: 'Pieces', icon: Tag, type: 'sub', active: false, children: [
             { path: '/pieces/list-piece', id:"listePiece", title: 'Liste des Pieces', type: 'link' },
             { path: '/pieces/add-piece', id:"ajouterPiece", title: 'Créer une piece', type: 'link' },
         ]
