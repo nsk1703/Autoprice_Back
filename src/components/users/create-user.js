@@ -128,6 +128,13 @@ export class Create_user extends Component {
     render() {
         const {loading, visible, roles, AllOptions, active, desactive, etat, lastName, username, email, role_id, isLoading, password, confirm_password} = this.state
         // console.log(this.state.etat)
+        const customStyles = {
+            input: (provided, state) => ({
+                ...provided,
+                margin: '0px',
+                width: '715px'
+            }),
+        }
         if(loading){
             return(
                 <div style={{display: "flex", justifyContent: "center", 
@@ -169,7 +176,7 @@ export class Create_user extends Component {
                                                                         onChange={this.handleInputChange}
                                                                         checked={etat === active} 
                                                                     />
-                                                                    Actif
+                                                                    Activé
                                                                 </label>
                                                                 <label className="d-block">
                                                                     <input className="radio_animated" id="ido-eni2" 
@@ -178,7 +185,7 @@ export class Create_user extends Component {
                                                                         onChange={this.handleInputChange}
                                                                         checked={etat === desactive}
                                                                     />
-                                                                    Inactif
+                                                                    Désactivé
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -214,7 +221,8 @@ export class Create_user extends Component {
                                                 <div className="form-group row">
                                                     <label className="col-xl-3 col-md-4" ><span>*</span> Role</label>
                                                     {/* <div className="col-xl-8 col-md-7"> */}
-                                                        <Select className="col-xl-8 col-md-7"
+                                                        <Select
+                                                            styles={customStyles}
                                                             name="role_id"
                                                             value={role_id}
                                                             options={AllOptions}

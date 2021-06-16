@@ -131,6 +131,13 @@ export class Edit_currency extends Component {
 
     render() {
         const {loading, roles, visible, AllOptions, quantite, description, machine_id, isLoading} =this.state
+        const customStyles = {
+            input: (provided, state) => ({
+                ...provided,
+                margin: '0px',
+                width: '715px'
+            }),
+        }
         if(loading){
             return(
                 <div style={{display: "flex", justifyContent: "center", 
@@ -168,7 +175,8 @@ export class Edit_currency extends Component {
                                                 </div>
                                                 <div className="form-group row">
                                                     <label className="col-xl-3 col-md-4" >Nom de machine :</label>
-                                                    <Select className="col-xl-8 col-md-7"
+                                                    <Select
+                                                        styles={customStyles}
                                                         name="machine_id"
                                                         value={machine_id}
                                                         options={AllOptions}
@@ -179,14 +187,13 @@ export class Edit_currency extends Component {
                                                 </div>
                                                 <div className="form">
                                                     <div className="form-group row">
-                                                        <label className="col-xl-3 col-sm-4">Description :</label>
-                                                        {/* <div className="form-control col-xl-8 col-sm-7"> */}
-                                                        
-                                                            <textarea className="form-control" name="description" value={description} 
-                                                                onChange={this.handleInputChange}
-                                                                rows="5" cols="92"
+                                                        <label className="col-xl-3 col-sm-4">Description :</label>                              
+                                                        <textarea className="form-control col-xl-8 col-md-7" 
+                                                            name="description" 
+                                                            value={description} 
+                                                            onChange={this.handleInputChange}
+                                                            rows="8" cols="92"
                                                         />
-                                                        {/* </div> */}
                                                     </div>
                                                 </div>
                                                 <ToastContainer />

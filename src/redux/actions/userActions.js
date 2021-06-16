@@ -21,12 +21,15 @@ export const login = (user) => {
                 // console.log(token)
 
                 console.log('roro',roles)
+                console.log('user',user)
                 
-                localStorage.setItem('token', response.data.user.token);
+                localStorage.setItem('token', user.token);
                 // console.log(token)
-                localStorage.setItem('user', response.data.user.username);
-                localStorage.setItem('roles', response.data.user.roles);
+                localStorage.setItem('userid', user.id);
                 
+                localStorage.setItem('roles', user.roles);
+                
+                console.log('local',localStorage.getItem('userid'));
                 dispatch({
                     type: userConstants.LOGIN_SUCCESS,
                     payload: { token: token, user: user, roles: roles }
@@ -182,7 +185,7 @@ export const newUser = (user) => {
         // console.log(user)
         let body = {
             etat: user.etat,
-            active:"1",
+            active: true,
             lastname: user.lastname,
             username: user.username,
             email: user.email,

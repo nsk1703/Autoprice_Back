@@ -127,6 +127,13 @@ export class Edit_slide extends Component {
 
     render() {
         const {loading, roles, visible, type, format, actualFile, isLoading} = this.state
+        const customStyles = {
+            input: (provided, state) => ({
+                ...provided,
+                margin: '0px',
+                width: '715px'
+            }),
+        }
         if(loading){
             return(
                 <div style={{display: "flex", justifyContent: "center", 
@@ -146,7 +153,7 @@ export class Edit_slide extends Component {
                                         {visible == true ?
                                             (
                                                 <div className="card-header">
-                                                    <Link type="button" to="/slides/liste-slide" className="btn btn-primary">Retour</Link>
+                                                    <Link type="button" to="/slides/list-slide" className="btn btn-primary">Retour</Link>
                                                 </div>
                                             ):
                                             null
@@ -155,7 +162,8 @@ export class Edit_slide extends Component {
                                             <form className="needs-validation">
                                                 <div className="form-group row">
                                                     <label className="col-xl-3 col-md-4"><span>*</span> Format</label>
-                                                    <Select className="col-xl-8 col-md-7"
+                                                    <Select
+                                                        styles={customStyles}
                                                         name="Format"
                                                         value={format}
                                                         onChange={this.handleFormatChange}
@@ -166,7 +174,8 @@ export class Edit_slide extends Component {
                                                 <div className="form-group row">
                                                     <label className="col-xl-3 col-md-4" ><span>*</span> type :</label>
                                                     {/* <div className="col-xl-8 col-md-7"> */}
-                                                        <Select className="col-xl-8 col-md-7"
+                                                        <Select
+                                                            styles={customStyles}
                                                             name="type"
                                                             value={type}
                                                             onChange={this.handleTypeChange}

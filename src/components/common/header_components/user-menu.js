@@ -12,12 +12,8 @@ export class User_menu extends Component {
     }
 
     handleDisconnectChange = () => {
-        // let token
-        // localStorage.removeItem('token')
         window.location.reload()
         localStorage.clear();
-        
-        // this.props.history.push('/login');
     }
 
     render() {

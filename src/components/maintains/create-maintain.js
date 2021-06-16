@@ -135,7 +135,13 @@ export class Create_maintain extends Component {
 
     render() {
         const {loading, roles, visible ,AllOptions, nom, type, montant, dateMaintenance, description, machine_id, isLoading} = this.state
-
+        const customStyles = {
+            input: (provided, state) => ({
+                ...provided,
+                margin: '0px',
+                width: '715px'
+            }),
+        }
         if(loading){
             return(
                 <div style={{display: "flex", justifyContent: "center", 
@@ -193,7 +199,8 @@ export class Create_maintain extends Component {
                                                 <div className="form-group row">
                                                     <label className="col-xl-3 col-md-4" >type :</label>
                                                     {/* <div className=""> */}
-                                                        <Select className="col-xl-8 col-md-7"
+                                                        <Select
+                                                            styles={customStyles} 
                                                             name="type"
                                                             value={type}
                                                             options={choices}
@@ -205,7 +212,8 @@ export class Create_maintain extends Component {
                                                 <div className="form-group row">
                                                     <label className="col-xl-3 col-md-4" >Nom de machine :</label>
                                                     {/* <div className="col-xl-8 col-md-7"> */}
-                                                        <Select className="col-xl-8 col-md-7"
+                                                        <Select
+                                                            styles={customStyles} 
                                                             name="machine_id"
                                                             value={machine_id}
                                                             options={AllOptions}

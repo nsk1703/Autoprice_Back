@@ -174,19 +174,19 @@ export class Category extends Component {
                                                             </div>
                                                             <div className="form-group">
                                                                 <label className="col-form-label">Description :</label>
-                                                                <div className="col-xl-8 col-sm-7">
-                                                                    <textarea className=" form-control " 
+                                                                {/* <div className="col-xl-8 col-sm-7"> */}
+                                                                    <textarea className=" form-control" 
                                                                         name="description" 
                                                                         value={description} 
                                                                         onChange={this.handleInputChange}
-                                                                        rows="5" cols="60"
+                                                                        rows="5" cols="1000"
                                                                         required=""
                                                                     />
-                                                                </div>
+                                                                {/* </div> */}
                                                             </div>
                                                             <div className="form-group">
                                                                 <label htmlFor="message-text" className="col-form-label">Image de Catégorie :</label>
-                                                                <input className="form-control col-xl-8 col-md-7" 
+                                                                <input className="form-control" 
                                                                     type="file" 
                                                                     onChange={this.handleFileChange}
                                                                 />

@@ -56,10 +56,12 @@ export class LoginTabset extends Component {
 
         this.props.login(this.state)
         setTimeout(() =>{
+        
             console.log(this.props.auth.isAuthenticated)
             console.log(this.props.auth.token)
             console.log(this.props.auth.user)
             console.log(this.props.auth.roles)
+            console.log('localuser',localStorage.getItem('userid'))
 
             if(this.props.auth.isAuthenticated == true){
                 this.props.history.push('/');
