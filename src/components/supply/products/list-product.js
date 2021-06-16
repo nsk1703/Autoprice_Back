@@ -38,7 +38,7 @@ export class List_product extends Component {
                     ID: approproduit.id,
                     etat: approproduit.etat,
                     quantite: <span className="badge badge-info">{approproduit.quantite} FCFA</span>,
-                    produit: approproduit.productId.name,
+                    produit: approproduit.productId ? approproduit.productId.name : null,
                     Description: approproduit.description,
                     // utilisateur: approproduit.utilisateurid.username
                    

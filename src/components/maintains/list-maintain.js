@@ -34,6 +34,7 @@ export class List_maintain extends Component {
         this.props.maintenances();
 
         setTimeout(() => {
+            console.log(this.props.maintenance.maintenances)
             this.props.maintenance.maintenances.map(maintenance => {
                 let item = {
                     ID: maintenance.id,
@@ -41,6 +42,7 @@ export class List_maintain extends Component {
                     Type: maintenance.type,
                     Montant: maintenance.montant,
                     Machine: maintenance.machine_id.nom,
+                    Piece:maintenance.piece_id ? maintenance.piece_id.nom : "Aucune Piece",
                     etat:maintenance.etat,
                     description:maintenance.description,
                     date: maintenance.dateMaintenance,

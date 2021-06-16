@@ -4,6 +4,7 @@ import CKEditors from 'react-ckeditor-component';
 import * as maintenanceActions from "../../redux/actions/maintenanceActions";
 import {connect} from "react-redux";
 import * as machineActions from "../../redux/actions/machineActions";
+import * as pieceActions from "../../redux/actions/pieceActions";
 import Select from 'react-select';
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
@@ -17,7 +18,7 @@ const choices = [
 ]
 
 export class Create_maintain extends Component {
-        constructor(props) {
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -27,8 +28,10 @@ export class Create_maintain extends Component {
             dateMaintenance: '',
             montant: '',
             description: '',
+            piece_id: '',
             machine_id: '',
-            AllOptions: [],
+            AllMachines: [],
+            AllPieces: [],
             isLoading: false,
             visible: false,
             roles: null,
@@ -39,6 +42,7 @@ export class Create_maintain extends Component {
         
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.handlePieceChange = this.handlePieceChange.bind(this)
         this.handleSubmitChange = this.handleSubmitChange.bind(this)
         this.handleSelect = this.handleSelect.bind(this)
 
@@ -54,13 +58,17 @@ export class Create_maintain extends Component {
         this.setState({machine_id});        
     }
 
+    handlePieceChange = (piece_id) => {
+        this.setState({piece_id});        
+    }
+
     handleSelect = (type) => {
         this.setState({ type })   
     }
 
     handleSubmitChange = (e) => {
         e.preventDefault();
-        // console.log(this.state.AllOptions)
+        // console.log(this.state.AllMachines)
         this.setState({
             isLoading: true
         })
@@ -83,12 +91,37 @@ export class Create_maintain extends Component {
 
     componentDidMount = () => {
         let options = [];
-        let listMachines = [];
+        let listPieces = [];
+        let listMachines = []
         let rol = null;
 
         this.setState({
             loading: true
         })
+        this.props.pieces();
+
+        setTimeout(() => {
+            this.props.piece.pieces.map(piece => {
+                // console.log('i',piece.id)
+                let item = {
+                    id: piece.id,
+                    Nom: piece.nom
+                }
+                listPieces.push(item);
+            })
+            
+            listPieces.map(listPiece => {
+                let option = 
+                    {value:listPiece.id, label: listPiece.Nom }
+                
+                options.push(option)
+            })
+          
+            this.setState({
+                AllPieces: options
+            })
+        }, 1000)
+
         this.props.machines();
 
         setTimeout(() => {
@@ -109,7 +142,7 @@ export class Create_maintain extends Component {
             })
           
             this.setState({
-                AllOptions: options
+                AllMachines: options
             })
         }, 1000)
 
@@ -134,7 +167,7 @@ export class Create_maintain extends Component {
     }
 
     render() {
-        const {loading, roles, visible ,AllOptions, nom, type, montant, dateMaintenance, description, machine_id, isLoading} = this.state
+        const {loading, roles, visible ,AllMachines, AllPieces, nom, type, piece_id, montant, dateMaintenance, description, machine_id, isLoading} = this.state
         const customStyles = {
             input: (provided, state) => ({
                 ...provided,
@@ -216,8 +249,21 @@ export class Create_maintain extends Component {
                                                             styles={customStyles} 
                                                             name="machine_id"
                                                             value={machine_id}
-                                                            options={AllOptions}
+                                                            options={AllMachines}
                                                             onChange={this.handleChange}
+                                                            required="" 
+                                                        />
+                                                    {/* </div> */}
+                                                </div>
+                                                <div className="form-group row">
+                                                    <label className="col-xl-3 col-md-4" >Nom de Piece :</label>
+                                                    {/* <div className="col-xl-8 col-md-7"> */}
+                                                        <Select
+                                                            styles={customStyles} 
+                                                            name="piece_id"
+                                                            value={piece_id}
+                                                            options={AllPieces}
+                                                            onChange={this.handlePieceChange}
                                                             required="" 
                                                         />
                                                     {/* </div> */}
@@ -265,12 +311,14 @@ const mapStateToProps = (state) => {
     return {
         addmaintenance: state.addmaintenance,
         machine: state.machine,
-        roledetails: state.roledetails
+        roledetails: state.roledetails,
+        piece: state.piece
     }
 }
 const mapDispatchToProps = (dispatch) =>{
     return {
         newMaintenance: (maintenance) => {dispatch( maintenanceActions.newMaintenance(maintenance))},
+        pieces: () => {dispatch( pieceActions.pieces())},
         machines: () => {dispatch( machineActions.machines())},
         actionsdetailRole: (rolename) => {dispatch(roleActions.actionsdetailRole(rolename))}
     }

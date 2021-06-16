@@ -53,6 +53,7 @@ export const newMaintenance = (maintenance) => {
             dateMaintenance: maintenance.dateMaintenance,
             montant: parseInt(maintenance.montant, 10),
             description: maintenance.description,
+            piece_id: maintenance.piece_id.value,
             machine_id: maintenance.machine_id.value,
             utilisateurid: localStorage.getItem('userid')
         }
@@ -116,6 +117,7 @@ export const editMaintenance = (maintenance) => {
             type: maintenance.type.value,
             dateMaintenance: maintenance.dateMaintenance,
             montant: parseInt(maintenance.montant, 10),
+            piece_id: maintenance.piece_id.value,
             description: maintenance.description,
             machine_id: maintenance.machine_id.value,
             utilisateurid: localStorage.getItem('userid')

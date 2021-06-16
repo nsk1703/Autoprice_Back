@@ -21,7 +21,7 @@ export class Login extends Component {
                     <div className="authentication-box">
                         <div className="container">
                             <div className="row">
-                                <div className="col-md-5 p-0 card-left">
+                                <div className="p-0 card-left" style={{float: "none", margin: "0 auto"}}>
                                     <div className="card ">
                                         {/* <div className=""> */}
                                             <img src={stats} className="Img-fluid" />
@@ -48,7 +48,9 @@ export class Login extends Component {
                                         </Slider> */}
                                     </div>
                                 </div>
-                                <div className="col-md-7 p-0 card-right">
+                            </div>
+                            <div className="row" >
+                                <div className="p-0 card-right " style={{float: "none", margin: "0 auto"}}>
                                     <div className="card tab2-card">
                                         <div className="card-body">
                                             <LoginTabset />
